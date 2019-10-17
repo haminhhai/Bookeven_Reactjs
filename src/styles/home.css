@@ -1,0 +1,13 @@
+.bestsellers {
+    padding: 100px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+}
+.bestsellers  .col {
+    justify-content: center!important;
+    display: flex!important;
+    padding-bottom: 20px;
+}
+.card {
+    margin-top: 1.25rem;
+}
