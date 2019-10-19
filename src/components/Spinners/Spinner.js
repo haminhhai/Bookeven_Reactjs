@@ -9,28 +9,30 @@ import './spinner.scss'
 const list = ['point', 'radius', 'corner', 'sound', 'default']
 class Radius extends Component {
     setType2Render(prop) {
-        var result = 
-        <div class="con-fl-loading" >
-            <h4 class="title-loading">{this.props.title}</h4>
-            <div class={`fl-loading ${prop}`}>
-                <div class="effect-1 effects"></div>
-                <div class="effect-2 effects"></div>
-                <div class="effect-3 effects"></div>
-            </div>
-        </div>
+        let type = ''
         let valid = -1
         list.map((item) => {
             if (item === prop)
                 valid = 0
         })
         if (prop !== undefined && valid === 0)
-            return result
+             type = prop
         else {
-            prop = 'default'
-            var newres = result
-            
-            return newres
+            type = 'default'
         }
+        
+        var result = 
+        <div class="con-fl-loading" >
+            <h4 class="title-loading">{this.props.title}</h4>
+            <div class={`fl-loading ${type}`}>
+                <div class="effect-1 effects"></div>
+                <div class="effect-2 effects"></div>
+                <div class="effect-3 effects"></div>
+            </div>
+        </div>
+        if(this.props.disable) 
+            result = ''
+        return result
 
     }
 

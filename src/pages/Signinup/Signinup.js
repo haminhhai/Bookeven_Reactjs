@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBBtn, MDBNav, MDBNavItem, MDBNavLink, MDBIcon, MDBTabPane, MDBTabContent, MDBInput, MDBCardBody } from 'mdbreact'
+import { MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBBtn, MDBIcon, MDBTabPane, MDBTabContent, MDBInput, MDBCardBody } from 'mdbreact'
 import '../../styles/reglog.scss'
 import Spinner from '../../components/Spinners/Spinner'
 class Signinup extends Component {
@@ -61,7 +61,7 @@ class Signinup extends Component {
     render() {
         return (
             <div className='card-reg-log'>
-                <Spinner title='Loading' />
+                
                 <MDBModal isOpen={this.state.modal} centered >
                     <MDBModalHeader>
                         <div className='row'>
@@ -105,6 +105,7 @@ class Signinup extends Component {
                                     </div>
                                 </div>
                                 <div className='text-center'>
+                                    
                                     <MDBBtn gradient="aqua" className='font-weight-bold text-white'>
                                         ĐĂNG NHẬP
                                     <MDBIcon icon="sign-in-alt" className='ml-2' />
