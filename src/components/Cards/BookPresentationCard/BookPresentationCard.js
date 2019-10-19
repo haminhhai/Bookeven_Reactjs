@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { MDBCard, MDBIcon, MDBCardBody, MDBCardTitle, MDBCardText,MDBMask, MDBView } from 'mdbreact'
-import './bpcard.css'
+import LazyLoad from 'react-lazyload';
+import './bpcard.scss'
 //data for CoupleButton Component
 const data = {
   icon1: 'info-circle',
@@ -9,11 +10,16 @@ const data = {
   text2: 'Mua'
 }
 class BPCard extends Component {
+  
   render() { 
     return ( 
-      <MDBCard style={{ width: "16rem" , height: 'auto'}}>
+      <MDBCard style={{ width: "16rem" , height: 'auto'}} >
       <MDBView className='book-wrapper' hover>
-        <img src={this.props.img} waves className="imgBook img-fluid" alt=""  overlay/>
+        <LazyLoad height='200' offset={100} once>
+        
+          <img src={this.props.img} waves className="imgBook img-fluid" alt=""  overlay/>
+          
+        </LazyLoad>
         <MDBMask className="flex-center" overlay="white-light"/>
       </MDBView>
       <MDBCardBody>

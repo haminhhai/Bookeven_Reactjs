@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../../layouts/Header/Header'
 import Footer from '../../layouts/Footer/Footer'
+
 import '../../styles/home.css'
 import { MDBCard, MDBIcon, MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn, MDBMask, MDBView, MDBCarousel, MDBCarouselInner, MDBRow, MDBCol, MDBCardImage, MDBCarouselItem } from 'mdbreact'
 import BPCard from '../../components/Cards/BookPresentationCard/BookPresentationCard'
@@ -21,6 +22,7 @@ class Homepage extends Component {
                 author={list[0].author}
                 discountAmount={list[0].discount}
                 amount={list[0].amount}
+                aos='fade-down-right'
               />
             </div>
             <div class="col">
@@ -29,6 +31,7 @@ class Homepage extends Component {
                 author={list[1].author}
                 discountAmount={list[1].discount}
                 amount={list[1].amount}
+                aos='fade-up-right'
               />
             </div>
             <div class="col">
@@ -36,14 +39,56 @@ class Homepage extends Component {
                 title={list[2].title}
                 author={list[2].author}
                 amount={list[2].amount}
+                aos='fade-up-left'
               />
             </div>
-            <div class="col">
+            <div class="col" >
               <BPCard img={list[3].src}
                 title={list[3].title}
                 author={list[3].author}
                 discountAmount={list[3].discount}
                 amount={list[3].amount}
+                aos='fade-down-left'
+              />
+            </div>
+          </div>
+        </div>
+        <div className='bestsellers'>
+          <h3>Sách mới</h3>
+          <div class="row mt-5 ">
+            <div class="col ">
+              <BPCard img='https://demo.tokopress.com/bookie/wp-content/uploads/sites/7/2016/06/book-23-250x333.jpg'
+                title={list[0].title}
+                author={list[0].author}
+                discountAmount={list[0].discount}
+                amount={list[0].amount}
+                aos='fade-down-right'
+              />
+            </div>
+            <div class="col">
+              <BPCard img='https://demo.tokopress.com/bookie/wp-content/uploads/sites/7/2016/06/book-23-250x333.jpg'
+                title={list[1].title}
+                author={list[1].author}
+                discountAmount={list[1].discount}
+                amount={list[1].amount}
+                aos='fade-up-right'
+              />
+            </div>
+            <div class="col">
+              <BPCard img='https://demo.tokopress.com/bookie/wp-content/uploads/sites/7/2016/06/book-23-250x333.jpg'
+                title={list[2].title}
+                author={list[2].author}
+                amount={list[2].amount}
+                aos='fade-up-left'
+              />
+            </div>
+            <div class="col" >
+              <BPCard img='https://demo.tokopress.com/bookie/wp-content/uploads/sites/7/2016/06/book-23-250x333.jpg'
+                title={list[3].title}
+                author={list[3].author}
+                discountAmount={list[3].discount}
+                amount={list[3].amount}
+                aos='fade-down-left'
               />
             </div>
           </div>
