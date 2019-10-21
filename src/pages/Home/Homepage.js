@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import Header from '../../layouts/Header/Header'
-import Footer from '../../layouts/Footer/Footer'
 import { MDBIcon } from 'mdbreact'
-import '../../styles/home.css'
+import Header from '../../layouts/Header/Header'
+import '../../styles/home.scss'
 import BPCard from '../../components/Cards/BookPresentationCard/BookPresentationCard'
 import * as lb from '../../const/listbook'
+
 class Homepage extends Component {
   state = {}
   render() {
     const list = lb.list
     return (
-      <div className="App">
+      <div>
         <Header />
         <div className='bestsellers'>
           <h3 className='font-weight-bold'>
@@ -138,7 +138,6 @@ class Homepage extends Component {
             </div>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }

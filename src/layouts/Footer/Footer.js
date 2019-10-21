@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { MDBCol, MDBContainer, MDBRow, MDBFooter, MDBIcon } from "mdbreact";
-import '../../styles/layout.css'
+import '../../styles/layout.scss'
 import logo from '../../assets/logo.png'
 class Footer extends Component {
     state = {}

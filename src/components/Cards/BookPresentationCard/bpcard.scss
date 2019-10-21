@@ -12,6 +12,7 @@
   &:hover {
     cursor: pointer;
   }
+
   .imgBook {
     border-top-left-radius: calc(0.25rem - 1px);
     border-top-right-radius: calc(0.25rem - 1px);
@@ -20,6 +21,7 @@
     border-radius: 0.25rem;
   }
 }
+
 .price {
   position: relative;
   margin: 0;
@@ -49,34 +51,43 @@
     }
 
     .detail {
-        border-radius: 20px 0 0 20px;
-        border-right: 1px solid #bfc7c8;
+      border-radius: 20px 0 0 20px;
+      border-right: 1px solid #bfc7c8;
+
     }
 
-    span{
-        display: inline-block;
-        width: 50%;
-        margin: 0;
-        padding: 0;
-        border: none;
-        border-radius: 0;
-        color: #3c3d41;
-        background: none;
-        font-size: 10px;
-        line-height: 30px;
-        text-align: left;
-        text-align: center;
-        letter-spacing: normal;
-        text-transform: uppercase;
-        border-radius: 0 20px 20px 0;
+    span {
+      display: inline-block;
+      width: 50%;
+      margin: 0;
+      padding: 0;
+      border: none;
+      border-radius: 0;
+      color: #3c3d41;
+      background: none;
+      font-size: 10px;
+      line-height: 30px;
+      text-align: left;
+      text-align: center;
+      letter-spacing: normal;
+      text-transform: uppercase;
+      border-radius: 0 20px 20px 0;
 
+      div {
+        display: inline-block;
+        margin-right: 5px;
+        color: #acb3b4;
+        font-size: 16px;
+        vertical-align: bottom;
+      }
+
+      &:hover {
+        color: #00c853;
         div {
-            display: inline-block;
-            margin-right: 5px;
-            color: #acb3b4;
-            font-size: 16px;
-            vertical-align: bottom;
+          color: #00c853;
         }
+      }
+
     }
   }
 }

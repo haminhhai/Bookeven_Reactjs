@@ -1,0 +1,88 @@
+.bookcg-wrapper {
+  padding: 80px;
+  font-family: "Montserrat", sans-serif;
+  text-align-last: center;
+
+  .col {
+    justify-content: center !important;
+    display: flex !important;
+    padding-bottom: 20px;
+  }
+
+  .card-rcol {
+    border-radius: 0.25rem;
+    background-color: #edf3f4;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    margin-bottom: 30px;
+
+    .btn {
+      border: none;
+      border-radius: 20px;
+      background: #dddddd;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 0.75px;
+    }
+  }
+
+  strong {
+    margin: 14px 0 20px 0;
+    color: black;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .ant-slider {
+    .ant-slider-handle {
+      height: 16px;
+      width: 16px;
+    }
+
+    .ant-slider-rail {
+      background-color: #9c9f9e;
+      height: 6px;
+    }
+
+    .ant-slider-track {
+      height: 6px;
+      border-radius: 6px;
+      background-color: #28cdf0;
+    }
+  }
+
+  .top-rate {
+    position: relative;
+    margin-top: 30px;
+    padding: 0 0 50px 70px;
+    text-align: left !important;
+
+    .ant-rate {
+      font-size: 14px;
+      position: absolute;
+      padding-left: 5px;
+    }
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50px;
+      max-width: 50px;
+      margin: 0 0 0 15px;
+    }
+
+    span {
+      display: block;
+      overflow: hidden;
+      padding-left: 20px;
+      color: #222222;
+      line-height: 20px;
+      white-space: nowrap;
+      text-transform: capitalize;
+      text-overflow: ellipsis;
+    }
+
+  }
+}

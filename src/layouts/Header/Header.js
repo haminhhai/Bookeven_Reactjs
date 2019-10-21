@@ -2,18 +2,23 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import {
     MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBDropdown,
-    MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon, MDBFormInline, MDBBtn, MDBCol
+    MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon, MDBFormInline, MDBBtn, MDBCol, MDBBadge, MDBMask
 } from "mdbreact";
 import logo from '../../assets/logo.png'
-import '../../styles/layout.css'
-import Signinup from '../../pages/Signinup/Signinup';
+import '../../styles/layout.scss'
+import Signinup from '../../pages/Home/Signinup';
+
+import img from '../../assets/banner.jpg'
 
 class Header extends Component {
     state = {
         openingTopNav: false,
         openingMenuBar: false,
+
         openModal: false,
         numTab: 1,
+
+        isCarousel: this.props.carousel
     };
 
     toggleNavBar = () => {
@@ -26,7 +31,7 @@ class Header extends Component {
         this.setState({ openModal: true })
         if (i === 1)
             this.setState({ numTab: 1 })
-        else this.setState({numTab: 2})
+        else this.setState({ numTab: 2 })
     }
     render() {
         return (
@@ -36,7 +41,7 @@ class Header extends Component {
                         <img src={logo} alt='' />
                         <MDBNavbarToggler onClick={this.toggleNavBar} />
                         <MDBCollapse id="navbarCollapse3" isOpen={this.state.openingTopNav} navbar>
-                            <MDBNavbarNav left >
+                            <MDBNavbarNav center >
                                 <MDBNavItem active>
                                     <MDBCol md="12">
                                         <MDBFormInline className="md-form mr-auto">
@@ -51,12 +56,21 @@ class Header extends Component {
                             </MDBNavbarNav>
                             <MDBNavbarNav right>
                                 <MDBNavItem>
-                                    <MDBNavLink className="waves-effect waves-light" to="#!" onClick={() => { this.toggleModal(1) }}>
+                                    <MDBNavLink className="cart-nav waves-effect waves-light text-center" to="#!">
+                                        <MDBBtn size="sm" className="mr-auto">
+                                            <MDBIcon icon="shopping-basket" className='mr3' size='2x'>
+                                                <MDBBadge color="danger" className='ml-1'>12</MDBBadge>
+                                            </MDBIcon>
+                                        </MDBBtn>
+                                    </MDBNavLink>
+                                </MDBNavItem>
+                                <MDBNavItem>
+                                    <MDBNavLink className="waves-effect waves-light text-center" to="#!" onClick={() => { this.toggleModal(1) }}>
                                         ĐĂNG NHẬP
                                     </MDBNavLink>
                                 </MDBNavItem>
                                 <MDBNavItem>
-                                    <MDBNavLink className="waves-effect waves-light" to="#!" onClick={() => { this.toggleModal(2) }}>
+                                    <MDBNavLink className="waves-effect waves-light text-center" to="#!" onClick={() => { this.toggleModal(2) }}>
                                         ĐĂNG KÝ
                                     </MDBNavLink>
                                 </MDBNavItem>
@@ -65,31 +79,40 @@ class Header extends Component {
                     </MDBNavbar>
 
                 </Router>
-                <MDBCarousel
-                    activeItem={1}
-                    length={3}
-                    showControls={true}
-                    showIndicators={true}
-                    className="z-depth-1"
-                >
-                    <MDBCarouselInner>
-                        <MDBCarouselItem itemId="1">
-                            <MDBView>
-                                <div className="slider1" id='sli' />
-                            </MDBView>
-                        </MDBCarouselItem>
-                        <MDBCarouselItem itemId="2">
-                            <MDBView>
-                                <div className='slider2' id='sli' />
-                            </MDBView>
-                        </MDBCarouselItem>
-                        <MDBCarouselItem itemId="3">
-                            <MDBView>
-                                <div className='slider3' id='sli' />
-                            </MDBView>
-                        </MDBCarouselItem>
-                    </MDBCarouselInner>
-                </MDBCarousel>
+                {
+                    this.state.isCarousel || this.state.isCarousel === undefined ?
+                        <MDBCarousel
+                            activeItem={1}
+                            length={3}
+                            showControls={true}
+                            showIndicators={true}
+                            className="z-depth-1">
+                            <MDBCarouselInner>
+                                <MDBCarouselItem itemId="1">
+                                    <MDBView>
+                                        <div className="slider1" id='sli' />
+                                    </MDBView>
+                                </MDBCarouselItem>
+                                <MDBCarouselItem itemId="2">
+                                    <MDBView>
+                                        <div className='slider2' id='sli' />
+                                    </MDBView>
+                                </MDBCarouselItem>
+                                <MDBCarouselItem itemId="3">
+                                    <MDBView>
+                                        <div className='slider3' id='sli' />
+                                    </MDBView>
+                                </MDBCarouselItem>
+                            </MDBCarouselInner>
+
+                        </MDBCarousel> :
+                        <MDBView id='sli' src={img}>
+                            <MDBMask overlay="black-strong" className="flex-center flex-column text-white text-center">
+                                <h1 className='text-white'>Bookeven</h1>
+                                <h6 className='text-white font-italic'>Home / Bookstore</h6>
+                            </MDBMask>
+                        </MDBView>
+                }
                 <Router>
                     <div className='over-img-card' >
                         <MDBNavbar color="heavy-rain-gradient" light expand="md">
@@ -99,20 +122,13 @@ class Header extends Component {
                                     <MDBNavItem>
                                         <MDBNavLink className="waves-effect waves-light" to="#!">
                                             <MDBIcon icon="tasks" className='mr-1' />
-                                            Danh mục sản phẩm
-                                            <MDBIcon icon="caret-down" />
+                                            Danh mục sách
                                         </MDBNavLink>
                                     </MDBNavItem>
                                     <MDBNavItem>
                                         <MDBNavLink className="waves-effect waves-light" to="#!">
                                             <MDBIcon icon="history" className='mr-1' />
                                             Lịch sử mua hàng
-                                        </MDBNavLink>
-                                    </MDBNavItem>
-                                    <MDBNavItem>
-                                        <MDBNavLink className="waves-effect waves-light" to="#!">
-                                            <MDBIcon icon="shopping-cart" className='mr-1' />
-                                            Giỏ hàng
                                         </MDBNavLink>
                                     </MDBNavItem>
                                 </MDBNavbarNav>

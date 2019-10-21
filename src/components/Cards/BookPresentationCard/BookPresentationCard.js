@@ -6,19 +6,19 @@ import './bpcard.scss'
 const data = {
   icon1: 'info-circle',
   text1: 'Chi tiết',
-  icon2: 'shopping-basket',
+  icon2: 'shopping-cart',
   text2: 'Mua'
 }
 class BPCard extends Component {
-  
-  render() { 
-    return ( 
+
+  render() {
+    return (
       <MDBCard style={{ width: "16rem" , height: 'auto'}} >
       <MDBView className='book-wrapper' hover>
         <LazyLoad height='200' offset={100} once>
-        
+
           <img src={this.props.img} waves className="imgBook img-fluid" alt=""  overlay/>
-          
+
         </LazyLoad>
         <MDBMask className="flex-center" overlay="white-light"/>
       </MDBView>
