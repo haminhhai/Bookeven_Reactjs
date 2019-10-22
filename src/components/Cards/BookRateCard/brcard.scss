@@ -1,0 +1,44 @@
+.top-rate {
+  position: relative;
+  margin-top: 30px;
+  padding: 0 0 10px 70px;
+  text-align: left !important;
+
+  .ant-rate {
+    font-size: 14px;
+    position: absolute;
+    padding-left: 5px;
+  }
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    max-width: 50px;
+    margin: 0 0 0 15px;
+  }
+
+  span {
+    display: block;
+    overflow: hidden;
+    padding-left: 20px;
+    color: #222222;
+    line-height: 20px;
+    white-space: nowrap;
+    text-transform: capitalize;
+    text-overflow: ellipsis;
+    font-size: 15px;
+  }
+
+  p {
+    margin-top: 25px;
+    margin-left: 20px;
+    font-weight: bold;
+    color: black;
+
+    del {
+      color: #9a9a9a;
+    }
+  }
+}

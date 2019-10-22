@@ -1,14 +1,11 @@
-.bestsellers {
-    padding: 100px;
+.home-container {
+  .wrapper {
     text-align: center;
-    font-family: 'Montserrat', sans-serif;
-
-    .col {
-        justify-content: center!important;
-        display: flex!important;
-        padding-bottom: 20px;
-    }
-} 
+    font-family: "Montserrat", sans-serif;
+    padding-bottom: 80px;
+    padding-top: 60px;
+  }
+}
 .card {
-    margin-top: 1.25rem;
+  margin-top: 1.25rem;
 }

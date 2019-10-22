@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Header from '../../layouts/Header/Header'
-import { MDBIcon, MDBBtn } from 'mdbreact'
-import { Slider, Rate } from 'antd'
+import { Slider } from 'antd'
+import { MDBPagination, MDBPageNav, MDBPageItem, MDBBtn } from 'mdbreact'
 import * as lb from '../../const/listbook'
 import BPCard from '../../components/Cards/BookPresentationCard/BookPresentationCard'
-
+import BRCard from '../../components/Cards/BookRateCard/BookRateCard'
 import '../../styles/bookcg.scss'
 class BookCategory extends Component {
     state = {
@@ -24,90 +24,131 @@ class BookCategory extends Component {
             <div>
                 <Header carousel={false} />
                 <div className='bookcg-wrapper'>
-                    <div className='row'>
-                        <div className='col-md-9'>
-                            <div className='row'>
-                                <div class="col ">
-                                    <BPCard img={list[0].src}
-                                        title={list[0].title}
-                                        author={list[0].author}
-                                        discountAmount={list[0].discount}
-                                        amount={list[0].amount}
-                                        aos='fade-down-right'
-                                    />
+                    <div className='container'>
+                        <div class="row">
+                            <div className="col-12 col-md-9">
+                                <div className='row'>
+                                    <div className="col-lg-3 col-md-6 mb-4 ml-5">
+                                        <BPCard img={list[0].src}
+                                            title={list[0].title}
+                                            author={list[0].author}
+                                            discountAmount={list[0].discount}
+                                            amount={list[0].amount}
+                                            aos='fade-down-right'
+                                        />
+                                    </div>
+                                    <div className="col-lg-3 col-md-6 mb-4 ml-5">
+                                        <BPCard img={list[0].src}
+                                            title={list[0].title}
+                                            author={list[0].author}
+                                            discountAmount={list[0].discount}
+                                            amount={list[0].amount}
+                                            aos='fade-down-right'
+                                        />
+                                    </div>
+                                    <div className="col-lg-3 col-md-6 mb-4 ml-5">
+                                        <BPCard img={list[0].src}
+                                            title={list[0].title}
+                                            author={list[0].author}
+                                            discountAmount={list[0].discount}
+                                            amount={list[0].amount}
+                                            aos='fade-down-right'
+                                        />
+                                    </div>
+                                    <div className="col-lg-3 col-md-6 mb-4 ml-5">
+                                        <BPCard img={list[0].src}
+                                            title={list[0].title}
+                                            author={list[0].author}
+                                            discountAmount={list[0].discount}
+                                            amount={list[0].amount}
+                                            aos='fade-down-right'
+                                        />
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <BPCard img={list[1].src}
-                                        title={list[1].title}
-                                        author={list[1].author}
-                                        discountAmount={list[1].discount}
-                                        amount={list[1].amount}
-                                        aos='fade-up-right'
-                                    />
-                                </div>
-                                <div class="col">
-                                    <BPCard img={list[2].src}
-                                        title={list[2].title}
-                                        author={list[2].author}
-                                        amount={list[2].amount}
-                                        aos='fade-up-left'
-                                    />
-                                </div>
-                                <div class="col" >
-                                    <BPCard img={list[3].src}
-                                        title={list[3].title}
-                                        author={list[3].author}
-                                        discountAmount={list[3].discount}
-                                        amount={list[3].amount}
-                                        aos='fade-down-left'
-                                    />
-                                </div>
-                                <div class="col" >
-                                    <BPCard img={list[4].src}
-                                        title={list[4].title}
-                                        author={list[4].author}
-                                        discountAmount={list[4].discount}
-                                        amount={list[4].amount}
-                                        aos='fade-down-left'
-                                    />
+                                <div className='pagi-store row'>
+                                    <MDBPagination circle>
+                                        <MDBPageItem disabled>
+                                            <MDBPageNav className="page-link">
+                                                <span>Đầu</span>
+                                            </MDBPageNav>
+                                        </MDBPageItem>
+                                        <MDBPageItem disabled>
+                                            <MDBPageNav className="page-link" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                                <span className="sr-only">Previous</span>
+                                            </MDBPageNav>
+                                        </MDBPageItem>
+                                        <MDBPageItem active>
+                                            <MDBPageNav className="page-link">
+                                                1 <span className="sr-only">(current)</span>
+                                            </MDBPageNav>
+                                        </MDBPageItem>
+                                        <MDBPageItem>
+                                            <MDBPageNav className="page-link">
+                                                2
+                                </MDBPageNav>
+                                        </MDBPageItem>
+                                        <MDBPageItem>
+                                            <MDBPageNav className="page-link">
+                                                &raquo;
+                                </MDBPageNav>
+                                        </MDBPageItem>
+                                        <MDBPageItem>
+                                            <MDBPageNav className="page-link">
+                                                Cuối
+                                </MDBPageNav>
+                                        </MDBPageItem>
+                                    </MDBPagination>
                                 </div>
                             </div>
-                        </div>
-                        <div className='col-md-3'>
-                            <div className='row'>
-                                <div className='card-rcol col-md-12'>
-                                    <strong>Lọc theo giá</strong>
-                                    <Slider
-                                        range
-                                        step={1000}
-                                        min={0}
-                                        max={100000}
-                                        defaultValue={[0, 100000]}
-                                        onChange={this.onChange} />
-                                    <MDBBtn gradient='aqua' className="align-middle float-left">Lọc</MDBBtn>
-                                    <p className='float-right mt-2'>
-                                        Giá {this.state.minval} — {this.state.maxval}
-                                    </p>
-                                </div>
-                                <div className='card-rcol col-md-12'>
-                                    <strong>Sách bình chọn nhiều nhất</strong>
-                                    <div className='top-rate row'>
-                                        <img src={list[5].src} alt='image' />
-                                        <span className='text-left'>
-                                            {list[4].title}
-                                        </span>
-                                        <div className='col-12'>
-                                            <Rate allowHalf defaultValue={5} disabled/>
-                                        </div>
-                                        <div >
-                                            {list[4].amount}
-                                        </div>
+                            <div className="col-12 col-md-3">
+                                <div className='row'>
+                                    <div className='card-rcol col-md-12'>
+                                        <strong>Lọc theo giá</strong>
+                                        <Slider
+                                            range
+                                            step={1000}
+                                            min={0}
+                                            max={100000}
+                                            defaultValue={[0, 100000]}
+                                            onChange={this.onChange} />
+                                        <p className=' mt-2'>
+                                            Giá {this.state.minval} — {this.state.maxval}
+                                        </p>
+                                        <MDBBtn gradient='aqua' className="align-middle">Lọc</MDBBtn>
+
+                                    </div>
+                                    <div className='card-rcol col-md-12'>
+                                        <strong>Sách bình chọn nhiều nhất</strong>
+                                        <BRCard img={list[5].src}
+                                            title={list[5].title}
+                                            rate={5}
+                                            price={list[5].amount} />
+                                        <BRCard img={list[6].src}
+                                            title={list[6].title}
+                                            rate={5}
+                                            discount={list[5].discount}
+                                            price={list[6].amount} />
+                                        <BRCard img={list[7].src}
+                                            title={list[7].title}
+                                            rate={5}
+                                            price={list[7].amount} />
+                                        <BRCard img={list[8].src}
+                                            title={list[8].title}
+                                            rate={5}
+                                            price={list[8].amount} />
+                                        <BRCard img={list[9].src}
+                                            title={list[9].title}
+                                            rate={4.5}
+                                            price={list[9].amount} />
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
+
             </div>
         );
     }

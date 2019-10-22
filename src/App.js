@@ -28,7 +28,7 @@ class App
                     <Switch>
                         {this.getRoutes(routes)}
                     </Switch>
-                    <Footer />
+                    <Footer/>
                 </div>
             </Router>
         );

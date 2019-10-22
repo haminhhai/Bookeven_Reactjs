@@ -9,7 +9,7 @@ export const routes = [
     },
     {
         path: '/store',
-        exact: true,
+        exact: false,
         main: () => <BookCategory />
     },
     
