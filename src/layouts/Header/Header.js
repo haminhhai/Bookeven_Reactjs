@@ -10,15 +10,18 @@ import Signinup from '../../pages/Home/Signinup';
 import img from '../../assets/banner.jpg'
 
 class Header extends Component {
-    state = {
-        openingTopNav: false,
-        openingMenuBar: false,
-
-        openModal: false,
-        numTab: 1,
-
-        isCarousel: this.props.carousel
-    };
+    constructor(props) {
+        super(props)
+        this.state = {
+            openingTopNav: false,
+            openingMenuBar: false,
+    
+            openModal: false,
+            numTab: 1,
+    
+            isCarousel: this.props.carousel
+        };
+    }
 
     toggleNavBar = () => {
         this.setState({ openingTopNav: !this.state.openingTopNav });

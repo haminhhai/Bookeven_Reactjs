@@ -24,7 +24,6 @@ class Homepage extends Component {
                   author={list[0].author}
                   discountAmount={list[0].discount}
                   amount={list[0].amount}
-                  aos='fade-down-right'
                 />
               </div>
               <div class="col-lg-3 col-md-6">
@@ -33,7 +32,6 @@ class Homepage extends Component {
                   author={list[1].author}
                   discountAmount={list[1].discount}
                   amount={list[1].amount}
-                  aos='fade-up-right'
                 />
               </div>
               <div class="col-lg-3 col-md-6">
@@ -41,7 +39,6 @@ class Homepage extends Component {
                   title={list[2].title}
                   author={list[2].author}
                   amount={list[2].amount}
-                  aos='fade-up-left'
                 />
               </div>
               <div class="col-lg-3 col-md-6" >
@@ -50,7 +47,6 @@ class Homepage extends Component {
                   author={list[3].author}
                   discountAmount={list[3].discount}
                   amount={list[3].amount}
-                  aos='fade-down-left'
                 />
               </div>
             </div>
@@ -68,7 +64,6 @@ class Homepage extends Component {
                   author={list[4].author}
                   discountAmount={list[4].discount}
                   amount={list[4].amount}
-                  aos='fade-down-right'
                 />
               </div>
               <div class="col-lg-3 col-md-6">
@@ -77,7 +72,6 @@ class Homepage extends Component {
                   author={list[5].author}
                   discountAmount={list[5].discount}
                   amount={list[5].amount}
-                  aos='fade-up-right'
                 />
               </div>
               <div class="col-lg-3 col-md-6">
@@ -85,7 +79,6 @@ class Homepage extends Component {
                   title={list[6].title}
                   author={list[6].author}
                   amount={list[6].amount}
-                  aos='fade-up-left'
                 />
               </div>
               <div class="col-lg-3 col-md-6" >
@@ -94,7 +87,6 @@ class Homepage extends Component {
                   author={list[7].author}
                   discountAmount={list[7].discount}
                   amount={list[7].amount}
-                  aos='fade-down-left'
                 />
               </div>
             </div>
@@ -112,7 +104,6 @@ class Homepage extends Component {
                   author={list[8].author}
                   discountAmount={list[8].discount}
                   amount={list[8].amount}
-                  aos='fade-down-right'
                 />
               </div>
               <div class="col-lg-3 col-md-6">
@@ -121,7 +112,6 @@ class Homepage extends Component {
                   author={list[9].author}
                   discountAmount={list[9].discount}
                   amount={list[9].amount}
-                  aos='fade-up-right'
                 />
               </div>
               <div class="col-lg-3 col-md-6">
@@ -129,7 +119,6 @@ class Homepage extends Component {
                   title={list[10].title}
                   author={list[10].author}
                   amount={list[10].amount}
-                  aos='fade-up-left'
                 />
               </div>
               <div class="col-lg-3 col-md-6" >
@@ -138,7 +127,6 @@ class Homepage extends Component {
                   author={list[11].author}
                   discountAmount={list[11].discount}
                   amount={list[11].amount}
-                  aos='fade-down-left'
                 />
               </div>
             </div>

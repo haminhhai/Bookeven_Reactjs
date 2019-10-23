@@ -8,7 +8,6 @@
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
     margin-bottom: 30px;
     padding: 20px;
-    text-align: center;
 
     .btn {
       border: none;
@@ -17,6 +16,11 @@
       font-weight: normal;
       font-size: 12px;
       line-height: 0.75px;
+    }
+
+    .filter {
+      border-bottom: 2px solid white;
+      margin-bottom: 1rem;
     }
   }
 
