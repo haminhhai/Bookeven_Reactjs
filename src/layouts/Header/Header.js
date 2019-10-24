@@ -44,7 +44,7 @@ class Header extends Component {
                     </Link>
                     <MDBNavbarToggler onClick={this.toggleNavBar} />
                     <MDBCollapse id="navbarCollapse3" isOpen={this.state.openingTopNav} navbar>
-                        <MDBNavbarNav center >
+                        <MDBNavbarNav center="true" >
                             <MDBNavItem active>
                                 <MDBCol md="12">
                                     <MDBFormInline className="md-form mr-auto">

@@ -1,0 +1,61 @@
+.book-detail {
+  margin: 50px 0 50px 0;
+  font-family: "Montserrat", sans-serif;
+
+  .container {
+    border-radius: 6px;
+    background-color: #edf3f4;
+
+    .row {
+      padding: 50px 20px 30px 20px;
+
+      .col-md-8 {
+        .rate-detail {
+          display: -webkit-box;
+          line-height: 2;
+
+          p {
+            line-height: 3.25;
+            font-style: italic;
+            color: black;
+          }
+        }
+
+        .read-more-button {
+          cursor: pointer;
+          font-weight: 600;
+          max-width: 100px;
+          font-size: 16px;
+          color: #1f8cd3;
+        }
+        .quantity {
+          width: 9em;
+        }
+
+        .ant-input-number {
+          width: 4em;
+
+          .ant-input-number-handler-wrap {
+            opacity: 1;
+          }
+        }
+
+        .add-cart-btn {
+          vertical-align: middle;
+          color: white;
+          font-weight: 600;
+          background-color: #fe6c61 !important;
+          -webkit-box-shadow: -4px 4px 0px 0px rgba(0, 0, 0, 0.2);
+          -moz-box-shadow: -4px 4px 0px 0px rgba(0, 0, 0, 0.2);
+          box-shadow: -4px 4px 0px 0px rgba(0, 0, 0, 0.2);
+          padding: .875rem 1.875rem;
+          transition: border-color .3s ease,background-color .3s ease,color .3s ease;
+
+          &:hover {
+            background-color: #ef5350;
+          }
+        }
+      }
+    }
+  }
+}

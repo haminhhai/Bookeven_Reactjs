@@ -1,3 +1,4 @@
+const webpack = require('webpack')
 module.exports = {
     mode: 'development',
     entry: {
@@ -35,7 +36,15 @@ module.exports = {
             {
                 test: /\.(jpe|jpg|woff|woff2|eot|ttf|svg|png)(\?.*$|$)/,
                 use: ['url-loader?limit=100000']
-            }
+            },
         ]
-    }
+    },
+    plugins: [
+        new webpack.ProvidePlugin({
+            '$': 'jquery',
+            'jQuery': 'jquery',
+            'window.$': 'jquery',
+            'window.jQuery': 'jquery'
+        })
+    ]
 };

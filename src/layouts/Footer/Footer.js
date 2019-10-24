@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { MDBCol, MDBContainer, MDBRow, MDBFooter, MDBIcon } from "mdbreact";
+import { MDBCol, MDBContainer, MDBRow, MDBFooter     } from "mdbreact";
 import '../../styles/layout.scss'
 import logo from '../../assets/logo.png'
 class Footer extends Component {

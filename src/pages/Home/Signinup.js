@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBBtn, MDBIcon, MDBTabPane, MDBTabContent, MDBInput, MDBCardBody } from 'mdbreact'
+import { MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBBtn, MDBIcon, MDBTabPane, MDBTabContent, MDBInput } from 'mdbreact'
 import '../../styles/reglog.scss'
-import Spinner from '../../components/Spinners/Spinner'
 class Signinup extends Component {
     constructor(props) {
         super(props)

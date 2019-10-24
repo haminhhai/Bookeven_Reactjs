@@ -16,6 +16,9 @@
       font-weight: normal;
       font-size: 12px;
       line-height: 0.75px;
+      -webkit-box-shadow: -4px 3px 0px 0px rgba(0, 0, 0, 0.2);
+      -moz-box-shadow: -4px 3px 0px 0px rgba(0, 0, 0, 0.2);
+      box-shadow: -4px 3px 0px 0px rgba(0, 0, 0, 0.2);
     }
 
     .filter {
@@ -23,7 +26,6 @@
       margin-bottom: 1rem;
     }
   }
-
 
   .pagi-store {
     justify-content: center;

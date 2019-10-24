@@ -17,7 +17,7 @@ class BPCard extends Component {
         <MDBCard style={{ minWidth: '14rem', height: 'auto' }} className='text-center'>
           <MDBView className='book-wrapper' hover>
             <LazyLoad height='200' offset={100} once>
-              <img src={this.props.img} waves className="imgBook" alt="image" overlay />
+              <img src={this.props.img} waves="true" className="imgBook" alt="" overlay="true" />
             </LazyLoad>
             <MDBMask className="flex-center" overlay="white-light" />
           </MDBView>
