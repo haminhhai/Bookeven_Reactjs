@@ -9,21 +9,25 @@
     "jquery": "^3.4.1",
     "less": "^3.10.3",
     "mdbreact": "^4.20.0",
+    "moment": "^2.24.0",
     "numeral": "^2.0.6",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-lazyload": "^2.6.2",
     "react-magnifier": "^3.0.4",
+    "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.0",
     "react-scripts": "3.1.2",
     "read-more-react": "^1.0.9",
+    "redux": "^4.0.4",
     "url-loader": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "serve": "webpack-dev-server"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -52,6 +56,7 @@
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.0",
     "webpack": "^4.40.2",
-    "webpack-cli": "^3.3.9"
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.2.1"
   }
 }

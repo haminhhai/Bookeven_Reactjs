@@ -9,17 +9,14 @@
   font-family: "Montserrat", sans-serif;
 }
 .cart-nav {
-  .btn-default {
+  .cart-nav-btn {
     background-color: initial !important;
-    color: white;
+    color: white !important;
     -webkit-box-shadow: -4px 3px 0px 0px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: -4px 3px 0px 0px rgba(0, 0, 0, 0.2);
     box-shadow: -4px 3px 0px 0px rgba(0, 0, 0, 0.2);
   }
 
-  .btn-default:not([disabled]):not(.disabled):active {
-    background-color: initial !important;
-  }
 
   .badge {
     min-width: 20px;

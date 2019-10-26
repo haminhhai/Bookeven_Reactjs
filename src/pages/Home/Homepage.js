@@ -4,11 +4,12 @@ import Header from '../../layouts/Header/Header'
 import '../../styles/home.scss'
 import BPCard from '../../components/Cards/BookPresentationCard/BookPresentationCard'
 import * as lb from '../../const/listbook'
+const list = lb.list
 
 class Homepage extends Component {
   state = {}
   render() {
-    const list = lb.list
+    
     return (
       <div className='home-container'>
         <Header />

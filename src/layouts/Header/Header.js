@@ -3,11 +3,16 @@ import { Link } from 'react-router-dom';
 import {
     MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBNavbar, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBIcon, MDBFormInline, MDBBtn, MDBCol, MDBBadge, MDBMask
 } from "mdbreact";
-import logo from '../../assets/logo.png'
+
+import {connect} from 'react-redux'
+import * as actions from '../../actions/index'
+
 import '../../styles/layout.scss'
+
 import Signinup from '../../pages/Home/Signinup';
 
 import img from '../../assets/banner.jpg'
+import logo from '../../assets/logo.png'
 
 class Header extends Component {
     constructor(props) {
@@ -30,10 +35,11 @@ class Header extends Component {
         this.setState({ openingMenuBar: !this.state.openingMenuBar });
     }
     toggleModal = (i) => {
-        this.setState({ openModal: true })
-        if (i === 1)
-            this.setState({ numTab: 1 })
-        else this.setState({ numTab: 2 })
+        // this.setState({ openModal: true })
+        // if (i === 1)
+        //     this.setState({ numTab: 1 })
+        // else this.setState({ numTab: 2 })
+        this.props.onOpenModal(i, true)
     }
     render() {
         return (
@@ -60,7 +66,7 @@ class Header extends Component {
                         <MDBNavbarNav right>
                             <MDBNavItem>
                                 <MDBNavLink className="cart-nav waves-effect waves-light text-center" to="#!">
-                                    <MDBBtn size="sm" className="mr-auto">
+                                    <MDBBtn size="sm" className="cart-nav-btn mr-auto">
                                         <MDBIcon icon="shopping-basket" className='mr3' size='2x'>
                                             <MDBBadge color="danger" className='ml-1'>12</MDBBadge>
                                         </MDBIcon>
@@ -132,10 +138,24 @@ class Header extends Component {
                         </MDBNavbar>
                     </div>
                 </div>
-                <Signinup modal={this.state.openModal} numTab={this.state.numTab} />
+                <Signinup modal={this.state.openModal} />
             </div>
         )
     }
 }
 
-export default Header;
+const mapStateToProps = state => {
+    return {
+
+    }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        onOpenModal: (numTab, isOpen) => {
+            dispatch(actions.openModal(numTab, isOpen))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

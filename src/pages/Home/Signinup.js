@@ -1,82 +1,40 @@
 import React, { Component } from 'react';
 import { MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBBtn, MDBIcon, MDBTabPane, MDBTabContent, MDBInput } from 'mdbreact'
+import { connect } from 'react-redux'
 import '../../styles/reglog.scss'
-class Signinup extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            modal: false, //isOpening modal
-            activeItem: "1", //number of Tab content
-            curTab: this.props.numTab, //current Tab active
+import * as actions from '../../actions/index'
 
-        }
-    }
+class Signinup extends Component {
     //open modal
-    toggleModal = () => {
-        this.setState({ modal: !this.state.modal })
+    closeModal = () => {
+        this.props.onCloseModal(false)
     }
     //active the current tab
     activeTab(i) {
-        if (i === 1) {
-            this.setState({
-                activeItem: "1",
-                curTab: 1
-            })
-
-        }
-        else {
-            this.setState({
-                activeItem: "2",
-                curTab: 2
-            })
-        }
-
-    }
-    //change tabs content
-    changeTabs = (tab) => {
-        if (this.state.activeItem !== tab) {
-            this.setState({
-                activeItem: tab
-            });
-        }
-    }
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.modal)
-            this.setState({ modal: nextProps.modal })
-        if (nextProps.numTab === 1) {
-            this.setState({
-                activeItem: "1",
-                curTab: 1
-            })
-        }
-        else {
-            this.setState({
-                activeItem: "2",
-                curTab: 2
-            })
-        }
+        this.props.onChangeTab(i)
 
     }
     render() {
+        var { numTab, isOpen } = this.props.toggleModal[0] // numTab: this.props.toggleModal[0].numTab
         return (
             <div className='card-reg-log'>
-                
-                <MDBModal isOpen={this.state.modal} centered >
+
+                <MDBModal isOpen={isOpen} centered >
                     <MDBModalHeader>
                         <div className='row'>
-                            <div className={`col ${this.state.curTab === 1 ? "activeTab" : ""}`} onClick={() => { this.activeTab(1) }}>
+                            <div className={`col ${numTab === 1 ? "activeTab" : ""}`} onClick={() => { this.activeTab(1) }}>
                                 <MDBIcon icon="user-alt" className='mr-1' />
                                 Đăng nhập
                             </div>
-                            <div className={`col ${this.state.curTab === 2 ? "activeTab" : ""}`} onClick={() => { this.activeTab(2) }}>
+                            <div className={`col ${numTab === 2 ? "activeTab" : ""}`} onClick={() => { this.activeTab(2) }}>
                                 <MDBIcon icon="user-plus" className='mr-1' />
                                 Đăng ký
                             </div>
                         </div>
                     </MDBModalHeader>
 
-                    <MDBTabContent activeItem={this.state.activeItem} >
-                        <MDBTabPane tabId="1" role="tabpanel">
+                    <MDBTabContent activeItem={numTab} >
+                        <MDBTabPane tabId={1} role="tabpanel">
                             <MDBModalBody>
                                 <div className='row'>
                                     <div className='col'>
@@ -98,13 +56,13 @@ class Signinup extends Component {
                                                     type="password"
                                                     validate
                                                 />
-                                                
+
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                                 <div className='text-center'>
-                                    
+
                                     <MDBBtn gradient="aqua" className='font-weight-bold text-white'>
                                         ĐĂNG NHẬP
                                     <MDBIcon icon="sign-in-alt" className='ml-2' />
@@ -119,10 +77,10 @@ class Signinup extends Component {
                                         Đăng ký ngay!
                                     </div>
                                 </div>
-                                <MDBBtn className='ml-auto' outline onClick={this.toggleModal}>Quay lại</MDBBtn>
+                                <MDBBtn className='ml-auto' outline onClick={this.closeModal}>Quay lại</MDBBtn>
                             </MDBModalFooter>
                         </MDBTabPane>
-                        <MDBTabPane fade tabId="2" role="tabpanel">
+                        <MDBTabPane fade tabId={2} role="tabpanel">
                             <MDBModalBody>
                                 <form>
                                     <div className="grey-text">
@@ -167,7 +125,7 @@ class Signinup extends Component {
                                         Đăng nhập ngay!
                                     </div>
                                 </div>
-                                <MDBBtn className='ml-auto' outline color='warning' onClick={this.toggleModal}>Quay lại</MDBBtn>
+                                <MDBBtn className='ml-auto' outline color='warning' onClick={this.closeModal}>Quay lại</MDBBtn>
                             </MDBModalFooter>
                         </MDBTabPane>
                     </MDBTabContent>
@@ -177,4 +135,24 @@ class Signinup extends Component {
     }
 }
 
-export default Signinup;
+// get props toggleModal
+const mapStateToProps = state => {
+    return {
+        toggleModal: state.toggleModal
+    }
+}
+
+// call actions
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        onCloseModal: (isOpen) => {
+            dispatch(actions.closeModal(isOpen))
+        },
+
+        onChangeTab: (numTab) => {
+            dispatch(actions.openModal(numTab, true))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signinup);
