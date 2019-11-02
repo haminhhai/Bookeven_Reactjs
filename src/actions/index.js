@@ -14,3 +14,10 @@ export const closeModal =  isOpen => {
         isOpen // isOpen: isOpen
     }
 }
+
+export const getDetailBook =  book => {
+    return {
+        type: types.GET_DETAIL_BOOK,
+        book // book: book
+    }
+}

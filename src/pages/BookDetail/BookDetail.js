@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import ReadMoreReact from 'read-more-react';
 import Magnifier from "react-magnifier";
-
+import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
 import Header from '../../layouts/Header/Header'
 
 import '../../styles/bookdetail.scss'
@@ -9,10 +10,7 @@ import '../../styles/bookdetail.scss'
 import { MDBBtn, MDBTable, MDBTableBody, MDBTabPane } from 'mdbreact';
 import { Rate, InputNumber, Tabs } from 'antd'
 
-import * as lb from '../../const/listbook'
 import * as index from './index.js'
-
-const list = lb.list
 
 const {TabPane} = Tabs
 
@@ -26,6 +24,10 @@ class BookDetail extends Component {
         console.log(e)
     }
     render() {
+        console.log(this.props.detailBook)
+        var currentBook = this.props.detailBook
+        const {match} = this.props.match
+        const url = match.url
         return (
             <div >
                 <Header carousel={false} />
@@ -33,14 +35,14 @@ class BookDetail extends Component {
                     <div className='container'>
                         <div className='book-general row'>
                             <div className='col-12 col-md-4'>
-                                <Magnifier src='https://www.nxbkimdong.com.vn/sites/default/files/styles/uc_product/public/de-men-phieu-luu-ky-_13x19_bia_tb2019-1.jpg?itok=T3r2mS-Q'
+                                <Magnifier src={currentBook.src}
                                     width='100%'
                                     mgWidth={180}
                                     mgHeight={180} />
                             </div>
                             <div className='col-12 col-md-8'>
-                                <h1 >{list[2].title}</h1>
-                                <h5 className=''>Tác giả: {list[2].author}</h5>
+                                <h1 >{currentBook.title}</h1>
+                                <h5 className=''>Tác giả: {currentBook.author}</h5>
                                 <div className='rate-detail'>
                                     <Rate disabled allowHalf defaultValue={4.5} />
                                     <p>(2 người đã đánh giá)</p>
@@ -83,4 +85,10 @@ class BookDetail extends Component {
     }
 }
 
-export default BookDetail;
+const MapStateToProps = state => {
+    return {
+        detailBook: state.detailBook
+    }
+}
+
+export default connect(MapStateToProps, null)(BookDetail);

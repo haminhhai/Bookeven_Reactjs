@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+
 import {
-    MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBNavbar, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBIcon, MDBFormInline, MDBBtn, MDBCol, MDBBadge, MDBMask
+    MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBNavbar, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler,
+    MDBCollapse, MDBIcon, MDBFormInline, MDBBtn, MDBCol, MDBBadge, MDBMask, MDBNavbarBrand, MDBContainer
 } from "mdbreact";
 
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import * as actions from '../../actions/index'
 
 import '../../styles/layout.scss'
 
-import Signinup from '../../pages/Home/Signinup';
+import Signinup from '../../pages/Signinup';
 
 import img from '../../assets/banner.jpg'
 import logo from '../../assets/logo.png'
@@ -20,10 +22,10 @@ class Header extends Component {
         this.state = {
             openingTopNav: false,
             openingMenuBar: false,
-    
+
             openModal: false,
             numTab: 1,
-    
+
             isCarousel: this.props.carousel
         };
     }
@@ -42,37 +44,33 @@ class Header extends Component {
         this.props.onOpenModal(i, true)
     }
     render() {
+        const book = this.props.detailBook
+        const category = book.category.name
+        const title = book.title
         return (
             <div>
                 <MDBNavbar scrolling fixed="top" dark expand="md">
-                    <Link to='/'>
-                        <img src={logo} alt='' />
-                    </Link>
+                    <MDBContainer>
+                        <MDBNavbarBrand href='/'>
+                            <img src={logo} alt='' />
+                        </MDBNavbarBrand>
                     <MDBNavbarToggler onClick={this.toggleNavBar} />
                     <MDBCollapse id="navbarCollapse3" isOpen={this.state.openingTopNav} navbar>
-                        <MDBNavbarNav center="true" >
-                            <MDBNavItem active>
-                                <MDBCol md="12">
-                                    <MDBFormInline className="md-form mr-auto">
-                                        <input className="form-control mr-sm-1" type="text" placeholder="Nhập từ khóa" aria-label="Search" />
-                                        <MDBBtn gradient="dusty-grass" size="sm" className="mr-auto">
-                                            <MDBIcon icon="search" className='mr3' />
-                                        </MDBBtn>
-                                    </MDBFormInline>
-                                </MDBCol>
-                            </MDBNavItem>
-
+                        <MDBNavbarNav left>
+                            <div className="input-field text-center">
+                                <div className="choices" data-type="text" aria-haspopup="true" aria-expanded="false" dir="ltr">
+                                    <div className="choices__inner">
+                                        <input className="choices__input" placeholder="Tìm sách..." />
+                                    </div>
+                                    <div className="choices__list choices__list--dropdown" aria-expanded="false">
+                                    </div>
+                                </div>
+                                <button className="btn-search">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
                         </MDBNavbarNav>
                         <MDBNavbarNav right>
-                            <MDBNavItem>
-                                <MDBNavLink className="cart-nav waves-effect waves-light text-center" to="#!">
-                                    <MDBBtn size="sm" className="cart-nav-btn mr-auto">
-                                        <MDBIcon icon="shopping-basket" className='mr3' size='2x'>
-                                            <MDBBadge color="danger" className='ml-1'>12</MDBBadge>
-                                        </MDBIcon>
-                                    </MDBBtn>
-                                </MDBNavLink>
-                            </MDBNavItem>
                             <MDBNavItem>
                                 <MDBNavLink className="waves-effect waves-light text-center" to="#!" onClick={() => { this.toggleModal(1) }}>
                                     ĐĂNG NHẬP
@@ -84,7 +82,15 @@ class Header extends Component {
                                     </MDBNavLink>
                             </MDBNavItem>
                         </MDBNavbarNav>
+                        <MDBNavLink className="cart-nav waves-effect waves-light text-center" to="#!">
+                            <MDBBtn size="sm" className="cart-nav-btn mr-auto">
+                                <MDBIcon icon="shopping-basket" className='mr3' size='2x'>
+                                    <MDBBadge color="danger" className='ml-1'>12</MDBBadge>
+                                </MDBIcon>
+                            </MDBBtn>
+                        </MDBNavLink>
                     </MDBCollapse>
+                    </MDBContainer>
                 </MDBNavbar>
                 {
                     this.state.isCarousel || this.state.isCarousel === undefined ?
@@ -115,8 +121,8 @@ class Header extends Component {
                         </MDBCarousel> :
                         <MDBView id='sli' src={img}>
                             <MDBMask overlay="black-strong" className="flex-center flex-column text-white text-center">
-                                <h1 className='text-white'>Bookeven</h1>
-                                <h6 className='text-white font-italic'>Home / Bookstore</h6>
+                                <h1 className='text-white'>{category}</h1>
+                                <h6 className='text-white font-italic'>Trang chủ / {category} / {title}</h6>
                             </MDBMask>
                         </MDBView>
                 }
@@ -146,7 +152,7 @@ class Header extends Component {
 
 const mapStateToProps = state => {
     return {
-
+        detailBook: state.detailBook
     }
 }
 

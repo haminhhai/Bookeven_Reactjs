@@ -1,5 +1,5 @@
 import React from 'react';
-import Homepage from '../pages/Home/Homepage'
+import Homepage from '../pages/Homepage'
 import BookCategory from '../pages/BookCategory/BookCategory'
 import BookDetail from '../pages/BookDetail/BookDetail'
 export const routes = [
@@ -16,7 +16,7 @@ export const routes = [
     {
         path: '/detail',
         exact: false,
-        main: () => <BookDetail />
+        main: (match) => <BookDetail match={match}/>
     }
     
 ]

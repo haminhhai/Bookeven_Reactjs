@@ -33,42 +33,15 @@ class BookCategory extends Component {
                         <div class="row">
                             <div className="col-12 col-md-9">
                                 <div className='row'>
-                                    <div className="col-lg-3 col-md-6 mb-4 ml-5">
-                                        <BPCard img={list[0].src}
-                                            title={list[0].title}
-                                            author={list[0].author}
-                                            discountAmount={list[0].discount}
-                                            amount={list[0].amount}
-                                            aos='fade-down-right'
-                                        />
-                                    </div>
-                                    <div className="col-lg-3 col-md-6 mb-4 ml-5">
-                                        <BPCard img={list[0].src}
-                                            title={list[0].title}
-                                            author={list[0].author}
-                                            discountAmount={list[0].discount}
-                                            amount={list[0].amount}
-                                            aos='fade-down-right'
-                                        />
-                                    </div>
-                                    <div className="col-lg-3 col-md-6 mb-4 ml-5">
-                                        <BPCard img={list[0].src}
-                                            title={list[0].title}
-                                            author={list[0].author}
-                                            discountAmount={list[0].discount}
-                                            amount={list[0].amount}
-                                            aos='fade-down-right'
-                                        />
-                                    </div>
-                                    <div className="col-lg-3 col-md-6 mb-4 ml-5">
-                                        <BPCard img={list[0].src}
-                                            title={list[0].title}
-                                            author={list[0].author}
-                                            discountAmount={list[0].discount}
-                                            amount={list[0].amount}
-                                            aos='fade-down-right'
-                                        />
-                                    </div>
+                                    {list.map((item, index) => {
+                                        if (index < 9)
+                                            return (
+                                                <div className="col-lg-3 col-md-6 mb-4 ml-5">
+                                                    <BPCard book={item}
+                                                    />
+                                                </div>
+                                            )
+                                    })}
                                 </div>
                                 <div className='pagi-store row'>
                                     <MDBPagination circle>
@@ -129,7 +102,7 @@ class BookCategory extends Component {
                                                 <p className='mt-2 ml-2'>( ít nhất {this.state.rate} sao )</p>
                                             </div>
                                         </div>
-                                        <MDBBtn gradient='aqua' className="align-middle">Lọc</MDBBtn>
+                                        <MDBBtn onClick={() => { console.log(333) }} gradient='aqua' className="align-middle">Lọc</MDBBtn>
 
                                     </div>
                                     <div className='card-rcol col-md-12'>

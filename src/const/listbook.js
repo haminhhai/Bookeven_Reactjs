@@ -27,6 +27,7 @@ export const list = [
         author: 'Dale',
         discount: 98000,
         amount: 51000,
+        topic: 1,
     },
     {
         src: i2,
@@ -34,6 +35,7 @@ export const list = [
         author: 'Fujiko Fujio',
         discount: 90000,
         amount: 22000,
+        topic: 2,
     },
     {
         src: i3,
@@ -41,6 +43,7 @@ export const list = [
         author: 'Tô Hoài',
         discount: 0,
         amount: 20000,
+        topic: 4,
     },
     {
         src: i4,
@@ -48,6 +51,7 @@ export const list = [
         author: 'Paulo Coelho',
         discount: 69000,
         amount: 45000,
+        topic: 5,
     },
     {
         src: i5,
@@ -55,6 +59,7 @@ export const list = [
         author: 'Nhật Ánh',
         discount: 110000,
         amount: 74000,
+        topic: 3,
     },
     {
         src: i6,
@@ -62,6 +67,7 @@ export const list = [
         author: 'Rosie Nguyễn',
         discount: 70000,
         amount: 51000,
+        topic: 6,
     },
     {
         src: i7,
@@ -69,12 +75,14 @@ export const list = [
         author: 'Atkia',
         discount: 57000,
         amount: 26000,
+        topic: 2,
     },{
         src: i8,
         title: 'Lorem ipsum',
         author: 'Atkia',
         discount: 0,
         amount: 20000,
+        topic: 3,
     },
     {
         src: i9,
@@ -82,6 +90,7 @@ export const list = [
         author: 'Atkia',
         discount: 0,
         amount: 20000,
+        topic: 4,
     },
     {
         src: i10,
@@ -89,6 +98,7 @@ export const list = [
         author: 'Atkia',
         discount: 0,
         amount: 20000,
+        topic: 4,
     },
     {
         src: i11,
@@ -96,12 +106,14 @@ export const list = [
         author: 'Atkia',
         discount: 0,
         amount: 20000,
+        topic: 5,
     },{
         src: i12,
         title: 'Lorem ipsum',
         author: 'Atkia',
         discount: 0,
         amount: 20000,
+        topic: 3,
     },
     {
         src: i13,
@@ -109,6 +121,7 @@ export const list = [
         author: 'Atkia',
         discount: 0,
         amount: 20000,
+        topic: 6,
     },
     {
         src: i14,
@@ -116,12 +129,14 @@ export const list = [
         author: 'Atkia',
         discount: 0,
         amount: 20000,
+        topic: 4,
     },{
         src: i16,
         title: 'Lorem ipsum',
         author: 'Atkia',
         discount: 0,
         amount: 20000,
+        topic: 1,
     },
     {
         src: i17,
@@ -129,6 +144,7 @@ export const list = [
         author: 'Atkia',
         discount: 0,
         amount: 20000,
+        topic: 2,
     },
     {
         src: i18,
@@ -136,12 +152,14 @@ export const list = [
         author: 'Atkia',
         discount: 0,
         amount: 20000,
+        topic: 5,
     },{
         src: i19,
         title: 'Lorem ipsum',
         author: 'Atkia',
         discount: 0,
         amount: 20000,
+        topic: 6,
     },
     {
         src: i20,
@@ -149,6 +167,7 @@ export const list = [
         author: 'Atkia',
         discount: 0,
         amount: 20000,
+        topic: 3,
     },
     {
         src: i21,
@@ -156,6 +175,7 @@ export const list = [
         author: 'Atkia',
         discount: 0,
         amount: 20000,
+        topic: 5,
     },
     {
         src: i22,
@@ -163,6 +183,41 @@ export const list = [
         author: 'Atkia',
         discount: 0,
         amount: 20000,
+        topic: 3,
+    },
+
+]
+
+export const categoryTopic = [
+    {
+        id: 1,
+        name: 'Lịch Sử - Truyền Thống',
+        path: 'lich-su-truyen-thong'
+    },
+    {
+        id: 2,
+        name: 'Kiến thức - Khoa Học',
+        path: 'kien-thuc-khoa-hoc'
+    },
+    {
+        id: 3,
+        name: 'Văn Học Việt Nam',
+        path: 'van-hoc-viet-nam'
+    },
+    {
+        id: 4,
+        name: 'Văn Học Nước Ngoài',
+        path: 'van-hoc-nuoc-ngoai'
+    },
+    {
+        id: 5,
+        name: 'Truyện tranh',
+        path:'truyen-tranh'
+    },
+    {
+        id: 6,
+        name: 'Manga - Comic',
+        path:'manga-comic'
     },
 
 ]
