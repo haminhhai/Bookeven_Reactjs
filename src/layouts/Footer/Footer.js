@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { MDBCol, MDBContainer, MDBRow, MDBFooter     } from "mdbreact";
+import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
+import { Link } from 'react-router-dom'
+
 import '../../styles/layout.scss'
 import logo from '../../assets/logo.png'
 class Footer extends Component {
@@ -9,7 +11,9 @@ class Footer extends Component {
             <MDBFooter color="blue-grey" className="page-footer font-small lighten-5 pt-0">
                 <MDBContainer className=" mb-4 text-center text-md-left">
                     <div id='logo-foot'>
-                        <img src={logo} alt=''/>
+                        <Link to='/'>
+                            <img src={logo} alt='' />
+                        </Link>
                     </div>
                     <MDBRow className="mt-3">
                         <MDBCol md="3" lg="4" xl="3" className="mb-4 dark-grey-text">

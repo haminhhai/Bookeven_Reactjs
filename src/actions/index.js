@@ -21,3 +21,11 @@ export const getDetailBook =  book => {
         book // book: book
     }
 }
+
+export const addToCart =  (book, quantity) => {
+    return {
+        type: types.ADD_TO_CART,
+        book, // book: book
+        quantity, // quantity: quantity
+    }
+}

@@ -7,7 +7,7 @@ import './spinner.scss'
     sound
 */
 const list = ['point', 'radius', 'corner', 'sound', 'default']
-class Radius extends Component {
+class Spinner extends Component {
     setType2Render(prop) {
         let type = ''
         let valid = -1
@@ -45,5 +45,5 @@ class Radius extends Component {
     }
 }
 
-export default Radius;
+export default Spinner;
 

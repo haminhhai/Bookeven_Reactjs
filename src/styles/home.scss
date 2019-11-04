@@ -4,8 +4,39 @@
     font-family: "Montserrat", sans-serif;
     padding-bottom: 80px;
     padding-top: 60px;
+
+    .title > a {
+      border: 1px solid transparent;
+      display: inline-block;
+      padding: 0.75em 1.8em 0.5em;
+      min-width: 200px;
+      color: #00c853;
+
+      &:hover {
+        border: 1px solid #e5e5e5;
+        color: #ff3945;
+        box-shadow: 0 0 14px #c3c1c1;
+      }
+    }
   }
 }
 .card {
   margin-top: 1.25rem;
+}
+.ant-back-top-content {
+  border-radius: 6px;
+  width: 3em;
+  height: 3em;
+  line-height: 3em;
+  text-align: center;
+  transition: all ease 1.5s;
+  -webkit-box-shadow: -4px 3px 0px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: -4px 3px 0px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: -4px 3px 0px 0px rgba(0, 0, 0, 0.2);
+  background-color: #febc2f;
+
+  &:hover {
+    background-color: #018763;
+    transition: all ease 1.5s;
+  }
 }

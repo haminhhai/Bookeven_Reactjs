@@ -3,9 +3,9 @@ import LazyLoad from 'react-lazyload';
 import { Redirect, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { MDBCard, MDBIcon, MDBCardBody, MDBCardTitle, MDBCardText, MDBMask, MDBView } from 'mdbreact'
+import { MDBCard, MDBIcon, MDBCardBody, MDBCardTitle, MDBCardText, MDBMask, MDBView} from 'mdbreact'
 
-import { categoryTopic } from '../../../const/listbook'
+import { fieldsBook } from '../../../const/listbook'
 import * as actions from '../../../actions/index'
 import './bpcard.scss'
 
@@ -19,32 +19,29 @@ const data = {
 class BPCard extends Component {
   state = {
     redir: false,
-    path: '',
     title: ''
   }
   getInform = () => {
     const book = this.props.book
-    var category = Object.assign({}, categoryTopic.filter((item) => {
+    var category = Object.assign({}, fieldsBook.filter((item) => {
       return item.id === book.topic
     }))
     book.category = category[0]
     localStorage.setItem('detail-book', JSON.stringify(book))
-
+    
     this.setState({
       redir: true,
-      path: book.category.path,
       title: book.title
     })
-
     this.props.onChangeBook(book)
 
   }
 
   render() {
     const book = this.props.book
-    const { redir, path, title } = this.state
+    const { redir, title } = this.state
     if (redir)
-      return <Redirect to={`/detail/${path}/${title}`} />
+      return <Redirect to={`/${title}`} />
     return (
       <div className='bpcard-container'>
         <MDBCard style={{ minWidth: '14rem', height: 'auto' }} className='text-center'>
@@ -55,13 +52,13 @@ class BPCard extends Component {
             <MDBMask className="flex-center" overlay="white-light" />
           </MDBView>
           <MDBCardBody>
-            <MDBCardTitle className="h5" style={{ fontWeight: 600, color: '#0de24a' }}>{book.title}</MDBCardTitle>
+            <MDBCardTitle onClick={this.getInform} className="h5" title={book.title}>{book.title}</MDBCardTitle>
             <MDBCardText className='font-italic text-muted'>
               {book.author}
             </MDBCardText>
             <div className='price'>
-              {book.discountAmount !== undefined &&
-                <del>{this.$utils.formatVND(book.discountAmount)}</del>}
+              {book.discount !== undefined &&
+                <del>{this.$utils.formatVND(book.discount)}</del>}
               <p className='h3'>{this.$utils.formatVND(book.amount)}</p>
             </div>
             <div className='coubtn-wrapper'>
@@ -97,7 +94,7 @@ const MapDispatchToProps = (dispatch, props) => {
   return {
     onChangeBook: book => {
       dispatch(actions.getDetailBook(book))
-    }
+    },
   }
 }
 

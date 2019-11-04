@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import Header from '../../layouts/Header/Header'
+import { connect } from 'react-redux'
+
 import { Slider, Rate } from 'antd'
 import { MDBPagination, MDBPageNav, MDBPageItem, MDBBtn } from 'mdbreact'
-import * as lb from '../../const/listbook'
+
+import Header from '../../layouts/Header/Header'
 import BPCard from '../../components/Cards/BookPresentationCard/BookPresentationCard'
 import BRCard from '../../components/Cards/BookRateCard/BookRateCard'
+
+import * as actions from '../../actions/index'
 import '../../styles/bookcg.scss'
 class BookCategory extends Component {
     state = {
@@ -24,19 +28,19 @@ class BookCategory extends Component {
         this.setState({ rate: value })
     }
     render() {
-        const list = lb.list
+        const { parent, products } = this.props //parent = this.props.parent
         return (
             <div>
-                <Header carousel={false} />
+                <Header carousel={false} parent={parent} />
                 <div className='bookcg-wrapper'>
                     <div className='container'>
                         <div class="row">
                             <div className="col-12 col-md-9">
                                 <div className='row'>
-                                    {list.map((item, index) => {
+                                    {products.map((item, index) => {
                                         if (index < 9)
                                             return (
-                                                <div className="col-lg-3 col-md-6 mb-4 ml-5">
+                                                <div className="col-lg-3 col-md-6 mb-4 ml-5" key={index}>
                                                     <BPCard book={item}
                                                     />
                                                 </div>
@@ -107,27 +111,18 @@ class BookCategory extends Component {
                                     </div>
                                     <div className='card-rcol col-md-12'>
                                         <strong>Sách bình chọn nhiều nhất</strong>
-                                        <BRCard img={list[5].src}
-                                            title={list[5].title}
-                                            rate={5}
-                                            price={list[5].amount} />
-                                        <BRCard img={list[6].src}
-                                            title={list[6].title}
-                                            rate={5}
-                                            discount={list[5].discount}
-                                            price={list[6].amount} />
-                                        <BRCard img={list[7].src}
-                                            title={list[7].title}
-                                            rate={5}
-                                            price={list[7].amount} />
-                                        <BRCard img={list[8].src}
-                                            title={list[8].title}
-                                            rate={5}
-                                            price={list[8].amount} />
-                                        <BRCard img={list[9].src}
-                                            title={list[9].title}
-                                            rate={4.5}
-                                            price={list[9].amount} />
+                                        {
+                                            products.map((item, index) => {
+                                                if (index > 4 && index < 10)
+                                                    return (
+                                                        <BRCard img={item.src}
+                                                            title={item.title}
+                                                            rate={item.rate}
+                                                            price={item.amount} />
+                                                    )
+                                            })
+                                        }
+
                                     </div>
                                 </div>
                             </div>
@@ -141,4 +136,16 @@ class BookCategory extends Component {
     }
 }
 
-export default BookCategory;
+const MapStateToProps = state => {
+    return {
+        products: state.products
+    }
+}
+
+const MapDispatchToProps = (dispatch, props) => {
+    return {
+
+    }
+}
+
+export default connect(MapStateToProps, null)(BookCategory);

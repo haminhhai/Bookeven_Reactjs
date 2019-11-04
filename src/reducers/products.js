@@ -1,14 +1,12 @@
 import * as types from '../const/actionType'
+import {list} from '../const/listbook'
 
-var data = JSON.parse(localStorage.getItem('detail-book'))
-
-var intialState = data ? data : []
+var intialState = list
 
 var appReducer = (state = intialState, action) => {
     switch (action.type) {
         case types.GET_DETAIL_BOOK:
-            var newBook = action.book
-            return newBook
+            return state
         default: return state
     }
 }

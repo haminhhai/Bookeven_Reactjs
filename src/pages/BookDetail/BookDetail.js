@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import ReadMoreReact from 'read-more-react';
-import Magnifier from "react-magnifier";
-import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
-import Header from '../../layouts/Header/Header'
-
-import '../../styles/bookdetail.scss'
+import { connect } from 'react-redux'
+import * as $ from 'jquery'
 
 import { MDBBtn, MDBTable, MDBTableBody, MDBTabPane } from 'mdbreact';
+import Header from '../../layouts/Header/Header'
 import { Rate, InputNumber, Tabs } from 'antd'
 
+import '../../components/Exzoom/jquery.exzoom.js'
 import * as index from './index.js'
 
-const {TabPane} = Tabs
+import '../../styles/bookdetail.scss'
+import '../../components/Exzoom/jquery.exzoom.scss'
+
+const { TabPane } = Tabs
+
 
 class BookDetail extends Component {
     constructor(props) {
@@ -20,25 +22,50 @@ class BookDetail extends Component {
         this.state = {
         }
     }
+
     changeQuantity = e => {
         console.log(e)
     }
+
+    componentDidMount() {
+        $(function () {
+
+            $("#exzoom").exzoom({
+                // thumbnail nav options
+                "navWidth": 60,
+                "navHeight": 60,
+                "navItemNum": 5,
+                "navItemMargin": 7,
+
+                // autoplay
+                "autoPlay": true,
+
+                // autoplay interval in milliseconds
+                "autoPlayTimeout": 2000
+            });
+
+        });
+    }
     render() {
-        console.log(this.props.detailBook)
+        console.log(this.props)
+        const {parent, child} = this.props //parent = this.props.parent
         var currentBook = this.props.detailBook
-        const {match} = this.props.match
-        const url = match.url
+
         return (
             <div >
-                <Header carousel={false} />
+                <Header carousel={false} parent={parent} child={child}/>
+
                 <div className='book-detail'>
                     <div className='container'>
                         <div className='book-general row'>
                             <div className='col-12 col-md-4'>
-                                <Magnifier src={currentBook.src}
-                                    width='100%'
-                                    mgWidth={180}
-                                    mgHeight={180} />
+                                <div className="exzoom" id="exzoom">
+                                    <div className="exzoom_img_box">
+                                        <div className='exzoom_img_ul'>
+                                            <img src={currentBook.src} alt=''/>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div className='col-12 col-md-8'>
                                 <h1 >{currentBook.title}</h1>
@@ -56,9 +83,9 @@ class BookDetail extends Component {
                             <div className='col-12 col-md-4'>
                                 <MDBTable striped bordered>
                                     <MDBTableBody>
-                                        {index.data.map((item) => {
+                                        {index.data.map((item, index) => {
                                             return (
-                                                <tr>
+                                                <tr key={index}>
                                                     <th>{item.title}</th>
                                                     <th className='font-weight-bold'>{item.content}</th>
                                                 </tr>
@@ -69,7 +96,7 @@ class BookDetail extends Component {
                             </div>
                             <div className='col-12 col-md-8'>
                                 <Tabs defaultActiveKey="1">
-                                    <TabPane tab="Giới thiệu" key="1">
+                                    <TabPane tab="Mô tả" key="1">
                                         {index.longdesc}
                                     </TabPane>
                                     <TabPane tab="Bình luận" key="2">
@@ -91,4 +118,10 @@ const MapStateToProps = state => {
     }
 }
 
-export default connect(MapStateToProps, null)(BookDetail);
+const MapDispatchToProps = (dispatch, props) => {
+    return {
+        
+    }
+}
+
+export default connect(MapStateToProps, MapDispatchToProps)(BookDetail);

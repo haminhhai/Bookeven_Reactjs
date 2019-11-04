@@ -23,6 +23,22 @@
       display: block;
       width: 100%;
       height: auto;
+      max-height: 320px;
+    }
+
+    
+  }
+  .card-title {
+    color: black !important;
+    cursor: pointer;
+    font-weight: 800px;
+    transition: .3s;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    
+    &:hover {
+      color:#0de24a !important
     }
   }
   
