@@ -102,7 +102,7 @@ class Header extends Component {
                                     </MDBNavItem>
                                 </MDBNavbarNav>
                             }
-                            <MDBNavLink className="cart-nav waves-effect waves-light text-center" to="#!">
+                            <MDBNavLink className="cart-nav waves-effect waves-light text-center" to="/cart">
                                 <MDBBtn size="sm" className="cart-nav-btn mr-auto">
                                     <MDBIcon icon="shopping-cart" className='mr3' size='2x'>
                                         <MDBBadge color="danger" className='ml-1'>12</MDBBadge>
@@ -176,7 +176,7 @@ class Header extends Component {
                                         {fieldsBook.map((item, index) => {
                                             if (index < 7)
                                                 return (
-                                                    <MDBDropdownItem>
+                                                    <MDBDropdownItem key={index}>
                                                         <Link to={'/' + item.path}>
                                                             {item.name}
                                                         </Link>

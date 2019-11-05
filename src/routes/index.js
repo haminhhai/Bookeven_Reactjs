@@ -3,12 +3,18 @@ import Homepage from '../pages/Homepage'
 import BookCategory from '../pages/BookCategory/BookCategory'
 import BookDetail from '../pages/BookDetail/BookDetail'
 import * as data from '../const/listbook'
+import CartContainer from '../containers/CartContainer';
 
 var routes = [
     {
         path: '/',
         exact: true,
         main: () => <Homepage />
+    },
+    {
+        path: '/cart',
+        exact: false,
+        main: () => <CartContainer />
     },
 ]
 

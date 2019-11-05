@@ -115,10 +115,7 @@ class BookCategory extends Component {
                                             products.map((item, index) => {
                                                 if (index > 4 && index < 10)
                                                     return (
-                                                        <BRCard img={item.src}
-                                                            title={item.title}
-                                                            rate={item.rate}
-                                                            price={item.amount} />
+                                                        <BRCard book={item}/>
                                                     )
                                             })
                                         }

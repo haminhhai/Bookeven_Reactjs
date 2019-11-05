@@ -1,0 +1,17 @@
+.cart-wrapper {
+  font-family: "Montserrat", sans-serif;
+  padding-top: 50px;
+  .container {
+    border-radius: 15px;
+    background-color: #edf3f4;
+
+    padding-top: 20px;
+
+    .imgBook {
+      img {
+        height: auto;
+        width: 50px;
+      }
+    }
+  }
+}
