@@ -6,20 +6,20 @@ class BRCard extends Component {
     state = {}
 
     render() {
-        const { book } = this.props
+        const { product } = this.props
         return (
             <div className='top-rate row'>
-                <img src={book.src} alt='image' />
+                <img src={product.src} alt='image' />
                 <span className='text-left'>
-                    {book.title}
+                    {product.title}
                 </span>
                 <div className='col-12'>
-                    <Rate allowHalf defaultValue={book.rate} disabled />
+                    <Rate allowHalf defaultValue={product.rate} disabled />
                 </div>
                 <p>
-                    {book.discount !== undefined &&
-                        <del className='mr-1'>{this.$utils.formatVND(book.discount)}</del>}
-                    {this.$utils.formatVND(book.amount)}
+                    {product.discount >= 0 &&
+                        <del className='mr-1'>{this.$utils.formatVND(product.discount)}</del>}
+                    {this.$utils.formatVND(product.amount)}
                 </p>
             </div>
         );

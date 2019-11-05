@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn, MDBIcon } from 'mdbreact';
-import {InputNumber} from 'antd'
+import { Link } from 'react-router-dom'
+import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn, MDBAlert, MDBIcon } from 'mdbreact';
 import Header from '../../layouts/Header/Header'
-
 import '../../styles/cart.scss'
+import MessageContainer from '../../containers/MessageContainer';
 
 class Cart extends Component {
     constructor(props) {
@@ -14,27 +14,59 @@ class Cart extends Component {
     }
     render() {
         var { children } = this.props
+        console.log(children)
         return (
             <div >
                 <Header carousel={false} parent='Giỏ hàng' />
 
                 <div className='cart-wrapper'>
                     <div className='container'>
+                        <MessageContainer />
                         <MDBTable className='mt-4'>
-                            <MDBTableHead color="purple-gradient" textWhite>
-                                <tr>
-                                    <th>&nbsp;</th>
-                                    <th>&nbsp;</th>
-                                    <th>Tên sách</th>
-                                    <th>Số lượng</th>
-                                    <th>Đơn giá</th>
-                                    <th>Tổng</th>
-                                </tr>
-                            </MDBTableHead>
+                            {
+                                typeof children[0] !== 'string' &&
+                                <MDBTableHead color="purple-gradient" textWhite>
+                                    <tr>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>Tên sách</th>
+                                        <th>Số lượng</th>
+                                        <th>Đơn giá</th>
+                                        <th>Tổng</th>
+                                    </tr>
+                                </MDBTableHead>
+                            }
                             <MDBTableBody>
-                               { children }
+                                {children[0]}
+                                {
+                                    typeof children[0] !== 'string' ?
+                                        <tr>
+                                            <td colSpan='12' className='actions'>
+                                                <div className='coupon' >
+                                                    <input
+                                                        type="text"
+                                                        className="form-control mr-2"
+                                                        placeholder="Mã giảm giá"
+                                                    />
+                                                    <MDBBtn>Áp dụng</MDBBtn>
+                                                </div>
+                                                <MDBBtn disabled>Cập nhật</MDBBtn>
+                                            </td>
+                                        </tr> :
+                                        <tr>
+                                            <td colSpan='12' className='actions'>
+                                                <div className='coupon' >
+                                                    <Link to='/'>
+                                                        <MDBBtn>Quay lại cửa hàng</MDBBtn>
+                                                    </Link>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                }
                             </MDBTableBody>
                         </MDBTable>
+                        {children[1]}
                     </div>
                 </div>
             </div >
@@ -44,7 +76,6 @@ class Cart extends Component {
 
 const MapStateToProps = state => {
     return {
-        detailBook: state.detailBook
     }
 }
 

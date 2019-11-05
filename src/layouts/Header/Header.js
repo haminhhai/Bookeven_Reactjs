@@ -49,7 +49,14 @@ class Header extends Component {
         window.location.reload()
     }
     render() {
-        const { parent, child } = this.props //parent = this.props.parent
+        const { parent, child, cart } = this.props //parent = this.props.parent
+        console.log(cart)
+        var total = 0
+        if (cart.length > 0)
+            cart.forEach(element => {
+                total += element.quantity
+            });
+
         return (
             <div>
                 <MDBNavbar scrolling fixed="top" dark expand="md">
@@ -105,7 +112,7 @@ class Header extends Component {
                             <MDBNavLink className="cart-nav waves-effect waves-light text-center" to="/cart">
                                 <MDBBtn size="sm" className="cart-nav-btn mr-auto">
                                     <MDBIcon icon="shopping-cart" className='mr3' size='2x'>
-                                        <MDBBadge color="danger" className='ml-1'>12</MDBBadge>
+                                        <MDBBadge color="danger" className='ml-1'>{total}</MDBBadge>
                                     </MDBIcon>
                                 </MDBBtn>
                             </MDBNavLink>
@@ -208,6 +215,7 @@ class Header extends Component {
 
 const mapStateToProps = state => {
     return {
+        cart: state.cart
     }
 }
 
@@ -215,7 +223,7 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         onOpenModal: (numTab, isOpen) => {
             dispatch(actions.openModal(numTab, isOpen))
-        },
+        }
     }
 }
 

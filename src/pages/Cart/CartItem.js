@@ -3,6 +3,8 @@ import { MDBIcon, MDBBtn } from 'mdbreact';
 import { InputNumber } from 'antd'
 
 import '../../styles/cart.scss'
+import product from '../../reducers/products';
+import * as msg from '../../const/message'
 
 class CartItem extends Component {
     constructor(props) {
@@ -10,12 +12,18 @@ class CartItem extends Component {
         this.state = {
         }
     }
+
+    onDelete = product => {
+        var { onRemoveProduct, onChangeMessage } = this.props
+        onRemoveProduct(product)
+        onChangeMessage(msg.MSG_DELETE_BOOK_IN_CART_SUCCESS)
+    }   
     render() {
-        var { item } = this.props
+        var { item} = this.props
         return (
             <tr>
                 <td className='remove align-middle'>
-                    <MDBBtn gradient="purple">
+                    <MDBBtn onClick={() => {this.onDelete(item.product)}}>
                         <MDBIcon icon="times" />
                     </MDBBtn>
                 </td>
@@ -26,10 +34,14 @@ class CartItem extends Component {
                 <td className='quantity align-middle'>
                     <InputNumber min={1} defaultValue={item.quantity} />
                 </td>
-                <td className='price align-middle'>{item.product.amount}</td>
+                <td className='price align-middle'>
+                    <del className='mr-1'>{this.$utils.formatVND(item.product.discount)}</del>
+                    {this.$utils.formatVND(item.product.amount)}
+                </td>
                 <td className='total align-middle font-weight-bold'>
                     {this.$utils.formatVND(item.product.amount * item.quantity)}
                 </td>
+
             </tr>
         );
     }

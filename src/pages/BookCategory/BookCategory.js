@@ -5,9 +5,7 @@ import { Slider, Rate } from 'antd'
 import { MDBPagination, MDBPageNav, MDBPageItem, MDBBtn } from 'mdbreact'
 
 import Header from '../../layouts/Header/Header'
-import BPCard from '../../components/Cards/BookPresentationCard/BookPresentationCard'
-import BRCard from '../../components/Cards/BookRateCard/BookRateCard'
-
+import BookContainer from '../../containers/BookContainer'
 import * as actions from '../../actions/index'
 import '../../styles/bookcg.scss'
 class BookCategory extends Component {
@@ -27,8 +25,19 @@ class BookCategory extends Component {
     changeStar = value => {
         this.setState({ rate: value })
     }
+
+    loopCard(min, max, type) {
+        var items = []
+        for (var i = min; i < max; i++) {
+            if (type === 'bp')
+                items.push(<BookContainer index={i} type={type} className='col-lg-3 col-md-6 mb-4 ml-5' />)
+            else if (type === 'br')
+                items.push(<BookContainer index={i} type={type} />)
+        }
+        return items
+    }
     render() {
-        const { parent, products } = this.props //parent = this.props.parent
+        const { parent } = this.props //parent = this.props.parent
         return (
             <div>
                 <Header carousel={false} parent={parent} />
@@ -37,15 +46,7 @@ class BookCategory extends Component {
                         <div class="row">
                             <div className="col-12 col-md-9">
                                 <div className='row'>
-                                    {products.map((item, index) => {
-                                        if (index < 9)
-                                            return (
-                                                <div className="col-lg-3 col-md-6 mb-4 ml-5" key={index}>
-                                                    <BPCard book={item}
-                                                    />
-                                                </div>
-                                            )
-                                    })}
+                                    {this.loopCard(0, 9, 'bp')}
                                 </div>
                                 <div className='pagi-store row'>
                                     <MDBPagination circle>
@@ -111,15 +112,7 @@ class BookCategory extends Component {
                                     </div>
                                     <div className='card-rcol col-md-12'>
                                         <strong>Sách bình chọn nhiều nhất</strong>
-                                        {
-                                            products.map((item, index) => {
-                                                if (index > 4 && index < 10)
-                                                    return (
-                                                        <BRCard book={item}/>
-                                                    )
-                                            })
-                                        }
-
+                                        {this.loopCard(4, 8, 'br')}
                                     </div>
                                 </div>
                             </div>
@@ -135,7 +128,6 @@ class BookCategory extends Component {
 
 const MapStateToProps = state => {
     return {
-        products: state.products
     }
 }
 

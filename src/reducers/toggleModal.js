@@ -7,7 +7,7 @@ var intialState = [
     }
 ]
 
-var appReducer = (state = intialState, action) => {
+var modal = (state = intialState, action) => {
     switch (action.type) {
         case types.OPEN_MODAL:
             var openModal = [
@@ -29,4 +29,4 @@ var appReducer = (state = intialState, action) => {
     }
 }
 
-export default appReducer
+export default modal

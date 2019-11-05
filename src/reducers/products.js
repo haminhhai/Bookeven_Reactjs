@@ -3,7 +3,7 @@ import {list} from '../const/listbook'
 
 var intialState = list
 
-var appReducer = (state = intialState, action) => {
+var product = (state = intialState, action) => {
     switch (action.type) {
         case types.GET_DETAIL_BOOK:
             return state
@@ -11,4 +11,4 @@ var appReducer = (state = intialState, action) => {
     }
 }
 
-export default appReducer
+export default product

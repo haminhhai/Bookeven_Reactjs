@@ -4,7 +4,7 @@ var data = JSON.parse(localStorage.getItem('detail-book'))
 
 var intialState = data ? data : []
 
-var appReducer = (state = intialState, action) => {
+var detailBook = (state = intialState, action) => {
     switch (action.type) {
         case types.GET_DETAIL_BOOK:
             var newBook = action.book
@@ -13,4 +13,4 @@ var appReducer = (state = intialState, action) => {
     }
 }
 
-export default appReducer
+export default detailBook

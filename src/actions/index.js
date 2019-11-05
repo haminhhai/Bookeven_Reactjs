@@ -22,10 +22,24 @@ export const getDetailBook =  book => {
     }
 }
 
-export const addToCart =  (book, quantity) => {
+export const addToCart =  (product, quantity) => {
     return {
         type: types.ADD_TO_CART,
-        book, // book: book
+        product, // product: product
         quantity, // quantity: quantity
+    }
+}
+
+export const changeMessage =  message => {
+    return {
+        type: types.CHANGE_MESSAGE,
+        message, // message: message
+    }
+}
+
+export const removeProduct =  product => {
+    return {
+        type: types.REMOVE_ITEM_FROM_CART,
+        product, // product: product
     }
 }

@@ -1,29 +1,43 @@
 import * as types from '../const/actionType'
 
 var data = JSON.parse(localStorage.getItem('CART'))
-var intialState = [
-    {
-        product: {
-            src: 'https://nxbkimdong.com.vn/sites/default/files/styles/uc_product/public/kim-dong_bia_195mmx260mm.jpg?itok=Wp5OCpwL',
-            title: 'Kim Đồng',
-            author: 'Nhiều tác giả',
-            discount: 98000,
-            amount: 51000,
-            topic: 1,
-            iventory: 15,
-            rate: 4
-        },
-        quantity: 5
-        
-    }
-]
+var intialState = data ? data : []
 
-var appReducer = (state = intialState, action) => {
+var cart = (state = intialState, action) => {
+    var { product, quantity } = action
+    var index = -1
     switch (action.type) {
         case types.ADD_TO_CART:
-            return state
-        default: return state
+            index = findProductInCart(state, product)
+            if (index !== -1)
+                state[index].quantity += quantity
+            else {
+                state.push({
+                    product: product,
+                    quantity: quantity
+                })
+            }
+            localStorage.setItem('CART', JSON.stringify(state))
+            return [...state]
+        case types.REMOVE_ITEM_FROM_CART:
+            index = findProductInCart(state, product)
+            if(index !== -1)
+                state.splice(index, 1)
+            localStorage.setItem('CART', JSON.stringify(state))
+            return [...state]
+        default: return [...state]
     }
 }
 
-export default appReducer
+//return !== -1 is duplicate
+var findProductInCart = (cart, product) => {
+    var index = -1
+    if (cart.length > 0) {
+        for (var i = 0; i < cart.length; i++)
+            if (cart[i].product.id === product.id)
+                index = i
+    }
+    return index
+}
+
+export default cart

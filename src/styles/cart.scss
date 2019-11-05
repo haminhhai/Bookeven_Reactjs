@@ -1,16 +1,109 @@
 .cart-wrapper {
   font-family: "Montserrat", sans-serif;
   padding-top: 50px;
+  padding-bottom: 50px;
   .container {
     border-radius: 15px;
     background-color: #edf3f4;
-
     padding-top: 20px;
 
+    th {
+      font-weight: bold;
+    }
+
+    del {
+      color: #9a9a9a;
+    }
     .imgBook {
       img {
         height: auto;
         width: 50px;
+      }
+    }
+
+    .alert {
+      background-color: white;
+      color: black;
+      border-color: white;
+      border-top: 4px solid #a46497;
+    }
+    .actions {
+      text-align: right;
+      vertical-align: middle;
+
+      .coupon {
+        float: left;
+      }
+    }
+
+    .remove .btn {
+      background-color: #ef5350 !important;
+      transition: 0.3s;
+
+      &:hover {
+        transition: 0.3s;
+        background-color: #f44336 !important;
+        border-color: none;
+      }
+    }
+
+    .btn {
+      -webkit-box-shadow: -4px 3px 0px 0px rgba(0, 0, 0, 0.2);
+      -moz-box-shadow: -4px 3px 0px 0px rgba(0, 0, 0, 0.2);
+      box-shadow: -4px 3px 0px 0px rgba(0, 0, 0, 0.2);
+      color: #fff;
+      font-weight: bold;
+      float: none;
+      margin-top: -1px;
+      background-color: #aa66cc !important;
+      transition: 0.3s;
+
+      &:hover {
+        transition: 0.3s;
+        background-color: #9933cc !important;
+        border-color: none;
+      }
+    }
+
+    .ant-input-number {
+      width: 50px;
+
+      &:hover,
+      &:focus {
+        border-color: rgb(186, 85, 199);
+      }
+
+      .ant-input-number-handler:hover .ant-input-number-handler-up-inner,
+      .ant-input-number-handler:hover .ant-input-number-handler-down-inner {
+        color: rgb(186, 85, 199);
+      }
+    }
+
+    .form-control {
+      width: 150px;
+      display: inline;
+      min-height: 45px;
+    }
+
+    .collateral {
+      width: 100%;
+
+      &::before {
+        content: " ";
+        display: table;
+      }
+
+      &::after {
+        clear: both;
+        content: " ";
+        display: table;
+      }
+      .total-amount {
+        float: right;
+        margin-bottom: 30px;
+        .btn {
+          width: 100%;
+        }
       }
     }
   }

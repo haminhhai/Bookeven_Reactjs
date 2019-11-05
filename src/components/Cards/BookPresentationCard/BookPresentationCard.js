@@ -37,8 +37,11 @@ class BPCard extends Component {
 
   }
 
+  onAddToCart = book => {
+    this.props.onAddToCart(book)
+  }
   render() {
-    const book = this.props.book
+    const product = this.props.product
     const { redir, title } = this.state
     if (redir)
       return <Redirect to={`/${title}`} />
@@ -47,19 +50,19 @@ class BPCard extends Component {
         <MDBCard style={{ minWidth: '14rem', height: 'auto' }} className='text-center'>
           <MDBView className='book-wrapper' hover onClick={this.getInform}>
             <LazyLoad height='200' offset={100} once>
-              <img src={book.src} waves="true" className="imgBook" alt="" overlay="true" />
+              <img src={product.src} waves="true" className="imgBook" alt="" overlay="true" />
             </LazyLoad>
             <MDBMask className="flex-center" overlay="white-light" />
           </MDBView>
           <MDBCardBody>
-            <MDBCardTitle onClick={this.getInform} className="h5" title={book.title}>{book.title}</MDBCardTitle>
+            <MDBCardTitle onClick={this.getInform} className="h5" title={product.title}>{product.title}</MDBCardTitle>
             <MDBCardText className='font-italic text-muted'>
-              {book.author}
+              {product.author}
             </MDBCardText>
             <div className='price'>
-              {book.discount !== undefined &&
-                <del>{this.$utils.formatVND(book.discount)}</del>}
-              <p className='h3'>{this.$utils.formatVND(book.amount)}</p>
+              {product.discount !== undefined &&
+                <del>{this.$utils.formatVND(product.discount)}</del>}
+              <p className='h3'>{this.$utils.formatVND(product.amount)}</p>
             </div>
             <div className='coubtn-wrapper'>
               <div className='coubtn-border'>
@@ -69,7 +72,7 @@ class BPCard extends Component {
                   </div>
                   {data.text1}
                 </span>
-                <span className='cart' >
+                <span className='cart' onClick={() => {this.props.onAddToCart(product)}}>
                   <div>
                     <MDBIcon icon={data.icon2} />
                   </div>

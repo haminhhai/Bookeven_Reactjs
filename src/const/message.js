@@ -1,3 +1,5 @@
+export const MSG_WELCOME = 'Chào mừng đến với giỏ hàng Bookeven'
+
 export const MSG_ADD_TO_CART_SUCCESS = 'Thêm vào giỏ thành công !'
 
 export const MSG_UPDATE_CART_SUCESS = 'Cập nhật giỏ hàng thành công!'

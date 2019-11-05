@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { MDBIcon } from 'mdbreact'
-import { connect } from 'react-redux'
-import {Redirect, Link} from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 
 import Header from '../layouts/Header/Header'
 import '../styles/home.scss'
-import BPCard from '../components/Cards/BookPresentationCard/BookPresentationCard'
-import * as actions from '../actions/index'
+import BookContainer from '../containers/BookContainer'
 
 class Homepage extends Component {
   state = {
@@ -15,10 +13,14 @@ class Homepage extends Component {
     title: ''
   }
 
-
+  loopCard(min, max) {
+    var items = []
+    for (var i = min; i < max; i++)
+      items.push(<BookContainer index={i} type='bp' className='col-lg-3 col-md-6'/>)
+    return items
+  }
   render() {
-    const {redir, path} = this.state
-    const list = this.props.products
+    const { redir, path } = this.state
     if (redir)
       return <Redirect to={`/${path}`} />
     return (
@@ -33,57 +35,33 @@ class Homepage extends Component {
               </Link>
             </h3>
             <div className="row mt-5">
-              {list.map((item, index) => {
-                if (index < 4)
-                  return (
-                    <div className="col-lg-3 col-md-6">
-                      <BPCard book={item}
-                      />
-                    </div>
-                  )
-              })}
+              {this.loopCard(0, 4) }
             </div>
           </div>
         </div>
         <div className='wrapper' style={{ backgroundColor: '#2F2B35' }}>
           <div className='container' >
             <h3 className='title text-white font-weight-bold'>
-              <Link  to='/sach-moi'>
+              <Link to='/sach-moi'>
                 <MDBIcon icon="splotch" className='mr-2' />
                 Sách mới
               </Link>
             </h3>
             <div className="row mt-5 ">
-              {list.map((item, index) => {
-                if (index > 3 && index < 8)
-                  return (
-                    <div className="col-lg-3 col-md-6">
-                      <BPCard book={item}
-                      />
-                    </div>
-                  )
-              })}
+              {this.loopCard(4, 8) }
             </div>
           </div>
         </div>
         <div className='wrapper' style={{ backgroundColor: '#EDF3F4' }}>
           <div className='container' >
             <h3 className='title font-weight-bold'>
-              <Link  to='/sach-giam-gia'>
+              <Link to='/sach-giam-gia'>
                 <MDBIcon icon="level-down-alt" className='mr-2' />
                 Sách giảm giá mạnh
               </Link>
             </h3>
             <div className="row mt-5 ">
-              {list.map((item, index) => {
-                if (index > 7 && index < 12)
-                  return (
-                    <div className="col-lg-3 col-md-6">
-                      <BPCard book={item}
-                      />
-                    </div>
-                  )
-              })}
+              {this.loopCard(8, 12)}
             </div>
           </div>
         </div>
@@ -92,16 +70,5 @@ class Homepage extends Component {
   }
 }
 
-const MapStateToProps = state => {
-  return {
-    products: state.products
-  }
-}
 
-const MapDispatchToProps = (dispatch, props) => {
-  return {
-    
-  }
-}
-
-export default connect(MapStateToProps, MapDispatchToProps)(Homepage);
+export default Homepage;
