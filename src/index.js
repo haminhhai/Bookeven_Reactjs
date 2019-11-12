@@ -13,7 +13,7 @@ import 'antd/dist/antd.css';
 
 import App from './App';
 
-import utils from './utils/Utils'
+import * as utils from './utils/Utils'
 
 import { createStore } from 'redux'
 import myReducer from './reducers/index'

@@ -5,7 +5,7 @@ import { Slider, Rate } from 'antd'
 import { MDBPagination, MDBPageNav, MDBPageItem, MDBBtn } from 'mdbreact'
 
 import Header from '../../layouts/Header/Header'
-import BookContainer from '../../containers/BookContainer'
+import BookCardContainer from '../../containers/BookCardContainer'
 import * as actions from '../../actions/index'
 import '../../styles/bookcg.scss'
 class BookCategory extends Component {
@@ -30,9 +30,9 @@ class BookCategory extends Component {
         var items = []
         for (var i = min; i < max; i++) {
             if (type === 'bp')
-                items.push(<BookContainer index={i} type={type} className='col-lg-3 col-md-6 mb-4 ml-5' />)
+                items.push(<BookCardContainer index={i} type={type} className='col-lg-3 col-md-6 mb-4 ml-5' />)
             else if (type === 'br')
-                items.push(<BookContainer index={i} type={type} />)
+                items.push(<BookCardContainer index={i} type={type} />)
         }
         return items
     }

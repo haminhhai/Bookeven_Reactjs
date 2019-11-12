@@ -1,5 +1,5 @@
 const ran = (max) => {
-    return Math.random() * max
+    return Math.floor(Math.random() * max)
 }
 
 export const list = [
@@ -11,7 +11,7 @@ export const list = [
         discount: 98000,
         amount: 51000,
         topic: 1,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },
     {
@@ -22,7 +22,7 @@ export const list = [
         discount: 198000,
         amount: 178000,
         topic: 1,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },
     {
@@ -33,7 +33,7 @@ export const list = [
         discount: 40000,
         amount: 20000,
         topic: 1,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },
     {
@@ -44,7 +44,7 @@ export const list = [
         discount: 15000,
         amount: 13500,
         topic: 1,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },
     {
@@ -55,7 +55,7 @@ export const list = [
         discount: 36000,
         amount: 32400,
         topic: 1,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },
     {
@@ -66,7 +66,7 @@ export const list = [
         discount: 55000,
         amount: 49500,
         topic: 2,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },
     {
@@ -77,7 +77,7 @@ export const list = [
         discount: 208000,
         amount: 187000,
         topic: 2,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },{
         id: 8,
@@ -87,7 +87,7 @@ export const list = [
         discount: 40000,
         amount: 36000,
         topic: 2,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },
     {
@@ -98,7 +98,7 @@ export const list = [
         discount: 48000,
         amount: 43000,
         topic: 2,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },
     {
@@ -109,7 +109,7 @@ export const list = [
         discount: 50000,
         amount: 45000,
         topic: 2,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },
     {
@@ -120,7 +120,7 @@ export const list = [
         discount: 68000,
         amount: 61000,
         topic: 3,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },{
         id: 12,
@@ -130,7 +130,7 @@ export const list = [
         discount: 65000,
         amount: 58000,
         topic: 3,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },
     {
@@ -141,7 +141,7 @@ export const list = [
         discount: 50000,
         amount: 45000,
         topic: 3,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },
     {
@@ -152,7 +152,7 @@ export const list = [
         discount: 55000,
         amount: 49000,
         topic: 3,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },{
         id: 15,
@@ -162,7 +162,7 @@ export const list = [
         discount: 94000,
         amount: 84000,
         topic: 3,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },
     {
@@ -173,7 +173,7 @@ export const list = [
         discount: 125000,
         amount: 112000,
         topic: 4,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },
     {
@@ -184,7 +184,7 @@ export const list = [
         discount: 40000,
         amount: 35000,
         topic: 4,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },{
         id: 18,
@@ -194,7 +194,7 @@ export const list = [
         discount: 45000,
         amount: 40000,
         topic: 4,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },
     {
@@ -205,7 +205,7 @@ export const list = [
         discount: 73000,
         amount: 65000,
         topic: 4,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },
     {
@@ -216,7 +216,7 @@ export const list = [
         discount: 48000,
         amount: 43000,
         topic: 4,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },
     {
@@ -227,7 +227,7 @@ export const list = [
         discount: 20000,
         amount: 18000,
         topic: 5,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },
     {
@@ -238,7 +238,7 @@ export const list = [
         discount: 20000,
         amount: 18000,
         topic: 5,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },
     {
@@ -249,7 +249,7 @@ export const list = [
         discount: 33000,
         amount: 29000,
         topic: 5,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },
     {
@@ -260,7 +260,7 @@ export const list = [
         discount: 60000,
         amount: 54000,
         topic: 5,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },
     {
@@ -271,7 +271,7 @@ export const list = [
         discount: 45000,
         amount: 40000,
         topic: 5,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },
     {
@@ -282,7 +282,7 @@ export const list = [
         discount: 25000,
         amount: 22000,
         topic: 6,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },
     {
@@ -293,7 +293,7 @@ export const list = [
         discount: 18000,
         amount: 16000,
         topic: 6,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },
     {
@@ -304,7 +304,7 @@ export const list = [
         discount: 22000,
         amount: 19000,
         topic: 6,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },
     {
@@ -315,7 +315,7 @@ export const list = [
         discount: 19000,
         amount: 17000,
         topic: 6,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },
     {
@@ -326,7 +326,7 @@ export const list = [
         discount: 20000,
         amount: 18000,
         topic: 6,
-        iventory: ran(20),
+        iventory: ran(30),
         rate: ran(5)
     },
 

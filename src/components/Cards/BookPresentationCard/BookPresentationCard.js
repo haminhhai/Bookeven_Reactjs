@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import LazyLoad from 'react-lazyload';
-import { Redirect, Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { MDBCard, MDBIcon, MDBCardBody, MDBCardTitle, MDBCardText, MDBMask, MDBView} from 'mdbreact'
-
+import { MDBCard, MDBIcon, MDBCardBody, MDBCardTitle, MDBCardText, MDBMask, MDBView } from 'mdbreact'
+import { notification } from 'antd'
 import { fieldsBook } from '../../../const/listbook'
 import * as actions from '../../../actions/index'
+import * as msg from '../../../const/message'
 import './bpcard.scss'
 
 //data for CoupleButton Component
@@ -22,23 +23,24 @@ class BPCard extends Component {
     title: ''
   }
   getInform = () => {
-    const book = this.props.book
+    const product = this.props.product
     var category = Object.assign({}, fieldsBook.filter((item) => {
-      return item.id === book.topic
+      return item.id === product.topic
     }))
-    book.category = category[0]
-    localStorage.setItem('detail-book', JSON.stringify(book))
-    
+    product.category = category[0]
+    localStorage.setItem('detail-book', JSON.stringify(product))
+
     this.setState({
       redir: true,
-      title: book.title
+      title: product.title
     })
-    this.props.onChangeBook(book)
+    this.props.onChangeBook(product)
 
   }
 
   onAddToCart = book => {
-    this.props.onAddToCart(book)
+    this.props.checkIventory(book)
+    
   }
   render() {
     const product = this.props.product
@@ -72,7 +74,7 @@ class BPCard extends Component {
                   </div>
                   {data.text1}
                 </span>
-                <span className='cart' onClick={() => {this.props.onAddToCart(product)}}>
+                <span className='cart' onClick={() => { this.onAddToCart(product) }}>
                   <div>
                     <MDBIcon icon={data.icon2} />
                   </div>

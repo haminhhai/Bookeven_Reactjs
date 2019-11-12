@@ -25,7 +25,7 @@
       background-color: white;
       color: black;
       border-color: white;
-      border-top: 4px solid #a46497;
+      border-top: 4px solid #62b6e7;
     }
     .actions {
       text-align: right;
@@ -55,28 +55,18 @@
       font-weight: bold;
       float: none;
       margin-top: -1px;
-      background-color: #aa66cc !important;
+      background-color: #33b5e5 !important;
       transition: 0.3s;
 
       &:hover {
         transition: 0.3s;
-        background-color: #9933cc !important;
+        background-color: #0099CC !important;
         border-color: none;
       }
     }
 
     .ant-input-number {
       width: 50px;
-
-      &:hover,
-      &:focus {
-        border-color: rgb(186, 85, 199);
-      }
-
-      .ant-input-number-handler:hover .ant-input-number-handler-up-inner,
-      .ant-input-number-handler:hover .ant-input-number-handler-down-inner {
-        color: rgb(186, 85, 199);
-      }
     }
 
     .form-control {

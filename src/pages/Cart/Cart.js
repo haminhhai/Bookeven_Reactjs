@@ -14,7 +14,6 @@ class Cart extends Component {
     }
     render() {
         var { children } = this.props
-        console.log(children)
         return (
             <div >
                 <Header carousel={false} parent='Giỏ hàng' />
@@ -25,7 +24,7 @@ class Cart extends Component {
                         <MDBTable className='mt-4'>
                             {
                                 typeof children[0] !== 'string' &&
-                                <MDBTableHead color="purple-gradient" textWhite>
+                                <MDBTableHead color="aqua-gradient" textWhite>
                                     <tr>
                                         <th>&nbsp;</th>
                                         <th>&nbsp;</th>
@@ -50,7 +49,6 @@ class Cart extends Component {
                                                     />
                                                     <MDBBtn>Áp dụng</MDBBtn>
                                                 </div>
-                                                <MDBBtn disabled>Cập nhật</MDBBtn>
                                             </td>
                                         </tr> :
                                         <tr>
@@ -62,7 +60,6 @@ class Cart extends Component {
                                                 </div>
                                             </td>
                                         </tr>
-
                                 }
                             </MDBTableBody>
                         </MDBTable>

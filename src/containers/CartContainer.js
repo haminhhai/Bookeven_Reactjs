@@ -10,7 +10,7 @@ import * as Message from '../const/message'
 class CartContainer extends Component {
 
   showCartItem = cart => {
-    var { onRemoveProduct, onChangeMessage} = this.props
+    var { onRemoveProduct, onChangeMessage, onUpdateProduct} = this.props
     var res = Message.MSG_CART_EMPTY
     if (cart.length > 0)
       res = cart.map((item, index) => {
@@ -19,7 +19,8 @@ class CartContainer extends Component {
             key={index}
             item={item} 
             onRemoveProduct={onRemoveProduct}
-            onChangeMessage={onChangeMessage}/>
+            onChangeMessage={onChangeMessage}
+            onUpdateProduct={onUpdateProduct}/>
 
         )
       })
@@ -36,9 +37,8 @@ class CartContainer extends Component {
 
   render() {
     var { cart } = this.props
-    console.log(cart)
     return (
-      <Cart >
+      <Cart>
         { this.showCartItem(cart) }
         { this.showCartTotal(cart) }
       </Cart>
@@ -78,6 +78,10 @@ const MapDispatchToProps = (dispatch, props) => {
     onChangeMessage: message => {
       dispatch(actions.changeMessage(message))
     },
+
+    onUpdateProduct: (product, quantity) => {
+      dispatch(actions.updateCart(product, quantity))
+    }
   }
 }
 

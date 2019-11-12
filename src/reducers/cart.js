@@ -25,6 +25,13 @@ var cart = (state = intialState, action) => {
                 state.splice(index, 1)
             localStorage.setItem('CART', JSON.stringify(state))
             return [...state]
+        case types.UPDATE_CART:
+            index = findProductInCart(state, product)
+            console.log(product, quantity)
+            if(index !== -1)
+                state[index].quantity = quantity
+            localStorage.setItem('CART', JSON.stringify(state))
+            return [...state]
         default: return [...state]
     }
 }
@@ -35,7 +42,10 @@ var findProductInCart = (cart, product) => {
     if (cart.length > 0) {
         for (var i = 0; i < cart.length; i++)
             if (cart[i].product.id === product.id)
+            {
                 index = i
+                break
+            }
     }
     return index
 }

@@ -15,14 +15,22 @@ $gr:rgba(0, 0, 0, 0.65);
   font-family: "Montserrat", sans-serif;
 }
 .cart-nav {
+  .btn-default:not([disabled]):not(.disabled):active {
+    color: $bl;
+    border-color: transparent;
+    background-color: $w !important;
+  }
   .cart-nav-btn {
-    background: initial !important;
+    background-color: initial !important;
     color: $w;
+    
 
     &:hover {
       background-color: $w !important;
       color: $pr;
     }
+
+    
   }
   .badge {
     min-width: 20px;
@@ -94,6 +102,13 @@ $gr:rgba(0, 0, 0, 0.65);
   height: 100px;
 }
 
+.ant-notification {
+  z-index: 2000;
+
+  .ant-notification-notice {
+    transform: translateY(10px);
+  }
+}
 .over-img-card {
   z-index: 10 !important;
   margin-top: -1rem;
@@ -114,10 +129,12 @@ $gr:rgba(0, 0, 0, 0.65);
     outline-color: initial;
   }
 
-  .btn-secondary:not(:disabled):not(.disabled):active {
+  .btn-default:not([disabled]):not(.disabled):active {
     color: $bl;
     border-color: transparent;
   }
+
+
 
   .btn-secondary {
     color: $gr;
@@ -154,6 +171,8 @@ $gr:rgba(0, 0, 0, 0.65);
       transform-origin: 50% 0;
     }
   }
+
+  
 }
 
 .reglog {

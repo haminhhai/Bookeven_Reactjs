@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReadMoreReact from 'read-more-react';
-import { connect } from 'react-redux'
 import * as $ from 'jquery'
 
 import { MDBBtn, MDBTable, MDBTableBody, MDBTabPane } from 'mdbreact';
@@ -20,11 +19,12 @@ class BookDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            quantity: 1
         }
     }
 
     changeQuantity = e => {
-        console.log(e)
+        this.setState({quantity: e})
     }
 
     componentDidMount() {
@@ -46,11 +46,12 @@ class BookDetail extends Component {
 
         });
     }
-    render() {
-        console.log(this.props)
-        const {parent, child} = this.props //parent = this.props.parent
-        var currentBook = this.props.detailBook
 
+    addToCart = (book) => {
+        this.props.checkIventory(book, this.state.quantity)
+    }
+    render() {
+        const {parent, child, detailBook} = this.props //parent = this.props.parent
         return (
             <div >
                 <Header carousel={false} parent={parent} child={child}/>
@@ -62,21 +63,21 @@ class BookDetail extends Component {
                                 <div className="exzoom" id="exzoom">
                                     <div className="exzoom_img_box">
                                         <div className='exzoom_img_ul'>
-                                            <img src={currentBook.src} alt=''/>
+                                            <img src={detailBook.src} alt=''/>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div className='col-12 col-md-8'>
-                                <h1 >{currentBook.title}</h1>
-                                <h5 className=''>Tác giả: {currentBook.author}</h5>
+                                <h1 >{detailBook.title}</h1>
+                                <h5 className=''>Tác giả: {detailBook.author}</h5>
                                 <div className='rate-detail'>
                                     <Rate disabled allowHalf defaultValue={4.5} />
                                     <p>(2 người đã đánh giá)</p>
-                                </div>
+                                </div> 
                                 <ReadMoreReact text={index.desc} readMoreText='Xem thêm' />
-                                <InputNumber className='mt-3' min={1} defaultValue={1} onChange={this.changeQuantity} />
-                                <MDBBtn className='add-cart-btn ml-3'>Thêm vào giỏ</MDBBtn>
+                                <InputNumber className='mt-3' min={1} max={detailBook.iventory} defaultValue={1} onChange={this.changeQuantity} />
+                                <MDBBtn className='add-cart-btn ml-3' onClick={() => {this.addToCart(detailBook)}}>Thêm vào giỏ</MDBBtn>
                             </div>
                         </div>
                         <div className='book-review row mt-4'>
@@ -112,16 +113,5 @@ class BookDetail extends Component {
     }
 }
 
-const MapStateToProps = state => {
-    return {
-        detailBook: state.detailBook
-    }
-}
 
-const MapDispatchToProps = (dispatch, props) => {
-    return {
-        
-    }
-}
-
-export default connect(MapStateToProps, MapDispatchToProps)(BookDetail);
+export default BookDetail;

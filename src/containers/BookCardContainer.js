@@ -6,15 +6,34 @@ import BPCard from '../components/Cards/BookPresentationCard/BookPresentationCar
 import BRCard from '../components/Cards/BookRateCard/BookRateCard'
 
 import * as actions from '../actions/index'
-class BookContainer extends Component {
+class BookCardContainer extends Component {
 
+  checkIventory = book => {
+    const { cart, onAddToCart } = this.props
+    var check = cart.filter(item => {
+      return item.product.id === book.id
+    })
+    if (check.length > 0) {
+      if (book.iventory > check[0].quantity) {
+        onAddToCart(book)
+        this.$utils.addToCartSuccess()
+      }
+      else
+        this.$utils.addToCartFail()
+    }
+    else {
+
+      onAddToCart(book)
+      this.$utils.addToCartSuccess()
+    }
+  }
   render() {
-    const { products, index, type, className, onAddToCart } = this.props
+    const { products, index, type, className } = this.props
     return (
       type === 'bp' ?
 
         <div className={className}>
-          <BPCard product={products[index]} onAddToCart={onAddToCart} />
+          <BPCard product={products[index]} checkIventory={this.checkIventory} />
         </div>
         :
         <BRCard product={products[index]} />
@@ -22,7 +41,7 @@ class BookContainer extends Component {
   }
 }
 
-BookContainer.propTypes = {
+BookCardContainer.propTypes = {
   products: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -36,13 +55,16 @@ BookContainer.propTypes = {
       rate: PropTypes.number.isRequired,
     })
   ).isRequired,
-    onChangeMessage: PropTypes.func.isRequired
+  onChangeMessage: PropTypes.func.isRequired,
+  onRemoveItem: PropTypes.func.isRequired
 }
 
 
 const MapStateToProps = state => {
   return {
-    products: state.products
+    products: state.products,
+    cart: state.cart
+
   }
 }
 
@@ -57,4 +79,4 @@ const MapDispatchToProps = (dispatch, props) => {
   }
 }
 
-export default connect(MapStateToProps, MapDispatchToProps)(BookContainer);
+export default connect(MapStateToProps, MapDispatchToProps)(BookCardContainer);

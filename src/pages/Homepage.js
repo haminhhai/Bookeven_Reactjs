@@ -4,7 +4,7 @@ import { Redirect, Link } from 'react-router-dom'
 
 import Header from '../layouts/Header/Header'
 import '../styles/home.scss'
-import BookContainer from '../containers/BookContainer'
+import BookCardContainer from '../containers/BookCardContainer'
 
 class Homepage extends Component {
   state = {
@@ -16,7 +16,7 @@ class Homepage extends Component {
   loopCard(min, max) {
     var items = []
     for (var i = min; i < max; i++)
-      items.push(<BookContainer index={i} type='bp' className='col-lg-3 col-md-6'/>)
+      items.push(<BookCardContainer index={i} type='bp' className='col-lg-3 col-md-6'/>)
     return items
   }
   render() {

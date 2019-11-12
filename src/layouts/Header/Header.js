@@ -50,7 +50,6 @@ class Header extends Component {
     }
     render() {
         const { parent, child, cart } = this.props //parent = this.props.parent
-        console.log(cart)
         var total = 0
         if (cart.length > 0)
             cart.forEach(element => {

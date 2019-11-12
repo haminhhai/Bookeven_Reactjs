@@ -43,3 +43,11 @@ export const removeProduct =  product => {
         product, // product: product
     }
 }
+
+export const updateCart =  (product, quantity) => {
+    return {
+        type: types.UPDATE_CART,
+        product, // product: product
+        quantity, // quantity: quantity
+    }
+}

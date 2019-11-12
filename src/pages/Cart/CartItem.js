@@ -3,7 +3,6 @@ import { MDBIcon, MDBBtn } from 'mdbreact';
 import { InputNumber } from 'antd'
 
 import '../../styles/cart.scss'
-import product from '../../reducers/products';
 import * as msg from '../../const/message'
 
 class CartItem extends Component {
@@ -18,6 +17,14 @@ class CartItem extends Component {
         onRemoveProduct(product)
         onChangeMessage(msg.MSG_DELETE_BOOK_IN_CART_SUCCESS)
     }   
+
+    onChangeQuantity = (e) => {
+        var { onUpdateProduct, onChangeMessage } = this.props
+        var { item } = this.props
+        onUpdateProduct(item.product, e)
+        onChangeMessage(msg.MSG_UPDATE_CART_SUCESS)
+        
+    }
     render() {
         var { item} = this.props
         return (
@@ -32,7 +39,7 @@ class CartItem extends Component {
                 </td>
                 <td className='name align-middle'>{item.product.title}</td>
                 <td className='quantity align-middle'>
-                    <InputNumber min={1} defaultValue={item.quantity} />
+                    <InputNumber min={1} max={item.product.iventory} defaultValue={item.quantity} onChange={this.onChangeQuantity}/>
                 </td>
                 <td className='price align-middle'>
                     <del className='mr-1'>{this.$utils.formatVND(item.product.discount)}</del>
