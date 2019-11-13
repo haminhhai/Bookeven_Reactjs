@@ -48,7 +48,7 @@ class Homepage extends Component {
               </Link>
             </h3>
             <div className="row mt-5 ">
-              {this.loopCard(4, 8) }
+              {this.loopCard(0, 4) }
             </div>
           </div>
         </div>
@@ -61,7 +61,7 @@ class Homepage extends Component {
               </Link>
             </h3>
             <div className="row mt-5 ">
-              {this.loopCard(8, 12)}
+              {this.loopCard(0, 4)}
             </div>
           </div>
         </div>

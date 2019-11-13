@@ -3,8 +3,10 @@ import ReadMoreReact from 'read-more-react';
 import * as $ from 'jquery'
 
 import { MDBBtn, MDBTable, MDBTableBody, MDBTabPane } from 'mdbreact';
-import Header from '../../layouts/Header/Header'
 import { Rate, InputNumber, Tabs } from 'antd'
+
+import Header from '../../layouts/Header/Header'
+import Comments from '../../components/Comments/Comments'
 
 import '../../components/Exzoom/jquery.exzoom.js'
 import * as index from './index.js'
@@ -24,7 +26,7 @@ class BookDetail extends Component {
     }
 
     changeQuantity = e => {
-        this.setState({quantity: e})
+        this.setState({ quantity: e })
     }
 
     componentDidMount() {
@@ -51,10 +53,10 @@ class BookDetail extends Component {
         this.props.checkIventory(book, this.state.quantity)
     }
     render() {
-        const {parent, child, detailBook} = this.props //parent = this.props.parent
+        const { parent, child, detailBook } = this.props //parent = this.props.parent
         return (
             <div >
-                <Header carousel={false} parent={parent} child={child}/>
+                <Header carousel={false} parent={parent} child={child} />
 
                 <div className='book-detail'>
                     <div className='container'>
@@ -63,7 +65,7 @@ class BookDetail extends Component {
                                 <div className="exzoom" id="exzoom">
                                     <div className="exzoom_img_box">
                                         <div className='exzoom_img_ul'>
-                                            <img src={detailBook.src} alt=''/>
+                                            <img src={detailBook.src} alt='' />
                                         </div>
                                     </div>
                                 </div>
@@ -74,36 +76,37 @@ class BookDetail extends Component {
                                 <div className='rate-detail'>
                                     <Rate disabled allowHalf defaultValue={4.5} />
                                     <p>(2 người đã đánh giá)</p>
-                                </div> 
+                                </div>
                                 <ReadMoreReact text={index.desc} readMoreText='Xem thêm' />
                                 <InputNumber className='mt-3' min={1} max={detailBook.iventory} defaultValue={1} onChange={this.changeQuantity} />
-                                <MDBBtn className='add-cart-btn ml-3' onClick={() => {this.addToCart(detailBook)}}>Thêm vào giỏ</MDBBtn>
+                                <MDBBtn className='add-cart-btn ml-3' onClick={() => { this.addToCart(detailBook) }}>Thêm vào giỏ</MDBBtn>
                             </div>
                         </div>
                         <div className='book-review row mt-4'>
-                            <div className='col-12 col-md-4'>
+                            <div className='col-12 col-md-12'>
+                                <h3>Thông tin chi tiết</h3>
                                 <MDBTable striped bordered>
                                     <MDBTableBody>
                                         {index.data.map((item, index) => {
                                             return (
                                                 <tr key={index}>
-                                                    <th>{item.title}</th>
-                                                    <th className='font-weight-bold'>{item.content}</th>
+                                                    <th colSpan='1'>{item.title}</th>
+                                                    <th clssName='font-weight-bold' colspan='2'>{item.content}</th>
                                                 </tr>
                                             )
                                         })}
                                     </MDBTableBody>
                                 </MDBTable>
                             </div>
-                            <div className='col-12 col-md-8'>
-                                <Tabs defaultActiveKey="1">
-                                    <TabPane tab="Mô tả" key="1">
-                                        {index.longdesc}
-                                    </TabPane>
-                                    <TabPane tab="Bình luận" key="2">
-                                        Content of Tab Pane 2
-                                    </TabPane>
-                                </Tabs>
+                            <div className='col-12 col-md-12'>
+                                <h3>Giới thiệu sách</h3>
+                                {index.longdesc}
+                            </div>
+                            <div className='col-12 col-md-12'>
+                                <h3>Bình luận</h3>
+                                <div className='comment-system'>
+                                    <Comments/>
+                                </div>
                             </div>
                         </div>
                     </div>

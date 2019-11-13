@@ -1,0 +1,893 @@
+[
+    {
+        "districtid": 1,
+        "provinceid": 1,
+        "name": "Ba Đình",
+        "type": "Quận",
+        "location": "21 02 08 N  ,   105 49 38 E",
+        "lat": 21.03555556,
+        "long": 105.82722222
+    },
+    {
+        "districtid": 2,
+        "provinceid": 1,
+        "name": "Hoàn Kiếm",
+        "type": "Quận",
+        "location": "21 01 53 N  ,   105 51 09 E",
+        "lat": 21.03138889,
+        "long": 105.8525
+    },
+    {
+        "districtid": 3,
+        "provinceid": 1,
+        "name": "Tây Hồ",
+        "type": "Quận",
+        "location": "21 04 10 N  ,   105 49 07 E",
+        "lat": 21.06944444,
+        "long": 105.81861111
+    },
+    {
+        "districtid": 4,
+        "provinceid": 1,
+        "name": "Long Biên",
+        "type": "Quận",
+        "location": "21 02 21 N  ,   105 53 07 E",
+        "lat": 21.03916667,
+        "long": 105.88527778
+    },
+    {
+        "districtid": 5,
+        "provinceid": 1,
+        "name": "Cầu Giấy",
+        "type": "Quận",
+        "location": "21 01 52 N  ,   105 47 20 E",
+        "lat": 21.03111111,
+        "long": 105.78888889
+    },
+    {
+        "districtid": 6,
+        "provinceid": 1,
+        "name": "Đống Đa",
+        "type": "Quận",
+        "location": "21 00 56 N  ,   105 49 06 E",
+        "lat": 21.01555556,
+        "long": 105.81833333
+    },
+    {
+        "districtid": 7,
+        "provinceid": 1,
+        "name": "Hai Bà Trưng",
+        "type": "Quận",
+        "location": "21 00 27 N  ,   105 51 35 E",
+        "lat": 21.0075,
+        "long": 105.85972222
+    },
+    {
+        "districtid": 8,
+        "provinceid": 1,
+        "name": "Hoàng Mai",
+        "type": "Quận",
+        "location": "20 58 33 N  ,   105 51 22 E",
+        "lat": 20.97583333,
+        "long": 105.85611111
+    },
+    {
+        "districtid": 9,
+        "provinceid": 1,
+        "name": "Thanh Xuân",
+        "type": "Quận",
+        "location": "20 59 44 N  ,   105 48 56 E",
+        "lat": 20.99555556,
+        "long": 105.81555556
+    },
+    {
+        "districtid": 16,
+        "provinceid": 1,
+        "name": "Sóc Sơn",
+        "type": "Huyện",
+        "location": "21 16 55 N  ,   105 49 46 E",
+        "lat": 21.28194444,
+        "long": 105.82944444
+    },
+    {
+        "districtid": 17,
+        "provinceid": 1,
+        "name": "Đông Anh",
+        "type": "Huyện",
+        "location": "21 08 16 N  ,   105 49 38 E",
+        "lat": 21.13777778,
+        "long": 105.82722222
+    },
+    {
+        "districtid": 18,
+        "provinceid": 1,
+        "name": "Gia Lâm",
+        "type": "Huyện",
+        "location": "21 01 28 N  ,   105 56 54 E",
+        "lat": 21.02444444,
+        "long": 105.94833333
+    },
+    {
+        "districtid": 19,
+        "provinceid": 1,
+        "name": "Từ Liêm",
+        "type": "Huyện",
+        "location": "21 02 39 N  ,   105 45 32 E",
+        "lat": 21.04416667,
+        "long": 105.75888889
+    },
+    {
+        "districtid": 20,
+        "provinceid": 1,
+        "name": "Thanh Trì",
+        "type": "Huyện",
+        "location": "20 56 32 N  ,   105 50 55 E",
+        "lat": 20.94222222,
+        "long": 105.84861111
+    },
+    {
+        "districtid": 24,
+        "provinceid": 2,
+        "name": "Hà Giang",
+        "type": "Thị Xã",
+        "location": "22 46 23 N  ,   105 02 39 E",
+        "lat": 22.77305556,
+        "long": 105.04416667
+    },
+    {
+        "districtid": 26,
+        "provinceid": 2,
+        "name": "Đồng Văn",
+        "type": "Huyện",
+        "location": "23 14 34 N  ,   105 15 48 E",
+        "lat": 23.24277778,
+        "long": 105.26333333
+    },
+    {
+        "districtid": 27,
+        "provinceid": 2,
+        "name": "Mèo Vạc",
+        "type": "Huyện",
+        "location": "23 09 10 N  ,   105 26 38 E",
+        "lat": 23.15277778,
+        "long": 105.44388889
+    },
+    {
+        "districtid": 28,
+        "provinceid": 2,
+        "name": "Yên Minh",
+        "type": "Huyện",
+        "location": "23 04 20 N  ,   105 10 13 E",
+        "lat": 23.07222222,
+        "long": 105.17027778
+    },
+    {
+        "districtid": 29,
+        "provinceid": 2,
+        "name": "Quản Bạ",
+        "type": "Huyện",
+        "location": "23 04 03 N  ,   104 58 05 E",
+        "lat": 23.0675,
+        "long": 104.96805556
+    },
+    {
+        "districtid": 30,
+        "provinceid": 2,
+        "name": "Vị Xuyên",
+        "type": "Huyện",
+        "location": "22 45 50 N  ,   104 56 26 E",
+        "lat": 22.76388889,
+        "long": 104.94055556
+    },
+    {
+        "districtid": 31,
+        "provinceid": 2,
+        "name": "Bắc Mê",
+        "type": "Huyện",
+        "location": "22 45 48 N  ,   105 16 26 E",
+        "lat": 22.76333333,
+        "long": 105.27388889
+    },
+    {
+        "districtid": 32,
+        "provinceid": 2,
+        "name": "Hoàng Su Phì",
+        "type": "Huyện",
+        "location": "22 41 37 N  ,   104 40 06 E",
+        "lat": 22.69361111,
+        "long": 104.66833333
+    },
+    {
+        "districtid": 33,
+        "provinceid": 2,
+        "name": "Xín Mần",
+        "type": "Huyện",
+        "location": "22 38 05 N  ,   104 28 35 E",
+        "lat": 22.63472222,
+        "long": 104.47638889
+    },
+    {
+        "districtid": 34,
+        "provinceid": 2,
+        "name": "Bắc Quang",
+        "type": "Huyện",
+        "location": "22 23 42 N  ,   104 55 06 E",
+        "lat": 22.395,
+        "long": 104.91833333
+    },
+    {
+        "districtid": 35,
+        "provinceid": 2,
+        "name": "Quang Bình",
+        "type": "Huyện",
+        "location": "22 23 07 N  ,   104 37 11 E",
+        "lat": 22.38527778,
+        "long": 104.61972222
+    },
+    {
+        "districtid": 40,
+        "provinceid": 4,
+        "name": "Cao Bằng",
+        "type": "Thị Xã",
+        "location": "22 39 20 N  ,   106 15 20 E",
+        "lat": 22.65555556,
+        "long": 106.25555556
+    },
+    {
+        "districtid": 42,
+        "provinceid": 4,
+        "name": "Bảo Lâm",
+        "type": "Huyện",
+        "location": "22 52 37 N  ,   105 27 28 E",
+        "lat": 22.87694444,
+        "long": 105.45777778
+    },
+    {
+        "districtid": 43,
+        "provinceid": 4,
+        "name": "Bảo Lạc",
+        "type": "Huyện",
+        "location": "22 52 31 N  ,   105 42 41 E",
+        "lat": 22.87527778,
+        "long": 105.71138889
+    },
+    {
+        "districtid": 44,
+        "provinceid": 4,
+        "name": "Thông Nông",
+        "type": "Huyện",
+        "location": "22 49 09 N  ,   105 57 05 E",
+        "lat": 22.81916667,
+        "long": 105.95138889
+    },
+    {
+        "districtid": 45,
+        "provinceid": 4,
+        "name": "Hà Quảng",
+        "type": "Huyện",
+        "location": "22 53 42 N  ,   106 06 32 E",
+        "lat": 22.895,
+        "long": 106.10888889
+    },
+    {
+        "districtid": 46,
+        "provinceid": 4,
+        "name": "Trà Lĩnh",
+        "type": "Huyện",
+        "location": "22 48 14 N  ,   106 19 47 E",
+        "lat": 22.80388889,
+        "long": 106.32972222
+    },
+    {
+        "districtid": 47,
+        "provinceid": 4,
+        "name": "Trùng Khánh",
+        "type": "Huyện",
+        "location": "22 49 31 N  ,   106 33 58 E",
+        "lat": 22.82527778,
+        "long": 106.56611111
+    },
+    {
+        "districtid": 48,
+        "provinceid": 4,
+        "name": "Hạ Lang",
+        "type": "Huyện",
+        "location": "22 42 37 N  ,   106 41 42 E",
+        "lat": 22.71027778,
+        "long": 106.695
+    },
+    {
+        "districtid": 49,
+        "provinceid": 4,
+        "name": "Quảng Uyên",
+        "type": "Huyện",
+        "location": "22 40 15 N  ,   106 27 42 E",
+        "lat": 22.67083333,
+        "long": 106.46166667
+    },
+    {
+        "districtid": 50,
+        "provinceid": 4,
+        "name": "Phục Hoà",
+        "type": "Huyện",
+        "location": "22 33 52 N  ,   106 30 02 E",
+        "lat": 22.56444444,
+        "long": 106.50055556
+    },
+    {
+        "districtid": 51,
+        "provinceid": 4,
+        "name": "Hoà An",
+        "type": "Huyện",
+        "location": "22 41 20 N  ,   106 02 05 E",
+        "lat": 22.68888889,
+        "long": 106.03472222
+    },
+    {
+        "districtid": 52,
+        "provinceid": 4,
+        "name": "Nguyên Bình",
+        "type": "Huyện",
+        "location": "22 38 52 N  ,   105 57 02 E",
+        "lat": 22.64777778,
+        "long": 105.95055556
+    },
+    {
+        "districtid": 53,
+        "provinceid": 4,
+        "name": "Thạch An",
+        "type": "Huyện",
+        "location": "22 28 51 N  ,   106 19 51 E",
+        "lat": 22.48083333,
+        "long": 106.33083333
+    },
+    {
+        "districtid": 58,
+        "provinceid": 6,
+        "name": "Bắc Kạn",
+        "type": "Thị Xã",
+        "location": "22 08 00 N  ,   105 51 10 E",
+        "lat": 22.13333333,
+        "long": 105.85277778
+    },
+    {
+        "districtid": 60,
+        "provinceid": 6,
+        "name": "Pác Nặm",
+        "type": "Huyện",
+        "location": "22 35 46 N  ,   105 40 25 E",
+        "lat": 22.59611111,
+        "long": 105.67361111
+    },
+    {
+        "districtid": 61,
+        "provinceid": 6,
+        "name": "Ba Bể",
+        "type": "Huyện",
+        "location": "22 23 54 N  ,   105 43 30 E",
+        "lat": 22.39833333,
+        "long": 105.725
+    },
+    {
+        "districtid": 62,
+        "provinceid": 6,
+        "name": "Ngân Sơn",
+        "type": "Huyện",
+        "location": "22 25 50 N  ,   106 01 00 E",
+        "lat": 22.43055556,
+        "long": 106.01666667
+    },
+    {
+        "districtid": 63,
+        "provinceid": 6,
+        "name": "Bạch Thông",
+        "type": "Huyện",
+        "location": "22 12 04 N  ,   105 51 01 E",
+        "lat": 22.20111111,
+        "long": 105.85027778
+    },
+    {
+        "districtid": 64,
+        "provinceid": 6,
+        "name": "Chợ Đồn",
+        "type": "Huyện",
+        "location": "22 11 18 N  ,   105 34 43 E",
+        "lat": 22.18833333,
+        "long": 105.57861111
+    },
+    {
+        "districtid": 65,
+        "provinceid": 6,
+        "name": "Chợ Mới",
+        "type": "Huyện",
+        "location": "21 57 56 N  ,   105 51 29 E",
+        "lat": 21.96555556,
+        "long": 105.85805556
+    },
+    {
+        "districtid": 66,
+        "provinceid": 6,
+        "name": "Na Rì",
+        "type": "Huyện",
+        "location": "22 09 48 N  ,   106 05 09 E",
+        "lat": 22.16333333,
+        "long": 106.08583333
+    },
+    {
+        "districtid": 70,
+        "provinceid": 8,
+        "name": "Tuyên Quang",
+        "type": "Thị Xã",
+        "location": "21 49 40 N  ,   105 13 12 E",
+        "lat": 21.82777778,
+        "long": 105.22
+    },
+    {
+        "districtid": 72,
+        "provinceid": 8,
+        "name": "Nà Hang",
+        "type": "Huyện",
+        "location": "22 28 34 N  ,   105 21 03 E",
+        "lat": 22.47611111,
+        "long": 105.35083333
+    },
+    {
+        "districtid": 73,
+        "provinceid": 8,
+        "name": "Chiêm Hóa",
+        "type": "Huyện",
+        "location": "22 12 49 N  ,   105 14 32 E",
+        "lat": 22.21361111,
+        "long": 105.24222222
+    },
+    {
+        "districtid": 74,
+        "provinceid": 8,
+        "name": "Hàm Yên",
+        "type": "Huyện",
+        "location": "22 05 46 N  ,   105 00 13 E",
+        "lat": 22.09611111,
+        "long": 105.00361111
+    },
+    {
+        "districtid": 75,
+        "provinceid": 8,
+        "name": "Yên Sơn",
+        "type": "Huyện",
+        "location": "21 51 53 N  ,   105 18 14 E",
+        "lat": 21.86472222,
+        "long": 105.30388889
+    },
+    {
+        "districtid": 76,
+        "provinceid": 8,
+        "name": "Sơn Dương",
+        "type": "Huyện",
+        "location": "21 40 22 N  ,   105 22 57 E",
+        "lat": 21.67277778,
+        "long": 105.3825
+    },
+    {
+        "districtid": 80,
+        "provinceid": 10,
+        "name": "Lào Cai",
+        "type": "Thành Phố",
+        "location": "22 25 07 N  ,   103 58 43 E",
+        "lat": 22.41861111,
+        "long": 103.97861111
+    },
+    {
+        "districtid": 82,
+        "provinceid": 10,
+        "name": "Bát Xát",
+        "type": "Huyện",
+        "location": "22 35 50 N  ,   103 44 49 E",
+        "lat": 22.59722222,
+        "long": 103.74694444
+    },
+    {
+        "districtid": 83,
+        "provinceid": 10,
+        "name": "Mường Khương",
+        "type": "Huyện",
+        "location": "22 41 05 N  ,   104 08 26 E",
+        "lat": 22.68472222,
+        "long": 104.14055556
+    },
+    {
+        "districtid": 84,
+        "provinceid": 10,
+        "name": "Si Ma Cai",
+        "type": "Huyện",
+        "location": "22 39 46 N  ,   104 16 05 E",
+        "lat": 22.66277778,
+        "long": 104.26805556
+    },
+    {
+        "districtid": 85,
+        "provinceid": 10,
+        "name": "Bắc Hà",
+        "type": "Huyện",
+        "location": "22 30 08 N  ,   104 18 54 E",
+        "lat": 22.50222222,
+        "long": 104.315
+    },
+    {
+        "districtid": 86,
+        "provinceid": 10,
+        "name": "Bảo Thắng",
+        "type": "Huyện",
+        "location": "22 22 47 N  ,   104 10 00 E",
+        "lat": 22.37972222,
+        "long": 104.16666667
+    },
+    {
+        "districtid": 87,
+        "provinceid": 10,
+        "name": "Bảo Yên",
+        "type": "Huyện",
+        "location": "22 17 38 N  ,   104 25 02 E",
+        "lat": 22.29388889,
+        "long": 104.41722222
+    },
+    {
+        "districtid": 88,
+        "provinceid": 10,
+        "name": "Sa Pa",
+        "type": "Huyện",
+        "location": "22 18 54 N  ,   103 54 18 E",
+        "lat": 22.315,
+        "long": 103.905
+    },
+    {
+        "districtid": 89,
+        "provinceid": 10,
+        "name": "Văn Bàn",
+        "type": "Huyện",
+        "location": "22 03 48 N  ,   104 10 59 E",
+        "lat": 22.06333333,
+        "long": 104.18305556
+    },
+    {
+        "districtid": 94,
+        "provinceid": 11,
+        "name": "Điện Biên Phủ",
+        "type": "Thành Phố",
+        "location": "21 24 52 N  ,   103 02 31 E",
+        "lat": 21.41444444,
+        "long": 103.04194444
+    },
+    {
+        "districtid": 95,
+        "provinceid": 11,
+        "name": "Mường Lay",
+        "type": "Thị Xã",
+        "location": "22 01 47 N  ,   103 07 10 E",
+        "lat": 22.02972222,
+        "long": 103.11944444
+    },
+    {
+        "districtid": 96,
+        "provinceid": 11,
+        "name": "Mường Nhé",
+        "type": "Huyện",
+        "location": "22 06 11 N  ,   102 30 54 E",
+        "lat": 22.10305556,
+        "long": 102.515
+    },
+    {
+        "districtid": 97,
+        "provinceid": 11,
+        "name": "Mường Chà",
+        "type": "Huyện",
+        "location": "21 50 31 N  ,   103 03 15 E",
+        "lat": 21.84194444,
+        "long": 103.05416667
+    },
+    {
+        "districtid": 98,
+        "provinceid": 11,
+        "name": "Tủa Chùa",
+        "type": "Huyện",
+        "location": "21 58 19 N  ,   103 23 01 E",
+        "lat": 21.97194444,
+        "long": 103.38361111
+    },
+    {
+        "districtid": 99,
+        "provinceid": 11,
+        "name": "Tuần Giáo",
+        "type": "Huyện",
+        "location": "21 38 03 N  ,   103 21 06 E",
+        "lat": 21.63416667,
+        "long": 103.35166667
+    },
+    {
+        "districtid": 100,
+        "provinceid": 11,
+        "name": "Điện Biên",
+        "type": "Huyện",
+        "location": "21 15 19 N  ,   103 03 19 E",
+        "lat": 21.25527778,
+        "long": 103.05527778
+    },
+    {
+        "districtid": 101,
+        "provinceid": 11,
+        "name": "Điện Biên Đông",
+        "type": "Huyện",
+        "location": "21 14 07 N  ,   103 15 19 E",
+        "lat": 21.23527778,
+        "long": 103.25527778
+    },
+    {
+        "districtid": 102,
+        "provinceid": 11,
+        "name": "Mường Ảng",
+        "type": "Huyện",
+        "location": "NULL",
+        "lat": "NULL",
+        "long": "NULL"
+    },
+    {
+        "districtid": 104,
+        "provinceid": 12,
+        "name": "Lai Châu",
+        "type": "Thị Xã",
+        "location": "22 23 15 N  ,   103 24 22 E",
+        "lat": 22.3875,
+        "long": 103.40611111
+    },
+    {
+        "districtid": 106,
+        "provinceid": 12,
+        "name": "Tam Đường",
+        "type": "Huyện",
+        "location": "22 20 16 N  ,   103 32 53 E",
+        "lat": 22.33777778,
+        "long": 103.54805556
+    },
+    {
+        "districtid": 107,
+        "provinceid": 12,
+        "name": "Mường Tè",
+        "type": "Huyện",
+        "location": "22 24 16 N  ,   102 43 11 E",
+        "lat": 22.40444444,
+        "long": 102.71972222
+    },
+    {
+        "districtid": 108,
+        "provinceid": 12,
+        "name": "Sìn Hồ",
+        "type": "Huyện",
+        "location": "22 17 21 N  ,   103 18 12 E",
+        "lat": 22.28916667,
+        "long": 103.30333333
+    },
+    {
+        "districtid": 109,
+        "provinceid": 12,
+        "name": "Phong Thổ",
+        "type": "Huyện",
+        "location": "22 38 24 N  ,   103 22 38 E",
+        "lat": 22.64,
+        "long": 103.37722222
+    },
+    {
+        "districtid": 110,
+        "provinceid": 12,
+        "name": "Than Uyên",
+        "type": "Huyện",
+        "location": "21 59 35 N  ,   103 45 30 E",
+        "lat": 21.99305556,
+        "long": 103.75833333
+    },
+    {
+        "districtid": 111,
+        "provinceid": 12,
+        "name": "Tân Uyên",
+        "type": "Huyện",
+        "location": "NULL",
+        "lat": "NULL",
+        "long": "NULL"
+    },
+    {
+        "districtid": 116,
+        "provinceid": 14,
+        "name": "Sơn La",
+        "type": "Thành Phố",
+        "location": "21 20 39 N  ,   103 54 52 E",
+        "lat": 21.34416667,
+        "long": 103.91444444
+    },
+    {
+        "districtid": 118,
+        "provinceid": 14,
+        "name": "Quỳnh Nhai",
+        "type": "Huyện",
+        "location": "21 46 34 N  ,   103 39 02 E",
+        "lat": 21.77611111,
+        "long": 103.65055556
+    },
+    {
+        "districtid": 119,
+        "provinceid": 14,
+        "name": "Thuận Châu",
+        "type": "Huyện",
+        "location": "21 24 54 N  ,   103 39 46 E",
+        "lat": 21.415,
+        "long": 103.66277778
+    },
+    {
+        "districtid": 120,
+        "provinceid": 14,
+        "name": "Mường La",
+        "type": "Huyện",
+        "location": "21 31 38 N  ,   104 02 48 E",
+        "lat": 21.52722222,
+        "long": 104.04666667
+    },
+    {
+        "districtid": 121,
+        "provinceid": 14,
+        "name": "Bắc Yên",
+        "type": "Huyện",
+        "location": "21 13 23 N  ,   104 22 09 E",
+        "lat": 21.22305556,
+        "long": 104.36916667
+    },
+    {
+        "districtid": 122,
+        "provinceid": 14,
+        "name": "Phù Yên",
+        "type": "Huyện",
+        "location": "21 13 33 N  ,   104 41 51 E",
+        "lat": 21.22583333,
+        "long": 104.6975
+    },
+    {
+        "districtid": 123,
+        "provinceid": 14,
+        "name": "Mộc Châu",
+        "type": "Huyện",
+        "location": "20 49 21 N  ,   104 43 10 E",
+        "lat": 20.8225,
+        "long": 104.71944444
+    },
+    {
+        "districtid": 124,
+        "provinceid": 14,
+        "name": "Yên Châu",
+        "type": "Huyện",
+        "location": "20 59 33 N  ,   104 19 51 E",
+        "lat": 20.9925,
+        "long": 104.33083333
+    },
+    {
+        "districtid": 125,
+        "provinceid": 14,
+        "name": "Mai Sơn",
+        "type": "Huyện",
+        "location": "21 10 08 N  ,   103 59 36 E",
+        "lat": 21.16888889,
+        "long": 103.99333333
+    },
+    {
+        "districtid": 126,
+        "provinceid": 14,
+        "name": "Sông Mã",
+        "type": "Huyện",
+        "location": "21 06 04 N  ,   103 43 56 E",
+        "lat": 21.10111111,
+        "long": 103.73222222
+    },
+    {
+        "districtid": 127,
+        "provinceid": 14,
+        "name": "Sốp Cộp",
+        "type": "Huyện",
+        "location": "20 52 46 N  ,   103 30 38 E",
+        "lat": 20.87944444,
+        "long": 103.51055556
+    },
+    {
+        "districtid": 132,
+        "provinceid": 15,
+        "name": "Yên Bái",
+        "type": "Thành Phố",
+        "location": "21 44 28 N  ,   104 53 42 E",
+        "lat": 21.74111111,
+        "long": 104.895
+    },
+    {
+        "districtid": 133,
+        "provinceid": 15,
+        "name": "Nghĩa Lộ",
+        "type": "Thị Xã",
+        "location": "21 35 58 N  ,   104 29 22 E",
+        "lat": 21.59944444,
+        "long": 104.48944444
+    },
+    {
+        "districtid": 135,
+        "provinceid": 15,
+        "name": "Lục Yên",
+        "type": "Huyện",
+        "location": "22 06 44 N  ,   104 43 12 E",
+        "lat": 22.11222222,
+        "long": 104.72
+    },
+    {
+        "districtid": 136,
+        "provinceid": 15,
+        "name": "Văn Yên",
+        "type": "Huyện",
+        "location": "21 55 55 N  ,   104 33 51 E",
+        "lat": 21.93194444,
+        "long": 104.56416667
+    },
+    {
+        "districtid": 137,
+        "provinceid": 15,
+        "name": "Mù Cang Chải",
+        "type": "Huyện",
+        "location": "21 48 22 N  ,   104 09 01 E",
+        "lat": 21.80611111,
+        "long": 104.15027778
+    },
+    {
+        "districtid": 138,
+        "provinceid": 15,
+        "name": "Trấn Yên",
+        "type": "Huyện",
+        "location": "21 42 20 N  ,   104 48 56 E",
+        "lat": 21.70555556,
+        "long": 104.81555556
+    },
+    {
+        "districtid": 139,
+        "provinceid": 15,
+        "name": "Trạm Tấu",
+        "type": "Huyện",
+        "location": "21 30 40 N  ,   104 28 03 E",
+        "lat": 21.51111111,
+        "long": 104.4675
+    },
+    {
+        "districtid": 140,
+        "provinceid": 15,
+        "name": "Văn Chấn",
+        "type": "Huyện",
+        "location": "21 34 15 N  ,   104 35 19 E",
+        "lat": 21.57083333,
+        "long": 104.58861111
+    },
+    {
+        "districtid": 141,
+        "provinceid": 15,
+        "name": "Yên Bình",
+        "type": "Huyện",
+        "location": "21 52 24 N  ,   104 55 16 E",
+        "lat": 21.87333333,
+        "long": 104.92111111
+    },
+    {
+        "districtid": 148,
+        "provinceid": 17,
+        "name": "Hòa Bình",
+        "type": "Thành Phố",
+        "location": "20 50 36 N  ,   105 19 20 E",
+        "lat": 20.84333333,
+        "long": 105.32222222
+    },
+    {
+        "districtid": 150,
+        "provinceid": 17,
+        "name": "Đà Bắc",
+        "type": "Huyện",
+        "location": "20 55 58 N  ,   105 04 52 E",
+        "lat": 20.93277778,
+        "long": 105.08111111
+    }
+]

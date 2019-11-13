@@ -1,9 +1,11 @@
 import React from 'react';
 import Homepage from '../pages/Homepage'
 import BookCategory from '../pages/BookCategory/BookCategory'
-import * as data from '../const/listbook'
 import CartContainer from '../containers/CartContainer';
 import BookDetailContainer from '../containers/BookDetailContainer'
+import AccountCustomer from '../pages/AccountSystem/AccountCustomer'
+
+import apiCaller from '../utils/apiCaller'
 var routes = [
     {
         path: '/',
@@ -15,11 +17,27 @@ var routes = [
         exact: false,
         main: () => <CartContainer />
     },
+    {
+        path: '/account',
+        exact: false,
+        main: () => <AccountCustomer />
+    },
+
 ]
 
+var fieldsBook = []
+apiCaller('fieldsBook', 'GET', null).then(res => {
+    fieldsBook = res.data
+})
+
+var listBook = []
+apiCaller('products', 'GET', null).then(res => {
+    this.listBook = res.data
+})
+console.log(listBook)
 //generate BookCategory routes
 var category = []
-data.fieldsBook.map(item => {
+fieldsBook.map(item => {
     category.push({
         path: '/' + item.path,
         exact: false,
@@ -29,8 +47,8 @@ data.fieldsBook.map(item => {
 
 //generate BookDetail routes
 var detail = []
-data.list.map(item => {
-    var field = data.fieldsBook.filter(field => {
+listBook.map(item => {
+    var field = fieldsBook.filter(field => {
         return field.id === item.topic
     })
     detail.push({

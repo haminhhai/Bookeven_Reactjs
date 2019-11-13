@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.btn {
+  -webkit-box-shadow: -4px 3px 0px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: -4px 3px 0px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: -4px 3px 0px 0px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    -webkit-box-shadow: -4px 3px 0px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: -4px 3px 0px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: -4px 3px 0px 0px rgba(0, 0, 0, 0.2);
+  }
+}

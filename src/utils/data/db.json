@@ -1,0 +1,106 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "src": "https: //nxbkimdong.com.vn/sites/default/files/styles/uc_product/public/kim-dong_bia_195mmx260mm.jpg?itok=Wp5OCpwL",
+            "title": "Kim Đồng",
+            "author": "Nhiều tác giả",
+            "discount": 98000,
+            "amount": 51000,
+            "topic": 1,
+            "iventory": 9,
+            "rate": 5
+        },
+        {
+            "id": 2,
+            "src": "https://nxbkimdong.com.vn/sites/default/files/styles/uc_product/public/viet-nam-su-luoc_ban-dac-biet_bia_16x24_bia-cung.jpg?itok=yf4MQTVn",
+            "title": "Việt Nam sử lược - Bản đặc biệt",
+            "author": "Trần Trọng Kim",
+            "discount": 98000,
+            "amount": 51000,
+            "topic": 2,
+            "iventory": 9,
+            "rate": 5
+        },
+        {
+            "id": 3,
+            "src": "https://nxbkimdong.com.vn/sites/default/files/styles/uc_product/public/bac-ho-viet-di-chuc.jpg?itok=fuHz3kX0",
+            "title": "Bác Hồ viết di chúc và di chúc của Bác Hồ",
+            "author": "Nhiều tác giả",
+            "discount": 98000,
+            "amount": 51000,
+            "topic": 5,
+            "iventory": 9,
+            "rate": 5
+        },
+        {
+            "id": 4,
+            "src": "https://nxbkimdong.com.vn/sites/default/files/styles/uc_product/public/ly-nam-de.jpg?itok=avcLDhcY",
+            "title": "Truyện tranh lịch sử Việt Nam - Lý Nam Đế",
+            "author": "Tạ Huy Long",
+            "discount": 98000,
+            "amount": 51000,
+            "topic": 3,
+            "iventory": 9,
+            "rate": 5
+        },
+        {
+            "id": 4,
+            "src": "https://nxbkimdong.com.vn/sites/default/files/styles/uc_product/public/toi-ke-em-nghe-truong-sa.jpg?itok=hxYWDZHf",
+            "title": "Tôi kể em nghe chuyện Trường Sa",
+            "author": "Nguyễn Xuân Thủy",
+            "discount": 98000,
+            "amount": 51000,
+            "topic": 4,
+            "iventory": 9,
+            "rate": 5
+        }
+    ],
+    "fieldsBook": [
+        {
+            "id": 1,
+            "name": "Lịch Sử - Truyền Thống",
+            "path": "lich-su-truyen-thong"
+        },
+        {
+            "id": 2,
+            "name": "Kiến thức - Khoa Học",
+            "path": "kien-thuc-khoa-hoc"
+        },
+        {
+            "id": 3,
+            "name": "Văn Học Việt Nam",
+            "path": "van-hoc-viet-nam"
+        },
+        {
+            "id": 4,
+            "name": "Văn Học Nước Ngoài",
+            "path": "van-hoc-nuoc-ngoai"
+        },
+        {
+            "id": 5,
+            "name": "Truyện tranh",
+            "path":"truyen-tranh"
+        },
+        {
+            "id": 6,
+            "name": "Manga - Comic",
+            "path":"manga-comic"
+        },
+        {
+            "id": 7,
+            "name": "Sách bán chạy nhất",
+            "path":"sach-ban-chay"
+        },
+        {
+            "id": 8,
+            "name": "Sách mới",
+            "path":"sach-moi"
+        },
+        {
+            "id": 9,
+            "name": "Sách giảm giá",
+            "path":"sach-giam-gia"
+        },
+    ]
+}

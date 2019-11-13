@@ -101,7 +101,9 @@ class Header extends Component {
                                                 Chào Bookevener!
                                             </MDBDropdownToggle>
                                             <MDBDropdownMenu >
-                                                <MDBDropdownItem>Tài khoản</MDBDropdownItem>
+                                                <Link to='/account'>
+                                                    <MDBDropdownItem>Tài khoản</MDBDropdownItem>
+                                                </Link>
                                                 <MDBDropdownItem onClick={this.Logout}>Đăng xuất</MDBDropdownItem>
                                             </MDBDropdownMenu>
                                         </MDBDropdown>

@@ -59,6 +59,20 @@ BookDetailContainer.propTypes = {
             rate: PropTypes.number.isRequired,
         })
     ).isRequired,
+    cart: PropTypes.arrayOf(PropTypes.shape({
+        product: PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            src: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+            author: PropTypes.string.isRequired,
+            discount: PropTypes.number.isRequired,
+            amount: PropTypes.number.isRequired,
+            topic: PropTypes.number.isRequired,
+            iventory: PropTypes.number.isRequired,
+            rate: PropTypes.number.isRequired,
+        }).isRequired,
+        quantity: PropTypes.number.isRequired
+    })).isRequired,
     onAddToCart: PropTypes.func.isRequired,
 }
 

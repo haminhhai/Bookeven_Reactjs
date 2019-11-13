@@ -17,3 +17,5 @@ export const MSG_OUT_OF_STOCK = "Sản phẩm này đã hết hàng. Bạn vui l
 export const MSG_CART_EMPTY = 'Chưa có sản phẩm nào trong giỏ hàng !'
 
 export const MSG_COMEBACK = 'Chào mừng bạn quay trở lại Bookeven!'
+
+export const MSG_EMPTY_ADDRESS = 'Không có địa chỉ nào được lưu!'
