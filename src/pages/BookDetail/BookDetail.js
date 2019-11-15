@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import ReadMoreReact from 'read-more-react';
 import * as $ from 'jquery'
 
-import { MDBBtn, MDBTable, MDBTableBody, MDBTabPane } from 'mdbreact';
-import { Rate, InputNumber, Tabs } from 'antd'
+import { MDBBtn, MDBTable, MDBTableBody } from 'mdbreact';
+import { Rate, InputNumber } from 'antd'
 
 import Header from '../../layouts/Header/Header'
 import Comments from '../../components/Comments/Comments'
@@ -14,7 +14,6 @@ import * as index from './index.js'
 import '../../styles/bookdetail.scss'
 import '../../components/Exzoom/jquery.exzoom.scss'
 
-const { TabPane } = Tabs
 
 
 class BookDetail extends Component {

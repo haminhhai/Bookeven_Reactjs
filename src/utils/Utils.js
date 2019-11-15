@@ -1,5 +1,6 @@
 import { notification } from 'antd'
 import * as msg from '../const/message'
+import { toast } from 'react-toastify'
 
 export const formatVND = value => {
   var numeral = require('numeral')
@@ -38,3 +39,15 @@ export const addToCartFail = () => {
   }, 1000);
 }
 
+export const idGenarator = function () {
+  return '_' + Math.random().toString(36).substr(2, 9);
+};
+
+export const toastError = error => {
+  let message = null
+  if (typeof error === 'object' && error.message)
+    message = error.message
+  if(message !== null && typeof message !== 'undefined' && message !== '') {
+    toast.error(message)
+  }
+}

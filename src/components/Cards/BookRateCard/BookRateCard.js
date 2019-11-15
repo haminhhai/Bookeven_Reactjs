@@ -1,25 +1,24 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { Rate } from "antd";
 import './brcard.scss'
 class BRCard extends Component {
     state = {}
 
     render() {
-        const { product } = this.props
+        const { book } = this.props
         return (
             <div className='top-rate row'>
-                <img src={product.src} alt='image' />
+                <img src={book.src} alt='image' />
                 <span className='text-left'>
-                    {product.title}
+                    {book.title}
                 </span>
                 <div className='col-12'>
-                    <Rate allowHalf defaultValue={product.rate} disabled />
+                    <Rate allowHalf defaultValue={book.rate} disabled />
                 </div>
                 <p>
-                    {product.discount >= 0 &&
-                        <del className='mr-1'>{this.$utils.formatVND(product.discount)}</del>}
-                    {this.$utils.formatVND(product.amount)}
+                    {book.discount >= 0 &&
+                        <del className='mr-1'>{this.$utils.formatVND(book.discount)}</del>}
+                    {this.$utils.formatVND(book.amount)}
                 </p>
             </div>
         );

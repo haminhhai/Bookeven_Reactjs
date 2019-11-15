@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import * as config from '../const/config'
 
-export default function callApi(endpoint, method = 'GET', body) {
+export default function callApi(endpoint, method , body) {
     return axios({
         method: method,
         url: `${config.API_URL}/${endpoint}`,

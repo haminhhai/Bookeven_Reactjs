@@ -1,5 +1,6 @@
 import * as types from '../const/actionType'
 
+import callApi from '../utils/apiCaller'
 export const openModal = (numTab, isOpen) => {
     return {
         type: types.OPEN_MODAL,
@@ -19,6 +20,34 @@ export const getDetailBook =  book => {
     return {
         type: types.GET_DETAIL_BOOK,
         book // book: book
+    }
+}
+
+export const fetchAllProductsRequest = () => {
+    return async (dispatch) => {
+        const res = await callApi('products', 'GET', null)
+        dispatch(fetchAllProducts(res.data))
+    }
+}
+
+export const fetchAllProducts = product => {
+    return {
+        type: types.FETCH_ALL_PRODUCTS,
+        product // product: product
+    }
+}
+
+export const fetchAllFieldsRequest = () => {
+    return async (dispatch) => {
+        const res = await callApi('fieldsBook', 'GET', null)
+        dispatch(fetchAllFieldsBook(res.data))
+    }
+}
+
+export const fetchAllFieldsBook = field => {
+    return {
+        type: types.FETCH_LIST_FIELDSBOOK,
+        field // field: field
     }
 }
 

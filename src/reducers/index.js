@@ -1,16 +1,20 @@
 import { combineReducers} from 'redux'
 import toggleModal from './toggleModal'
 import detailBook from './detailBook'
-import products from './products'
+import books from './books'
 import cart from './cart'
 import message from './message'
+import fieldsBook from './fieldsBook'
+import spinner from './spinner'
 
-const appReducer = combineReducers({
+const rootReducer = combineReducers({
     toggleModal, //openModal: openModal
     detailBook, //detailBook: detailBook
-    products, //products: products
+    books, //books: books
     cart, //cart: cart
     message, //message: message
+    fieldsBook, //fieldsBook: fieldsBook
+    spinner, //spinner: spinner
 })
 
-export default appReducer
+export default rootReducer

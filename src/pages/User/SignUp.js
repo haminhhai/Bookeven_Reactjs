@@ -4,6 +4,7 @@ import { MDBBtn, MDBIcon, MDBInput } from 'mdbreact'
 class SignUp extends Component {
     state = {
         email: '',
+        fullname: '',
         password: '',
         confirmpassword: ''
     }
@@ -12,6 +13,7 @@ class SignUp extends Component {
         event.preventDefault();
         event.target.className += " was-validated";
 
+
     };
 
     changeHandler = event => {
@@ -19,13 +21,22 @@ class SignUp extends Component {
 
     };
     render() {
-        var { email, password, confirmpassword } = this.state
+        var { email, fullname, password, confirmpassword } = this.state
         return (
             <form className="needs-validation"
                 onSubmit={this.submitHandler}>
                 <div className="grey-text">
                     <MDBInput
-                        label="Nhập email của bạn"
+                        label="Họ tên"
+                        icon="user-plus"
+                        type="text"
+                        name='fullname'
+                        onChange={this.changeHandler}
+                        value={fullname}
+                        required
+                    />
+                    <MDBInput
+                        label="Email"
                         icon="envelope"
                         type="email"
                         name='email'
@@ -34,7 +45,7 @@ class SignUp extends Component {
                         required
                     />
                     <MDBInput
-                        label="Nhập mật khẩu"
+                        label="Mật khẩu"
                         icon="lock"
                         onChange={this.changeHandler}
                         value={password}

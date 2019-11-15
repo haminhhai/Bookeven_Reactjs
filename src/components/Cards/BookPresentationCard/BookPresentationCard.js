@@ -4,10 +4,9 @@ import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { MDBCard, MDBIcon, MDBCardBody, MDBCardTitle, MDBCardText, MDBMask, MDBView } from 'mdbreact'
-import { notification } from 'antd'
 import { fieldsBook } from '../../../const/listbook'
 import * as actions from '../../../actions/index'
-import * as msg from '../../../const/message'
+
 import './bpcard.scss'
 
 //data for CoupleButton Component
@@ -23,27 +22,39 @@ class BPCard extends Component {
     title: ''
   }
   getInform = () => {
-    const product = this.props.product
+    const book = this.props.book
     var category = Object.assign({}, fieldsBook.filter((item) => {
-      return item.id === product.topic
+      return item.id === book.topic
     }))
-    product.category = category[0]
-    localStorage.setItem('detail-book', JSON.stringify(product))
+    book.category = category[0]
+    localStorage.setItem('detail-book', JSON.stringify(book))
 
     this.setState({
       redir: true,
-      title: product.title
+      title: book.title
     })
-    this.props.onChangeBook(product)
+    this.props.onChangeBook(book)
 
   }
 
   onAddToCart = book => {
     this.props.checkIventory(book)
-    
+
   }
   render() {
-    const product = this.props.product
+    var book = {
+      id: 1,
+      src: '',
+      title: '',
+      author: '',
+      discount: 0,
+      amount: 0,
+      topic: 0,
+      iventory: 0,
+      rate: 0
+    }
+    if (this.props.book !== undefined)
+      book = this.props.book
     const { redir, title } = this.state
     if (redir)
       return <Redirect to={`/${title}`} />
@@ -52,19 +63,19 @@ class BPCard extends Component {
         <MDBCard style={{ minWidth: '14rem', height: 'auto' }} className='text-center'>
           <MDBView className='book-wrapper' hover onClick={this.getInform}>
             <LazyLoad height='200' offset={100} once>
-              <img src={product.src} waves="true" className="imgBook" alt="" overlay="true" />
+              <img src={book.src} waves="true" className="imgBook" alt="" overlay="true" />
             </LazyLoad>
             <MDBMask className="flex-center" overlay="white-light" />
           </MDBView>
           <MDBCardBody>
-            <MDBCardTitle onClick={this.getInform} className="h5" title={product.title}>{product.title}</MDBCardTitle>
+            <MDBCardTitle onClick={this.getInform} className="h5" title={book.title}>{book.title}</MDBCardTitle>
             <MDBCardText className='font-italic text-muted'>
-              {product.author}
+              {book.author}
             </MDBCardText>
             <div className='price'>
-              {product.discount !== undefined &&
-                <del>{this.$utils.formatVND(product.discount)}</del>}
-              <p className='h3'>{this.$utils.formatVND(product.amount)}</p>
+              {book.discount !== undefined &&
+                <del>{this.$utils.formatVND(book.discount)}</del>}
+              <p className='h3'>{this.$utils.formatVND(book.amount)}</p>
             </div>
             <div className='coubtn-wrapper'>
               <div className='coubtn-border'>
@@ -74,7 +85,7 @@ class BPCard extends Component {
                   </div>
                   {data.text1}
                 </span>
-                <span className='cart' onClick={() => { this.onAddToCart(product) }}>
+                <span className='cart' onClick={() => { this.onAddToCart(book) }}>
                   <div>
                     <MDBIcon icon={data.icon2} />
                   </div>

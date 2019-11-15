@@ -15,20 +15,15 @@ import App from './App';
 
 import * as utils from './utils/Utils'
 
-import { createStore } from 'redux'
-import myReducer from './reducers/index'
 import { Provider } from 'react-redux'
+import configureStore from './redux/configureStore'
 
 import './styles/index.scss'
 
-const store = createStore(
-    myReducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
 
 global.$utils = utils
 Component.prototype.$utils = global.$utils
-
+const store = configureStore()
 ReactDOM.render(
     <Provider store={store}>
         <App />
