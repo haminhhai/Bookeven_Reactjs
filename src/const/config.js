@@ -1,7 +1,7 @@
 export const API_URL = 'http://localhost:3000'
 
 export const STATUS_CODE = {
-    success: 200,
-    created: 201,
-    updated: 202
+    SUCCESS: 200,
+    CREATED: 201,
+    UPDATED: 202
 }

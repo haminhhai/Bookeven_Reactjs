@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Avatar } from 'antd'
 
-import './avatar.scss'
+import './style.scss'
 class AvatarUser extends Component {
     state = {}
     handleName = (name) => {

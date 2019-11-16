@@ -23,7 +23,7 @@ class AxiosService {
     }
 
     post(endpoint, payload) {
-        return this.service.request({
+        return this.instance.request({
             method: 'POST',
             url: endpoint,
             responseType: 'json',
@@ -31,7 +31,7 @@ class AxiosService {
         });
     }
     put(endpoint, payload) {
-        return this.service.request({
+        return this.instance.request({
             method: 'PUT',
             url: endpoint,
             responseType: 'json',
@@ -40,7 +40,7 @@ class AxiosService {
     }
 
     delete(endpoint, payload) {
-        return this.service.request({
+        return this.instance.request({
             method: 'DELETE',
             url: endpoint,
             responseType: 'json',

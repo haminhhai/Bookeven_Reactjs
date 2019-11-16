@@ -1,6 +1,6 @@
 import * as types from '../const/actionType'
 
-export const fetchCart =  () => {
+export const fetchCart = () => {
     return {
         type: types.FETCH_CART,
     }
@@ -24,9 +24,13 @@ export const fetchCartFailed = error => {
     }
 }
 
-export const addToCart =  () => {
+export const addToCart = (product, quantity) => {
     return {
         type: types.ADD_TO_CART,
+        payload: {
+            product,
+            quantity
+        }
     }
 }
 
@@ -48,9 +52,13 @@ export const addToCartFailed = error => {
     }
 }
 
-export const updateCart =  () => {
+export const updateCart = (product, quantity) => {
     return {
         type: types.UPDATE_CART,
+        payload: {
+            product,
+            quantity
+        }
     }
 }
 
@@ -72,9 +80,12 @@ export const updateCartFailed = error => {
     }
 }
 
-export const removeCart =  () => {
+export const removeCart = product => {
     return {
         type: types.REMOVE_ITEM_FROM_CART,
+        payload: {
+            product
+        }
     }
 }
 

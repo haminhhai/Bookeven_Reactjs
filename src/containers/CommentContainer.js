@@ -5,8 +5,6 @@ import Cart from '../pages/Cart/Cart'
 import CartItem from '../pages/Cart/CartItem'
 import CartTotal from '../pages/Cart/CartTotal'
 
-import * as actions from '../actions/index'
-import * as Message from '../const/message'
 class CommentContainer extends Component {
 
   render() {

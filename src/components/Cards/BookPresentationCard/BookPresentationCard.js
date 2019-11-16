@@ -4,10 +4,10 @@ import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { MDBCard, MDBIcon, MDBCardBody, MDBCardTitle, MDBCardText, MDBMask, MDBView } from 'mdbreact'
-import { fieldsBook } from '../../../const/listbook'
-import * as actions from '../../../actions/index'
+import * as bookActions from '../../../actions/book'
 
-import './bpcard.scss'
+import './style.scss'
+import { bindActionCreators } from 'C:/Users/ADMIN/AppData/Local/Microsoft/TypeScript/3.6/node_modules/redux';
 
 //data for CoupleButton Component
 const data = {
@@ -22,23 +22,23 @@ class BPCard extends Component {
     title: ''
   }
   getInform = () => {
-    const book = this.props.book
+    const {book, bookActions, fieldsBook } = this.props
+    const { getDetailBook } = bookActions
     var category = Object.assign({}, fieldsBook.filter((item) => {
       return item.id === book.topic
     }))
     book.category = category[0]
-    localStorage.setItem('detail-book', JSON.stringify(book))
+    getDetailBook(book)
 
     this.setState({
       redir: true,
       title: book.title
     })
-    this.props.onChangeBook(book)
 
   }
 
   onAddToCart = book => {
-    this.props.checkIventory(book)
+    this.props.onAddToCart(book)
 
   }
   render() {
@@ -102,15 +102,13 @@ class BPCard extends Component {
 
 const MapStateToProps = state => {
   return {
-
+    fieldsBook: state.fieldsBook
   }
 }
 
-const MapDispatchToProps = (dispatch, props) => {
+const MapDispatchToProps = dispatch => {
   return {
-    onChangeBook: book => {
-      dispatch(actions.getDetailBook(book))
-    },
+    bookActions: bindActionCreators(bookActions, dispatch)
   }
 }
 

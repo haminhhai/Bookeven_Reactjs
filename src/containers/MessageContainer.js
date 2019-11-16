@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import Message from '../pages/Cart/Message'
 
-import * as msg from '../const/message'
 class MessageContainer extends Component {
 
   render() {
@@ -20,7 +19,7 @@ MessageContainer.propTypes = {
 
 const MapStateToProps = state => {
   return {
-    message: state.message
+    message: state.ui.message
   }
 }
 

@@ -12,8 +12,8 @@ export const addToCart = data => {
     return axiosService.post(`${API_URL}/${url}`, data)
 }
 
-export const updateCart = (data, id) => {
-    return axiosService.put(`${API_URL}/${url}/${id}`, data)
+export const updateCart = data => {
+    return axiosService.put(`${API_URL}/${url}/${data.id}`, data)
 }
 
 export const removeBook = id => {

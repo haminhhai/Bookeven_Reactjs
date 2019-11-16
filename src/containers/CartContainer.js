@@ -1,16 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators} from 'redux'
 import PropTypes from 'prop-types';
 import Cart from '../pages/Cart/Cart'
 import CartItem from '../pages/Cart/CartItem'
 import CartTotal from '../pages/Cart/CartTotal'
 
-import * as actions from '../actions/index'
 import * as Message from '../const/message'
+import * as cartActions from '../actions/cart'
+import * as uiActions from '../actions/ui'
 class CartContainer extends Component {
 
   showCartItem = cart => {
-    var { onRemoveProduct, onChangeMessage, onUpdateProduct} = this.props
+    var { cartActions, uiActions } = this.props
+    const { changeMessage } = uiActions
+    const { updateCart, removeCart } = cartActions
     var res = Message.MSG_CART_EMPTY
     if (cart.length > 0)
       res = cart.map((item, index) => {
@@ -18,9 +22,9 @@ class CartContainer extends Component {
           <CartItem
             key={index}
             item={item} 
-            onRemoveProduct={onRemoveProduct}
-            onChangeMessage={onChangeMessage}
-            onUpdateProduct={onUpdateProduct}/>
+            onRemoveProduct={removeCart}
+            onChangeMessage={changeMessage}
+            onUpdateProduct={updateCart}/>
 
         )
       })
@@ -48,7 +52,6 @@ class CartContainer extends Component {
 
 CartContainer.propTypes = {
   cart: PropTypes.arrayOf(PropTypes.shape({
-    product: PropTypes.shape({
       id: PropTypes.number.isRequired,
       src: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
@@ -58,12 +61,11 @@ CartContainer.propTypes = {
       topic: PropTypes.number.isRequired,
       iventory: PropTypes.number.isRequired,
       rate: PropTypes.number.isRequired,
+      quantity: PropTypes.number.isRequired
     }).isRequired,
-    quantity: PropTypes.number.isRequired
-  })).isRequired,
-  onChangeMessage: PropTypes.func.isRequired,
-  onUpdateProduct: PropTypes.func.isRequired,
-  onRemoveProduct: PropTypes.func.isRequired
+  ),
+  uiActions: PropTypes.func.isRequired,
+  cartActions: PropTypes.func.isRequired,
 }
 
 const MapStateToProps = state => {
@@ -72,19 +74,10 @@ const MapStateToProps = state => {
   }
 }
 
-const MapDispatchToProps = (dispatch, props) => {
+const MapDispatchToProps = dispatch => {
   return {
-    onRemoveProduct: product => {
-      dispatch(actions.removeProduct(product))
-    },
-    
-    onChangeMessage: message => {
-      dispatch(actions.changeMessage(message))
-    },
-
-    onUpdateProduct: (product, quantity) => {
-      dispatch(actions.updateCart(product, quantity))
-    }
+    uiActions: bindActionCreators(uiActions, dispatch),
+    cartActions: bindActionCreators(cartActions, dispatch)
   }
 }
 

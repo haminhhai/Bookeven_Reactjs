@@ -1,25 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import { MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBBtn, MDBIcon, MDBTabPane, MDBTabContent, MDBInput } from 'mdbreact'
 
 import '../../styles/reglog.scss'
-import * as actions from '../../actions/index'
+import * as uiActions from '../../actions/ui'
 import SignIn from './SignIn';
 import SignUp from './SignUp'
 
 class ModalAuth extends Component {
     //open modal
     closeModal = () => {
-        this.props.onCloseModal(false)
+        const { uiActions } = this.props
+        const { closeModal } = uiActions
+        closeModal()
     }
     //active the current tab
     activeTab(i) {
-        this.props.onChangeTab(i)
+        const { uiActions } = this.props
+        const { openModal } = uiActions
+        openModal(i, true)
 
     }
     render() {
-        var { numTab, isOpen } = this.props.toggleModal[0] // numTab: this.props.toggleModal[0].numTab
+        var { numTab, isOpen } = this.props.ui.toggleModal 
         return (
             <div className='card-reg-log'>
 
@@ -79,20 +84,14 @@ class ModalAuth extends Component {
 // get props toggleModal
 const mapStateToProps = state => {
     return {
-        toggleModal: state.toggleModal
+        ui: state.ui
     }
 }
 
 // call actions
-const mapDispatchToProps = (dispatch, props) => {
+const mapDispatchToProps = dispatch => {
     return {
-        onCloseModal: (isOpen) => {
-            dispatch(actions.closeModal(isOpen))
-        },
-
-        onChangeTab: (numTab) => {
-            dispatch(actions.openModal(numTab, true))
-        }
+        uiActions: bindActionCreators(uiActions, dispatch),
     }
 }
 

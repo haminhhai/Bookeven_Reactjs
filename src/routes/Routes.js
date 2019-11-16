@@ -12,7 +12,7 @@ import AccountCustomer from '../pages/AccountSystem/AccountCustomer'
 import Footer from '../layouts/Footer/Footer'
 
 import * as bookActions from '../actions/book'
-import * as fieldsBookActions from '../actions/fieldsBook'
+import * as cartActions from '../actions/cart'
 
 class Routes extends Component {
     constructor(props) {
@@ -24,15 +24,16 @@ class Routes extends Component {
     }
 
     componentDidMount() {
-        var { bookActions, fieldsBookActions} = this.props
-        const { fetchListBook } = bookActions
-        const { fetchListFieldsbook } = fieldsBookActions
+        var { bookActions, cartActions} = this.props
+        const { fetchListBook , fetchListFieldsbook} = bookActions
+        const { fetchCart} = cartActions
         fetchListBook()
         fetchListFieldsbook()
+        fetchCart()
     }
 
     generateRoutes() {
-        const { books, fieldsBook } = this.props
+        const { listBooks, fieldsBook } = this.props.books
         var routes = [
             {
                 path: '/',
@@ -53,7 +54,7 @@ class Routes extends Component {
         //generate BookCategory routes
 
         var category = []
-        if (books !== [])
+        if (listBooks !== [])
             // eslint-disable-next-line array-callback-return
             fieldsBook.map(item => {
                 category.push({
@@ -66,7 +67,7 @@ class Routes extends Component {
         //generate BookDetail routes
         var detail = []
         // eslint-disable-next-line array-callback-return
-        books.map(item => {
+        listBooks.map(item => {
             var field = fieldsBook.filter(field => {
                 return field.id === item.topic
             })
@@ -76,12 +77,12 @@ class Routes extends Component {
                 main: () => <BookDetailContainer parent={field[0].name} child={item.title} />
             })
         })
-        category.map(item => {
+        category.map(item => 
             routes.push(item)
-        })
-        detail.map(item => {
+        )
+        detail.map(item => 
             routes.push(item)
-        })
+        )
         var result = null;
         result = routes.map((route, index) => {
             return (
@@ -96,12 +97,11 @@ class Routes extends Component {
             done: true,
             routes: result
         })
-        console.log(result)
     }
     render() {
         const { done,routes } = this.state
-        var { books, fieldsBook } = this.props
-        if((books.length > 0 && fieldsBook.length > 0 && !done))
+        var { listBooks, fieldsBook } = this.props.books
+        if((listBooks.length > 0 && fieldsBook.length > 0 && !done))
             this.generateRoutes()
         return (
             <Router>
@@ -119,15 +119,14 @@ class Routes extends Component {
 
 const mapStateToProps = state => {
     return {
-        books: state.books.listBooks,
-        fieldsBook: state.fieldsBook
+        books: state.books,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         bookActions: bindActionCreators(bookActions, dispatch),
-        fieldsBookActions: bindActionCreators(fieldsBookActions, dispatch),
+        cartActions: bindActionCreators(cartActions, dispatch)
 
     }
 }

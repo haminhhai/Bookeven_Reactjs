@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import {
     MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBNavbar, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler,
     MDBCollapse, MDBIcon, MDBBtn, MDBBadge, MDBMask, MDBNavbarBrand, MDBContainer, MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem,
@@ -8,13 +9,13 @@ import {
 } from "mdbreact";
 import { Breadcrumb } from 'antd';
 
-import { connect } from 'react-redux'
-import * as actions from '../../actions/index'
-import { fieldsBook } from '../../const/listbook'
+import * as bookActions from '../../actions/book'
+import * as uiActions from '../../actions/ui'
 
 import '../../styles/layout.scss'
 
 import Signinup from '../../pages/User/ModalAuthen';
+import SearchBox from '../../components/SearchBox/SearchBox'
 
 import img from '../../assets/banner.jpg'
 import logo from '../../assets/logo.png'
@@ -35,6 +36,13 @@ class Header extends Component {
         };
     }
 
+    handleFilter = e => {
+        const { value } = e.target
+        const { bookActions } = this.props
+        const { filterBooks } = bookActions
+        filterBooks(value)
+    }
+
     toggleNavBar = () => {
         this.setState({ openingTopNav: !this.state.openingTopNav });
     }
@@ -42,14 +50,18 @@ class Header extends Component {
         this.setState({ openingMenuBar: !this.state.openingMenuBar });
     }
     toggleModal = (i) => {
-        this.props.onOpenModal(i, true)
+        const { uiActions } = this.props
+        const { openModal } = uiActions
+        openModal(i)
     }
     Logout() {
+        
         localStorage.removeItem('authen')
         window.location.reload()
     }
     render() {
-        const { parent, child, cart } = this.props //parent = this.props.parent
+        
+        const { parent, child, cart, fieldsBook } = this.props //parent = this.props.parent
         var total = 0
         if (cart.length > 0)
             cart.forEach(element => {
@@ -66,18 +78,7 @@ class Header extends Component {
                         <MDBNavbarToggler onClick={this.toggleNavBar} />
                         <MDBCollapse id="navbarCollapse3" isOpen={this.state.openingTopNav} navbar>
                             <MDBNavbarNav left>
-                                <div className="input-field text-center">
-                                    <div className="choices" data-type="text" aria-haspopup="true" aria-expanded="false" dir="ltr">
-                                        <div className="choices__inner">
-                                            <input className="choices__input" placeholder="Tìm sách..." />
-                                        </div>
-                                        <div className="choices__list choices__list--dropdown" aria-expanded="false">
-                                        </div>
-                                    </div>
-                                    <button className="btn-search">
-                                        <i className="fas fa-search"></i>
-                                    </button>
-                                </div>
+                                <SearchBox handleChange={this.handleFilter}/>
                             </MDBNavbarNav>
                             {this.state.authen === null ?
                                 <MDBNavbarNav className='reglog' right>
@@ -176,7 +177,7 @@ class Header extends Component {
                         <MDBNavbar className='row' color="heavy-rain-gradient" light expand="md">
                             <div className='col d-flex justify-content-center'>
                                 <MDBDropdown>
-                                    <MDBDropdownToggle title='Chào Bookevener'>
+                                    <MDBDropdownToggle title='Danh mục sách'>
                                         <MDBIcon icon="tasks" className='mr-1' />
                                         Danh mục sách
                                             </MDBDropdownToggle>
@@ -216,15 +217,16 @@ class Header extends Component {
 
 const mapStateToProps = state => {
     return {
-        cart: state.cart
+        cart: state.cart,
+        fieldsBook: state.books.fieldsBook
     }
 }
 
-const mapDispatchToProps = (dispatch, props) => {
+const mapDispatchToProps = dispatch => {
     return {
-        onOpenModal: (numTab, isOpen) => {
-            dispatch(actions.openModal(numTab, isOpen))
-        }
+        uiActions: bindActionCreators(uiActions, dispatch),
+        bookActions: bindActionCreators(bookActions, dispatch)
+
     }
 }
 

@@ -6,42 +6,38 @@ import { bindActionCreators } from 'redux'
 import BPCard from '../components/Cards/BookPresentationCard/BookPresentationCard'
 import BRCard from '../components/Cards/BookRateCard/BookRateCard'
 
-import * as actions from '../actions/index'
-import * as bookActions from '../actions/book'
+import * as cartActions from '../actions/cart'
 class BookCardContainer extends Component {
 
-  checkIventory = book => {
-    const { cart, onAddToCart } = this.props
-    var check = cart.filter(item => {
-      return item.product.id === book.id
-    })
+  onAddToCart = book => {
+    const { cart, cartActions } = this.props
+    const { addToCart } = cartActions
+    var check = []
+    if (cart.length > 0)
+      check = cart.filter(item => {
+        return item.id === book.id
+      })
     if (check.length > 0) {
       if (book.iventory > check[0].quantity) {
-        onAddToCart(book)
-        this.$utils.addToCartSuccess()
+        addToCart(book, 1)
       }
       else
         this.$utils.addToCartFail()
     }
     else {
 
-      onAddToCart(book)
+      addToCart(book, 1)
       this.$utils.addToCartSuccess()
     }
   }
 
-  componentDidMount() {
-    var { bookActions } = this.props
-    const { fetchListBook } = bookActions
-    fetchListBook()
-  }
   render() {
-    var { books, index, type, className, } = this.props
+    const { books, index, type, className, fieldsBook } = this.props
     return (
       type === 'bp' ?
 
         <div className={className}>
-          <BPCard book={books[index]} checkIventory={this.checkIventory} />
+          <BPCard book={books[index]} onAddToCart={this.onAddToCart} fieldsBook={fieldsBook} />
         </div>
         :
         <BRCard book={books[index]} />
@@ -85,20 +81,15 @@ BookCardContainer.propTypes = {
 const MapStateToProps = state => {
   return {
     books: state.books.listBooks,
-    cart: state.cart
+    cart: state.cart,
+    fieldsBook: state.fieldsBook
 
   }
 }
 
-const MapDispatchToProps = (dispatch) => {
+const MapDispatchToProps = dispatch => {
   return {
-    // onAddToCart: product => {
-    //   dispatch(actions.addToCart(product, 1))
-    // },
-    // onRemoveItem: product => {
-    //   dispatch(actions.removeProduct(product))
-    // },
-    bookActions: bindActionCreators(bookActions, dispatch)
+    cartActions: bindActionCreators(cartActions, dispatch)
   }
 }
 

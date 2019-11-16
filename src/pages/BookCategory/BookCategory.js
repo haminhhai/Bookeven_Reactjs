@@ -6,7 +6,6 @@ import { MDBPagination, MDBPageNav, MDBPageItem, MDBBtn } from 'mdbreact'
 
 import Header from '../../layouts/Header/Header'
 import BookCardContainer from '../../containers/BookCardContainer'
-import * as actions from '../../actions/index'
 import '../../styles/bookcg.scss'
 class BookCategory extends Component {
     state = {
@@ -112,7 +111,7 @@ class BookCategory extends Component {
                                     </div>
                                     <div className='card-rcol col-md-12'>
                                         <strong>Sách bình chọn nhiều nhất</strong>
-                                        {this.loopCard(4, 8, 'br')}
+                                        {this.loopCard(0, 5, 'br')}
                                     </div>
                                 </div>
                             </div>

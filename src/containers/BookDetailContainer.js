@@ -1,27 +1,27 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import BookDetail from '../pages/BookDetail/BookDetail'
 
-import * as actions from '../actions/index'
+import * as cartActions from '../actions/cart'
 class BookDetailContainer extends Component {
 
-    checkIventory = (book, quantity) => {
-        const { cart, onAddToCart } = this.props
-        console.log(book, quantity)
+    onAddToCart = (book, quantity) => {
+        const { cart, cartActions } = this.props
+        const { addToCart } = cartActions
         var checkExist = cart.filter(item => {
-            return item.product.id === book.id
-
+            return item.id === book.id
         })
         if (checkExist.length > 0) {
             if (book.iventory > checkExist[0].quantity) {
                 if (checkExist[0].quantity + quantity >= book.iventory) {
-                    onAddToCart(book, book.iventory - checkExist[0].quantity)
+                    addToCart(book, book.iventory - checkExist[0].quantity)
                     this.$utils.addToCartSuccess()
                 }
                 else {
-                    onAddToCart(book, quantity)
+                    addToCart(book, quantity)
                     this.$utils.addToCartSuccess()
                 }
             }
@@ -29,18 +29,18 @@ class BookDetailContainer extends Component {
                 this.$utils.addToCartFail()
         }
         else {
-            onAddToCart(book, quantity)
+            addToCart(book, quantity)
             this.$utils.addToCartSuccess()
         }
     }
     render() {
-        const { parent, child, detailBook } = this.props //parent = this.props.parent
+        const { parent, child, books } = this.props //parent = this.props.parent
         return (
             <BookDetail
                 parent={parent}
                 child={child}
-                detailBook={detailBook}
-                checkIventory={this.checkIventory} />
+                detailBook={books.detailBook}
+                onAddToCart={this.onAddToCart} />
         );
     }
 }
@@ -79,16 +79,14 @@ BookDetailContainer.propTypes = {
 
 const MapStateToProps = state => {
     return {
-        detailBook: state.detailBook,
+        books: state.books,
         cart: state.cart
     }
 }
 
-const MapDispatchToProps = (dispatch, props) => {
+const MapDispatchToProps = dispatch => {
     return {
-        onAddToCart: (product, quantity) => {
-            dispatch(actions.addToCart(product, quantity))
-        }
+        cartActions: bindActionCreators(cartActions, dispatch)
     }
 }
 

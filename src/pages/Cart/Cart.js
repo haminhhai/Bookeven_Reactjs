@@ -12,9 +12,6 @@ class Cart extends Component {
         this.state = {
         }
     }
-    componentDidMount() {
-        console.log(123)
-    }
     render() {
         var { children } = this.props
         return (

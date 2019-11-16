@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
 import { Rate } from "antd";
-import './brcard.scss'
+import './style.scss'
 class BRCard extends Component {
     state = {}
 
     render() {
-        const { book } = this.props
+        var book = {
+            id: 1,
+            src: '',
+            title: '',
+            author: '',
+            discount: 0,
+            amount: 0,
+            topic: 0,
+            iventory: 0,
+            rate: 0
+        }
+        if (this.props.book !== undefined)
+            book = this.props.book
         return (
             <div className='top-rate row'>
                 <img src={book.src} alt='image' />
