@@ -4,7 +4,7 @@ import { Redirect, Link } from 'react-router-dom'
 
 import Header from '../layouts/Header/Header'
 import '../styles/home.scss'
-import BookCardContainer from '../containers/BookCardContainer'
+import BookCardContainer from '../containers/BookContainer/BookCardContainer'
 
 class Homepage extends Component {
   state = {

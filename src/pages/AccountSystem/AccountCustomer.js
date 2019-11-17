@@ -48,10 +48,9 @@ class AccountCustomer extends Component {
             return item.provinceid === id
         })
         var tempDistrict = []
-        districts.map((item, index) => {
+        districts.map((item, index) => 
             tempDistrict.push(<option key={index} value={parseInt(item.districtid)}>{item.name}</option>)
-            return ''
-        })
+        )
         this.setState({ district: tempDistrict })
     }
 
@@ -63,10 +62,9 @@ class AccountCustomer extends Component {
             return item.districtid === id
         })
         var tempWard = []
-        wards.map((item, index) => {
+        wards.map((item, index) => 
             tempWard.push(<option key={index} value={parseInt(item.wardid)}>{item.name}</option>)
-            return ''
-        })
+        )
         this.setState({ ward: tempWard })
     }
 
@@ -85,10 +83,9 @@ class AccountCustomer extends Component {
     };
     componentDidMount() {
         var tempProvince = []
-        province.map((item, index) => {
+        province.map((item, index) => 
             tempProvince.push(<option key={index} value={parseInt(item.provinceid)}>{item.name}</option>)
-            return ''
-        })
+        )
 
         this.setState({ province: tempProvince })
     }
@@ -273,7 +270,7 @@ class AccountCustomer extends Component {
                                                                     {ward}
                                                                 </select>
                                                             </div>
-                                                            <div className='col-12'>
+                                                            <div className='col-12 mt-4'>
                                                                 <MDBBtn type='submit'>Tạo mới</MDBBtn>
                                                             </div>
                                                         </div>

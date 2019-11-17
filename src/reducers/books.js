@@ -3,7 +3,11 @@ import * as types from '../const/actionType'
 var intialState = {
     listBooks: [],
     detailBook: {},
-    fieldsBook: []
+    fieldsBook: [],
+    filtedBook: {
+        list: [],
+        keyword: ''
+    }
 }
 
 var books = (state = intialState, action) => {
@@ -33,11 +37,34 @@ var books = (state = intialState, action) => {
                 listBooks: [],
             }
         }
-        case types.FITLER_BOOKS_SUCCESS: {
+        case types.FITLER_BOOKS_SINGLE_SUCCESS: {
             const { data } = action.payload
             return {
                 ...state,
-                listBooks: data
+                filtedBook: {
+                    ...state.filtedBook,
+                    list: data
+                }
+            }
+        }
+        case types.FITLER_BOOKS_MULTI_SUCCESS: {
+            const { data } = action.payload
+            return {
+                ...state,
+                filtedBook: {
+                    list: data,
+                    keyword: ''
+                }
+            }
+        }
+        case types.GET_KEYWORD: {
+            const { keyword } = action.payload
+            return {
+                ...state,
+                filtedBook: {
+                    ...state.filtedBook,
+                    keyword: keyword
+                }
             }
         }
         case types.FETCH_LIST_FIELDSBOOK:
@@ -52,7 +79,7 @@ var books = (state = intialState, action) => {
             }
         case types.FETCH_LIST_FIELDSBOOK_FAILED:
             return {...state}
-        default: return state
+        default: return {...state}
     }
 }
 

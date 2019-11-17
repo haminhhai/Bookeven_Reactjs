@@ -32,15 +32,23 @@ class Header extends Component {
 
             isCarousel: this.props.carousel,
 
-            authen: localStorage.getItem('authen')
+            authen: localStorage.getItem('authen'),
+
+            keyWord: '',
         };
     }
 
     handleFilter = e => {
         const { value } = e.target
+        this.setState({ keyWord: value })
+    }
+
+    handleSearch = () => {
+        const { keyWord } = this.state
         const { bookActions } = this.props
-        const { filterBooks } = bookActions
-        filterBooks(value)
+        const { getKeyword, filterBooksSingle } = bookActions
+        getKeyword(keyWord)
+        filterBooksSingle(keyWord)
     }
 
     toggleNavBar = () => {
@@ -55,19 +63,17 @@ class Header extends Component {
         openModal(i)
     }
     Logout() {
-        
+
         localStorage.removeItem('authen')
         window.location.reload()
     }
     render() {
-        
         const { parent, child, cart, fieldsBook } = this.props //parent = this.props.parent
         var total = 0
         if (cart.length > 0)
             cart.forEach(element => {
                 total += element.quantity
             });
-
         return (
             <div>
                 <MDBNavbar scrolling fixed="top" dark expand="md">
@@ -78,7 +84,7 @@ class Header extends Component {
                         <MDBNavbarToggler onClick={this.toggleNavBar} />
                         <MDBCollapse id="navbarCollapse3" isOpen={this.state.openingTopNav} navbar>
                             <MDBNavbarNav left>
-                                <SearchBox handleChange={this.handleFilter}/>
+                                <SearchBox handleChange={this.handleFilter} handleSearch={this.handleSearch} />
                             </MDBNavbarNav>
                             {this.state.authen === null ?
                                 <MDBNavbarNav className='reglog' right>
@@ -182,16 +188,15 @@ class Header extends Component {
                                         Danh mục sách
                                             </MDBDropdownToggle>
                                     <MDBDropdownMenu >
-                                        {fieldsBook.map((item, index) => {
-                                            if (index < 7)
-                                                return (
-                                                    <MDBDropdownItem key={index}>
-                                                        <Link to={'/' + item.path}>
-                                                            {item.name}
-                                                        </Link>
-                                                    </MDBDropdownItem>
-                                                )
-                                        })}
+                                        {fieldsBook.map((item, index) =>
+                                            index < 7 &&
+                                            <MDBDropdownItem key={index}>
+                                                <Link to={'/' + item.path}>
+                                                    {item.name}
+                                                </Link>
+                                            </MDBDropdownItem>
+
+                                        )}
                                     </MDBDropdownMenu>
                                 </MDBDropdown>
 

@@ -9,7 +9,7 @@ export const getDetailBook = book => {
 
 export const fetchListBook = () => {
     return {
-        type: types.FETCH_LIST_BOOK 
+        type: types.FETCH_LIST_BOOK
     }
 }
 
@@ -31,27 +31,54 @@ export const fetchListBookFailed = error => {
     }
 }
 
-export const filterBooks  = keyword => {
+export const filterBooksSingle = data => {
     return {
-        type: types.FILTER_BOOKS,
-        payload: {
-            keyword
-        }
-    }
-}
-
-export const filterBooksSuccess  = data => {
-    return {
-        type: types.FITLER_BOOKS_SUCCESS,
+        type: types.FILTER_BOOKS_SINGLE,
         payload: {
             data
         }
     }
 }
 
+export const filterBooksSingleSuccess = data => {
+    return {
+        type: types.FITLER_BOOKS_SINGLE_SUCCESS,
+        payload: {
+            data
+        }
+    }
+}
+
+export const filterBooksMulti = data => {
+    return {
+        type: types.FILTER_BOOKS_MULTI,
+        payload: {
+            data
+        }
+    }
+}
+
+export const filterBooksMultiSuccess = data => {
+    return {
+        type: types.FITLER_BOOKS_MULTI_SUCCESS,
+        payload: {
+            data
+        }
+    }
+}
+
+export const getKeyword = keyword => {
+    return {
+        type: types.GET_KEYWORD,
+        payload: {
+            keyword
+        }
+    }
+}
+
 export const fetchListFieldsbook = () => {
     return {
-        type: types.FETCH_LIST_FIELDSBOOK 
+        type: types.FETCH_LIST_FIELDSBOOK
     }
 }
 

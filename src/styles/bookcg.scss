@@ -9,15 +9,16 @@
     padding: 20px;
 
     .btn {
-      border: none;
-      border-radius: 20px;
-      background: #dddddd;
-      font-weight: normal;
-      font-size: 12px;
-      line-height: 0.75px;
+      color: white;
       -webkit-box-shadow: -4px 3px 0px 0px rgba(0, 0, 0, 0.2);
       -moz-box-shadow: -4px 3px 0px 0px rgba(0, 0, 0, 0.2);
       box-shadow: -4px 3px 0px 0px rgba(0, 0, 0, 0.2);
+      background-image: linear-gradient(68.2deg, rgba(3, 126, 243, 1) -0.3%, rgba(48, 195, 158, 1) 100.2%);
+      transition: 0.3s;
+      &:hover {
+        background-image: linear-gradient(68.2deg, rgb(114, 176, 235) -0.3%, rgb(78, 228, 190) 100.2%);
+        transition: 0.3s;
+      }
     }
 
     .filter {

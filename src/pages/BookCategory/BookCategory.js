@@ -1,28 +1,52 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { Link } from 'react-router-dom'
 
-import { Slider, Rate } from 'antd'
+import { Slider, Rate, Select } from 'antd'
 import { MDBPagination, MDBPageNav, MDBPageItem, MDBBtn } from 'mdbreact'
 
 import Header from '../../layouts/Header/Header'
-import BookCardContainer from '../../containers/BookCardContainer'
+import BookCardContainer from '../../containers/BookContainer/BookCardContainer'
+import * as bookActions from '../../actions/book'
 import '../../styles/bookcg.scss'
+
+const { Option } = Select
 class BookCategory extends Component {
     state = {
-        minval: this.$utils.formatVND(0),
-        maxval: this.$utils.formatVND(100000),
-        rate: 1,
+        minval: 0,
+        maxval: 100000,
+        rate: 0,
+        topic: ''
     };
 
-    onChange = value => {
+    setPriceRange = value => {
         this.setState({
-            minval: this.$utils.formatVND(value[0]),
-            maxval: this.$utils.formatVND(value[1])
+            minval: value[0],
+            maxval: value[1]
         });
     };
 
     changeStar = value => {
         this.setState({ rate: value })
+    }
+
+    handleSelectTopic = id => {
+        this.setState({ topic: id })
+    }
+
+    handleFilter = () => {
+        const { filterBooksMulti } = this.props.bookActions
+        const { minval, maxval, rate, topic } = this.state
+        const data = {
+            price: {
+                min: minval,
+                max: maxval
+            },
+            rate: rate,
+            topic: topic
+        }
+        filterBooksMulti(data)
     }
 
     loopCard(min, max, type) {
@@ -36,7 +60,8 @@ class BookCategory extends Component {
         return items
     }
     render() {
-        const { parent } = this.props //parent = this.props.parent
+        const { parent, listBook, fieldsBook } = this.props //parent = this.props.parent
+        const { topic, rate, maxval, minval } = this.state
         return (
             <div>
                 <Header carousel={false} parent={parent} />
@@ -45,7 +70,12 @@ class BookCategory extends Component {
                         <div class="row">
                             <div className="col-12 col-md-9">
                                 <div className='row'>
-                                    {this.loopCard(0, 9, 'bp')}
+                                    {listBook.length > 0 &&
+                                        listBook.map(item =>
+                                            <div className='col-lg-3 col-md-6 mb-4 ml-5'>
+                                                <BookCardContainer book={item} type='bp' />
+                                            </div>)
+                                    }
                                 </div>
                                 <div className='pagi-store row'>
                                     <MDBPagination circle>
@@ -94,20 +124,41 @@ class BookCategory extends Component {
                                                 min={0}
                                                 max={100000}
                                                 defaultValue={[0, 100000]}
-                                                onChange={this.onChange} />
+                                                onChange={this.setPriceRange} />
                                             <p className='text-center mt-2'>
-                                                Giá {this.state.minval} — {this.state.maxval}
+                                                Giá {this.$utils.formatVND(minval)} — {this.$utils.formatVND(maxval)}
                                             </p>
                                         </div>
                                         <div className='filter' >
                                             <strong>Lọc theo rating</strong>
                                             <div className='row'>
-                                                <Rate className='ml-2' defaultValue={1} onChange={this.changeStar} />
-                                                <p className='mt-2 ml-2'>( ít nhất {this.state.rate} sao )</p>
+                                                <Rate className='ml-2' value={rate} onChange={this.changeStar} />
+                                                <p className='mt-2 ml-2'>( ít nhất {rate} sao )</p>
                                             </div>
                                         </div>
-                                        <MDBBtn onClick={() => { console.log(333) }} gradient='aqua' className="align-middle">Lọc</MDBBtn>
+                                        <div className='filter' >
+                                            <strong>Lọc theo danh mục sách</strong>
+                                            <Select
+                                                value={topic}
+                                                className='mt-2 mb-3'
+                                                style={{ width: '100%' }}
+                                                onChange={this.handleSelectTopic}>
+                                                <Option value=''>Chọn danh mục</Option>
+                                                {
 
+                                                    fieldsBook.length > 0 &&
+                                                    fieldsBook.map(item =>
+                                                        <Option value={item.id}>
+                                                            {item.name}
+                                                        </Option>)
+                                                }
+                                            </Select>
+                                        </div>
+                                        <div className='row justify-content-center'>
+                                            <Link to='/search'>
+                                                <MDBBtn onClick={this.handleFilter} className="rounded-pill">Lọc</MDBBtn>
+                                            </Link>
+                                        </div>
                                     </div>
                                     <div className='card-rcol col-md-12'>
                                         <strong>Sách bình chọn nhiều nhất</strong>
@@ -125,15 +176,17 @@ class BookCategory extends Component {
     }
 }
 
-const MapStateToProps = state => {
+const mapStateToProps = state => {
     return {
+        fieldsBook: state.books.fieldsBook
     }
 }
 
-const MapDispatchToProps = (dispatch, props) => {
+const mapDispatchToProps = dispatch => {
     return {
-
+        bookActions: bindActionCreators(bookActions, dispatch)
     }
 }
 
-export default connect(MapStateToProps, null)(BookCategory);
+
+export default connect(mapStateToProps, mapDispatchToProps)(BookCategory);

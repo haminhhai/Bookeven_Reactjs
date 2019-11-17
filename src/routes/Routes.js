@@ -3,12 +3,14 @@ import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { BackTop } from 'antd'
 import { bindActionCreators } from 'redux'
+import PropTypes from 'prop-types'
 
 import Homepage from '../pages/Homepage'
-import BookCategory from '../pages/BookCategory/BookCategory'
 import CartContainer from '../containers/CartContainer';
-import BookDetailContainer from '../containers/BookDetailContainer'
+import BookDetailContainer from '../containers/BookContainer/BookDetailContainer'
+import BookCategoryContainer from '../containers/BookContainer/BookCategoryContainer'
 import AccountCustomer from '../pages/AccountSystem/AccountCustomer'
+import AccountManager from '../pages/AccountSystem/AccountManager'
 import Footer from '../layouts/Footer/Footer'
 
 import * as bookActions from '../actions/book'
@@ -24,9 +26,9 @@ class Routes extends Component {
     }
 
     componentDidMount() {
-        var { bookActions, cartActions} = this.props
-        const { fetchListBook , fetchListFieldsbook} = bookActions
-        const { fetchCart} = cartActions
+        var { bookActions, cartActions } = this.props
+        const { fetchListBook, fetchListFieldsbook } = bookActions
+        const { fetchCart } = cartActions
         fetchListBook()
         fetchListFieldsbook()
         fetchCart()
@@ -48,39 +50,43 @@ class Routes extends Component {
             {
                 path: '/account',
                 exact: false,
-                main: () => <AccountCustomer />
+                main: () => <AccountManager />
             },
+            {
+                path: '/search',
+                exact: false,
+                main: () =><BookCategoryContainer parent='search' />
+            }
+
         ]
         //generate BookCategory routes
 
         var category = []
         if (listBooks !== [])
-            // eslint-disable-next-line array-callback-return
-            fieldsBook.map(item => {
+            fieldsBook.map(item => 
                 category.push({
                     path: '/' + item.path,
                     exact: false,
-                    main: () => <BookCategory parent={item.name} />
+                    main: () => <BookCategoryContainer parent={item.name} id={item.id}/>
                 })
-            })
+            )
 
         //generate BookDetail routes
         var detail = []
-        // eslint-disable-next-line array-callback-return
         listBooks.map(item => {
             var field = fieldsBook.filter(field => {
                 return field.id === item.topic
             })
-            detail.push({
+            return detail.push({
                 path: '/' + item.title,
                 exact: false,
                 main: () => <BookDetailContainer parent={field[0].name} child={item.title} />
             })
         })
-        category.map(item => 
+        category.map(item =>
             routes.push(item)
         )
-        detail.map(item => 
+        detail.map(item =>
             routes.push(item)
         )
         var result = null;
@@ -99,9 +105,9 @@ class Routes extends Component {
         })
     }
     render() {
-        const { done,routes } = this.state
+        const { done, routes } = this.state
         var { listBooks, fieldsBook } = this.props.books
-        if((listBooks.length > 0 && fieldsBook.length > 0 && !done))
+        if ((listBooks.length > 0 && fieldsBook.length > 0 && !done))
             this.generateRoutes()
         return (
             <Router>
@@ -117,6 +123,17 @@ class Routes extends Component {
     }
 }
 
+Routes.propTypes = {
+    books: PropTypes.object,
+    bookActions: PropTypes.shape({
+        fetchListFieldsbook: PropTypes.func,
+        fetchListBook: PropTypes.func
+    }),
+    cartActions: PropTypes.shape({
+        fetchCart: PropTypes.func
+    })
+}
+
 const mapStateToProps = state => {
     return {
         books: state.books,
@@ -127,7 +144,6 @@ const mapDispatchToProps = dispatch => {
     return {
         bookActions: bindActionCreators(bookActions, dispatch),
         cartActions: bindActionCreators(cartActions, dispatch)
-
     }
 }
 

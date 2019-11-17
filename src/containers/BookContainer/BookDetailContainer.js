@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import BookDetail from '../pages/BookDetail/BookDetail'
+import BookDetail from '../../pages/BookDetail/BookDetail'
 
-import * as cartActions from '../actions/cart'
+import * as cartActions from '../../actions/cart'
 class BookDetailContainer extends Component {
 
     onAddToCart = (book, quantity) => {
@@ -34,52 +34,29 @@ class BookDetailContainer extends Component {
         }
     }
     render() {
-        const { parent, child, books } = this.props //parent = this.props.parent
+        const { parent, child, detailBook } = this.props //parent = this.props.parent
         return (
             <BookDetail
                 parent={parent}
                 child={child}
-                detailBook={books.detailBook}
+                detailBook={detailBook}
                 onAddToCart={this.onAddToCart} />
         );
     }
 }
 
 BookDetailContainer.propTypes = {
-    detailBook: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.number.isRequired,
-            src: PropTypes.string.isRequired,
-            title: PropTypes.string.isRequired,
-            author: PropTypes.string.isRequired,
-            discount: PropTypes.number.isRequired,
-            amount: PropTypes.number.isRequired,
-            topic: PropTypes.number.isRequired,
-            iventory: PropTypes.number.isRequired,
-            rate: PropTypes.number.isRequired,
-        })
-    ).isRequired,
-    cart: PropTypes.arrayOf(PropTypes.shape({
-        product: PropTypes.shape({
-            id: PropTypes.number.isRequired,
-            src: PropTypes.string.isRequired,
-            title: PropTypes.string.isRequired,
-            author: PropTypes.string.isRequired,
-            discount: PropTypes.number.isRequired,
-            amount: PropTypes.number.isRequired,
-            topic: PropTypes.number.isRequired,
-            iventory: PropTypes.number.isRequired,
-            rate: PropTypes.number.isRequired,
-        }).isRequired,
-        quantity: PropTypes.number.isRequired
-    })).isRequired,
-    onAddToCart: PropTypes.func.isRequired,
+    detailBook: PropTypes.object,
+    cart: PropTypes.array,
+    cartActions: PropTypes.shape({
+        addToCart: PropTypes.func,
+    }),
 }
 
 
 const MapStateToProps = state => {
     return {
-        books: state.books,
+        detailBook: state.books.detailBook,
         cart: state.cart
     }
 }

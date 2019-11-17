@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators} from 'redux'
+import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types';
 import Cart from '../pages/Cart/Cart'
 import CartItem from '../pages/Cart/CartItem'
@@ -21,20 +21,20 @@ class CartContainer extends Component {
         return (
           <CartItem
             key={index}
-            item={item} 
+            item={item}
             onRemoveProduct={removeCart}
             onChangeMessage={changeMessage}
-            onUpdateProduct={updateCart}/>
+            onUpdateProduct={updateCart} />
 
         )
       })
-    
+
     return res
   }
 
   showCartTotal = cart => {
     var res = null
-    if(cart.length > 0)
+    if (cart.length > 0)
       res = <CartTotal cart={cart} />
     return res
   }
@@ -43,29 +43,22 @@ class CartContainer extends Component {
     var { cart } = this.props
     return (
       <Cart>
-        { this.showCartItem(cart) }
-        { this.showCartTotal(cart) }
+        {this.showCartItem(cart)}
+        {this.showCartTotal(cart)}
       </Cart>
     );
   }
 }
 
 CartContainer.propTypes = {
-  cart: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      src: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
-      discount: PropTypes.number.isRequired,
-      amount: PropTypes.number.isRequired,
-      topic: PropTypes.number.isRequired,
-      iventory: PropTypes.number.isRequired,
-      rate: PropTypes.number.isRequired,
-      quantity: PropTypes.number.isRequired
-    }).isRequired,
-  ),
-  uiActions: PropTypes.func.isRequired,
-  cartActions: PropTypes.func.isRequired,
+  cart: PropTypes.array,
+  uiActions: PropTypes.shape({
+    changeMessage: PropTypes.func
+  }),
+  cartActions: PropTypes.shape({
+    updateCart: PropTypes.func,
+    removeCart: PropTypes.func,
+  }),
 }
 
 const MapStateToProps = state => {

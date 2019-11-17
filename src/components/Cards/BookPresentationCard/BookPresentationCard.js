@@ -102,7 +102,7 @@ class BPCard extends Component {
 
 const MapStateToProps = state => {
   return {
-    fieldsBook: state.fieldsBook
+    fieldsBook: state.books.fieldsBook
   }
 }
 

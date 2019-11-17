@@ -6,7 +6,7 @@ import './style.scss'
 class AvatarUser extends Component {
     state = {}
     handleName = (name) => {
-        var check = /\ /g
+        var check = / /g
         var firstWord = ''
         var secondWord = ''
         var numOfBlank = name.match(check)

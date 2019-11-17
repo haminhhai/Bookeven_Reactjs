@@ -9,7 +9,7 @@ import {
     takeEvery
 } from 'redux-saga/effects';
 import * as types from '../const/actionType'
-import { fetchListBookSuccess, fetchListBookFailed, filterBooksSuccess, fetchListFieldsbookSuccess, fetchListFieldsbookFailed } from '../actions/book'
+import { fetchListBookSuccess, fetchListBookFailed, filterBooksSingleSuccess, filterBooksMultiSuccess, fetchListFieldsbookSuccess, fetchListFieldsbookFailed } from '../actions/book'
 import { getListBooks, getListFieldsbook } from '../apis/book'
 
 import { STATUS_CODE } from '../const/config'
@@ -37,18 +37,6 @@ function* watchFetchListBookAction() {
     }
 }
 
-function* filterBookAction({ payload }) {
-    yield delay(500)
-    const { keyword } = payload
-    const list = yield select(state => state.books.listBooks)
-    const filterBooks = list.filter(book =>
-        book.title
-            .trim()
-            .toLowerCase()
-            .includes(keyword.trim().toLowerCase()))
-    yield put(filterBooksSuccess(filterBooks))
-}
-
 function* watchFetchFieldsbookAction() {
     while (true) {
         yield take(types.FETCH_LIST_FIELDSBOOK)
@@ -62,10 +50,43 @@ function* watchFetchFieldsbookAction() {
     }
 }
 
+function* filterBookBySingleTypeAction({ payload }) {
+    yield delay(500)
+    const { data } = payload
+    const list = yield select(state => state.books.listBooks)
+    var filterBooks = null
+    if (typeof data === 'string') //filter by title
+        filterBooks = list.filter(book =>
+            book.title
+                .trim()
+                .toLowerCase()
+                .includes(data.trim().toLowerCase()))
+    else  //filter by topic
+        filterBooks = list.filter(book => book.topic === data)
+    yield put(filterBooksSingleSuccess(filterBooks))
+}
+
+function* filterBookByMultiTypeAction({ payload }) {
+    yield delay(500)
+    const { data } = payload
+    console.log(data)
+    const { min, max } = data.price
+    const list = yield select(state => state.books.listBooks)
+    var filterBooks = list.filter(item =>
+        item.amount >= min 
+        && item.amount <= max 
+        && item.rate === data.rate
+        && (data.topic !== '' ? item.topic === data.topic : item.topic > 0)
+    )
+    yield put(filterBooksMultiSuccess(filterBooks))
+}
+
+
 function* bookSaga() {
     yield fork(watchFetchListBookAction)
     yield fork(watchFetchFieldsbookAction)
-    yield takeLatest(types.FILTER_BOOKS, filterBookAction)
+    yield takeLatest(types.FILTER_BOOKS_SINGLE, filterBookBySingleTypeAction)
+    yield takeLatest(types.FILTER_BOOKS_MULTI, filterBookByMultiTypeAction)
 }
 
 export default bookSaga
