@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn, MDBAlert, MDBIcon } from 'mdbreact';
+import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn,  } from 'mdbreact';
 import Header from '../../layouts/Header/Header'
 import '../../styles/cart.scss'
 import MessageContainer from '../../containers/MessageContainer';

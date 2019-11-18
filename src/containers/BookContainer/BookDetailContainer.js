@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 
 import BookDetail from '../../pages/BookDetail/BookDetail'
 
+import * as bookActions from '../../actions/book'
 import * as cartActions from '../../actions/cart'
 class BookDetailContainer extends Component {
 
@@ -33,12 +34,17 @@ class BookDetailContainer extends Component {
             this.$utils.addToCartSuccess()
         }
     }
+
+    componentDidMount() {
+        const { bookActions, id } = this.props
+        bookActions.getDetailBook(id)
+
+    }
     render() {
-        const { parent, child, detailBook } = this.props //parent = this.props.parent
+        const { parent, detailBook } = this.props //parent = this.props.parent
         return (
             <BookDetail
                 parent={parent}
-                child={child}
                 detailBook={detailBook}
                 onAddToCart={this.onAddToCart} />
         );
@@ -51,6 +57,9 @@ BookDetailContainer.propTypes = {
     cartActions: PropTypes.shape({
         addToCart: PropTypes.func,
     }),
+    bookActions: PropTypes.shape({
+        getDetailBook: PropTypes.func
+    })
 }
 
 
@@ -63,7 +72,8 @@ const MapStateToProps = state => {
 
 const MapDispatchToProps = dispatch => {
     return {
-        cartActions: bindActionCreators(cartActions, dispatch)
+        cartActions: bindActionCreators(cartActions, dispatch),
+        bookActions: bindActionCreators(bookActions, dispatch)
     }
 }
 

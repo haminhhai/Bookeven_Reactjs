@@ -1,9 +1,29 @@
 import * as types from '../const/actionType'
 
-export const getDetailBook = book => {
+export const getDetailBook = data => {
     return {
         type: types.GET_DETAIL_BOOK,
-        book
+        payload: {
+            data
+        }
+    }
+}
+
+export const getDetailBookSuccess = data => {
+    return {
+        type: types.GET_DETAIL_BOOK_SUCCESS,
+        payload: {
+            data
+        }
+    }
+}
+
+export const getDetailBookFailed = error => {
+    return {
+        type: types.GET_DETAIL_BOOK_FAILED,
+        payload: {
+            error
+        }
     }
 }
 

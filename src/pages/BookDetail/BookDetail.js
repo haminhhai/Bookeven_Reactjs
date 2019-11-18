@@ -52,10 +52,11 @@ class BookDetail extends Component {
         this.props.onAddToCart(book, this.state.quantity)
     }
     render() {
-        const { parent, child, detailBook } = this.props //parent = this.props.parent
+        const { parent,  detailBook } = this.props //parent = this.props.parent
+        const { quantity } = this.state
         return (
             <div >
-                <Header carousel={false} parent={parent} child={child} />
+                <Header carousel={false} parent={parent} child={detailBook.title} />
 
                 <div className='book-detail'>
                     <div className='container'>
@@ -77,7 +78,7 @@ class BookDetail extends Component {
                                     <p>(2 người đã đánh giá)</p>
                                 </div>
                                 <ReadMoreReact text={index.desc} readMoreText='Xem thêm' />
-                                <InputNumber className='mt-3' min={1} max={detailBook.iventory} defaultValue={1} onChange={this.changeQuantity} />
+                                <InputNumber className='mt-3' value={quantity} min={1} max={detailBook.iventory} onChange={this.changeQuantity} />
                                 <MDBBtn className='add-cart-btn ml-3' onClick={() => { this.addToCart(detailBook) }}>Thêm vào giỏ</MDBBtn>
                             </div>
                         </div>

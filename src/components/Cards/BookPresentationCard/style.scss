@@ -1,4 +1,22 @@
 .bpcard-container {
+  .card {
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+
+    &:hover {
+      -webkit-transform: translateY(4px);
+      transform: translateY(4px);
+      -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+
+      .book-wrapper {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+        -webkit-transition: all 0.25s ease;
+        transition: all 0.25s ease;
+      }
+    }
+  }
   .book-wrapper {
     border-radius: 0.55rem;
     position: relative;
@@ -10,15 +28,16 @@
     background-clip: border-box;
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
     min-height: 320px;
-  
+    -webkit-transition: all 0.25s ease;
+        transition: all 0.25s ease;
+
     &:hover {
       cursor: pointer;
     }
-  
+
     .imgBook {
       border-top-left-radius: calc(0.25rem - 1px);
       border-top-right-radius: calc(0.25rem - 1px);
-      vertical-align: middle;
       border-style: none;
       border-radius: 0.25rem;
       display: block;
@@ -26,57 +45,54 @@
       height: auto;
       max-height: 320px;
     }
-
-    
   }
   .card-title {
     color: black !important;
     cursor: pointer;
     font-weight: 800px;
-    transition: .3s;
+    transition: 0.3s;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    
+
     &:hover {
-      color:#0de24a !important
+      color: #0de24a !important;
     }
   }
-  
-  
+
   .price {
     position: relative;
     margin: 0;
     font-family: "Montserrat", sans-serif;
     display: block;
   }
-  
+
   /* SCSS for couplebutton */
   .coubtn-wrapper {
     display: block;
     padding: 10px 20px 20px;
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;
-  
+
     .coubtn-border {
       border: 1px solid #bfc7c8;
       border-radius: 20px;
-  
+
       &:hover {
         cursor: pointer;
       }
-  
+
       ::after {
         display: table;
         content: " ";
         clear: both;
       }
-  
+
       .detail {
         border-radius: 20px 0 0 20px;
         border-right: 1px solid #bfc7c8;
       }
-  
+
       span {
         display: inline-block;
         width: 50%;
@@ -93,7 +109,7 @@
         letter-spacing: normal;
         text-transform: uppercase;
         border-radius: 0 20px 20px 0;
-  
+
         div {
           display: inline-block;
           margin-right: 5px;
@@ -101,7 +117,7 @@
           font-size: 16px;
           vertical-align: bottom;
         }
-  
+
         &:hover {
           color: #00c853;
           div {
@@ -111,5 +127,4 @@
       }
     }
   }
-  
 }

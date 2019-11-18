@@ -5,7 +5,7 @@
     border-radius: 15px;
     background-color: #edf3f4;
     padding-top: 20px;
-
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
     th {
       font-weight: bold;
     }
@@ -87,9 +87,6 @@
       .total-amount {
         float: right;
         margin-bottom: 30px;
-        .btn {
-          width: 100%;
-        }
       }
     }
   }

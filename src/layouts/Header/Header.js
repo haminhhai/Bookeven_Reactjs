@@ -156,14 +156,14 @@ class Header extends Component {
                         </MDBCarousel> :
                         <MDBView id='sli' src={img}>
                             <MDBMask overlay="black-strong" className="flex-center flex-column text-white text-center">
-                                <h1 className='text-white'>{parent}</h1>
+                                <h1 className='text-white'>{child !== undefined ? child : parent}</h1>
                                 <Breadcrumb>
                                     <Breadcrumb.Item>
                                         <Link to='/'>Trang chủ</Link>
                                     </Breadcrumb.Item>
                                     <Breadcrumb.Item>
                                         {child !== undefined ?
-                                            <Link to='' onClick={document.documentElement.scrollTop = 0}>
+                                            <Link to={`/${this.$utils.convertVietnamese(parent)}`} onClick={document.documentElement.scrollTop = 0}>
                                                 {parent}
                                             </Link> :
                                             parent
@@ -186,7 +186,8 @@ class Header extends Component {
                                     <MDBDropdownToggle title='Danh mục sách'>
                                         <MDBIcon icon="tasks" className='mr-1' />
                                         Danh mục sách
-                                            </MDBDropdownToggle>
+                                        <MDBIcon icon="caret-down" />
+                                    </MDBDropdownToggle>
                                     <MDBDropdownMenu >
                                         {fieldsBook.map((item, index) =>
                                             index < 7 &&

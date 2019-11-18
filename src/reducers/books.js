@@ -12,16 +12,11 @@ var intialState = {
 
 var books = (state = intialState, action) => {
     switch (action.type) {
-        case types.GET_DETAIL_BOOK: {
+        case types.GET_DETAIL_BOOK_SUCCESS: {
+            const { data } = action.payload
             return {
                 ...state,
-                detailBook: action.book,
-            }
-        }
-        case types.FETCH_LIST_BOOK: {
-            return {
-                ...state,
-                listBooks: [],
+                detailBook: data,
             }
         }
         case types.FETCH_LIST_BOOK_SUCCESS: {
@@ -67,10 +62,6 @@ var books = (state = intialState, action) => {
                 }
             }
         }
-        case types.FETCH_LIST_FIELDSBOOK:
-            return {
-                ...state
-            }
         case types.FETCH_LIST_FIELDSBOOK_SUCCESS:
             const { data } = action.payload
             return {

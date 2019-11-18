@@ -1,0 +1,88 @@
+.payment {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  strong{
+      font-weight: bold;
+  }
+  .payment-card {
+    border-radius: 10px;
+    background-color: #c9efc6;
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    font-size: 16px;
+
+    input,
+    select {
+      border: 1px solid #adaeb1 !important;
+      background-color: white !important;
+    }
+
+    h4 {
+      color: #46c93a;
+      border-radius: 5px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      padding: 8px 10px;
+      -webkit-box-shadow: 0 6px 15px -7px rgb(90, 90, 90);
+      box-shadow: 0 6px 15px -7px rgb(170, 165, 165);
+      text-transform: uppercase;
+
+      i {
+        margin-right: 5px;
+      }
+    }
+
+    .ant-radio-checked .ant-radio-inner {
+      border-color: #46c93a;
+
+      &::after {
+        background-color: #46c93a;
+      }
+    }
+
+    .collateral {
+      width: 100%;
+      
+      &::before {
+        content: " ";
+        display: table;
+      }
+
+      &::after {
+        clear: both;
+        content: " ";
+        display: table;
+      }
+      .total-amount {
+        float: right;
+        font-weight: 700;
+        margin-bottom: 30px;
+      }
+    }
+
+    .actions {
+        text-align: right;
+        vertical-align: middle;
+  
+        .coupon {
+          float: left;
+          text-align: center;
+          .btn {
+              width: 95%;
+              font-weight: bold;
+          }
+        }
+      }
+
+    .method-pay {
+      border-bottom: 1px solid rgb(161, 158, 158);
+      padding: 10px;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    .row,
+    p {
+      padding: 10px;
+    }
+  }
+}

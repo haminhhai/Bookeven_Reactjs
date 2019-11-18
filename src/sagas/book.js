@@ -9,7 +9,12 @@ import {
     takeEvery
 } from 'redux-saga/effects';
 import * as types from '../const/actionType'
-import { fetchListBookSuccess, fetchListBookFailed, filterBooksSingleSuccess, filterBooksMultiSuccess, fetchListFieldsbookSuccess, fetchListFieldsbookFailed } from '../actions/book'
+import {
+    fetchListBookSuccess, fetchListBookFailed,
+    filterBooksSingleSuccess, filterBooksMultiSuccess,
+    fetchListFieldsbookSuccess, fetchListFieldsbookFailed,
+    getDetailBookSuccess, getDetailBookFailed
+} from '../actions/book'
 import { getListBooks, getListFieldsbook } from '../apis/book'
 
 import { STATUS_CODE } from '../const/config'
@@ -50,8 +55,15 @@ function* watchFetchFieldsbookAction() {
     }
 }
 
+function* watchGetBookDetailAction({payload}) {
+    const { data } = payload
+    const list = yield select(state => state.books.listBooks)
+    const filterBook = list.filter(item => item.id === data)
+    console.log(filterBook[0])
+    yield put(getDetailBookSuccess(filterBook[0]))
+}
+
 function* filterBookBySingleTypeAction({ payload }) {
-    yield delay(500)
     const { data } = payload
     const list = yield select(state => state.books.listBooks)
     var filterBooks = null
@@ -67,14 +79,12 @@ function* filterBookBySingleTypeAction({ payload }) {
 }
 
 function* filterBookByMultiTypeAction({ payload }) {
-    yield delay(500)
     const { data } = payload
-    console.log(data)
     const { min, max } = data.price
     const list = yield select(state => state.books.listBooks)
     var filterBooks = list.filter(item =>
-        item.amount >= min 
-        && item.amount <= max 
+        item.amount >= min
+        && item.amount <= max
         && item.rate === data.rate
         && (data.topic !== '' ? item.topic === data.topic : item.topic > 0)
     )
@@ -85,6 +95,7 @@ function* filterBookByMultiTypeAction({ payload }) {
 function* bookSaga() {
     yield fork(watchFetchListBookAction)
     yield fork(watchFetchFieldsbookAction)
+    yield takeEvery(types.GET_DETAIL_BOOK, watchGetBookDetailAction)
     yield takeLatest(types.FILTER_BOOKS_SINGLE, filterBookBySingleTypeAction)
     yield takeLatest(types.FILTER_BOOKS_MULTI, filterBookByMultiTypeAction)
 }

@@ -15,7 +15,7 @@ import ward from '../../utils/data/ward.json'
 import '../../styles/account.scss'
 
 const { TabPane } = Tabs;
-class AccountManager extends Component {
+class AccountCustomer extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -72,15 +72,15 @@ class AccountManager extends Component {
         this.setState({ selectedWard: e.target.value })
     }
 
-    submitHandler = event => {
-        event.preventDefault();
-        event.target.className += " was-validated";
-        console.log(event)
-    };
+        submitHandler = event => {
+            event.preventDefault();
+            event.target.className += " was-validated";
+            console.log(event)
+        };
 
-    changeHandler = event => {
-        this.setState({ [event.target.name]: event.target.value });
-    };
+        changeHandler = event => {
+            this.setState({ [event.target.name]: event.target.value });
+        };
     componentDidMount() {
         var tempProvince = []
         province.map((item, index) => 
@@ -102,8 +102,16 @@ class AccountManager extends Component {
                                 <div className='row'>
                                     <div className='col-12'>
                                         <section className='left_acc'>
-                                            <Avatar name='Manager' />
-                                            <p>Manager</p>
+                                            <Avatar name='Bookeven' />
+                                            <p>Bookevener</p>
+                                            <Link to='/cart'>
+                                                <MDBIcon icon="shopping-cart" />
+                                                Giỏ hàng
+                                            </Link>
+                                            <Link>
+                                                <MDBIcon icon="history" />
+                                                Lịch sử mua hàng
+                                            </Link>
                                         </section>
                                     </div>
                                     <div className='col-12 text-center mt-3'>
@@ -283,4 +291,4 @@ class AccountManager extends Component {
 }
 
 
-export default AccountManager;
+export default AccountCustomer;

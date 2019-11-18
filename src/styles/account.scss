@@ -5,6 +5,7 @@
     border-radius: 15px;
     padding-left: 50px;
     padding-right: 50px;
+    
     .btn {
       color: #fff;
       font-weight: bold;
@@ -13,6 +14,7 @@
       text-align: center;
       border-radius: 10px;
       background-color: #edf3f4;
+      box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 
       .ant-avatar {
         margin-top: 20px;
@@ -40,6 +42,7 @@
     .right_acc {
       background-color: #edf3f4;
       padding: 10px;
+      box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
 
       .ant-tabs .ant-tabs-top-content,
       .ant-tabs .ant-tabs-bottom-content {

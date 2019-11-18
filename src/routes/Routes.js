@@ -9,12 +9,13 @@ import Homepage from '../pages/Homepage'
 import CartContainer from '../containers/CartContainer';
 import BookDetailContainer from '../containers/BookContainer/BookDetailContainer'
 import BookCategoryContainer from '../containers/BookContainer/BookCategoryContainer'
-import AccountCustomer from '../pages/AccountSystem/AccountCustomer'
-import AccountManager from '../pages/AccountSystem/AccountManager'
+import Account from '../pages/AccountSystem/Account'
+import Payment from '../pages/Payment/Payment'
 import Footer from '../layouts/Footer/Footer'
 
 import * as bookActions from '../actions/book'
 import * as cartActions from '../actions/cart'
+import { convertVietnamese } from '../utils/Utils'
 
 class Routes extends Component {
     constructor(props) {
@@ -50,22 +51,27 @@ class Routes extends Component {
             {
                 path: '/account',
                 exact: false,
-                main: () => <AccountManager />
+                main: () => <Account />
             },
             {
                 path: '/search',
                 exact: false,
                 main: () =><BookCategoryContainer parent='search' />
+            },
+            {
+                path: '/payment',
+                exact: false,
+                main: () =><Payment />
             }
 
         ]
         //generate BookCategory routes
-
+        
         var category = []
         if (listBooks !== [])
             fieldsBook.map(item => 
                 category.push({
-                    path: '/' + item.path,
+                    path: '/' + convertVietnamese(item.name),
                     exact: false,
                     main: () => <BookCategoryContainer parent={item.name} id={item.id}/>
                 })
@@ -78,9 +84,9 @@ class Routes extends Component {
                 return field.id === item.topic
             })
             return detail.push({
-                path: '/' + item.title,
+                path: '/' + convertVietnamese(item.title),
                 exact: false,
-                main: () => <BookDetailContainer parent={field[0].name} child={item.title} />
+                main: () => <BookDetailContainer parent={field[0].name} id={item.id} />
             })
         })
         category.map(item =>

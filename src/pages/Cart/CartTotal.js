@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import {  MDBBtn, MDBTable, MDBTableBody } from 'mdbreact';
+import { Link } from 'react-router-dom'
+import { MDBBtn, MDBTable, MDBTableBody } from 'mdbreact';
 
 import '../../styles/cart.scss'
 
@@ -37,7 +38,9 @@ class CartTotal extends Component {
                             </tr>
                         </MDBTableBody>
                     </MDBTable>
-                    <MDBBtn>Thanh toán</MDBBtn>
+                    <Link to='/payment'>
+                        <MDBBtn>Thanh toán</MDBBtn>
+                    </Link>
                 </div>
             </div>
         return xhtml

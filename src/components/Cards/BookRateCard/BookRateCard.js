@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Rate } from "antd";
+import { Link } from 'react-router-dom'
 import './style.scss'
 class BRCard extends Component {
     state = {}
@@ -20,9 +21,13 @@ class BRCard extends Component {
             book = this.props.book
         return (
             <div className='top-rate row'>
-                <img src={book.src} alt='image' />
-                <span className='text-left'>
-                    {book.title}
+                <Link to={`/${this.$utils.convertVietnamese(book.title)}`}>
+                    <img src={book.src} alt='' />
+                </Link>
+                <span className='text-left' title={book.title}>
+                    <Link className='text-black' to={`/${this.$utils.convertVietnamese(book.title)}`}>
+                        {book.title}
+                    </Link>
                 </span>
                 <div className='col-12'>
                     <Rate allowHalf defaultValue={book.rate} disabled />

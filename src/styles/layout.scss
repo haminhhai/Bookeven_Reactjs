@@ -1,7 +1,7 @@
 $pr: #fe6c61;
 $w: white;
 $bl: black;
-$gr:rgba(0, 0, 0, 0.65);
+$gr: rgba(0, 0, 0, 0.65);
 
 /*
   FOR HEADER
@@ -18,14 +18,11 @@ $gr:rgba(0, 0, 0, 0.65);
   .cart-nav-btn {
     background-color: initial !important;
     color: $w;
-    
 
     &:hover {
       background-color: $w !important;
       color: $pr;
     }
-
-    
   }
   .badge {
     min-width: 20px;
@@ -104,19 +101,30 @@ $gr:rgba(0, 0, 0, 0.65);
   }
 }
 .over-img-card {
-  z-index: 10 !important;
+  z-index: 100 !important;
   margin-top: -1rem;
-  border-radius: 0.25rem;
-  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
   text-align: center;
   font-size: 18px;
   margin-right: 4%;
   margin-left: 4%;
 
+  .navbar {
+    border-radius: 10px;
+    transition: transform 0.3s ease-out, box-shadow 0.2s ease-out, -webkit-transform 0.3s ease-out,
+      -o-transform 0.3s ease-out, -webkit-box-shadow 0.2s ease-out;
+      z-index: 100 !important;
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    }
+  }
   a {
     color: rgba(0, 0, 0, 0.65);
   }
 
+  .dropdown-menu.show {
+    will-change: initial !important;
+  }
   .btn-secondary:not(:disabled):not(.disabled):active:focus {
     box-shadow: initial;
     background-color: initial !important;
@@ -127,8 +135,6 @@ $gr:rgba(0, 0, 0, 0.65);
     color: $bl;
     border-color: transparent;
   }
-
-
 
   .btn-secondary {
     color: $gr;
@@ -146,10 +152,7 @@ $gr:rgba(0, 0, 0, 0.65);
       -ms-transform: scale(1);
       transform: scale(1);
     }
-
   }
-
-  
 }
 
 .reglog {
@@ -211,7 +214,6 @@ $gr:rgba(0, 0, 0, 0.65);
     );
   }
 }
-
 
 /*
   FOR FOOTER

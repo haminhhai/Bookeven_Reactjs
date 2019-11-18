@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import LazyLoad from 'react-lazyload';
-import { Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { MDBCard, MDBIcon, MDBCardBody, MDBCardTitle, MDBCardText, MDBMask, MDBView } from 'mdbreact'
@@ -18,23 +18,6 @@ const data = {
 }
 class BPCard extends Component {
   state = {
-    redir: false,
-    title: ''
-  }
-  getInform = () => {
-    const {book, bookActions, fieldsBook } = this.props
-    const { getDetailBook } = bookActions
-    var category = Object.assign({}, fieldsBook.filter((item) => {
-      return item.id === book.topic
-    }))
-    book.category = category[0]
-    getDetailBook(book)
-
-    this.setState({
-      redir: true,
-      title: book.title
-    })
-
   }
 
   onAddToCart = book => {
@@ -55,20 +38,22 @@ class BPCard extends Component {
     }
     if (this.props.book !== undefined)
       book = this.props.book
-    const { redir, title } = this.state
-    if (redir)
-      return <Redirect to={`/${title}`} />
     return (
       <div className='bpcard-container'>
         <MDBCard style={{ minWidth: '14rem', height: 'auto' }} className='text-center'>
-          <MDBView className='book-wrapper' hover onClick={this.getInform}>
-            <LazyLoad height='200' offset={100} once>
-              <img src={book.src} waves="true" className="imgBook" alt="" overlay="true" />
-            </LazyLoad>
-            <MDBMask className="flex-center" overlay="white-light" />
-          </MDBView>
+          <Link to={`/${this.$utils.convertVietnamese(book.title)}`}>
+            <MDBView className='book-wrapper' hover>
+              <LazyLoad height='200' offset={100} once>
+                <img src={book.src} waves="true" className="imgBook" alt="" overlay="true" />
+              </LazyLoad>
+              <MDBMask className="flex-center" overlay="white-light" />
+            </MDBView></Link>
           <MDBCardBody>
-            <MDBCardTitle onClick={this.getInform} className="h5" title={book.title}>{book.title}</MDBCardTitle>
+            <MDBCardTitle className="h5" title={book.title}>
+              <Link to={`/${this.$utils.convertVietnamese(book.title)}`}>
+                {book.title}
+              </Link>
+            </MDBCardTitle>
             <MDBCardText className='font-italic text-muted'>
               {book.author}
             </MDBCardText>
@@ -102,7 +87,6 @@ class BPCard extends Component {
 
 const MapStateToProps = state => {
   return {
-    fieldsBook: state.books.fieldsBook
   }
 }
 
