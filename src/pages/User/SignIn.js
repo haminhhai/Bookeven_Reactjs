@@ -21,6 +21,7 @@ class SignIn extends Component {
         }, 3000);
         
         localStorage.setItem('authen', true)
+        localStorage.setItem('role', '1')
     };
 
     changeHandler = event => {

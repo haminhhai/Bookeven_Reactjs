@@ -6,17 +6,31 @@ import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 
 import Homepage from '../pages/Homepage'
-import CartContainer from '../containers/CartContainer';
 import BookDetailContainer from '../containers/BookContainer/BookDetailContainer'
 import BookCategoryContainer from '../containers/BookContainer/BookCategoryContainer'
-import Account from '../pages/AccountSystem/Account'
 import Payment from '../pages/Payment/Payment'
 import Footer from '../layouts/Footer/Footer'
 
 import * as bookActions from '../actions/book'
 import * as cartActions from '../actions/cart'
 import { convertVietnamese } from '../utils/Utils'
+import CustomerRoutes from './CustomerRoutes'
+import ManagerRoutes from './ManagerRoutes'
+import NotFound from '../pages/NotFound';
 
+var routes = [
+    {
+        path: '/',
+        exact: true,
+        main: () => <Homepage />
+    },
+    {
+        path: '/search',
+        exact: false,
+        main: () => <BookCategoryContainer parent='search' />
+    },
+
+]
 class Routes extends Component {
     constructor(props) {
         super(props);
@@ -37,43 +51,15 @@ class Routes extends Component {
 
     generateRoutes() {
         const { listBooks, fieldsBook } = this.props.books
-        var routes = [
-            {
-                path: '/',
-                exact: true,
-                main: () => <Homepage />
-            },
-            {
-                path: '/cart',
-                exact: false,
-                main: () => <CartContainer />
-            },
-            {
-                path: '/account',
-                exact: false,
-                main: () => <Account />
-            },
-            {
-                path: '/search',
-                exact: false,
-                main: () =><BookCategoryContainer parent='search' />
-            },
-            {
-                path: '/payment',
-                exact: false,
-                main: () =><Payment />
-            }
 
-        ]
         //generate BookCategory routes
-        
         var category = []
         if (listBooks !== [])
-            fieldsBook.map(item => 
+            fieldsBook.map(item =>
                 category.push({
                     path: '/' + convertVietnamese(item.name),
                     exact: false,
-                    main: () => <BookCategoryContainer parent={item.name} id={item.id}/>
+                    main: () => <BookCategoryContainer parent={item.name} id={item.id} />
                 })
             )
 
@@ -121,6 +107,8 @@ class Routes extends Component {
                     <BackTop visibilityHeight={100} />
                     <Switch>
                         {routes}
+                        <CustomerRoutes />
+                        <Route exact={false} path="" component={NotFound} />
                     </Switch>
                     <Footer />
                 </div>

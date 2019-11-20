@@ -1,8 +1,3 @@
-import Homepage from "../pages/Homepage"
-import Account from "../pages/AccountSystem/Account"
-import CartContainer from "../containers/CartContainer"
-import Payment from "../pages/Payment/Payment"
-
 export const API_URL = 'http://localhost:3000'
 
 export const STATUS_CODE = {
@@ -11,20 +6,8 @@ export const STATUS_CODE = {
     UPDATED: 202
 }
 
-export const role = {
+export const roles = {
     manager: {
-        routes: [
-            {
-                path: '/',
-                exact: true,
-                component: Homepage
-            },
-            {
-                path: '/account',
-                exact: false,
-                component: Account,
-            },
-        ],
         couple_btn: {
             l_icon: 'info-circle',
             l_txt: 'Chi tiết',
@@ -61,38 +44,6 @@ export const role = {
         ]
     },
     customer: {
-        routes: [
-            {
-                path: '/',
-                exact: true,
-                component: Homepage
-            },
-            {
-                path: '/account',
-                exact: false,
-                component: Account,
-                children: [
-                    {
-                        path: '/edit-address',
-                        exact: false
-                    },
-                    {
-                        path: '/add-address',
-                        exact: false
-                    },
-                ]
-            },
-            {
-                path: '/cart',
-                exact: false,
-                component: CartContainer
-            },
-            {
-                path: '/payment',
-                exact: false,
-                component: Payment
-            },
-        ],
         couple_btn: {
             l_icon: 'info-circle',
             l_txt: 'Chi tiết',

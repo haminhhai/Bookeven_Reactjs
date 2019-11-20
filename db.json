@@ -401,8 +401,10 @@
       "topic": 1,
       "iventory": 9,
       "rate": 1,
-      "quantity": 4
+      "quantity": 3
     }
   ],
-  "account": []
+  "account": [],
+  "address": [],
+  "invoice": []
 }

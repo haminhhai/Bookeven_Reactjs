@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import { MDBInput, MDBIcon, MDBBtn, MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact'
 import { Radio } from 'antd'
@@ -63,17 +65,24 @@ const total = {
 }
 
 class Payment extends Component {
-    state = {
-        province: '',
-        district: '',
-        ward: '',
-        fullnameAddress: '',
-        emailAddress: '',
-        phoneAddress: '',
-        street: '',
-        selectedProvince: '',
-        selectedDistrict: '',
-        selectedWard: ''
+    constructor(props) {
+        super(props);
+        this.state = {
+            province: '',
+            district: '',
+            ward: '',
+            fullnameAddress: '',
+            emailAddress: '',
+            phoneAddress: '',
+            street: '',
+            selectedProvince: '',
+            selectedDistrict: '',
+            selectedWard: '',
+            addressNote: 1
+        }
+    }
+    changeTypeAddressNote = (e) => {
+        this.setState({ addressNote: e.target.value })
     }
 
     changeProvince = e => {
@@ -129,7 +138,7 @@ class Payment extends Component {
     }
     render() {
         const { province, district, ward, fullnameAddress, phoneAddress, emailAddress,
-            street, selectedProvince, selectedDistrict, selectedWard } = this.state
+            street, selectedProvince, selectedDistrict, selectedWard, addressNote } = this.state
         return (
             <div >
                 <Header carousel={false} parent='Giỏ hàng' child='Thanh toán' />
@@ -142,73 +151,87 @@ class Payment extends Component {
                                     Thông tin in hóa đơn
                                 </h4>
                                 <div className='row'>
-                                    <div className='col-12 mb-4'>
-                                        <select onChange={this.changeProvince} value={selectedProvince} className="browser-default custom-select">
-                                            <option value=''>Sổ địa chỉ</option>
-                                        </select>
+                                    <div className='col-12 mb-2'>
+                                        <Radio.Group onChange={this.changeTypeAddressNote} value={addressNote}>
+                                            <Radio value={1}>Chọn sổ địa chỉ của bạn</Radio>
+                                            <Radio value={2}>Thêm địa chỉ mới</Radio>
+                                        </Radio.Group>
                                     </div>
-                                    <div className='col-12'>
-                                        <MDBInput
-                                            outline
-                                            label="Họ tên *"
-                                            type="text"
-                                            name='fullnameAddress'
-                                            value={fullnameAddress}
-                                            onChange={this.changeHandler}
-                                            required
-                                        />
-                                    </div>
-                                    <div className='col-12'>
-                                        <MDBInput
-                                            outline
-                                            label="Email *"
-                                            type="email"
-                                            name='emailAddress'
-                                            value={emailAddress}
-                                            onChange={this.changeHandler}
-                                            required
-                                        />
-                                    </div>
-                                    <div className='col-12'>
-                                        <MDBInput
-                                            outline
-                                            label="Điện thoại *"
-                                            type="tel"
-                                            name='phoneAddress'
-                                            value={phoneAddress}
-                                            onChange={this.changeHandler}
-                                            required
-                                        />
-                                    </div>
-                                    <div className='col-12'>
-                                        <MDBInput
-                                            outline
-                                            label="Địa chỉ *"
-                                            type="text"
-                                            name='street'
-                                            value={street}
-                                            onChange={this.changeHandler}
-                                            required
-                                        />
-                                    </div>
-                                    <div className='col-12 mt-4'>
-                                        <select onChange={this.changeProvince} value={selectedProvince} className="browser-default custom-select">
-                                            <option value=''>Tỉnh/Thành phố *</option>
-                                            {province}
-                                        </select>
-                                    </div>
-                                    <div className='col-12 mt-5'>
-                                        <select onChange={this.changeDistrict} value={selectedDistrict} className="browser-default custom-select">
-                                            <option>Quận/Huyện/TX *</option>
-                                            {district}
-                                        </select>
-                                    </div>
-                                    <div className='col-12 mt-5 mb-4'>
-                                        <select onChange={this.changeWard} value={selectedWard} className="browser-default custom-select">
-                                            <option>Xã/Phường *</option>
-                                            {ward}
-                                        </select>
-                                    </div>
+                                    {
+                                        addressNote === 1 &&
+                                        <div className='col-12 mb-4'>
+                                            <select onChange={this.changeProvince} value={selectedProvince} className="browser-default custom-select">
+                                                <option value=''>Sổ địa chỉ</option>
+                                            </select>
+                                        </div>
+                                    }
+                                    {
+                                        addressNote === 2 &&
+                                        <React.Fragment>
+                                            <div className='col-12'>
+                                                <MDBInput
+                                                    outline
+                                                    label="Họ tên *"
+                                                    type="text"
+                                                    name='fullnameAddress'
+                                                    value={fullnameAddress}
+                                                    onChange={this.changeHandler}
+                                                    required
+                                                />
+                                            </div>
+                                            <div className='col-12'>
+                                                <MDBInput
+                                                    outline
+                                                    label="Email *"
+                                                    type="email"
+                                                    name='emailAddress'
+                                                    value={emailAddress}
+                                                    onChange={this.changeHandler}
+                                                    required
+                                                />
+                                            </div>
+                                            <div className='col-12'>
+                                                <MDBInput
+                                                    outline
+                                                    label="Điện thoại *"
+                                                    type="tel"
+                                                    name='phoneAddress'
+                                                    value={phoneAddress}
+                                                    onChange={this.changeHandler}
+                                                    required
+                                                />
+                                            </div>
+                                            <div className='col-12'>
+                                                <MDBInput
+                                                    outline
+                                                    label="Địa chỉ *"
+                                                    type="text"
+                                                    name='street'
+                                                    value={street}
+                                                    onChange={this.changeHandler}
+                                                    required
+                                                />
+                                            </div>
+                                            <div className='col-12 mt-4'>
+                                                <select onChange={this.changeProvince} value={selectedProvince} className="browser-default custom-select">
+                                                    <option value=''>Tỉnh/Thành phố *</option>
+                                                    {province}
+                                                </select>
+                                            </div>
+                                            <div className='col-12 mt-5'>
+                                                <select onChange={this.changeDistrict} value={selectedDistrict} className="browser-default custom-select">
+                                                    <option>Quận/Huyện/TX *</option>
+                                                    {district}
+                                                </select>
+                                            </div>
+                                            <div className='col-12 mt-5 mb-4'>
+                                                <select onChange={this.changeWard} value={selectedWard} className="browser-default custom-select">
+                                                    <option>Xã/Phường *</option>
+                                                    {ward}
+                                                </select>
+                                            </div>
+                                        </React.Fragment>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -231,7 +254,7 @@ class Payment extends Component {
                                 <div className='col-6'>
                                     <div className='payment-card'>
                                         <h4>
-                                            <MDBIcon icon="shuttle-van" />
+                                            <MDBIcon icon="truck-moving" />
                                             Hình thức vận chuyển
                                         </h4>
                                         <p>
@@ -272,7 +295,7 @@ class Payment extends Component {
                                     </div>
                                 </div>
                                 <div className='col-6 mt-2'>
-                                    <MDBBtn style={{width: '100%'}} color='danger'>Đặt mua</MDBBtn>
+                                    <MDBBtn style={{ width: '100%' }} color='danger'>Đặt mua</MDBBtn>
                                 </div>
                             </div>
                         </div>
@@ -282,5 +305,14 @@ class Payment extends Component {
         );
     }
 }
+const mapStateToProps = state => {
+    return {
+        cart: state.cart
+    }
+}
 
-export default Payment;
+const mapDispatchToProps = dispatch => {
+    return 
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Payment);

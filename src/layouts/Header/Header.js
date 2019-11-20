@@ -11,6 +11,7 @@ import { Breadcrumb } from 'antd';
 
 import * as bookActions from '../../actions/book'
 import * as uiActions from '../../actions/ui'
+import { roles } from '../../const/config'
 
 import '../../styles/layout.scss'
 
@@ -65,10 +66,12 @@ class Header extends Component {
     Logout() {
 
         localStorage.removeItem('authen')
+        localStorage.removeItem('role')
         window.location.reload()
     }
     render() {
         const { parent, child, cart, fieldsBook } = this.props //parent = this.props.parent
+        const role = localStorage.getItem('role')
         var total = 0
         if (cart.length > 0)
             cart.forEach(element => {
@@ -117,13 +120,16 @@ class Header extends Component {
                                     </MDBNavItem>
                                 </MDBNavbarNav>
                             }
-                            <MDBNavLink className="cart-nav waves-effect waves-light text-center" to="/cart">
-                                <MDBBtn size="sm" className="cart-nav-btn mr-auto">
-                                    <MDBIcon icon="shopping-cart" className='mr3' size='2x'>
-                                        <MDBBadge color="danger" className='ml-1'>{total}</MDBBadge>
-                                    </MDBIcon>
-                                </MDBBtn>
-                            </MDBNavLink>
+                            {
+                                role === '1' &&
+                                <MDBNavLink className="cart-nav waves-effect waves-light text-center" to="/gio-hang">
+                                    <MDBBtn size="sm" className="cart-nav-btn mr-auto">
+                                        <MDBIcon icon="shopping-cart" className='mr3' size='2x'>
+                                            <MDBBadge color="danger" className='ml-1'>{total}</MDBBadge>
+                                        </MDBIcon>
+                                    </MDBBtn>
+                                </MDBNavLink>
+                            }
                         </MDBCollapse>
                     </MDBContainer>
                 </MDBNavbar>
@@ -206,11 +212,29 @@ class Header extends Component {
                                 <MDBIcon icon="user-edit" className='mr-1' />
                                 Tác giả
                             </Link>
-                            {this.state.authen !== null &&
-                                <div className='col d-flex justify-content-center'>
-                                    <MDBIcon icon="history" className='mr-1' />
-                                    Lịch sử mua hàng
-                                </div>
+                            {
+                                role === '1' &&
+                                roles.customer.over_img_card.map((item, index) => 
+                                    <Link 
+                                        key={index} 
+                                        to={item.icon} 
+                                        className='col d-flex justify-content-center'>
+                                            <MDBIcon icon={item.icon} className='mr-1'/>
+                                            {item.title}
+                                    </Link>
+                                )
+                            }
+                            {
+                                role === '2' &&
+                                roles.manager.over_img_card.map((item, index) => 
+                                    <Link 
+                                        key={index} 
+                                        to={`/${this.$utils.convertVietnamese(item.title)}`} 
+                                        className='col d-flex justify-content-center'>
+                                            <MDBIcon icon={item.icon} className='mr-1'/>
+                                            {item.title}
+                                    </Link>
+                                )
                             }
                         </MDBNavbar>
                     </div>

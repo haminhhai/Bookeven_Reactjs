@@ -8,23 +8,27 @@ import * as bookActions from '../../../actions/book'
 
 import './style.scss'
 import { bindActionCreators } from 'C:/Users/ADMIN/AppData/Local/Microsoft/TypeScript/3.6/node_modules/redux';
-
-//data for CoupleButton Component
-const data = {
-  icon1: 'info-circle',
-  text1: 'Chi tiết',
-  icon2: 'shopping-cart',
-  text2: 'Mua'
-}
+import { roles } from '../../../const/config'
 class BPCard extends Component {
   state = {
+    data: {}
   }
 
   onAddToCart = book => {
     this.props.onAddToCart(book)
 
   }
+
+  componentDidMount() {
+    const role = localStorage.getItem('role')
+    if (role === '2')
+      this.setState({
+        data: roles.manager.couple_btn
+      })
+    else this.setState({data: roles.customer.couple_btn})
+  }
   render() {
+    const { data } = this.state
     var book = {
       id: 1,
       src: '',
@@ -50,7 +54,7 @@ class BPCard extends Component {
             </MDBView></Link>
           <MDBCardBody>
             <MDBCardTitle className="h5" title={book.title}>
-              <Link to={`/${this.$utils.convertVietnamese(book.title)}`}>
+              <Link className='text-dark' to={`/${this.$utils.convertVietnamese(book.title)}`}>
                 {book.title}
               </Link>
             </MDBCardTitle>
@@ -66,15 +70,15 @@ class BPCard extends Component {
               <div className='coubtn-border'>
                 <span className='detail' onClick={this.getInform}>
                   <div>
-                    <MDBIcon icon={data.icon1} />
+                    <MDBIcon icon={data.l_icon} />
                   </div>
-                  {data.text1}
+                  {data.l_txt}
                 </span>
                 <span className='cart' onClick={() => { this.onAddToCart(book) }}>
                   <div>
-                    <MDBIcon icon={data.icon2} />
+                    <MDBIcon icon={data.r_icon} />
                   </div>
-                  {data.text2}
+                  {data.r_txt}
                 </span>
               </div>
             </div>

@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom'
 
 import './style.scss'
 class SearchBox extends Component {
+    handleKeyDown = (e) => {
+        e.key === 'Enter' && this.props.handleSearch()
+    }
     render() {
         const { handleChange, handleSearch } = this.props
         return (
@@ -13,7 +16,7 @@ class SearchBox extends Component {
                             className="choices__input"
                             placeholder="Tìm sách..."
                             onChange={handleChange}
-                            onPressEnter={handleSearch} />
+                            onKeyDown={this.handleKeyDown} />
                     </div>
                     <div className="choices__list choices__list--dropdown" aria-expanded="false">
                     </div>

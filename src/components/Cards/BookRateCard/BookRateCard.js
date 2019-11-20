@@ -25,7 +25,7 @@ class BRCard extends Component {
                     <img src={book.src} alt='' />
                 </Link>
                 <span className='text-left' title={book.title}>
-                    <Link className='text-black' to={`/${this.$utils.convertVietnamese(book.title)}`}>
+                    <Link className='text-dark' to={`/${this.$utils.convertVietnamese(book.title)}`}>
                         {book.title}
                     </Link>
                 </span>

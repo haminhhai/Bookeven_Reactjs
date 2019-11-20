@@ -2,12 +2,14 @@ import { fork, all } from 'redux-saga/effects'
 
 import bookSaga from './book'
 import cartSaga from './cart'
+import accountSaga from './account'
 
 
 function* rootSaga() {
     yield all([
         yield fork(bookSaga),
-        yield fork(cartSaga)
+        yield fork(accountSaga),
+        yield fork(cartSaga),
     ])
 }
 

@@ -19,3 +19,11 @@ export const MSG_CART_EMPTY = 'Chưa có sản phẩm nào trong giỏ hàng !'
 export const MSG_COMEBACK = 'Chào mừng bạn quay trở lại Bookeven!'
 
 export const MSG_EMPTY_ADDRESS = 'Không có địa chỉ nào được lưu!'
+
+export const MSG_CREATED_ADDRESS_SUCCESS = 'Thêm địa chỉ thành công!'
+
+export const MSG_UPDATE_ADDRESS_SUCCESS = 'Cập nhật địa chỉ thành công!'
+
+export const MSG_DELETE_ADDRESS_SUCCESS = 'Xóa địa chỉ thành công!'
+
+export const MSG_SURE_TO_DELETE_ADDRESS = 'Bạn có chắc muốn xóa địa chỉ này?'

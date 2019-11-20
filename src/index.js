@@ -10,6 +10,7 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 import 'jquery/dist/jquery.min.js'
 
 import 'antd/dist/antd.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 import App from './App';
 

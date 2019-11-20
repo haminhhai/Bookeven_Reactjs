@@ -17,7 +17,7 @@ class AvatarUser extends Component {
         }
         else
             firstWord = name.slice(0, 1)
-        return firstWord + secondWord
+        return (firstWord + secondWord).toUpperCase()
     }
     render() {
         const { size, name } = this.props

@@ -1,0 +1,24 @@
+.notfound.container {
+    border-radius: 15px;
+    background-color: #edf3f4;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding-bottom: 20px;
+  
+    .row {
+        display: block;
+        .logo {
+            width: 200px;
+            height: 200px;
+        }
+        h1 {
+            font-size: 80px;
+            font-weight: 800;
+            color: #5E912B
+        }
+        h5 {
+            font-weight: bold;
+        }
+    }
+  }
+  

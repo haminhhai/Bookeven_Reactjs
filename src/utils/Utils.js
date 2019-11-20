@@ -39,9 +39,13 @@ export const addToCartFail = () => {
   }, 1000);
 }
 
-export const idGenarator = function () {
+export const idGenerator = function () {
   return '_' + Math.random().toString(36).substr(2, 9);
 };
+
+export const toastSuccess = message => {
+  toast.success(message)
+}
 
 export const toastError = error => {
   let message = null

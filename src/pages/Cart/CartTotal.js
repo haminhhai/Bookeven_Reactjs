@@ -38,7 +38,7 @@ class CartTotal extends Component {
                             </tr>
                         </MDBTableBody>
                     </MDBTable>
-                    <Link to='/payment'>
+                    <Link to='/gio-hang/payment'>
                         <MDBBtn>Thanh toán</MDBBtn>
                     </Link>
                 </div>
