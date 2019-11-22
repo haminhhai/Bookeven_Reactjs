@@ -1,76 +1,22 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 
-import { MDBInput, MDBIcon, MDBBtn, MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact'
+import { MDBModal, MDBModalHeader, MDBIcon, MDBBtn, MDBTable, MDBTableBody, MDBTableHead, MDBInput, MDBModalBody } from 'mdbreact'
 import { Radio } from 'antd'
 
-import Header from '../../layouts/Header/Header'
 import province from '../../utils/data/province.json'
 import district from '../../utils/data/district.json'
 import ward from '../../utils/data/ward.json'
+import Header from '../../layouts/Header/Header'
+import * as msg from '../../const/message'
+import * as cont from './const'
 import '../../styles/payment.scss'
-const list = {
-    columns: [
-        {
-            label: <strong>Tên sách</strong>,
-            field: 'name',
-            width: 500,
-        },
-        {
-            label: <strong>Số lượng</strong>,
-            field: 'quantity',
-            width: 15,
-        },
-        {
-            label: <strong>Thành tiền</strong>,
-            field: 'total',
-            width: 20,
-        }
-    ],
-    rows: [
-        {
-            name: 'Dế mèn phiêu lưu ký',
-            quantity: 12,
-            total: 120000,
-        },
-        {
-            name: 'Dế mèn phiêu lưu ký',
-            quantity: 12,
-            total: 120000,
-        },
-        {
-            name: 'Dế mèn phiêu lưu ký',
-            quantity: 12,
-            total: 120000,
-        },
-    ]
-}
-
-const total = {
-    rows: [
-        {
-            name: <strong >Thành tiền:</strong>,
-            total: <strong >240000</strong>,
-        },
-        {
-            name: <strong >Phí vận chuyển:</strong>,
-            total: <strong >0</strong>,
-        },
-        {
-            name: <strong >Tổng giá trị đơn hàng:   </strong>,
-            total: <strong >240000</strong>,
-        },
-    ]
-}
+import PaymentSuccess from './PaymentSuccess.js';
 
 class Payment extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            province: '',
-            district: '',
-            ward: '',
+            modal: false,
             fullnameAddress: '',
             emailAddress: '',
             phoneAddress: '',
@@ -78,7 +24,9 @@ class Payment extends Component {
             selectedProvince: '',
             selectedDistrict: '',
             selectedWard: '',
-            addressNote: 1
+            selectedAddress: '',
+            addressNote: 1,
+            isSuccess: false
         }
     }
     changeTypeAddressNote = (e) => {
@@ -113,22 +61,46 @@ class Payment extends Component {
         this.setState({ ward: tempWard })
     }
 
-    changeWard = e => {
-        this.setState({ selectedWard: e.target.value })
-    }
-
-    submitHandler = event => {
-        event.preventDefault();
-        event.target.className += " was-validated";
-        console.log(event)
-    };
-
     changeHandler = event => {
         this.setState({ [event.target.name]: event.target.value });
     };
 
-    componentDidMount() {
+    submitHandler = (event, values) => {
+        event.preventDefault();
+        event.target.className += " was-validated";
+        this.toggleModal()
+    };
 
+    submitCreateInvoice = () => {
+        const { createNewAddress, createInvoice, cart } = this.props
+        const { addressNote, street, selectedProvince, selectedDistrict, selectedWard, selectedAddress } = this.state
+        const body = {
+            id: this.$utils.idGenerator(),
+            name: 'Hà Minh Hải',
+            email: 'haihaidb@gmail.com',
+            phone: '0327487958',
+            street: street,
+            province: selectedProvince,
+            district: selectedDistrict,
+            ward: parseInt(selectedWard)
+        }
+        var id = ''
+        if (addressNote === 2) {
+            id = body.id
+            createNewAddress(body)
+        }
+        else id = selectedAddress
+        createInvoice(id, cart)
+        this.toggleModal()
+        this.setState({ isSuccess: true })
+    }
+
+    toggleModal = () => {
+        this.setState({ modal: !this.state.modal })
+    }
+
+    componentDidMount() {
+        window.scrollTo(0, 0)
         var tempProvince = []
         province.map((item, index) =>
             tempProvince.push(<option key={index} value={parseInt(item.provinceid)}>{item.name}</option>)
@@ -137,182 +109,207 @@ class Payment extends Component {
         this.setState({ province: tempProvince })
     }
     render() {
-        const { province, district, ward, fullnameAddress, phoneAddress, emailAddress,
-            street, selectedProvince, selectedDistrict, selectedWard, addressNote } = this.state
+        const { cart, address } = this.props
+        const { province, district, ward, modal, isSuccess,
+            street, selectedProvince, selectedDistrict, selectedWard, addressNote, selectedAddress } = this.state
         return (
-            <div >
-                <Header carousel={false} parent='Giỏ hàng' child='Thanh toán' />
+            <form className='needs-validation'
+                onSubmit={this.submitHandler}>
+                <Header carousel={false} parent='Thanh toán' />
                 <div className='payment container'>
-                    <div className='row'>
-                        <div className='col-sm-4'>
-                            <div className='payment-card'>
-                                <h4>
-                                    <MDBIcon icon="home" />
-                                    Thông tin in hóa đơn
-                                </h4>
+                    {isSuccess ?
+                        <PaymentSuccess /> :
+                        <div className='row'>
+                            <div className='col-sm-4'>
+                                <div className='payment-card'>
+                                    <h4>
+                                        <MDBIcon icon="map-marked-alt" />
+                                        {cont.INFO_INVOICE_TITLE}
+                                    </h4>
+                                    <div className='row'>
+                                        <div className='col-12 mb-2'>
+                                            <Radio.Group onChange={this.changeTypeAddressNote} value={addressNote}>
+                                                <Radio value={1}>{cont.CHOOSE_YOUR_ADDRESS}</Radio>
+                                                <Radio value={2}>{cont.CHOOSE_NEW_ADDRESS}</Radio>
+                                            </Radio.Group>
+                                        </div>
+                                        {
+                                            addressNote === 1 &&
+                                            <div className='col-12 mb-4'>
+                                                <select
+                                                    name='selectedAddress'
+                                                    onChange={this.changeHandler}
+                                                    value={selectedAddress}
+                                                    className="browser-default custom-select"
+                                                    required>
+                                                    <option value=''>Sổ địa chỉ</option>
+                                                    {
+                                                        address.length > 0 &&
+                                                        address.map(item =>
+                                                            <option value={item.id}>
+                                                                Người nhận: {item.name},
+                                       Địa chỉ: {`${item.street}, ${this.$utils.filterAddress(item.province, item.district, item.ward)}`}
+                                                            </option>
+                                                        )
+                                                    }
+                                                </select>
+                                            </div>
+                                        }
+                                        {
+                                            addressNote === 2 &&
+                                            <div className='row'>
+                                                <div className='col-12'>
+                                                    <MDBInput
+                                                        outline
+                                                        label="Địa chỉ *"
+                                                        type="text"
+                                                        name='street'
+                                                        value={street}
+                                                        onChange={this.changeHandler}
+                                                        required
+                                                    />
+                                                </div>
+                                                <div className='col-12 mt-4'>
+                                                    <select onChange={this.changeProvince} value={selectedProvince} className="browser-default custom-select" required>
+                                                        <option value=''>Tỉnh/Thành phố *</option>
+                                                        {province}
+                                                    </select>
+                                                </div>
+                                                <div className='col-12 mt-5'>
+                                                    <select onChange={this.changeDistrict} value={selectedDistrict} className="browser-default custom-select" required>
+                                                        <option value=''>Quận/Huyện/TX *</option>
+                                                        {district}
+                                                    </select>
+                                                </div>
+                                                <div className='col-12 mt-5 mb-4'>
+                                                    <select name='selectedWard' onChange={this.changeHandler} value={selectedWard} className="browser-default custom-select" required>
+                                                        <option value=''>Xã/Phường *</option>
+                                                        {ward}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='col-sm-8'>
                                 <div className='row'>
-                                    <div className='col-12 mb-2'>
-                                        <Radio.Group onChange={this.changeTypeAddressNote} value={addressNote}>
-                                            <Radio value={1}>Chọn sổ địa chỉ của bạn</Radio>
-                                            <Radio value={2}>Thêm địa chỉ mới</Radio>
-                                        </Radio.Group>
-                                    </div>
-                                    {
-                                        addressNote === 1 &&
-                                        <div className='col-12 mb-4'>
-                                            <select onChange={this.changeProvince} value={selectedProvince} className="browser-default custom-select">
-                                                <option value=''>Sổ địa chỉ</option>
-                                            </select>
+                                    <div className='col-6'>
+                                        <div className='payment-card'>
+                                            <h4>
+                                                <MDBIcon icon="credit-card" />
+                                                {cont.METHOD_PAY_TITLE}
+                                            </h4>
+                                            <div className='method-pay'>
+                                                <Radio defaultChecked >{cont.METHOD_PAY_CONTENT}</Radio>
+                                            </div>
+                                            <p>
+                                                {cont.METHOD_PAY_INDICATTION}
+                                            </p>
                                         </div>
-                                    }
-                                    {
-                                        addressNote === 2 &&
-                                        <React.Fragment>
-                                            <div className='col-12'>
-                                                <MDBInput
-                                                    outline
-                                                    label="Họ tên *"
-                                                    type="text"
-                                                    name='fullnameAddress'
-                                                    value={fullnameAddress}
-                                                    onChange={this.changeHandler}
-                                                    required
-                                                />
+                                    </div>
+                                    <div className='col-6'>
+                                        <div className='payment-card'>
+                                            <h4>
+                                                <MDBIcon icon="truck-moving" />
+                                                {cont.SHIP_TYPE_TITLE}
+                                            </h4>
+                                            <p>
+                                                {cont.SHIP_TYPE_CONTENT}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className='col-12'>
+                                        <div className='payment-card'>
+                                            <h4>
+                                                <MDBIcon icon="cart-arrow-down" />
+                                                {cont.CART_TITLE}
+                                            </h4>
+                                            <MDBTable striped>
+                                                <MDBTableHead color='cloudy-knoxville-gradient'>
+                                                    <tr>
+                                                        <th>{cont.CART_BOOKNAME}</th>
+                                                        <th>{cont.CART_QUANTITY}</th>
+                                                        <th>{cont.CART_TOTAL}</th>
+                                                    </tr>
+                                                </MDBTableHead>
+                                                <MDBTableBody >
+                                                    {
+                                                        cart.length > 0 &&
+                                                        cart.map((item, i) =>
+                                                            <tr key={i}>
+                                                                <td>{item.title}</td>
+                                                                <td>{item.quantity}</td>
+                                                                <td>{this.$utils.formatVND(item.quantity * item.amount)}</td>
+                                                            </tr>
+                                                        )
+                                                    }
+                                                    <tr>
+                                                        <td colSpan='12' className='actions'>
+                                                            <div className='coupon' >
+                                                                <input
+                                                                    type="text"
+                                                                    className="form-control mr-2"
+                                                                    placeholder="Mã giảm giá"
+                                                                />
+                                                                <MDBBtn color='danger'>Áp dụng</MDBBtn>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </MDBTableBody>
+                                            </MDBTable>
+                                            <div className='collateral'>
+                                                <div className='total-amount'>
+                                                    <MDBTable striped bordered>
+                                                        <MDBTableBody>
+                                                            <tr>
+                                                                <td className='font-weight-bold'>{cont.CART_TOTAL}</td>
+                                                                <td>{this.$utils.calculateTotalCart(cart, 'vnd')}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td className='font-weight-bold'>{cont.SHIP_TOTAL}</td>
+                                                                <td>{this.$utils.formatVND(0)}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td className='font-weight-bold'>{cont.TOTAL_INVOICE}</td>
+                                                                <td>{this.$utils.calculateTotalCart(cart, 'vnd')}</td>
+                                                            </tr>
+                                                        </MDBTableBody>
+                                                    </MDBTable>
+                                                </div>
                                             </div>
-                                            <div className='col-12'>
-                                                <MDBInput
-                                                    outline
-                                                    label="Email *"
-                                                    type="email"
-                                                    name='emailAddress'
-                                                    value={emailAddress}
-                                                    onChange={this.changeHandler}
-                                                    required
-                                                />
-                                            </div>
-                                            <div className='col-12'>
-                                                <MDBInput
-                                                    outline
-                                                    label="Điện thoại *"
-                                                    type="tel"
-                                                    name='phoneAddress'
-                                                    value={phoneAddress}
-                                                    onChange={this.changeHandler}
-                                                    required
-                                                />
-                                            </div>
-                                            <div className='col-12'>
-                                                <MDBInput
-                                                    outline
-                                                    label="Địa chỉ *"
-                                                    type="text"
-                                                    name='street'
-                                                    value={street}
-                                                    onChange={this.changeHandler}
-                                                    required
-                                                />
-                                            </div>
-                                            <div className='col-12 mt-4'>
-                                                <select onChange={this.changeProvince} value={selectedProvince} className="browser-default custom-select">
-                                                    <option value=''>Tỉnh/Thành phố *</option>
-                                                    {province}
-                                                </select>
-                                            </div>
-                                            <div className='col-12 mt-5'>
-                                                <select onChange={this.changeDistrict} value={selectedDistrict} className="browser-default custom-select">
-                                                    <option>Quận/Huyện/TX *</option>
-                                                    {district}
-                                                </select>
-                                            </div>
-                                            <div className='col-12 mt-5 mb-4'>
-                                                <select onChange={this.changeWard} value={selectedWard} className="browser-default custom-select">
-                                                    <option>Xã/Phường *</option>
-                                                    {ward}
-                                                </select>
-                                            </div>
-                                        </React.Fragment>
-                                    }
+                                        </div>
+                                    </div>
+                                    <div className='col-6 mt-2'>
+                                        <MDBBtn
+                                            style={{ width: '100%', fontWeight: 'bold' }}
+                                            color='danger'
+                                            type='submit'>
+                                            Đặt mua
+                                   </MDBBtn>
+                                    </div>
                                 </div>
+                                <MDBModal cascading isOpen={modal} toggle={this.toggleModal}>
+                                    <MDBModalHeader
+                                        tag="h5"
+                                        className=" green accent-3"
+                                        toggle={this.toggleModal}
+                                        titleClass="w-100">
+                                        <MDBIcon className='mr-2' icon="hand-holding-usd" />
+                                        {msg.MSG_SURE_TO_ORDER}
+                                    </MDBModalHeader>
+                                    <MDBModalBody className='text-right'>
+                                        <MDBBtn className='rounded-pill' outline rounded color="success" onClick={this.toggleModal}>Không</MDBBtn>
+                                        <MDBBtn className='text-white rounded-pill' rounded color=" green accent-3" onClick={this.submitCreateInvoice}>Có</MDBBtn>
+                                    </MDBModalBody>
+                                </MDBModal>
                             </div>
                         </div>
-                        <div className='col-sm-8'>
-                            <div className='row'>
-                                <div className='col-6'>
-                                    <div className='payment-card'>
-                                        <h4>
-                                            <MDBIcon icon="credit-card" />
-                                            Phương thức thanh toán
-                                        </h4>
-                                        <div className='method-pay'>
-                                            <Radio defaultChecked >Trả tiền khi nhận hàng</Radio>
-                                        </div>
-                                        <p>
-                                            Khách hàng trả tiền cho nhân viên giao nhận.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className='col-6'>
-                                    <div className='payment-card'>
-                                        <h4>
-                                            <MDBIcon icon="truck-moving" />
-                                            Hình thức vận chuyển
-                                        </h4>
-                                        <p>
-                                            Miễn phí vận chuyển trên toàn quốc.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className='col-12'>
-                                    <div className='payment-card'>
-                                        <h4>
-                                            <MDBIcon icon="cart-arrow-down" />
-                                            Nội dung giỏ hàng
-                                        </h4>
-                                        <MDBTable striped>
-                                            <MDBTableHead color='cloudy-knoxville-gradient' columns={list.columns} />
-                                            <MDBTableBody rows={list.rows} >
-                                                <tr>
-                                                    <td colSpan='12' className='actions'>
-                                                        <div className='coupon' >
-                                                            <input
-                                                                type="text"
-                                                                className="form-control mr-2"
-                                                                placeholder="Mã giảm giá"
-                                                            />
-                                                            <MDBBtn color='danger'>Áp dụng</MDBBtn>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </MDBTableBody>
-                                        </MDBTable>
-                                        <div className='collateral'>
-                                            <div className='total-amount'>
-                                                <MDBTable striped bordered>
-                                                    <MDBTableBody rows={total.rows} />
-                                                </MDBTable>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='col-6 mt-2'>
-                                    <MDBBtn style={{ width: '100%' }} color='danger'>Đặt mua</MDBBtn>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    }
                 </div>
-            </div>
+            </form >
         );
     }
 }
-const mapStateToProps = state => {
-    return {
-        cart: state.cart
-    }
-}
 
-const mapDispatchToProps = dispatch => {
-    return 
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Payment);
+export default Payment

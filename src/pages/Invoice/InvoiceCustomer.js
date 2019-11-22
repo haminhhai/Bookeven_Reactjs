@@ -1,64 +1,24 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 
-import { MDBBtn, MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
+import { MDBBtn, MDBTable, MDBTableBody, MDBTableHead, MDBModal, MDBModalHeader, MDBModalBody, MDBIcon } from 'mdbreact';
 import { Badge } from 'antd'
 
 import Header from '../../layouts/Header/Header'
 import '../../styles/invoice.scss'
+import * as msg from '../../const/message'
+import * as cont from './const'
 import img from '../../assets/logo.png'
+import moment from 'moment'
+import DetailInvoice from './DetailInvoice';
 class InvoiceCustomer extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            list: {
-                columns: [
-                    {
-                        label: <strong>Mã đơn hàng</strong>,
-                        field: 'code',
-                    },
-                    {
-                        label: <strong>Tên sách</strong>,
-                        field: 'name',
-                    },
-                    {
-                        label: <strong>Số lượng</strong>,
-                        field: 'quantity',
-                    },
-                    {
-                        label: <strong>Thành tiền</strong>,
-                        field: 'total',
-                    },
-                    {
-                        label: <strong>Tình trạng</strong>,
-                        field: 'status',
-                    }
-                ],
-                rows: [
-                    {
-                        code: '17021238',
-                        name: 'Dế mèn phiêu lưu ký',
-                        quantity: 12,
-                        total: 120000,
-                        status: <Badge status='processing' text='Đang giao hàng' />,
-                        clickEvent: this.handleData
-                    },
-                    {
-                        code: '17021238',
-                        name: 'Dế mèn phiêu lưu ký',
-                        quantity: 12,
-                        total: 120000,
-                        status: <Badge status='success' text='Thành công' />
-                    },
-                    {
-                        code: '17021238',
-                        name: 'Dế mèn phiêu lưu ký',
-                        quantity: 12,
-                        total: 120000,
-                        status: <Badge status='error' text='Thất bại' />
-                    },
-                ]
-            }
+            modal: false,
+            data: {},
+            address: {},
         }
 
     }
@@ -66,25 +26,84 @@ class InvoiceCustomer extends Component {
     handleData = (e) => {
         console.log(e.target.parentNode.childNodes)
     }
+    componentDidMount() {
+        window.scrollTo(0, 0)
+    }
+    formatTime = value => {
+        return moment.unix(value).format('HH:mm:ss DD-MM-YYYY')
+    }
+    formatStatus = status => {
+        switch (status) {
+            case 2:
+                return <Badge status='success' text={cont.statuses.success} />
+            case 3:
+                return <Badge status='error' text={cont.statuses.failed} />
+            default:
+                return <Badge status='processing' text={cont.statuses.process} />
+        }
+    }
+    showModal = data => {
+        const { address } = this.props
+        var filtedAddress = address.filter(item => item.id === data.idAddress)[0]
+        this.setState({
+            data: data,
+            modal: !this.state.modal,
+            address: filtedAddress
+        })
+    }
+    closeModal = () => {
+        this.setState({ modal: !this.state.modal })
+    }
     render() {
-        const { list } = this.state
+        const { modal, data, address } = this.state
+        const { invoices } = this.props
         return (
             <div>
                 <Header carousel={false} parent='Lịch sử mua hàng' />
                 <div className='invoice container'>
-                    {/* <div className='row text-center'>
-                        <img className='logo' src={img} />
-                        <h6>Bạn chưa có đơn hàng nào</h6>
-                        <MDBBtn color=' light-green accent-3'>Tiếp tục mua sắm</MDBBtn>
-                    </div> */}
-                    <div className='row'>
-                        <div className='container'>
-                            <MDBTable hover >
-                                <MDBTableHead color='tempting-azure-gradient' columns={list.columns} />
-                                <MDBTableBody rows={list.rows} />
-                            </MDBTable>
-                        </div>
-                    </div>
+                    {
+                        invoices.length === 0 ?
+                            <div className='empty-invoice text-center'>
+                                <img className='logo' src={img} alt='' />
+                                <h4>{cont.EMPTY_INVOICE}</h4>
+                                <Link to='/'>
+                                    <MDBBtn color=' light-green accent-3'>Tiếp tục mua sắm</MDBBtn>
+                                </Link>
+                            </div> :
+                            <div className='row'>
+                                <div className='container mt-4'>
+                                    <MDBTable hover >
+                                        <MDBTableHead color='tempting-azure-gradient' textWhite>
+                                            <tr>
+                                                {
+                                                    cont.columns.map(item =>
+                                                        item.label
+                                                    )
+                                                }
+                                            </tr>
+                                        </MDBTableHead>
+                                        <MDBTableBody >
+                                            {
+                                                invoices.map((item, index) =>
+                                                    <tr onClick={() => this.showModal(item)} style={{ cursor: 'pointer' }}>
+                                                        <td>{item.id}</td>
+                                                        <td className='text-center'>{this.formatTime(item.createAt)}</td>
+                                                        <td className='text-center'>{item.endTime}</td>
+                                                        <td>{this.$utils.calculateTotalCart(item.listBooks, 'vnd')}</td>
+                                                        <td>{this.formatStatus(item.status)}</td>
+                                                    </tr>
+                                                )
+                                            }
+                                        </MDBTableBody>
+                                    </MDBTable>
+                                </div>
+                            </div>
+                    }
+                    <DetailInvoice data={data}
+                        address={address}
+                        closeModal={this.closeModal}
+                        modal={modal}
+                        formatTime={this.formatTime} />
                 </div>
             </div>
         );

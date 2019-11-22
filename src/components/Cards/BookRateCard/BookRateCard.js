@@ -14,7 +14,7 @@ class BRCard extends Component {
             discount: 0,
             amount: 0,
             topic: 0,
-            iventory: 0,
+            inventory: 0,
             rate: 0
         }
         if (this.props.book !== undefined)

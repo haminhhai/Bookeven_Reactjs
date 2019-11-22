@@ -55,10 +55,6 @@ class EditAddress extends Component {
         this.setState({ ward: tempWard })
     }
 
-    changeWard = e => {
-        this.setState({ selectedWard: e.target.value })
-    }
-
     submitHandler = event => {
         event.preventDefault();
         event.target.className += " was-validated";
@@ -172,7 +168,7 @@ class EditAddress extends Component {
                         </select>
                     </div>
                     <div className='col-12 mt-5'>
-                        <select onChange={this.changeWard} value={selectedWard} className="browser-default custom-select" required>
+                        <select name='selectedWard' onChange={this.changeHandler} value={selectedWard} className="browser-default custom-select" required>
                             <option>Xã/Phường *</option>
                             {ward}
                         </select>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import AccountContainer from '../containers/AccountContainer';
+import AccountContainer from '../containers/Account/AccountContainer';
 
 const routes = [
     {

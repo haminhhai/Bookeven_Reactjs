@@ -16,9 +16,9 @@ class BookDetailContainer extends Component {
             return item.id === book.id
         })
         if (checkExist.length > 0) {
-            if (book.iventory > checkExist[0].quantity) {
-                if (checkExist[0].quantity + quantity >= book.iventory) {
-                    addToCart(book, book.iventory - checkExist[0].quantity)
+            if (book.inventory > checkExist[0].quantity) {
+                if (checkExist[0].quantity + quantity >= book.inventory) {
+                    addToCart(book, book.inventory - checkExist[0].quantity)
                     this.$utils.addToCartSuccess()
                 }
                 else {

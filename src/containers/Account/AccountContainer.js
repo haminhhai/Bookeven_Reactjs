@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types';
 
-import Account from '../pages/AccountSystem/Account'
-import * as accountActions from '../actions/account'
+import Account from '../../pages/AccountSystem/Account'
+import * as accountActions from '../../actions/account'
 class AccountContainer extends Component {
     componentDidMount() {
         const { getListAddress } = this.props.accountActions

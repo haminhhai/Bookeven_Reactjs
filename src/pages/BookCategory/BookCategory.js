@@ -59,6 +59,9 @@ class BookCategory extends Component {
         }
         return items
     }
+    componentDidMount() {
+        window.scrollTo(0, 0)
+    }
     render() {
         const { parent, listBook, fieldsBook } = this.props //parent = this.props.parent
         const { topic, rate, maxval, minval } = this.state

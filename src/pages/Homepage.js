@@ -19,6 +19,9 @@ class Homepage extends Component {
       items.push(<BookCardContainer key={i} index={i} type='bp' className='col-lg-3 col-md-6'/>)
     return items
   }
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
   render() {
     const { redir, path } = this.state
     if (redir)

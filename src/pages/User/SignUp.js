@@ -64,7 +64,7 @@ class SignUp extends Component {
                     />
                 </div>
                 <div className='text-center'>
-                    <MDBBtn type='submit' gradient="peach" className='font-weight-bold text-white'>
+                    <MDBBtn block type='submit' gradient="peach" className='font-weight-bold text-white rounded-pill'>
                         ĐĂNG KÝ
                         <MDBIcon icon="sign-out-alt" className='ml-2' />
                     </MDBBtn>

@@ -6,6 +6,9 @@ import img from '../assets/logo.png'
 import { MDBBtn } from 'mdbreact';
 class NotFound extends Component {
     state = {}
+    componentDidMount() {
+        window.scrollTo(0, 0)
+    }
     render() {
         return (
             <div>

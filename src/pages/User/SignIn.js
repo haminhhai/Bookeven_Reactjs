@@ -21,7 +21,7 @@ class SignIn extends Component {
         }, 3000);
         
         localStorage.setItem('authen', true)
-        localStorage.setItem('role', '1')
+        localStorage.setItem('role', '2')
     };
 
     changeHandler = event => {
@@ -61,7 +61,7 @@ class SignIn extends Component {
                 </div>
                 <div className='text-center'>
 
-                    <MDBBtn type='submit' gradient="aqua" className='font-weight-bold text-white'>
+                    <MDBBtn block type='submit' gradient="aqua" className='font-weight-bold text-white rounded-pill'>
                         ĐĂNG NHẬP
                         <MDBIcon icon="sign-in-alt" className='ml-2' />
                     </MDBBtn>

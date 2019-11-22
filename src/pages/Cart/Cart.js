@@ -12,6 +12,9 @@ class Cart extends Component {
         this.state = {
         }
     }
+    componentDidMount() {
+        window.scrollTo(0, 0)
+    }
     render() {
         var { children } = this.props
         return (

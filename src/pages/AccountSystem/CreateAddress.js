@@ -55,20 +55,16 @@ class CreateAddress extends Component {
         this.setState({ ward: tempWard })
     }
 
-    changeWard = e => {
-        this.setState({ selectedWard: e.target.value })
-    }
-
     submitHandler = event => {
         event.preventDefault();
         event.target.className += " was-validated";
-        const { fullnameAddress, emailAddress, phoneAddress, street, selectedProvince, selectedDistrict, selectedWard } = this.state
+        const { street, selectedProvince, selectedDistrict, selectedWard } = this.state
         const { createNewAddress, redirect } = this.props
         const body = {
             id: this.$utils.idGenerator(),
-            name: fullnameAddress,
-            email: emailAddress,
-            phone: phoneAddress,
+            name: 'Hà Minh Hải',
+            email: 'haihaidb@gmail.com',
+            phone: '0327487958',
             street: street,
             province: selectedProvince,
             district: selectedDistrict,
@@ -90,44 +86,11 @@ class CreateAddress extends Component {
         this.setState({ province: tempProvince })
     }
     render() {
-        const {  province, district, ward, fullnameAddress, phoneAddress, emailAddress, street, selectedProvince, selectedDistrict, selectedWard } = this.state
+        const {  province, district, ward, street, selectedProvince, selectedDistrict, selectedWard } = this.state
         return (
             <form className='needs-validation'
                 onSubmit={this.submitHandler}>
                 <div className='row container'>
-                    <div className='col-12'>
-                        <MDBInput
-                            outline
-                            label="Họ tên *"
-                            type="text"
-                            name='fullnameAddress'
-                            value={fullnameAddress}
-                            onChange={this.changeHandler}
-                            required
-                        />
-                    </div>
-                    <div className='col-12'>
-                        <MDBInput
-                            outline
-                            label="Email *"
-                            type="email"
-                            name='emailAddress'
-                            value={emailAddress}
-                            onChange={this.changeHandler}
-                            required
-                        />
-                    </div>
-                    <div className='col-12'>
-                        <MDBInput
-                            outline
-                            label="Điện thoại *"
-                            type="tel"
-                            name='phoneAddress'
-                            value={phoneAddress}
-                            onChange={this.changeHandler}
-                            required
-                        />
-                    </div>
                     <div className='col-12'>
                         <MDBInput
                             outline
@@ -147,13 +110,13 @@ class CreateAddress extends Component {
                     </div>
                     <div className='col-12 mt-5'>
                         <select onChange={this.changeDistrict} value={selectedDistrict} className="browser-default custom-select" required>
-                            <option>Quận/Huyện/TX *</option>
+                            <option value=''>Quận/Huyện/TX *</option>
                             {district}
                         </select>
                     </div>
                     <div className='col-12 mt-5'>
-                        <select onChange={this.changeWard} value={selectedWard} className="browser-default custom-select" required>
-                            <option>Xã/Phường *</option>
+                        <select name='selectedWard' onChange={this.changeHandler} value={selectedWard} className="browser-default custom-select" required>
+                            <option value=''>Xã/Phường *</option>
                             {ward}
                         </select>
                     </div>

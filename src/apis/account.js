@@ -19,3 +19,14 @@ export const updateAddress = data => {
 export const deleteAddress = id => {
     return axiosService.delete(`${API_URL}/${url_address}/${id}`)
 }
+
+// http://localhost:3000/invoice
+const url_invoice = 'invoice'
+
+export const fetchListInvoices = () => {
+    return axiosService.get(`${API_URL}/${url_invoice}`)
+} 
+
+export const createInvoice = data => {
+    return axiosService.post(`${API_URL}/${url_invoice}`, data)
+}

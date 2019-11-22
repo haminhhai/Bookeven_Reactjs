@@ -18,7 +18,7 @@ class BookCardContainer extends Component {
         return item.id === book.id
       })
     if (check.length > 0) {
-      if (book.iventory > check[0].quantity) {
+      if (book.inventory > check[0].quantity) {
         addToCart(book, 1)
       }
       else

@@ -38,6 +38,9 @@ class Account extends Component {
     activeTab = e => {
         this.setState({ currentTab: e })
     }
+    componentDidMount() {
+        window.scrollTo(0, 0)
+    }
     render() {
         const { address, createNewAddress, updateAddress, deleteAddress } = this.props
         const { isEditing, data, currentTab } = this.state

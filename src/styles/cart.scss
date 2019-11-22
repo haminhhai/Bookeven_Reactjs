@@ -70,24 +70,23 @@
       display: inline;
       min-height: 45px;
     }
+  }
+}
+.collateral {
+  width: 100%;
 
-    .collateral {
-      width: 100%;
+  &::before {
+    content: " ";
+    display: table;
+  }
 
-      &::before {
-        content: " ";
-        display: table;
-      }
-
-      &::after {
-        clear: both;
-        content: " ";
-        display: table;
-      }
-      .total-amount {
-        float: right;
-        margin-bottom: 30px;
-      }
-    }
+  &::after {
+    clear: both;
+    content: " ";
+    display: table;
+  }
+  .total-amount {
+    float: right;
+    margin-bottom: 30px;
   }
 }

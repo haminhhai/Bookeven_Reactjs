@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReadMoreReact from 'read-more-react';
 import * as $ from 'jquery'
 
-import { MDBBtn, MDBTable, MDBTableBody } from 'mdbreact';
+import { MDBBtn, MDBTable, MDBTableBody, MDBBadge } from 'mdbreact';
 import { Rate, InputNumber } from 'antd'
 
 import Header from '../../layouts/Header/Header'
@@ -29,6 +29,7 @@ class BookDetail extends Component {
     }
 
     componentDidMount() {
+        window.scrollTo(0, 0)
         $(function () {
 
             $("#exzoom").exzoom({
@@ -52,10 +53,11 @@ class BookDetail extends Component {
         this.props.onAddToCart(book, this.state.quantity)
     }
     render() {
-        const { parent,  detailBook } = this.props //parent = this.props.parent
+        const { parent, detailBook } = this.props //parent = this.props.parent
         const { quantity } = this.state
-        return (
-            <div >
+        let xhtml = null
+        if (detailBook.hasOwnProperty('id'))
+            xhtml = <div >
                 <Header carousel={false} parent={parent} child={detailBook.title} />
 
                 <div className='book-detail'>
@@ -78,8 +80,15 @@ class BookDetail extends Component {
                                     <p>(2 người đã đánh giá)</p>
                                 </div>
                                 <ReadMoreReact text={index.desc} readMoreText='Xem thêm' />
-                                <InputNumber className='mt-3' value={quantity} min={1} max={detailBook.iventory} onChange={this.changeQuantity} />
-                                <MDBBtn className='add-cart-btn ml-3' onClick={() => { this.addToCart(detailBook) }}>Thêm vào giỏ</MDBBtn>
+                                {
+                                    detailBook.inventory > 0 &&
+                                    <InputNumber className='mt-3' value={quantity} min={1} max={detailBook.inventory} onChange={this.changeQuantity} />
+                                }
+                                {
+                                    detailBook.inventory > 0 ?
+                                        <MDBBtn className='add-cart-btn ml-3' onClick={() =>  this.addToCart(detailBook) }>Thêm vào giỏ</MDBBtn> :
+                                        <MDBBtn className='add-cart-btn' disabled>Hết hàng!</MDBBtn>
+                                }
                             </div>
                         </div>
                         <div className='book-review row mt-4'>
@@ -87,12 +96,12 @@ class BookDetail extends Component {
                                 <h3>Thông tin chi tiết</h3>
                                 <MDBTable striped bordered>
                                     <MDBTableBody>
-                                        {index.data.map((item, index) => 
-                                                <tr key={index}>
-                                                    <th colSpan='1'>{item.title}</th>
-                                                    <th clssName='font-weight-bold' colSpan='2'>{item.content}</th>
-                                                </tr>
-                                            )
+                                        {index.data.map((item, index) =>
+                                            <tr key={index}>
+                                                <th colSpan='1'>{item.title}</th>
+                                                <th clssName='font-weight-bold' colSpan='2'>{item.content}</th>
+                                            </tr>
+                                        )
                                         }
                                     </MDBTableBody>
                                 </MDBTable>
@@ -104,14 +113,14 @@ class BookDetail extends Component {
                             <div className='col-12 col-md-12'>
                                 <h3>Bình luận</h3>
                                 <div className='comment-system'>
-                                    <Comments/>
+                                    <Comments />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div >
-        );
+        return xhtml;
     }
 }
 

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import CartContainer from '../containers/CartContainer';
-import Payment from '../pages/Payment/Payment';
-import InvoiceCustomer from '../pages/Invoice/InvoiceCustomer';
-import AccountContainer from '../containers/AccountContainer';
+import AccountContainer from '../containers/Account/AccountContainer';
+import PaymentContainer from '../containers/Account/PaymentContainer';
+import InvoiceContainer from '../containers/Account/InvoiceContainer';
 
 const routes = [
     {
@@ -14,17 +14,17 @@ const routes = [
     {
         path: '/history',
         exact: false,
-        main: () => <InvoiceCustomer />
+        main: () => <InvoiceContainer />
     },
     {
         path: '/gio-hang',
-        exact: true,
+        exact: false,
         main: () => <CartContainer />
     },
     {
-        path: '/gio-hang/payment',
-        exact: true,
-        main: () => <Payment />
+        path: '/payment',
+        exact: false,
+        main: () => <PaymentContainer />
     },
 ]
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { MDBTable, MDBTableBody, MDBBtn, MDBIcon, MDBModal, MDBModalFooter, MDBModalHeader } from 'mdbreact'
+import { MDBTable, MDBTableBody, MDBBtn, MDBIcon, MDBModal, MDBModalBody, MDBModalHeader } from 'mdbreact'
+import { Tooltip } from 'antd'
 import province from '../../utils/data/province.json'
 import district from '../../utils/data/district.json'
 import ward from '../../utils/data/ward.json'
@@ -11,12 +12,6 @@ class ListAddress extends Component {
             modal: false,
             id: 0,
         }
-    }
-    handleAddress = (street, wardId, districtId, provinceId) => {
-        const wardName = ward.filter(item => item.wardid === wardId)
-        const districtName = district.filter(item => item.districtid === districtId)
-        const provinceName = province.filter(item => item.provinceid === provinceId)
-        return `${street}, ${wardName[0].name}, ${districtName[0].name}, ${provinceName[0].name}`
     }
 
     sureToDelete = id => {
@@ -40,8 +35,12 @@ class ListAddress extends Component {
                         <div className='row'>
                             <h5 className='col-6'>Địa chỉ {i + 1}</h5>
                             <div className='col-6 text-right'>
-                                <MDBBtn color='success' onClick={() => toggleEditAddress(item)}><MDBIcon icon='edit' /></MDBBtn>
-                                <MDBBtn color='danger' onClick={() => this.sureToDelete(item.id)}><MDBIcon icon="trash-alt" /></MDBBtn>
+                                <Tooltip placement='top' title='Chỉnh sửa địa chỉ'>
+                                    <MDBBtn color='success' onClick={() => toggleEditAddress(item)}><MDBIcon icon='edit' /></MDBBtn>
+                                </Tooltip>
+                                <Tooltip placement='top' title='Xóa địa chỉ'>
+                                    <MDBBtn color='danger' onClick={() => this.sureToDelete(item.id)}><MDBIcon icon="trash-alt" /></MDBBtn>
+                                </Tooltip>
                             </div>
                         </div>
                     </div>
@@ -53,7 +52,7 @@ class ListAddress extends Component {
                             </tr>
                             <tr>
                                 <td>Địa chỉ: </td>
-                                <td>{this.handleAddress(item.street, item.ward, item.district, item.province)}</td>
+                                <td>{`${item.street}, ${this.$utils.filterAddress(item.province, item.district, item.ward)}`}</td>
                             </tr>
                             <tr>
                                 <td>Email: </td>
@@ -66,16 +65,22 @@ class ListAddress extends Component {
                         </MDBTableBody>
                     </MDBTable>
 
-                    <MDBModal isOpen={modal} toggle={this.toggleModal} size="sm">
-                        <MDBModalHeader toggle={this.toggleModal}>{msg.MSG_SURE_TO_DELETE_ADDRESS}</MDBModalHeader>
-                        <MDBModalFooter>
-                            <MDBBtn outline color="danger" size="sm" onClick={this.toggleModal}>Không</MDBBtn>
-                            <MDBBtn color="danger" size="sm"
+                    <MDBModal cascading isOpen={modal} toggle={this.toggleModal}>
+                        <MDBModalHeader
+                            tag="h5"
+                            className=" red text-white"
+                            toggle={this.toggleModal}>
+                                <MDBIcon className='mr-2' icon="trash-alt" />
+                            {msg.MSG_SURE_TO_DELETE_ADDRESS}
+                        </MDBModalHeader>
+                        <MDBModalBody className='text-right'>
+                            <MDBBtn className='rounded-pill' outline color="danger" onClick={this.toggleModal}>Không</MDBBtn>
+                            <MDBBtn className='rounded-pill' color="danger"
                                 onClick={() => {
                                     deleteAddress(id)
                                     this.setState({ modal: false })
                                 }}>Có</MDBBtn>
-                        </MDBModalFooter>
+                        </MDBModalBody>
                     </MDBModal>
                 </div>
             })

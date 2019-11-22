@@ -1,8 +1,12 @@
-.payment {
+.payment.container {
   padding-top: 50px;
   padding-bottom: 50px;
-  strong{
-      font-weight: bold;
+  th {
+    font-weight: bold;
+  }
+  
+  .btn {
+    font-weight: bold;
   }
   .payment-card {
     border-radius: 10px;
@@ -39,39 +43,19 @@
       }
     }
 
-    .collateral {
-      width: 100%;
-      
-      &::before {
-        content: " ";
-        display: table;
-      }
-
-      &::after {
-        clear: both;
-        content: " ";
-        display: table;
-      }
-      .total-amount {
-        float: right;
-        font-weight: 700;
-        margin-bottom: 30px;
-      }
-    }
-
     .actions {
-        text-align: right;
-        vertical-align: middle;
-  
-        .coupon {
-          float: left;
-          text-align: center;
-          .btn {
-              width: 95%;
-              font-weight: bold;
-          }
+      text-align: right;
+      vertical-align: middle;
+
+      .coupon {
+        float: left;
+        text-align: center;
+        .btn {
+          width: 95%;
+          font-weight: bold;
         }
       }
+    }
 
     .method-pay {
       border-bottom: 1px solid rgb(161, 158, 158);
@@ -84,5 +68,15 @@
     p {
       padding: 10px;
     }
+  }
+  
+}
+.btn[class*="btn-outline-"]{
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+}
+.modal-header {
+  h5 {
+    color: #fff !important;
   }
 }

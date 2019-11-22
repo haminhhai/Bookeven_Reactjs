@@ -38,7 +38,7 @@ class CartItem extends Component {
             </td>
             <td className='name align-middle'>{item.title}</td>
             <td className='quantity align-middle'>
-                <InputNumber min={1} max={item.iventory} defaultValue={item.quantity} onChange={this.onChangeQuantity} />
+                <InputNumber min={1} max={item.inventory} defaultValue={item.quantity} onChange={this.onChangeQuantity} />
             </td>
             <td className='price align-middle'>
                 <del className='mr-1'>{this.$utils.formatVND(item.discount)}</del>

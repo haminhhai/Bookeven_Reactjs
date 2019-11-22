@@ -10,15 +10,6 @@ class CartTotal extends Component {
         this.state = {
         }
     }
-    showTotalAmount = cart => {
-        var total = 0
-        if (cart.length > 0)
-            cart.map(item =>
-                total += item.amount * item.quantity
-            )
-
-        return this.$utils.formatVND(total)
-    }
     render() {
         const { cart } = this.props
         let xhtml = null
@@ -30,15 +21,15 @@ class CartTotal extends Component {
                         <MDBTableBody>
                             <tr>
                                 <td>Tạm tính</td>
-                                <td>{this.showTotalAmount(cart)}</td>
+                                <td>{this.$utils.calculateTotalCart(cart, 'vnd')}</td>
                             </tr>
                             <tr >
                                 <td className='font-weight-bold'>Tổng tiền</td>
-                                <td className='font-weight-bold'>{this.showTotalAmount(cart)}</td>
+                                <td className='font-weight-bold'>{this.$utils.calculateTotalCart(cart, 'vnd')}</td>
                             </tr>
                         </MDBTableBody>
                     </MDBTable>
-                    <Link to='/gio-hang/payment'>
+                    <Link to='/payment'>
                         <MDBBtn>Thanh toán</MDBBtn>
                     </Link>
                 </div>

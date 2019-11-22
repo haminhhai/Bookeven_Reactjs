@@ -5,17 +5,29 @@
   margin-bottom: 50px;
   padding-bottom: 20px;
 
-  strong {
+  th {
     font-weight: bold;
   }
 
-  .row {
-      display: block;
-      padding-top: 20px;
-      padding-bottom: 20px;
-      .logo {
-          width: 200px;
-          height: 200px;
-      }
+  del {
+    color: #9a9a9a;
+  }
+
+  .imgBook {
+    img {
+      height: auto;
+      width: 50px;
+      float: left;
+      margin-right: 10px;
+    }
+  }
+  .empty-invoice {
+    display: block;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    .logo {
+      width: 200px;
+      height: 200px;
+    }
   }
 }

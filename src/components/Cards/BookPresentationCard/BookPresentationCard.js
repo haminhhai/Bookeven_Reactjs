@@ -25,7 +25,7 @@ class BPCard extends Component {
       this.setState({
         data: roles.manager.couple_btn
       })
-    else this.setState({data: roles.customer.couple_btn})
+    else this.setState({ data: roles.customer.couple_btn })
   }
   render() {
     const { data } = this.state
@@ -37,11 +37,12 @@ class BPCard extends Component {
       discount: 0,
       amount: 0,
       topic: 0,
-      iventory: 0,
+      inventory: 0,
       rate: 0
     }
     if (this.props.book !== undefined)
       book = this.props.book
+    const role = localStorage.getItem('role')
     return (
       <div className='bpcard-container'>
         <MDBCard style={{ minWidth: '14rem', height: 'auto' }} className='text-center'>
@@ -68,13 +69,19 @@ class BPCard extends Component {
             </div>
             <div className='coubtn-wrapper'>
               <div className='coubtn-border'>
-                <span className='detail' onClick={this.getInform}>
-                  <div>
-                    <MDBIcon icon={data.l_icon} />
-                  </div>
-                  {data.l_txt}
+
+                <span className='detail'>
+                  <Link style={{color: '#3c3d41'}} to={`/${this.$utils.convertVietnamese(book.title)}`}>
+                    <div>
+                      <MDBIcon icon={data.l_icon} />
+                    </div>
+                    {data.l_txt}
+                  </Link>
                 </span>
-                <span className='cart' onClick={() => { this.onAddToCart(book) }}>
+
+                <span
+                  className='cart_edit'
+                  onClick={role === '1' ? () => { this.onAddToCart(book) } : ''}>
                   <div>
                     <MDBIcon icon={data.r_icon} />
                   </div>
