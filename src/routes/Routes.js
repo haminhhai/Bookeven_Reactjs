@@ -8,7 +8,6 @@ import PropTypes from 'prop-types'
 import Homepage from '../pages/Homepage'
 import BookDetailContainer from '../containers/BookContainer/BookDetailContainer'
 import BookCategoryContainer from '../containers/BookContainer/BookCategoryContainer'
-import Payment from '../pages/Payment/Payment'
 import Footer from '../layouts/Footer/Footer'
 
 import * as bookActions from '../actions/book'
@@ -107,7 +106,7 @@ class Routes extends Component {
                     <BackTop visibilityHeight={100} />
                     <Switch>
                         {routes}
-                        <CustomerRoutes />
+                        <ManagerRoutes />
                         <Route exact={false} path="" component={NotFound} />
                     </Switch>
                     <Footer />

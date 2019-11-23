@@ -84,11 +84,11 @@ class DetailInvoice extends Component {
                                                             {item.quantity}
                                                         </td>
                                                         <td className=' align-middle'>
-                                                            <del className='mr-1'>{this.$utils.formatVND(item.discount)}</del>
-                                                            {this.$utils.formatVND(item.amount)}
+                                                            <del className='mr-1'>{this.$utils.formatVND(item.realPrice)}</del>
+                                                            {this.$utils.formatVND(item.percentDiscount)}
                                                         </td>
                                                         <td className='align-middle font-weight-bold'>
-                                                            {this.$utils.formatVND(item.amount * item.quantity)}
+                                                            {this.$utils.formatVND(item.percentDiscount * item.quantity)}
                                                         </td>
                                                     </tr>
                                                 )
@@ -96,7 +96,7 @@ class DetailInvoice extends Component {
                                         </MDBTableBody>
                                     </MDBTable>
                                     <div className='collateral'>
-                                        <div className='total-amount'>
+                                        <div className='total-percentDiscount'>
                                             <MDBTable bordered>
                                                 <MDBTableBody>
                                                     <tr>

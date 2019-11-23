@@ -15,7 +15,7 @@ class CartTotal extends Component {
         let xhtml = null
         if (cart.length > 0)
             xhtml = <div className='collateral'>
-                <div className='total-amount'>
+                <div className='total-percentDiscount'>
                     <h2>Xác nhận thanh toán</h2>
                     <MDBTable >
                         <MDBTableBody>

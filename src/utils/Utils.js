@@ -50,7 +50,11 @@ export const toastSuccess = message => {
   toast.success(message)
 }
 
-export const toastError = error => {
+export const toastError = message => {
+  toast.error(message)
+}
+
+export const toastErrorApi = error => {
   let message = null
   if (typeof error === 'object' && error.message)
     message = error.message
@@ -79,7 +83,7 @@ export const calculateTotalCart = (cart, type) => {
   var result = 0
   if (cart.length > 0)
     cart.map(item =>
-      result += (parseInt(item.quantity) * parseInt(item.amount)))
+      result += (parseInt(item.quantity) * parseInt(item.percentDiscount)))
   if (type === 'vnd')
     result = formatVND(result)
   return result
@@ -91,6 +95,16 @@ export const filterAddress = (provinceId, districtId, wardId) => {
   const districtName = district.filter(item => item.districtid === districtId)[0]
   const provinceName = province.filter(item => item.provinceid === provinceId)[0]
   address = `${wardName.name}, ${districtName.name}, ${provinceName.name}`
-  return address
-  
+  return address 
+}
+
+
+export const getBase64 = (img, callback) => {
+  const reader = new FileReader();
+  reader.addEventListener('load', () => callback(reader.result));
+  reader.readAsDataURL(img);
+}
+
+export const calDiscountPrice = (realPrice, percent) => {
+  return formatVND(realPrice - (realPrice * percent / 100))
 }

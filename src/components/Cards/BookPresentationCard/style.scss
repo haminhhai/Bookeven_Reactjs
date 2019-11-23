@@ -17,6 +17,46 @@
       }
     }
   }
+
+  .modal-edit {
+    label {
+      font-weight: bold;
+      font-size: 16px;
+      margin-top: 0.5rem;
+    }
+
+    textarea,
+    .ant-select-lg {
+      margin-bottom: 1.5rem;
+    }
+    .md-form.md-outline {
+      margin-top: 0;
+    }
+
+    .avatar-uploader > .ant-upload,
+    .img-lightbox {
+      width: 128px;
+      height: auto;
+    }
+
+    .mask:hover {
+      cursor: zoom-in;
+    }
+
+    .modal-header {
+      background: linear-gradient(25deg, #d64c7f, #ee4758 50%);
+    }
+    .btn-outline-default {
+      border: 2px solid #ee4758 !important;
+      color: #d64c7f !important;
+      font-weight: bold;
+    }
+    .btn-default {
+      background: linear-gradient(25deg, #d64c7f, #ee4758 50%);
+      font-weight: bold;
+    }
+  }
+
   .book-wrapper {
     border-radius: 0.55rem;
     position: relative;
@@ -30,6 +70,39 @@
     min-height: 320px;
     -webkit-transition: all 0.25s ease;
     transition: all 0.25s ease;
+
+    .promotionPercent {
+      position: absolute;
+      width: 3.5rem;
+      height: 1.7rem;
+    top: 0;
+    right: 0;
+
+    svg {
+      width: 3.5rem;
+      height: 1.7rem;
+      fill: #f21a4c;
+  }
+
+    &>span {
+      padding-right: 0;
+    width: 100%;
+    justify-content: center;
+      color: #fff;
+    font-size: .7rem;
+    font-weight: 500;
+    padding-right: .4rem;
+    height: 100%;
+    position: absolute;
+    font-weight: bold;
+    top: 0;
+    right: -.2rem;
+    bottom: unset;
+    left: unset;
+    display: flex;
+    align-items: center;
+    }
+    }
 
     &:hover {
       cursor: pointer;
@@ -139,4 +212,7 @@
       }
     }
   }
+}
+.ReactModal__Overlay--after-open {
+  z-index: 2000 !important;
 }

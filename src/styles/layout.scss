@@ -194,10 +194,6 @@ $gr: rgba(0, 0, 0, 0.65);
 }
 
 .top-nav-collapse {
-  background: url(../assets/navbar.jpg) 50% 60%;
-  background-size: cover;
-  background-repeat: no-repeat;
-
   &::after {
     content: "";
     width: 100%;
@@ -206,12 +202,16 @@ $gr: rgba(0, 0, 0, 0.65);
     top: 0;
     left: 0;
     z-index: -100;
-    opacity: 0.7;
-    background-image: radial-gradient(
-      circle farthest-corner at 10% 20%,
-      rgba(90, 92, 106, 1) 0%,
-      rgba(32, 45, 58, 1) 81.3%
-    );
+    background-image: url(../assets/navbar.jpg);
+    background-repeat: no-repeat;
+    background-position: center 0;
+    background-size: cover;
+    // background-image: radial-gradient(
+    //   circle farthest-corner at 10% 20%,
+    //   rgba(90, 92, 106, 1) 0%,
+    //   rgba(32, 45, 58, 1) 81.3%
+    // );
+    animation: float 60s linear infinite;
   }
 }
 
@@ -228,4 +228,15 @@ $gr: rgba(0, 0, 0, 0.65);
     width: 120px;
     height: 120px;
   }
+}
+@keyframes float {
+	0% {
+		background-position: center 30%
+	}
+	50% {
+		background-position: center 70%
+	}
+	to {
+		background-position: center 10%
+	}
 }

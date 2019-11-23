@@ -11,8 +11,8 @@ class BRCard extends Component {
             src: '',
             title: '',
             author: '',
-            discount: 0,
-            amount: 0,
+            realPrice: 0,
+            percentDiscount: 0,
             topic: 0,
             inventory: 0,
             rate: 0
@@ -33,9 +33,9 @@ class BRCard extends Component {
                     <Rate allowHalf defaultValue={book.rate} disabled />
                 </div>
                 <p>
-                    {book.discount >= 0 &&
-                        <del className='mr-1'>{this.$utils.formatVND(book.discount)}</del>}
-                    {this.$utils.formatVND(book.amount)}
+                    {book.percentDiscount > 0 &&
+                        <del className='mr-1'>{this.$utils.formatVND(book.realPrice)}</del>}
+                    {this.$utils.calDiscountPrice(book.realPrice, book.percentDiscount)}
                 </p>
             </div>
         );

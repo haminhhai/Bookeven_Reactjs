@@ -83,8 +83,8 @@ function* filterBookByMultiTypeAction({ payload }) {
     const { min, max } = data.price
     const list = yield select(state => state.books.listBooks)
     var filterBooks = list.filter(item =>
-        item.amount >= min
-        && item.amount <= max
+        item.realPrice >= min
+        && item.realPrice <= max
         && item.rate === data.rate
         && (data.topic !== '' ? item.topic === data.topic : item.topic > 0)
     )

@@ -11,6 +11,7 @@ import 'jquery/dist/jquery.min.js'
 
 import 'antd/dist/antd.css';
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-image-lightbox/style.css'; 
 
 import App from './App';
 

@@ -41,11 +41,11 @@ class CartItem extends Component {
                 <InputNumber min={1} max={item.inventory} defaultValue={item.quantity} onChange={this.onChangeQuantity} />
             </td>
             <td className='price align-middle'>
-                <del className='mr-1'>{this.$utils.formatVND(item.discount)}</del>
-                {this.$utils.formatVND(item.amount)}
+                <del className='mr-1'>{this.$utils.formatVND(item.realPrice)}</del>
+                {this.$utils.formatVND(item.percentDiscount)}
             </td>
             <td className='total align-middle font-weight-bold'>
-                {this.$utils.formatVND(item.amount * item.quantity)}
+                {this.$utils.formatVND(item.percentDiscount * item.quantity)}
             </td>
 
         </tr>

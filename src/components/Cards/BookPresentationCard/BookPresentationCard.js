@@ -5,18 +5,33 @@ import { connect } from 'react-redux'
 
 import { MDBCard, MDBIcon, MDBCardBody, MDBCardTitle, MDBCardText, MDBMask, MDBView } from 'mdbreact'
 import * as bookActions from '../../../actions/book'
+import * as cont from './const'
 
 import './style.scss'
 import { bindActionCreators } from 'C:/Users/ADMIN/AppData/Local/Microsoft/TypeScript/3.6/node_modules/redux';
 import { roles } from '../../../const/config'
+import ModalEditBook from './ModalEditBook';
 class BPCard extends Component {
   state = {
-    data: {}
+    data: {},
+    modal: false,
+    detailBook: {}
   }
 
   onAddToCart = book => {
     this.props.onAddToCart(book)
 
+  }
+
+  showModal = data => {
+    this.setState({
+      detailBook: data,
+      modal: !this.state.modal
+    })
+  }
+
+  closeModal = () => {
+    this.setState({ modal: !this.state.modal })
   }
 
   componentDidMount() {
@@ -28,14 +43,15 @@ class BPCard extends Component {
     else this.setState({ data: roles.customer.couple_btn })
   }
   render() {
-    const { data } = this.state
+    const { data, detailBook, modal } = this.state
+    const { fieldsBook } = this.props
     var book = {
       id: 1,
       src: '',
       title: '',
       author: '',
-      discount: 0,
-      amount: 0,
+      realPrice: 0,
+      percentDiscount: 0,
       topic: 0,
       inventory: 0,
       rate: 0
@@ -50,6 +66,13 @@ class BPCard extends Component {
             <MDBView className='book-wrapper' hover>
               <LazyLoad height='200' offset={100} once>
                 <img src={book.src} waves="true" className="imgBook" alt="" overlay="true" />
+                {
+                  book.percentDiscount > 0 && 
+                  <div class="promotionPercent">
+                  {cont.SVG}
+                  <span>{book.percentDiscount + '%'}</span>
+                </div>
+                }
               </LazyLoad>
               <MDBMask className="flex-center" overlay="white-light" />
             </MDBView></Link>
@@ -63,15 +86,15 @@ class BPCard extends Component {
               {book.author}
             </MDBCardText>
             <div className='price'>
-              {book.discount !== undefined &&
-                <del>{this.$utils.formatVND(book.discount)}</del>}
-              <p className='h3'>{this.$utils.formatVND(book.amount)}</p>
+              {book.percentDiscount !== 0 &&
+                <del>{this.$utils.formatVND(book.realPrice)}</del>}
+              <p className='h3'>{this.$utils.calDiscountPrice(book.realPrice, book.percentDiscount)}</p>
             </div>
             <div className='coubtn-wrapper'>
               <div className='coubtn-border'>
 
                 <span className='detail'>
-                  <Link style={{color: '#3c3d41'}} to={`/${this.$utils.convertVietnamese(book.title)}`}>
+                  <Link style={{ color: '#3c3d41' }} to={`/${this.$utils.convertVietnamese(book.title)}`}>
                     <div>
                       <MDBIcon icon={data.l_icon} />
                     </div>
@@ -81,7 +104,7 @@ class BPCard extends Component {
 
                 <span
                   className='cart_edit'
-                  onClick={role === '1' ? () => { this.onAddToCart(book) } : ''}>
+                  onClick={role === '1' ? () => this.onAddToCart(book) : () => this.showModal(book)}>
                   <div>
                     <MDBIcon icon={data.r_icon} />
                   </div>
@@ -91,7 +114,10 @@ class BPCard extends Component {
             </div>
           </MDBCardBody>
         </MDBCard>
-      </div>
+        {
+          modal && <ModalEditBook data={detailBook} modal={modal} closeModal={this.closeModal} fieldsBook={fieldsBook}/>
+        }
+      </div >
     )
   }
 }

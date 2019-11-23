@@ -148,7 +148,7 @@ class Payment extends Component {
                                                         address.map(item =>
                                                             <option value={item.id}>
                                                                 Người nhận: {item.name},
-                                       Địa chỉ: {`${item.street}, ${this.$utils.filterAddress(item.province, item.district, item.ward)}`}
+                                                                Địa chỉ: {`${item.street}, ${this.$utils.filterAddress(item.province, item.district, item.ward)}`}
                                                             </option>
                                                         )
                                                     }
@@ -240,7 +240,7 @@ class Payment extends Component {
                                                             <tr key={i}>
                                                                 <td>{item.title}</td>
                                                                 <td>{item.quantity}</td>
-                                                                <td>{this.$utils.formatVND(item.quantity * item.amount)}</td>
+                                                                <td>{this.$utils.formatVND(item.quantity * item.percentDiscount)}</td>
                                                             </tr>
                                                         )
                                                     }
@@ -259,7 +259,7 @@ class Payment extends Component {
                                                 </MDBTableBody>
                                             </MDBTable>
                                             <div className='collateral'>
-                                                <div className='total-amount'>
+                                                <div className='total-percentDiscount'>
                                                     <MDBTable striped bordered>
                                                         <MDBTableBody>
                                                             <tr>
@@ -299,8 +299,8 @@ class Payment extends Component {
                                         {msg.MSG_SURE_TO_ORDER}
                                     </MDBModalHeader>
                                     <MDBModalBody className='text-right'>
-                                        <MDBBtn className='rounded-pill' outline rounded color="success" onClick={this.toggleModal}>Không</MDBBtn>
-                                        <MDBBtn className='text-white rounded-pill' rounded color=" green accent-3" onClick={this.submitCreateInvoice}>Có</MDBBtn>
+                                        <MDBBtn className='rounded-pill' outline color="success" onClick={this.toggleModal}>Không</MDBBtn>
+                                        <MDBBtn className='text-white rounded-pill' color=" green accent-3" onClick={this.submitCreateInvoice}>Có</MDBBtn>
                                     </MDBModalBody>
                                 </MDBModal>
                             </div>
