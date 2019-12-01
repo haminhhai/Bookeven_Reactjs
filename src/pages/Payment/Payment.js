@@ -71,8 +71,8 @@ class Payment extends Component {
         this.toggleModal()
     };
 
-    submitCreateInvoice = () => {
-        const { createNewAddress, createInvoice, cart } = this.props
+    submitcreateOrder = () => {
+        const { createNewAddress, createOrder, cart } = this.props
         const { addressNote, street, selectedProvince, selectedDistrict, selectedWard, selectedAddress } = this.state
         const body = {
             id: this.$utils.idGenerator(),
@@ -90,7 +90,7 @@ class Payment extends Component {
             createNewAddress(body)
         }
         else id = selectedAddress
-        createInvoice(id, cart)
+        createOrder(id, cart)
         this.toggleModal()
         this.setState({ isSuccess: true })
     }
@@ -240,7 +240,7 @@ class Payment extends Component {
                                                             <tr key={i}>
                                                                 <td>{item.title}</td>
                                                                 <td>{item.quantity}</td>
-                                                                <td>{this.$utils.formatVND(item.quantity * item.percentDiscount)}</td>
+                                                                <td>{this.$utils.calTotalPrice(item.realPrice, item.percentDiscount, item.quantity)}</td>
                                                             </tr>
                                                         )
                                                     }
@@ -259,7 +259,7 @@ class Payment extends Component {
                                                 </MDBTableBody>
                                             </MDBTable>
                                             <div className='collateral'>
-                                                <div className='total-percentDiscount'>
+                                                <div className='total-amount'>
                                                     <MDBTable striped bordered>
                                                         <MDBTableBody>
                                                             <tr>
@@ -300,7 +300,7 @@ class Payment extends Component {
                                     </MDBModalHeader>
                                     <MDBModalBody className='text-right'>
                                         <MDBBtn className='rounded-pill' outline color="success" onClick={this.toggleModal}>Không</MDBBtn>
-                                        <MDBBtn className='text-white rounded-pill' color=" green accent-3" onClick={this.submitCreateInvoice}>Có</MDBBtn>
+                                        <MDBBtn className='text-white rounded-pill' color=" green accent-3" onClick={this.submitcreateOrder}>Có</MDBBtn>
                                     </MDBModalBody>
                                 </MDBModal>
                             </div>

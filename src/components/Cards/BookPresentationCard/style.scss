@@ -24,13 +24,19 @@
       font-size: 16px;
       margin-top: 0.5rem;
     }
-
-    textarea,
-    .ant-select-lg {
-      margin-bottom: 1.5rem;
+    .ant-form-item {
+      margin-bottom: 0;
     }
-    .md-form.md-outline {
-      margin-top: 0;
+    .ant-btn-lg {
+      text-transform: uppercase;
+      background: linear-gradient(25deg, #d64c7f, #ee4758 50%);
+      border-color: #ee4758;
+
+      &:hover,
+      &:active,
+      &:focus {
+        border-color: #ee4758;
+      }
     }
 
     .avatar-uploader > .ant-upload,
@@ -49,11 +55,11 @@
     .btn-outline-default {
       border: 2px solid #ee4758 !important;
       color: #d64c7f !important;
-      font-weight: bold;
+      padding-left: 20px;
+      padding-right: 20px;
     }
     .btn-default {
       background: linear-gradient(25deg, #d64c7f, #ee4758 50%);
-      font-weight: bold;
     }
   }
 
@@ -75,33 +81,33 @@
       position: absolute;
       width: 3.5rem;
       height: 1.7rem;
-    top: 0;
-    right: 0;
+      top: 0;
+      right: 0;
 
-    svg {
-      width: 3.5rem;
-      height: 1.7rem;
-      fill: #f21a4c;
-  }
+      svg {
+        width: 3.5rem;
+        height: 1.7rem;
+        fill: #f21a4c;
+      }
 
-    &>span {
-      padding-right: 0;
-    width: 100%;
-    justify-content: center;
-      color: #fff;
-    font-size: .7rem;
-    font-weight: 500;
-    padding-right: .4rem;
-    height: 100%;
-    position: absolute;
-    font-weight: bold;
-    top: 0;
-    right: -.2rem;
-    bottom: unset;
-    left: unset;
-    display: flex;
-    align-items: center;
-    }
+      & > span {
+        padding-right: 0;
+        width: 100%;
+        justify-content: center;
+        color: #fff;
+        font-size: 0.7rem;
+        font-weight: 500;
+        padding-right: 0.4rem;
+        height: 100%;
+        position: absolute;
+        font-weight: bold;
+        top: 0;
+        right: -0.2rem;
+        bottom: unset;
+        left: unset;
+        display: flex;
+        align-items: center;
+      }
     }
 
     &:hover {

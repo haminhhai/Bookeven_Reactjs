@@ -44,7 +44,7 @@ class BPCard extends Component {
   }
   render() {
     const { data, detailBook, modal } = this.state
-    const { fieldsBook } = this.props
+    const { fieldsBook, updateListBook, fetchListBook } = this.props
     var book = {
       id: 1,
       src: '',
@@ -115,7 +115,13 @@ class BPCard extends Component {
           </MDBCardBody>
         </MDBCard>
         {
-          modal && <ModalEditBook data={detailBook} modal={modal} closeModal={this.closeModal} fieldsBook={fieldsBook}/>
+          modal && <ModalEditBook 
+          data={detailBook} 
+          modal={modal} 
+          closeModal={this.closeModal} 
+          fieldsBook={fieldsBook} 
+          updateListBook={updateListBook} 
+          fetchListBook={fetchListBook}/>
         }
       </div >
     )

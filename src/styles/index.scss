@@ -9,10 +9,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-.btn {
+.btn,
+.ant-btn {
   -webkit-box-shadow: -4px 3px 0px 0px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: -4px 3px 0px 0px rgba(0, 0, 0, 0.2);
   box-shadow: -4px 3px 0px 0px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
 
   &:hover {
     -webkit-box-shadow: -4px 3px 0px 0px rgba(0, 0, 0, 0.2);
@@ -24,5 +26,3 @@ code {
   width: 10px;
   height: 10px;
 }
-
-

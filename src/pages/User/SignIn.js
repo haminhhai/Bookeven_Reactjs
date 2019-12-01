@@ -18,10 +18,17 @@ class SignIn extends Component {
         setTimeout(() => {
             this.setState({ isLoading: !this.state.isLoading })
             window.location.reload()
-        }, 3000);
+        }, 0);
         
+        const info = {
+            name: 'Hà Minh Hải',
+            phone: '0123435644',
+            email: 'haihaidb@gmail.com',
+            id: 3306,
+        }
         localStorage.setItem('authen', true)
-        localStorage.setItem('role', '2')
+        localStorage.setItem('role', '1')
+        localStorage.setItem('info', JSON.stringify(info))
     };
 
     changeHandler = event => {

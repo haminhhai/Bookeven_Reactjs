@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 import province from './data/province.json'
 import district from './data/district.json'
 import ward from './data/ward.json'
+import moment from 'moment'
 
 export const formatVND = value => {
   var numeral = require('numeral')
@@ -72,8 +73,10 @@ export function convertVietnamese(str) {
   str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
   str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
   str = str.replace(/đ/g, "d");
+  // eslint-disable-next-line no-useless-escape
   str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'| |\"|\&|\#|\[|\]|~|$|_/g, "-");
   str = str.replace(/-+-/g, "-");
+  // eslint-disable-next-line no-useless-escape
   str = str.replace(/^\-+|\-+$/g, "");
 
   return str;
@@ -83,7 +86,7 @@ export const calculateTotalCart = (cart, type) => {
   var result = 0
   if (cart.length > 0)
     cart.map(item =>
-      result += (parseInt(item.quantity) * parseInt(item.percentDiscount)))
+      result += (parseInt(item.quantity) * parseInt(item.realPrice - (item.realPrice * item.percentDiscount / 100))))
   if (type === 'vnd')
     result = formatVND(result)
   return result
@@ -95,7 +98,7 @@ export const filterAddress = (provinceId, districtId, wardId) => {
   const districtName = district.filter(item => item.districtid === districtId)[0]
   const provinceName = province.filter(item => item.provinceid === provinceId)[0]
   address = `${wardName.name}, ${districtName.name}, ${provinceName.name}`
-  return address 
+  return address
 }
 
 
@@ -107,4 +110,16 @@ export const getBase64 = (img, callback) => {
 
 export const calDiscountPrice = (realPrice, percent) => {
   return formatVND(realPrice - (realPrice * percent / 100))
+}
+
+export const calTotalPrice = (realPrice, percent, quantity) => {
+  return formatVND((realPrice - (realPrice * percent / 100)) * quantity)
+}
+
+
+export const formatTimeToDate = (timestamp, format) => {
+  if (typeof timestamp !== 'number')
+    return timestamp
+  else
+  return moment.unix(timestamp).format(format)
 }

@@ -15,59 +15,7 @@ class Footer extends Component {
                             <img src={logo} alt='' />
                         </Link>
                     </div>
-                    <MDBRow className="mt-3">
-                        <MDBCol md="3" lg="4" xl="3" className="mb-4 dark-grey-text">
-                            <h6 className="text-uppercase font-weight-bold">
-                                <strong>Dịch vụ</strong>
-                            </h6>
-                            <hr className="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style={{ width: "60px" }} />
-                            <p>
-                                Điều khoản sử dụng
-                            </p>
-                            <p>
-                                Chính sách bảo mật
-                            </p>
-                            <p>
-                                Liên hệ
-                            </p>
-                        </MDBCol>
-                        <MDBCol md="2" lg="2" xl="2" className="mb-4 dark-grey-text">
-                            <h6 className="text-uppercase font-weight-bold">
-                                <strong>Hộ trợ</strong>
-                            </h6>
-                            <hr className="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style={{ width: "60px" }} />
-                            <p>
-                                <a href="#!" className="dark-grey-text">
-                                    Cách thức mua hàng
-                                </a>
-                            </p>
-                            <p>
-                                <a href="#!" className="dark-grey-text">
-                                    Chính sách đổi trả - hoàn tiền
-                                </a>
-                            </p>
-                            <p>
-                                <a href="#!" className="dark-grey-text">
-                                    Phương thức vận chuyển
-                                </a>
-                            </p>
-                        </MDBCol>
-                        <MDBCol md="3" lg="2" xl="2" className="mb-4 dark-grey-text">
-                            <h6 className="text-uppercase font-weight-bold">
-                                <strong>Tài khoản</strong>
-                            </h6>
-                            <hr className="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style={{ width: "60px" }} />
-                            <p>
-                                <a href="#!" className="dark-grey-text">
-                                    Đăng nhập
-                                </a>
-                            </p>
-                            <p>
-                                <a href="#!" className="dark-grey-text">
-                                    Tạo mới tài khoản
-                                </a>
-                            </p>
-                        </MDBCol>
+                    <MDBRow className="mt-3 justify-content-center text-center">
                         <MDBCol md="4" lg="3" xl="3" className="mb-4 dark-grey-text">
                             <h6 className="text-uppercase font-weight-bold">
                                 <strong>Liên lạc</strong>
@@ -88,7 +36,7 @@ class Footer extends Component {
                 <div className="footer-copyright text-center py-3">
                     <MDBContainer fluid>
                         &copy; {new Date().getFullYear()} Copyright:{" "}
-                        <a href="https://www.MDBootstrap.com"> Bookeven.com </a>
+                        <a href="/"> Bookeven.com </a>
                     </MDBContainer>
                 </div>
             </MDBFooter>

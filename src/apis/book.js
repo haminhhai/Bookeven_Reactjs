@@ -8,6 +8,11 @@ export const getListBooks = () => {
     return axiosService.get(`${API_URL}/${url_books}`)
 }
 
+export const updateListBooks = data => {
+    return axiosService.put(`${API_URL}/${url_books}/${data.id}`, data)
+}
+
+
 // http://localhost:3000/fieldsBook
 const url_field = 'fieldsBook'
 

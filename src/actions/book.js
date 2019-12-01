@@ -119,3 +119,30 @@ export const fetchListFieldsbookFailed = error => {
         }
     }
 }
+
+export const updateListBook = data => {
+    return {
+        type: types.UPDATE_BOOK,
+        payload: {
+            data
+        }
+    }
+}
+
+export const updateListBookSuccess = data => {
+    return {
+        type: types.UPDATE_BOOK_SUCCESS,
+        payload: {
+            data
+        }
+    }
+}
+
+export const updateListBookFailed = error => {
+    return {
+        type: types.UPDATE_BOOK_FAILED,
+        payload: {
+            error
+        }
+    }
+}

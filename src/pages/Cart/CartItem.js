@@ -42,10 +42,10 @@ class CartItem extends Component {
             </td>
             <td className='price align-middle'>
                 <del className='mr-1'>{this.$utils.formatVND(item.realPrice)}</del>
-                {this.$utils.formatVND(item.percentDiscount)}
+                {this.$utils.calDiscountPrice(item.realPrice, item.percentDiscount)}
             </td>
             <td className='total align-middle font-weight-bold'>
-                {this.$utils.formatVND(item.percentDiscount * item.quantity)}
+                {this.$utils.calTotalPrice(item.realPrice, item.percentDiscount, item.quantity)}
             </td>
 
         </tr>

@@ -111,7 +111,7 @@ class Header extends Component {
                                                 Chào Bookevener!
                                             </MDBDropdownToggle>
                                             <MDBDropdownMenu >
-                                                <Link to='/account'>
+                                                <Link to='/tai-khoan'>
                                                     <MDBDropdownItem>Tài khoản</MDBDropdownItem>
                                                 </Link>
                                                 <MDBDropdownItem onClick={this.Logout}>Đăng xuất</MDBDropdownItem>
@@ -208,16 +208,12 @@ class Header extends Component {
                                 </MDBDropdown>
 
                             </div>
-                            <Link className='col d-flex justify-content-center' to='/cua-hang-sach' >
-                                <MDBIcon icon="user-edit" className='mr-1' />
-                                Tác giả
-                            </Link>
                             {
                                 role === '1' &&
                                 roles.customer.over_img_card.map((item, index) => 
                                     <Link 
                                         key={index} 
-                                        to={item.icon} 
+                                        to={`/${this.$utils.convertVietnamese(item.title)}`}
                                         className='col d-flex justify-content-center'>
                                             <MDBIcon icon={item.icon} className='mr-1'/>
                                             {item.title}

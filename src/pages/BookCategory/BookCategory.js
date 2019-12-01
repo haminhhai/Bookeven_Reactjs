@@ -150,8 +150,8 @@ class BookCategory extends Component {
                                                 {
 
                                                     fieldsBook.length > 0 &&
-                                                    fieldsBook.map(item =>
-                                                        <Option value={item.id}>
+                                                    fieldsBook.map((item, index) =>
+                                                        <Option key={index} value={item.id}>
                                                             {item.name}
                                                         </Option>)
                                                 }

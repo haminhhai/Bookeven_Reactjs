@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import AccountContainer from '../containers/Account/AccountContainer';
+import OrderContainer from '../containers/Account/OrderContainer';
 
 const routes = [
     {
-        path: '/account',
+        path: '/tai-khoan',
         exact: false,
         main:() => <AccountContainer />
-    }
+    },
+    {
+        path: '/tinh-hinh-don-hang',
+        exact: false,
+        main:() => <OrderContainer />
+    },
 ]
 
 export default class CusomerRoute extends Component {

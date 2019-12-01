@@ -13,11 +13,14 @@ import {
     fetchListBookSuccess, fetchListBookFailed,
     filterBooksSingleSuccess, filterBooksMultiSuccess,
     fetchListFieldsbookSuccess, fetchListFieldsbookFailed,
-    getDetailBookSuccess, getDetailBookFailed
+    getDetailBookSuccess, getDetailBookFailed,
+    updateListBookSuccess, updateListBookFailed
 } from '../actions/book'
-import { getListBooks, getListFieldsbook } from '../apis/book'
+import { getListBooks, getListFieldsbook, updateListBooks } from '../apis/book'
 
 import { STATUS_CODE } from '../const/config'
+import { toastSuccess } from '../utils/Utils'
+import * as msg from '../const/message'
 
 /**
  * First: fetch list book
@@ -91,6 +94,19 @@ function* filterBookByMultiTypeAction({ payload }) {
     yield put(filterBooksMultiSuccess(filterBooks))
 }
 
+function* updateBookAction({ payload }) {
+    const res = yield call(updateListBooks, payload.data)
+    const { status, data } = res
+    if(status === STATUS_CODE.SUCCESS) {
+        yield put(updateListBookSuccess(data))
+        toastSuccess(msg.MSG_UPDATE_BOOK_SUCCESS)
+        yield delay(1000)
+        window.location.reload()
+    }
+    else yield put(updateListBookFailed(data))
+
+}
+
 
 function* bookSaga() {
     yield fork(watchFetchListBookAction)
@@ -98,6 +114,7 @@ function* bookSaga() {
     yield takeEvery(types.GET_DETAIL_BOOK, watchGetBookDetailAction)
     yield takeLatest(types.FILTER_BOOKS_SINGLE, filterBookBySingleTypeAction)
     yield takeLatest(types.FILTER_BOOKS_MULTI, filterBookByMultiTypeAction)
+    yield takeLatest(types.UPDATE_BOOK, updateBookAction)
 }
 
 export default bookSaga

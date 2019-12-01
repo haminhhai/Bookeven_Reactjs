@@ -80,13 +80,18 @@ class BookDetail extends Component {
                                     <p>(2 người đã đánh giá)</p>
                                 </div>
                                 <ReadMoreReact text={index.desc} readMoreText='Xem thêm' />
+
+                                <h4 className='mt-3'>
+                                    <del className='mr-3'>{this.$utils.formatVND(detailBook.realPrice)}</del>
+                                    <b>{this.$utils.calDiscountPrice(detailBook.realPrice, detailBook.percentDiscount)}</b>
+                                </h4>
                                 {
                                     detailBook.inventory > 0 &&
                                     <InputNumber className='mt-3' value={quantity} min={1} max={detailBook.inventory} onChange={this.changeQuantity} />
                                 }
                                 {
                                     detailBook.inventory > 0 ?
-                                        <MDBBtn className='add-cart-btn ml-3' onClick={() =>  this.addToCart(detailBook) }>Thêm vào giỏ</MDBBtn> :
+                                        <MDBBtn className='add-cart-btn ml-3' onClick={() => this.addToCart(detailBook)}>Thêm vào giỏ</MDBBtn> :
                                         <MDBBtn className='add-cart-btn' disabled>Hết hàng!</MDBBtn>
                                 }
                             </div>

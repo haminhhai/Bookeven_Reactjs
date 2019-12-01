@@ -3,12 +3,14 @@ import books from './books'
 import cart from './cart'
 import ui from './ui'
 import account from './account'
+import orders from './order'
 
 const rootReducer = combineReducers({
-    books, //books: books
-    cart, //cart: cart
-    ui, //ui: ui
-    account, //account: account
+    books,
+    cart, 
+    ui, 
+    account, 
+    orders,
 })
 
 export default rootReducer

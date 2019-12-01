@@ -5,13 +5,13 @@ import { MDBBtn, MDBTable, MDBTableBody, MDBTableHead, MDBModal, MDBModalHeader,
 import { Badge } from 'antd'
 
 import Header from '../../layouts/Header/Header'
-import '../../styles/invoice.scss'
+import '../../styles/order.scss'
 import * as msg from '../../const/message'
 import * as cont from './const'
 import img from '../../assets/logo.png'
 import moment from 'moment'
-import DetailInvoice from './DetailInvoice';
-class InvoiceCustomer extends Component {
+import DetailOrder from './DetailOrder';
+class OrderCustomer extends Component {
 
     constructor(props) {
         super(props);
@@ -28,9 +28,6 @@ class InvoiceCustomer extends Component {
     }
     componentDidMount() {
         window.scrollTo(0, 0)
-    }
-    formatTime = value => {
-        return moment.unix(value).format('HH:mm:ss DD-MM-YYYY')
     }
     formatStatus = status => {
         switch (status) {
@@ -56,27 +53,27 @@ class InvoiceCustomer extends Component {
     }
     render() {
         const { modal, data, address } = this.state
-        const { invoices } = this.props
+        const { orders } = this.props
         return (
             <div>
                 <Header carousel={false} parent='Lịch sử mua hàng' />
-                <div className='invoice container'>
+                <div className='order-contain container'>
                     {
-                        invoices.length === 0 ?
-                            <div className='empty-invoice text-center'>
+                        orders.length === 0 ?
+                            <div className='empty-order text-center'>
                                 <img className='logo' src={img} alt='' />
-                                <h4>{cont.EMPTY_INVOICE}</h4>
+                                <h4>{cont.EMPTY_ORDER}</h4>
                                 <Link to='/'>
-                                    <MDBBtn color=' light-green accent-3'>Tiếp tục mua sắm</MDBBtn>
+                                    <MDBBtn color=' light-green accent-3'>{cont.TO_BE_CONTINUED}</MDBBtn>
                                 </Link>
                             </div> :
-                            <div className='row'>
+                            <div className='order row'>
                                 <div className='container mt-4'>
                                     <MDBTable hover >
                                         <MDBTableHead color='tempting-azure-gradient' textWhite>
                                             <tr>
                                                 {
-                                                    cont.columns.map(item =>
+                                                    cont.columnsCus.map(item =>
                                                         item.label
                                                     )
                                                 }
@@ -84,11 +81,11 @@ class InvoiceCustomer extends Component {
                                         </MDBTableHead>
                                         <MDBTableBody >
                                             {
-                                                invoices.map((item, index) =>
+                                                orders.map((item, index) =>
                                                     <tr onClick={() => this.showModal(item)} style={{ cursor: 'pointer' }}>
                                                         <td>{item.id}</td>
-                                                        <td className='text-center'>{this.formatTime(item.createAt)}</td>
-                                                        <td className='text-center'>{item.endTime}</td>
+                                                        <td className='text-center'>{this.$utils.formatTimeToDate(item.createAt, 'DD/MM/YYYY')}</td>
+                                                        <td className='text-center'>{this.$utils.formatTimeToDate(item.endTime, 'DD/MM/YYYY')}</td>
                                                         <td>{this.$utils.calculateTotalCart(item.listBooks, 'vnd')}</td>
                                                         <td>{this.formatStatus(item.status)}</td>
                                                     </tr>
@@ -99,15 +96,14 @@ class InvoiceCustomer extends Component {
                                 </div>
                             </div>
                     }
-                    <DetailInvoice data={data}
+                    <DetailOrder data={data}
                         address={address}
                         closeModal={this.closeModal}
-                        modal={modal}
-                        formatTime={this.formatTime} />
+                        modal={modal} />
                 </div>
             </div>
         );
     }
 }
 
-export default InvoiceCustomer;
+export default OrderCustomer;

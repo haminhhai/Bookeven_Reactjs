@@ -1,4 +1,4 @@
-import * as types from '../const/actionType'
+    import * as types from '../const/actionType'
 
 export const getListAddress = () => {
     return {
@@ -99,58 +99,6 @@ export const deleteAddressSuccess = id => {
 export const deleteAddressFailed = error => {
     return {
         type: types.DELETE_ADDRESS_FAILED,
-        payload: {
-            error
-        }
-    }
-}
-
-export const fetchListInvoice = () => {
-    return {
-        type: types.FETCH_LIST_INVOICE,
-    }
-}
-
-export const fetchListInvoiceSuccess = data => {
-    return {
-        type: types.FETCH_LIST_INVOICE_SUCCESS,
-        payload: {
-            data
-        }
-    }
-}
-
-export const fetchListInvoiceFailed = error => {
-    return {
-        type: types.FETCH_LIST_INVOICE_FAILED,
-        payload: {
-            error
-        }
-    }
-}
-
-export const createInvoice = (id, data) => {
-    return {
-        type: types.CREATE_INVOICE,
-        payload: {
-            id,
-            data
-        }
-    }
-}
-
-export const createInvoiceSuccess = data => {
-    return {
-        type: types.CREATE_INVOICE_SUCCESS,
-        payload: {
-            data
-        }
-    }
-}
-
-export const createInvoiceFailed = error => {
-    return {
-        type: types.CREATE_INVOICE_FAILED,
         payload: {
             error
         }

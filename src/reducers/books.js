@@ -69,8 +69,18 @@ var books = (state = intialState, action) => {
                 fieldsBook: data
             }
         case types.FETCH_LIST_FIELDSBOOK_FAILED:
-            return {...state}
-        default: return {...state}
+            return { ...state }
+        case types.UPDATE_BOOK_SUCCESS:
+            {
+                const { data } = action.payload
+                const index = state.listBooks.findIndex(item => item.id === data.id)
+                const newList = [...state.listBooks.slice(0, index), data, ...state.listBooks.slice(index + 1)];
+                return {
+                    ...state,
+                    listBooks: newList
+                }
+            }
+        default: return { ...state }
     }
 }
 

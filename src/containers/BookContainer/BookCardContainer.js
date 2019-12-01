@@ -7,6 +7,7 @@ import BPCard from '../../components/Cards/BookPresentationCard/BookPresentation
 import BRCard from '../../components/Cards/BookRateCard/BookRateCard'
 
 import * as cartActions from '../../actions/cart'
+import * as bookActions from '../../actions/book'
 class BookCardContainer extends Component {
 
   onAddToCart = book => {
@@ -32,11 +33,12 @@ class BookCardContainer extends Component {
   }
 
   render() {
-    const { listBooks, index, type, book, fieldsBook } = this.props
+    const { listBooks, index, type, book, fieldsBook, bookActions } = this.props
+    const { updateListBook, fetchListBook } = bookActions
     return (
       type === 'bp' ?
 
-          <BPCard book={book} onAddToCart={this.onAddToCart} fieldsBook={fieldsBook} />
+          <BPCard book={book} onAddToCart={this.onAddToCart} fieldsBook={fieldsBook} updateListBook={updateListBook} fetchListBook={fetchListBook}/>
         :
         <BRCard book={listBooks[index]} />
     );
@@ -50,6 +52,9 @@ BookCardContainer.propTypes = {
   cartActions: PropTypes.shape({
     addToCart: PropTypes.func,
   }),
+  bookActions: PropTypes.shape({
+    updateListBook: PropTypes.func
+  })
 }
 
 
@@ -64,7 +69,8 @@ const MapStateToProps = state => {
 
 const MapDispatchToProps = dispatch => {
   return {
-    cartActions: bindActionCreators(cartActions, dispatch)
+    cartActions: bindActionCreators(cartActions, dispatch),
+    bookActions: bindActionCreators(bookActions, dispatch)
   }
 }
 

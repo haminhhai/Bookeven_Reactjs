@@ -100,6 +100,10 @@ $gr: rgba(0, 0, 0, 0.65);
     transform: translateY(10px);
   }
 }
+.navbar .dropdown-menu a {
+  padding: 0;
+  font-size: 16px;
+}
 .over-img-card {
   z-index: 100 !important;
   margin-top: -1rem;
@@ -112,12 +116,14 @@ $gr: rgba(0, 0, 0, 0.65);
     border-radius: 10px;
     transition: transform 0.3s ease-out, box-shadow 0.2s ease-out, -webkit-transform 0.3s ease-out,
       -o-transform 0.3s ease-out, -webkit-box-shadow 0.2s ease-out;
-      z-index: 100 !important;
+    z-index: 100 !important;
+
     &:hover {
       transform: translateY(-5px);
       box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
     }
   }
+
   a {
     color: rgba(0, 0, 0, 0.65);
   }
@@ -171,12 +177,13 @@ $gr: rgba(0, 0, 0, 0.65);
     border: initial;
     text-transform: initial;
     max-width: 180px;
-    font-weight: bold;
     transition: 0.3s;
     white-space: nowrap;
     text-overflow: ellipsis;
 
-    &:hover {
+    &:hover,
+    &:not(:disabled):not(.disabled):active,
+    &:not([disabled]):not(.disabled):active {
       background-color: #4caf50 !important;
     }
   }
@@ -194,6 +201,8 @@ $gr: rgba(0, 0, 0, 0.65);
 }
 
 .top-nav-collapse {
+  background-image: url(../assets/navbar.jpg);
+  animation: float 60s linear infinite;
   &::after {
     content: "";
     width: 100%;
@@ -202,16 +211,15 @@ $gr: rgba(0, 0, 0, 0.65);
     top: 0;
     left: 0;
     z-index: -100;
-    background-image: url(../assets/navbar.jpg);
     background-repeat: no-repeat;
     background-position: center 0;
     background-size: cover;
-    // background-image: radial-gradient(
-    //   circle farthest-corner at 10% 20%,
-    //   rgba(90, 92, 106, 1) 0%,
-    //   rgba(32, 45, 58, 1) 81.3%
-    // );
-    animation: float 60s linear infinite;
+    opacity: 0.8;
+    background-image: radial-gradient(
+      circle farthest-corner at 10% 20%,
+      rgba(90, 92, 106, 1) 0%,
+      rgba(32, 45, 58, 1) 81.3%
+    );
   }
 }
 
@@ -230,13 +238,13 @@ $gr: rgba(0, 0, 0, 0.65);
   }
 }
 @keyframes float {
-	0% {
-		background-position: center 30%
-	}
-	50% {
-		background-position: center 70%
-	}
-	to {
-		background-position: center 10%
-	}
+  0% {
+    background-position: center 10%;
+  }
+  50% {
+    background-position: center 70%;
+  }
+  to {
+    background-position: center 10%;
+  }
 }

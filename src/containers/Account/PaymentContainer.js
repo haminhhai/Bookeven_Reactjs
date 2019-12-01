@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 
 import * as accountActions from '../../actions/account'
+import * as orderActions from '../../actions/order'
 import Payment from '../../pages/Payment/Payment';
 
 class PaymentContainer extends Component {
@@ -16,11 +17,12 @@ class PaymentContainer extends Component {
         getListAddress()
     }
     render() {
-        const { accountActions, cart, address } = this.props
-        const { createNewAddress, createInvoice } = accountActions
+        const { accountActions, orderActions, cart, address } = this.props
+        const { createNewAddress } = accountActions
+        const { createOrder } = orderActions
         return (
             <Payment
-                createInvoice={createInvoice}
+                createOrder={createOrder}
                 cart={cart}
                 address={address}
                 createNewAddress={createNewAddress} />
@@ -34,7 +36,9 @@ PaymentContainer.propTypes = {
     accountActions: PropTypes.shape({
         getListAddress: PropTypes.func,
         createNewAddress: PropTypes.func,
-        createInvoice: PropTypes.func
+    }),
+    orderActions: PropTypes.shape({
+        createOrder: PropTypes.func
     })
 }
 
@@ -48,6 +52,7 @@ const mapStatetoProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         accountActions: bindActionCreators(accountActions, dispatch),
+        orderActions: bindActionCreators(orderActions, dispatch)
     }
 }
 

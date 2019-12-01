@@ -20,7 +20,11 @@ export const MSG_UPDATE_ADDRESS_SUCCESS = 'Cập nhật địa chỉ thành côn
 
 export const MSG_DELETE_ADDRESS_SUCCESS = 'Xóa địa chỉ thành công!'
 
-export const MST_CREATE_INVOICE_SUCCESS = 'Đặt mua hàng thành công!'
+export const MSG_CREATE_ORDER_SUCCESS = 'Đặt mua hàng thành công!'
+
+export const MSG_UPDATE_ORDER_SUCCESS = 'Cập nhật đơn hàng thành công!'
+
+export const MSG_UPDATE_BOOK_SUCCESS = 'Cập nhật sản phẩm thành công!'
 
 //CONTENT
 export const MSG_MAX_QUANTITY = 'Rất xin lỗi. Chúng tôi chỉ có tối đa '

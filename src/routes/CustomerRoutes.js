@@ -3,18 +3,18 @@ import { Route, Redirect } from 'react-router-dom';
 import CartContainer from '../containers/CartContainer';
 import AccountContainer from '../containers/Account/AccountContainer';
 import PaymentContainer from '../containers/Account/PaymentContainer';
-import InvoiceContainer from '../containers/Account/InvoiceContainer';
+import OrderContainer from '../containers/Account/OrderContainer';
 
 const routes = [
     {
-        path: '/account',
+        path: '/tai-khoan',
         exact: false,
         main: (match) => <AccountContainer match={match}/>,
     },
     {
-        path: '/history',
+        path: '/lich-su-mua-hang',
         exact: false,
-        main: () => <InvoiceContainer />
+        main: () => <OrderContainer />
     },
     {
         path: '/gio-hang',
@@ -22,7 +22,7 @@ const routes = [
         main: () => <CartContainer />
     },
     {
-        path: '/payment',
+        path: '/thanh-toan',
         exact: false,
         main: () => <PaymentContainer />
     },

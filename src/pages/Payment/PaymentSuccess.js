@@ -28,7 +28,7 @@ class PaymentSuccess extends Component {
                     <Link to='/'>
                         <MDBBtn color=' light-green accent-2'>Quay lại mua sắm</MDBBtn>
                     </Link>
-                    <Link to='/history'>
+                    <Link to='/lich-su-mua-hang'>
                         <MDBBtn color=' cyan accent-3'>Tới lịch sử mua hàng</MDBBtn>
                     </Link>
                 </div>

@@ -52,12 +52,12 @@ export const roles = {
         },
         account_left: [
             {
-                path: '/cart',
+                path: '/gio-hang',
                 icon: 'shopping-cart',
                 title: 'Giỏ hàng'
             },
             {
-                path: '/history',
+                path: '/lich-su-mua-hang',
                 icon: 'history',
                 title: 'Lịch sử mua hàng'
             },

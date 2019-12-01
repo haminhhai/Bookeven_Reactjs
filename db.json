@@ -58,13 +58,12 @@
     {
       "id": 6,
       "src": "https://nxbkimdong.com.vn/sites/default/files/styles/uc_product/public/giao-duc-nhi-dong_bia-final-in-1.jpg?itok=odJolgFH",
-      "title": "Giáo dục nhi đồng",
+      "title": "Giáo dục nhi đồng 1",
       "author": "Đạm Phương Nữ Sử",
+      "inventory": 1,
       "realPrice": 55000,
       "percentDiscount": 10,
-      "topic": 2,
-      "inventory": 1,
-      "rate": 1
+      "topic": 2
     },
     {
       "id": 7,
@@ -361,47 +360,32 @@
       "id": 6,
       "name": "Manga - Comic",
       "path": "manga-comic"
-    },
-    {
-      "id": 7,
-      "name": "Sách bán chạy nhất",
-      "path": "sach-ban-chay"
-    },
-    {
-      "id": 8,
-      "name": "Sách mới",
-      "path": "sach-moi"
-    },
-    {
-      "id": 9,
-      "name": "Sách giảm giá",
-      "path": "sach-giam-gia"
     }
   ],
   "cart": [
     {
-      "id": 7,
-      "src": "https://nxbkimdong.com.vn/sites/default/files/styles/uc_product/public/bach-khoa-thu-vi-sao_bo-2.jpg?itok=AeoL-8ig",
-      "title": "Bách khoa thư Vì sao - Bộ 2 (26 cuốn)",
-      "author": "Nhiều tác giả",
-      "realPrice": 208000,
-      "percentDiscount": 187000,
-      "topic": 2,
-      "inventory": 1,
-      "rate": 2,
-      "quantity": 1
+      "id": 2,
+      "src": "https://nxbkimdong.com.vn/sites/default/files/styles/uc_product/public/viet-nam-su-luoc_ban-dac-biet_bia_16x24_bia-cung.jpg?itok=yf4MQTVn",
+      "title": "Việt Nam sử lược - Bản đặc biệt",
+      "author": "Trần Trọng Kim",
+      "realPrice": 198000,
+      "percentDiscount": 10,
+      "topic": 1,
+      "inventory": 9,
+      "rate": 1,
+      "quantity": 3
     },
     {
-      "id": 8,
-      "src": "https://nxbkimdong.com.vn/sites/default/files/styles/uc_product/public/4-5t_q1.jpg?itok=--SMuMSP",
-      "title": "Thực hành phát triển kỹ năng tuổi mẫu giáo 4-5 tuổi (Quyển 1)",
+      "id": 3,
+      "src": "https://nxbkimdong.com.vn/sites/default/files/styles/uc_product/public/bac-ho-viet-di-chuc.jpg?itok=fuHz3kX0",
+      "title": "Bác Hồ viết di chúc và di chúc của Bác Hồ",
       "author": "Nhiều tác giả",
       "realPrice": 40000,
-      "percentDiscount": 36000,
-      "topic": 2,
-      "inventory": 23,
-      "rate": 4,
-      "quantity": 23
+      "percentDiscount": 15,
+      "topic": 1,
+      "inventory": 15,
+      "rate": 0,
+      "quantity": 4
     },
     {
       "id": 10,
@@ -409,7 +393,7 @@
       "title": "Giải cứu đội bóng lợn hoang",
       "author": "Atkia",
       "realPrice": 50000,
-      "percentDiscount": 45000,
+      "percentDiscount": 50,
       "topic": 2,
       "inventory": 3,
       "rate": 0,
@@ -436,36 +420,36 @@
       "street": "103, ngõ 79, đường Cầu Giấy",
       "province": 1,
       "district": 2,
-      "ward": 70
+      "ward": 73
     }
   ],
-  "invoice": [
+  "order": [
     {
-      "idAddress": "_8yik03x09",
+      "idAddress": "_6gy1a6mbz",
       "listBooks": [
         {
-          "id": 7,
-          "src": "https://nxbkimdong.com.vn/sites/default/files/styles/uc_product/public/bach-khoa-thu-vi-sao_bo-2.jpg?itok=AeoL-8ig",
-          "title": "Bách khoa thư Vì sao - Bộ 2 (26 cuốn)",
-          "author": "Nhiều tác giả",
-          "realPrice": 208000,
-          "percentDiscount": 187000,
-          "topic": 2,
-          "inventory": 1,
-          "rate": 2,
-          "quantity": 1
+          "id": 2,
+          "src": "https://nxbkimdong.com.vn/sites/default/files/styles/uc_product/public/viet-nam-su-luoc_ban-dac-biet_bia_16x24_bia-cung.jpg?itok=yf4MQTVn",
+          "title": "Việt Nam sử lược - Bản đặc biệt",
+          "author": "Trần Trọng Kim",
+          "realPrice": 198000,
+          "percentDiscount": 10,
+          "topic": 1,
+          "inventory": 9,
+          "rate": 1,
+          "quantity": 3
         },
         {
-          "id": 8,
-          "src": "https://nxbkimdong.com.vn/sites/default/files/styles/uc_product/public/4-5t_q1.jpg?itok=--SMuMSP",
-          "title": "Thực hành phát triển kỹ năng tuổi mẫu giáo 4-5 tuổi (Quyển 1)",
+          "id": 3,
+          "src": "https://nxbkimdong.com.vn/sites/default/files/styles/uc_product/public/bac-ho-viet-di-chuc.jpg?itok=fuHz3kX0",
+          "title": "Bác Hồ viết di chúc và di chúc của Bác Hồ",
           "author": "Nhiều tác giả",
           "realPrice": 40000,
-          "percentDiscount": 36000,
-          "topic": 2,
-          "inventory": 23,
-          "rate": 4,
-          "quantity": 23
+          "percentDiscount": 15,
+          "topic": 1,
+          "inventory": 15,
+          "rate": 0,
+          "quantity": 4
         },
         {
           "id": 10,
@@ -473,7 +457,7 @@
           "title": "Giải cứu đội bóng lợn hoang",
           "author": "Atkia",
           "realPrice": 50000,
-          "percentDiscount": 45000,
+          "percentDiscount": 50,
           "topic": 2,
           "inventory": 3,
           "rate": 0,
@@ -481,7 +465,7 @@
         }
       ],
       "status": 1,
-      "createAt": 1574434115.0770001,
+      "createAt": 1575220549,
       "endTime": "-",
       "id": 1
     }

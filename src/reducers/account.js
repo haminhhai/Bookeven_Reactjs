@@ -2,7 +2,7 @@ import * as types from '../const/actionType'
 
 var initialState = {
     address: [],
-    invoices: []
+    info: []
 }
 var account = (state = initialState, action) => {
     switch (action.type) {
@@ -38,23 +38,6 @@ var account = (state = initialState, action) => {
             return {
                 ...state,
                 address: [...newList]
-            }
-        }
-        case types.FETCH_LIST_INVOICE_SUCCESS: {
-            const { data } = action.payload
-            return {
-                ...state,
-                invoices: data
-            }
-        }
-        case types.CREATE_INVOICE_SUCCESS: {
-            const { data } = action.payload
-            return {
-                ...state,
-                invoices: [
-                    ...state.invoices,
-                    data
-                ]
             }
         }
         default: return { ...state }
