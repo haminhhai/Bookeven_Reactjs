@@ -1,10 +1,11 @@
-# FE_Bookeven
-This project is about souce code front end of Online Book Store named "Bookeven"
+# Bookeven_Reactjs
+This project is the web application operated for the commercial purpose, particularly that is a online book store created by react and redux.
 
- $ npm isntall
- 
-// install all packages project
+```bash
+# install all packages project
+npm install
 
- $ npm start
+# start project in localhost:1999
+npm start
+```
 
- // start project in localhost:3000
