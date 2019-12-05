@@ -38,6 +38,7 @@ class BookDetailContainer extends Component {
     componentDidMount() {
         const { bookActions, id } = this.props
         bookActions.getDetailBook(id)
+        bookActions.getListComments(id)
 
     }
     render() {
@@ -58,7 +59,8 @@ BookDetailContainer.propTypes = {
         addToCart: PropTypes.func,
     }),
     bookActions: PropTypes.shape({
-        getDetailBook: PropTypes.func
+        getDetailBook: PropTypes.func,
+        getListComments: PropTypes.func
     })
 }
 

@@ -1,0 +1,104 @@
+.nbcard-container {
+  .card {
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+
+    &:hover {
+      -webkit-transform: translateY(4px);
+      transform: translateY(4px);
+      -webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+
+      .book-wrapper {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+        -webkit-transition: all 0.25s ease;
+        transition: all 0.25s ease;
+      }
+    }
+  }
+
+  .book-wrapper {
+    border-radius: 0.55rem;
+    position: relative;
+    overflow: hidden;
+    margin-left: 4%;
+    margin-right: 4%;
+    word-wrap: break-word;
+    margin-top: -1.25rem;
+    background-clip: border-box;
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    min-height: 320px;
+    -webkit-transition: all 0.25s ease;
+    transition: all 0.25s ease;
+    background-image: linear-gradient( 107deg,  rgba(13,198,180,1) 8.1%, rgba(33,198,138,1) 79.5% );
+    vertical-align: middle;
+
+    i {
+      display: inline-block;
+      color: white;
+      animation: roll 3s infinite;
+      transform: rotate(30deg);
+      top: 40%;
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+      position: sticky;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .modal-new {
+    label {
+      font-weight: bold;
+      font-size: 16px;
+      margin-top: 0.5rem;
+    }
+    .ant-form-item {
+      margin-bottom: 0;
+    }
+    .ant-btn-lg {
+      text-transform: uppercase;
+      background-image: linear-gradient( 107deg,  rgba(13,198,180,1) 8.1%, rgba(33,198,138,1) 79.5% );
+      border-color: #47eeca;
+
+      &:hover,
+      &:active,
+      &:focus {
+        border-color: #47eeca;
+      }
+    }
+
+    .avatar-uploader > .ant-upload,
+    .img-lightbox {
+      width: 128px;
+      height: auto;
+    }
+
+    .mask:hover {
+      cursor: zoom-in;
+    }
+
+    .modal-header {
+      background-image: linear-gradient( 107deg,  rgba(13,198,180,1) 8.1%, rgba(33,198,138,1) 79.5% );
+    }
+    .btn-outline-default {
+      border: 2px solid #0cd4a9 !important;
+      color: #0cd4a9 !important;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .btn-default {
+      background-image: linear-gradient( 107deg,  rgba(13,198,180,1) 8.1%, rgba(33,198,138,1) 79.5% );
+    }
+  }
+}
+@keyframes roll {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -7,7 +7,8 @@ var intialState = {
     filtedBook: {
         list: [],
         keyword: ''
-    }
+    },
+    comments: []
 }
 
 var books = (state = intialState, action) => {
@@ -80,6 +81,23 @@ var books = (state = intialState, action) => {
                     listBooks: newList
                 }
             }
+        case types.GET_LIST_COMMENTS_SUCCESS: {
+            const { data } = action.payload
+            return {
+                ...state,
+                comments: data
+            }
+        }
+        case types.ADD_COMMENT_SUCCESS: {
+            const { data } = action.payload
+            return {
+                ...state,
+                comments: [
+                    ...state.comments,
+                    data
+                ]
+            }
+        }
         default: return { ...state }
     }
 }

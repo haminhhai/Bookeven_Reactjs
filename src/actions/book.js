@@ -146,3 +146,57 @@ export const updateListBookFailed = error => {
         }
     }
 }
+
+export const getListComments = ISBN => {
+    return {
+        type: types.GET_LIST_COMMENTS,
+        payload: {
+            ISBN
+        }
+    }
+}
+
+export const getListCommentsSuccess = data => {
+    return {
+        type: types.GET_LIST_COMMENTS_SUCCESS,
+        payload: {
+            data
+        }
+    }
+}
+
+export const getListCommentsFailed = error => {
+    return {
+        type: types.GET_LIST_COMMENTS_FAILED,
+        payload: {
+            error
+        }
+    }
+}
+
+export const addComment = data => {
+    return {
+        type: types.ADD_COMMENT,
+        payload: {
+            data
+        }
+    }
+}
+
+export const addCommentSuccess = data => {
+    return {
+        type: types.ADD_COMMENT_SUCCESS,
+        payload: {
+            data
+        }
+    }
+}
+
+export const addCommentFailed = error => {
+    return {
+        type: types.ADD_COMMENT_FAILED,
+        payload: {
+            error
+        }
+    }
+}

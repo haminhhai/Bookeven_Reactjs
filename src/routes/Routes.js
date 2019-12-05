@@ -106,7 +106,7 @@ class Routes extends Component {
                     <BackTop visibilityHeight={100} />
                     <Switch>
                         {routes}
-                        <CustomerRoutes />
+                        {/* <CustomerRoutes /> */}
                         <ManagerRoutes />
                         <Route exact={false} path="" component={NotFound} />
                     </Switch>

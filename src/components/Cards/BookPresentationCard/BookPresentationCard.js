@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import LazyLoad from 'react-lazyload';
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
 
 import { MDBCard, MDBIcon, MDBCardBody, MDBCardTitle, MDBCardText, MDBMask, MDBView } from 'mdbreact'
-import * as bookActions from '../../../actions/book'
 import * as cont from './const'
 
 import './style.scss'
-import { bindActionCreators } from 'C:/Users/ADMIN/AppData/Local/Microsoft/TypeScript/3.6/node_modules/redux';
 import { roles } from '../../../const/config'
 import ModalEditBook from './ModalEditBook';
 class BPCard extends Component {
@@ -128,15 +125,4 @@ class BPCard extends Component {
   }
 }
 
-const MapStateToProps = state => {
-  return {
-  }
-}
-
-const MapDispatchToProps = dispatch => {
-  return {
-    bookActions: bindActionCreators(bookActions, dispatch)
-  }
-}
-
-export default connect(MapStateToProps, MapDispatchToProps)(BPCard);
+export default BPCard;

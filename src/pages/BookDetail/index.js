@@ -8,10 +8,6 @@ export const data = [
         content: '11.3x17.6 cm'
     },
     {
-        title: 'Định dạng',
-        content: 'Bìa mềm'
-    },
-    {
         title: 'Trọng lượng',
         content: '120 gram'
     },

@@ -1,44 +1,50 @@
 import React from 'react';
-import { Comment, Icon, Tooltip, Avatar } from 'antd';
+import { Comment, Icon, Tooltip } from 'antd';
 import moment from 'moment';
+import AvatarUser from '../AvatarUser/AvatarUser';
 
+import './style.scss'
 class Comments extends React.Component {
   state = {
     action: null,
   };
 
   render() {
-    const { likes, dislikes, action } = this.state;
+    const { comment } = this.props
+    const { likes, action } = this.state;
 
     const actions = [
-      
-      <span key="comment-basic-reply-to">Reply to</span>,
+      <span key="comment-basic-like">
+        <Tooltip title="Like">
+          <Icon
+            type="like"
+            theme={action === 'liked' ? 'filled' : 'outlined'}
+            onClick={this.like}
+          />
+        </Tooltip>
+        <span style={{ paddingLeft: 8, cursor: 'auto' }}>{likes}</span>
+      </span>,
+      <span key="comment-basic-reply-to">Trả lời</span>,
     ];
 
     return (
       <Comment
+      className='comment-card'
         actions={actions}
-        author={<a>Han Solo</a>}
-        avatar={
-          <Avatar
-            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-            alt="Han Solo"
-          />
-        }
+        author={comment.name}
+        avatar={<AvatarUser name={comment.name}/>}
         content={
           <p>
-            We supply a series of design principles, practical patterns and high quality design
-            resources (Sketch and Axure), to help people create their product prototypes beautifully
-            and efficiently.
+            {comment.comment}
           </p>
         }
         datetime={
-          <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>
-            <span>{moment().fromNow()}</span>
+          <Tooltip title={this.$utils.formatTimeToDate(comment.time, 'HH:mm:ss DD-MM-YYYY')}>
+            <span>{moment(this.$utils.formatTimeToDate(comment.time, 'YYYY-MM-DD HH:mm:ss')).fromNow()}</span>
           </Tooltip>
         }
       />
-    );
+    )
   }
 }
 

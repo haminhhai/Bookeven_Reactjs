@@ -1,0 +1,17 @@
+.bookdb {
+    border-radius: 15px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    background-color: #deeded;
+
+    h4 {
+        -webkit-box-shadow: 0 6px 15px -7px rgb(90, 90, 90);
+        box-shadow: 0 6px 15px -7px rgb(170, 165, 165);
+        text-transform: uppercase;
+        font-size: 1.25rem;
+        font-weight: 700;
+        padding: 8px 10px;
+      }
+  
+}

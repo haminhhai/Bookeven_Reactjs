@@ -14,9 +14,11 @@ import {
     filterBooksSingleSuccess, filterBooksMultiSuccess,
     fetchListFieldsbookSuccess, fetchListFieldsbookFailed,
     getDetailBookSuccess, getDetailBookFailed,
-    updateListBookSuccess, updateListBookFailed
+    updateListBookSuccess, updateListBookFailed,
+    getListCommentsSuccess, getListCommentsFailed,
+    addCommentSuccess, addCommentFailed
 } from '../actions/book'
-import { getListBooks, getListFieldsbook, updateListBooks } from '../apis/book'
+import { getListBooks, getListFieldsbook, updateListBooks, getListComments, addComment } from '../apis/book'
 
 import { STATUS_CODE } from '../const/config'
 import { toastSuccess } from '../utils/Utils'
@@ -62,8 +64,17 @@ function* watchGetBookDetailAction({payload}) {
     const { data } = payload
     const list = yield select(state => state.books.listBooks)
     const filterBook = list.filter(item => item.id === data)
-    console.log(filterBook[0])
     yield put(getDetailBookSuccess(filterBook[0]))
+}
+
+
+function* watchGetListComments({payload}) {
+    const { ISBN } = payload
+    const res = yield call(getListComments, ISBN)
+    const { status, data } = res
+    if(status === STATUS_CODE.SUCCESS)
+        yield put(getListCommentsSuccess(data))
+    else yield put(getListCommentsFailed(data))
 }
 
 function* filterBookBySingleTypeAction({ payload }) {
@@ -107,6 +118,17 @@ function* updateBookAction({ payload }) {
 
 }
 
+function* addCommentAction({ payload }) {
+    const res = yield call(addComment, payload.data)
+    const { status, data } = res
+    if(status === STATUS_CODE.CREATED) {
+        yield put(addCommentSuccess(data))
+        toastSuccess(msg.MSG_ADD_COMMENT_SUCCESS)
+    }
+    else yield put(addCommentFailed(data))
+
+}
+
 
 function* bookSaga() {
     yield fork(watchFetchListBookAction)
@@ -114,6 +136,8 @@ function* bookSaga() {
     yield takeEvery(types.GET_DETAIL_BOOK, watchGetBookDetailAction)
     yield takeLatest(types.FILTER_BOOKS_SINGLE, filterBookBySingleTypeAction)
     yield takeLatest(types.FILTER_BOOKS_MULTI, filterBookByMultiTypeAction)
+    yield takeLatest(types.GET_LIST_COMMENTS, watchGetListComments)
+    yield takeEvery(types.ADD_COMMENT, addCommentAction)
     yield takeLatest(types.UPDATE_BOOK, updateBookAction)
 }
 

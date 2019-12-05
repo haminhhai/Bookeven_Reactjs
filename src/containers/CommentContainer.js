@@ -1,30 +1,47 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types';
-import Cart from '../pages/Cart/Cart'
-import CartItem from '../pages/Cart/CartItem'
-import CartTotal from '../pages/Cart/CartTotal'
+
+import * as bookActions from '../actions/book'
+import Comments from '../components/Comments/Comments';
+import InputComment from '../components/Comments/InputComment';
 
 class CommentContainer extends Component {
 
   render() {
-    var { cart } = this.props
+    const { comments, bookActions } = this.props
+    const { addComment } = bookActions
     return (
-      <div>
-
-      </div>
+      <React.Fragment>
+        {
+          comments.length > 0 &&
+          comments.map((item, index) =>
+            <Comments comment={item} key={index} />
+          )
+        }
+        <InputComment addComment={addComment}/>
+      </React.Fragment>
     );
   }
 }
 
+CommentContainer.propTypes = {
+  comments: PropTypes.array,
+  bookActions: PropTypes.shape({
+    addComment: PropTypes.func
+  })
+}
+
 const MapStateToProps = state => {
   return {
+    comments: state.books.comments
   }
 }
 
-const MapDispatchToProps = (dispatch, props) => {
+const MapDispatchToProps = dispatch => {
   return {
-    
+    bookActions: bindActionCreators(bookActions, dispatch)
   }
 }
 

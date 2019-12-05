@@ -6,7 +6,7 @@ import { MDBBtn, MDBTable, MDBTableBody, MDBBadge } from 'mdbreact';
 import { Rate, InputNumber } from 'antd'
 
 import Header from '../../layouts/Header/Header'
-import Comments from '../../components/Comments/Comments'
+import CommentContainer from '../../containers/CommentContainer'
 
 import '../../components/Exzoom/jquery.exzoom.js'
 import * as index from './index.js'
@@ -29,7 +29,6 @@ class BookDetail extends Component {
     }
 
     componentDidMount() {
-        window.scrollTo(0, 0)
         $(function () {
 
             $("#exzoom").exzoom({
@@ -118,7 +117,7 @@ class BookDetail extends Component {
                             <div className='col-12 col-md-12'>
                                 <h3>Bình luận</h3>
                                 <div className='comment-system'>
-                                    <Comments />
+                                    <CommentContainer />
                                 </div>
                             </div>
                         </div>

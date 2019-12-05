@@ -26,6 +26,8 @@ export const MSG_UPDATE_ORDER_SUCCESS = 'Cập nhật đơn hàng thành công!'
 
 export const MSG_UPDATE_BOOK_SUCCESS = 'Cập nhật sản phẩm thành công!'
 
+export const MSG_ADD_COMMENT_SUCCESS = 'Thêm bình luận thành công!'
+
 //CONTENT
 export const MSG_MAX_QUANTITY = 'Rất xin lỗi. Chúng tôi chỉ có tối đa '
 

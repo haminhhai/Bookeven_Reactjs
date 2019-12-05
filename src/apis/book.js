@@ -19,3 +19,14 @@ const url_field = 'fieldsBook'
 export const getListFieldsbook = () => {
     return axiosService.get(`${API_URL}/${url_field}`)
 }
+
+// http://localhost:3000/comment
+const url_cmt = 'comment'
+
+export const getListComments = ISBN => {
+    return axiosService.get(`${API_URL}/${url_cmt}?ISBN=${ISBN}`)
+}
+
+export const addComment = data => {
+    return axiosService.post(`${API_URL}/${url_cmt}`, data)
+}
