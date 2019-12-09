@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/Bookeven_Reactjs/static/css/main.31b79fc1.chunk.css",
+    "main.js": "/Bookeven_Reactjs/static/js/main.c1a78774.chunk.js",
+    "main.js.map": "/Bookeven_Reactjs/static/js/main.c1a78774.chunk.js.map",
+    "runtime-main.js": "/Bookeven_Reactjs/static/js/runtime-main.19511237.js",
+    "runtime-main.js.map": "/Bookeven_Reactjs/static/js/runtime-main.19511237.js.map",
+    "static/css/2.1bbc2663.chunk.css": "/Bookeven_Reactjs/static/css/2.1bbc2663.chunk.css",
+    "static/js/2.1601b039.chunk.js": "/Bookeven_Reactjs/static/js/2.1601b039.chunk.js",
+    "static/js/2.1601b039.chunk.js.map": "/Bookeven_Reactjs/static/js/2.1601b039.chunk.js.map",
+    "index.html": "/Bookeven_Reactjs/index.html",
+    "precache-manifest.faac0e1edc120717479c7350db2a91df.js": "/Bookeven_Reactjs/precache-manifest.faac0e1edc120717479c7350db2a91df.js",
+    "service-worker.js": "/Bookeven_Reactjs/service-worker.js",
+    "static/css/2.1bbc2663.chunk.css.map": "/Bookeven_Reactjs/static/css/2.1bbc2663.chunk.css.map",
+    "static/css/main.31b79fc1.chunk.css.map": "/Bookeven_Reactjs/static/css/main.31b79fc1.chunk.css.map",
+    "static/media/mdb.css": "/Bookeven_Reactjs/static/media/arrow_right.8ef6a08c.svg",
+    "static/media/banner.jpg": "/Bookeven_Reactjs/static/media/banner.3bb7578f.jpg",
+    "static/media/all.min.css": "/Bookeven_Reactjs/static/media/fa-solid-900.c2801fb4.svg",
+    "static/media/logo.png": "/Bookeven_Reactjs/static/media/logo.06b64a78.png",
+    "static/media/layout.scss": "/Bookeven_Reactjs/static/media/slider-03.348f2910.jpg",
+    "static/media/truck-animation.gif": "/Bookeven_Reactjs/static/media/truck-animation.1f5ebcca.gif"
+  }
+}
