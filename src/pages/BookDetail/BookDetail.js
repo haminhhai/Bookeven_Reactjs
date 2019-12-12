@@ -103,7 +103,7 @@ class BookDetail extends Component {
                                         {index.data.map((item, index) =>
                                             <tr key={index}>
                                                 <th colSpan='1'>{item.title}</th>
-                                                <th clssName='font-weight-bold' colSpan='2'>{item.content}</th>
+                                                <th className='font-weight-bold' colSpan='2'>{item.content}</th>
                                             </tr>
                                         )
                                         }

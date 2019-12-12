@@ -53,9 +53,9 @@ class BookCategory extends Component {
         var items = []
         for (var i = min; i < max; i++) {
             if (type === 'bp')
-                items.push(<BookCardContainer index={i} type={type} className='col-lg-3 col-md-6 mb-4 ml-5' />)
+                items.push(<BookCardContainer key={i} index={i} type={type} className='col-lg-3 col-md-6 mb-4 ml-5' />)
             else if (type === 'br')
-                items.push(<BookCardContainer index={i} type={type} />)
+                items.push(<BookCardContainer key={i} index={i} type={type} />)
         }
         return items
     }
@@ -70,12 +70,12 @@ class BookCategory extends Component {
                 <Header carousel={false} parent={parent} />
                 <div className='bookcg-wrapper'>
                     <div className='container'>
-                        <div class="row">
+                        <div className="row">
                             <div className="col-12 col-md-9">
                                 <div className='row'>
                                     {listBook.length > 0 &&
-                                        listBook.map(item =>
-                                            <div className='col-lg-3 col-md-6 mb-4 ml-5'>
+                                        listBook.map((item, index) =>
+                                            <div key={index} className='col-lg-3 col-md-6 mb-4 ml-5'>
                                                 <BookCardContainer book={item} type='bp' />
                                             </div>)
                                     }

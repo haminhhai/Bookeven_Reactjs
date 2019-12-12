@@ -12,6 +12,7 @@ class EditAccount extends Component {
             fullnameEdit: 'Hà Minh Hải',
             emailEdit: 'bookeven@gmail.com',
             phoneEdit: '0327487958',
+            isUpdating: false
 
         }
     }
@@ -20,14 +21,17 @@ class EditAccount extends Component {
     }
 
     changeHandler = event => {
-        this.setState({ [event.target.name]: event.target.value });
+        this.setState({ 
+            [event.target.name]: event.target.value,
+            isUpdating: true
+        });
     };
     submitHandler = event => {
         event.preventDefault();
         event.target.className += " was-validated";
     };
     render() {
-        const { showEditPassword, fullnameEdit, phoneEdit, emailEdit, } = this.state
+        const { showEditPassword, fullnameEdit, phoneEdit, emailEdit, isUpdating} = this.state
         return (
             <form
                 className='needs-validation'
@@ -100,7 +104,7 @@ class EditAccount extends Component {
                             </div>
                         </div>}
                     <div className='col-6 container'>
-                        <MDBBtn gradient='sunny-morning' type='submit'>Cập nhật</MDBBtn>
+                        <MDBBtn disabled={!isUpdating} gradient='sunny-morning' type='submit'>Cập nhật</MDBBtn>
                     </div>
                 </div>
             </form>

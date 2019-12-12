@@ -82,7 +82,7 @@ class OrderCustomer extends Component {
                                         <MDBTableBody >
                                             {
                                                 orders.map((item, index) =>
-                                                    <tr onClick={() => this.showModal(item)} style={{ cursor: 'pointer' }}>
+                                                    <tr key={index} onClick={() => this.showModal(item)} style={{ cursor: 'pointer' }}>
                                                         <td>{item.id}</td>
                                                         <td className='text-center'>{this.$utils.formatTimeToDate(item.createAt, 'DD/MM/YYYY')}</td>
                                                         <td className='text-center'>{this.$utils.formatTimeToDate(item.endTime, 'DD/MM/YYYY')}</td>

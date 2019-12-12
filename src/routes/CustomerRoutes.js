@@ -4,27 +4,48 @@ import CartContainer from '../containers/CartContainer';
 import AccountContainer from '../containers/Account/AccountContainer';
 import PaymentContainer from '../containers/Account/PaymentContainer';
 import OrderContainer from '../containers/Account/OrderContainer';
+import Footer from '../layouts/Footer/Footer';
 
 const routes = [
     {
         path: '/tai-khoan',
         exact: false,
-        main: (match) => <AccountContainer match={match}/>,
+        main: (match) => {
+            return <React.Fragment>
+                <AccountContainer match={match} />
+                <Footer />
+            </React.Fragment>
+        },
     },
     {
         path: '/lich-su-mua-hang',
         exact: false,
-        main: () => <OrderContainer />
+        main: () => {
+            return <React.Fragment>
+                <OrderContainer />
+                <Footer />
+            </React.Fragment>
+        }
     },
     {
         path: '/gio-hang',
         exact: false,
-        main: () => <CartContainer />
+        main: () => {
+            return <React.Fragment>
+                <CartContainer />
+                <Footer />
+            </React.Fragment>
+        }
     },
     {
         path: '/thanh-toan',
         exact: false,
-        main: () => <PaymentContainer />
+        main: () => {
+            return <React.Fragment>
+                <PaymentContainer />
+                <Footer />
+            </React.Fragment>
+        }
     },
 ]
 

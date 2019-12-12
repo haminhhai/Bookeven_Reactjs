@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
+import { Switch, Route, BrowserRouter as Router, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { BackTop } from 'antd'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 
@@ -21,14 +20,23 @@ var routes = [
     {
         path: '/',
         exact: true,
-        main: () => <Homepage />
+        main: () => {
+            return <React.Fragment>
+                <Homepage />
+                <Footer />
+            </React.Fragment>
+        }
     },
     {
         path: '/search',
         exact: false,
-        main: () => <BookCategoryContainer parent='search' />
+        main: () => {
+            return <React.Fragment>
+                <BookCategoryContainer parent='search' />
+                <Footer />
+            </React.Fragment>
+        }
     },
-
 ]
 class Routes extends Component {
     constructor(props) {
@@ -58,7 +66,12 @@ class Routes extends Component {
                 category.push({
                     path: '/' + convertVietnamese(item.name),
                     exact: false,
-                    main: () => <BookCategoryContainer parent={item.name} id={item.id} />
+                    main: () => {
+                        return <React.Fragment>
+                            <BookCategoryContainer parent={item.name} id={item.id} />
+                            <Footer />
+                        </React.Fragment>
+                    }
                 })
             )
 
@@ -71,7 +84,12 @@ class Routes extends Component {
             return detail.push({
                 path: '/' + convertVietnamese(item.title),
                 exact: false,
-                main: () => <BookDetailContainer parent={field[0].name} id={item.id} />
+                main: () => {
+                    return <React.Fragment>
+                        <BookDetailContainer parent={field[0].name} id={item.id} />
+                        <Footer />
+                    </React.Fragment>
+                }
             })
         })
         category.map(item =>
@@ -101,18 +119,13 @@ class Routes extends Component {
         if ((listBooks.length > 0 && fieldsBook.length > 0 && !done))
             this.generateRoutes()
         return (
-            <Router>
-                <div>
-                    <BackTop visibilityHeight={100} />
-                    <Switch>
-                        {routes}
-                        {/* <CustomerRoutes /> */}
-                        <ManagerRoutes />
-                        <Route exact={false} path="" component={NotFound} />
-                    </Switch>
-                    <Footer />
-                </div>
-            </Router>
+            <Switch>
+                {routes}
+                <CustomerRoutes />
+                <ManagerRoutes />
+                <Route exact path="/404" component={NotFound} />
+                <Redirect to="/404" />
+            </Switch>
         );
     }
 }

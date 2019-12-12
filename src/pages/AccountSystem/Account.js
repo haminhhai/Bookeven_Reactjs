@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom'
 import { Tabs, Icon } from 'antd'
-import { MDBBtn, MDBInput, MDBIcon } from "mdbreact";
+import { MDBBtn, MDBIcon } from "mdbreact";
 
 import Header from '../../layouts/Header/Header'
 import Avatar from '../../components/AvatarUser/AvatarUser'
 
-import * as msg from '../../const/message'
+import * as config from '../../const/config'
 
 import '../../styles/account.scss'
 import CreateAddress from './CreateAddress';
@@ -44,6 +44,7 @@ class Account extends Component {
     render() {
         const { address, createNewAddress, updateAddress, deleteAddress } = this.props
         const { isEditing, data, currentTab } = this.state
+        const role = localStorage.getItem('role')
         return (
             <div >
                 <Header carousel={false} parent='Tài khoản' />
@@ -56,14 +57,17 @@ class Account extends Component {
                                         <section className='left_acc'>
                                             <Avatar name='Hà Minh Hải' />
                                             <p>Hà Minh Hải</p>
-                                            <Link to='/gio-hang'>
-                                                <MDBIcon icon="shopping-cart" />
-                                                Giỏ hàng
-                                            </Link>
-                                            <Link to='/history'>
-                                                <MDBIcon icon="history" />
-                                                Lịch sử mua hàng
-                                            </Link>
+                                            {
+                                                role === '1' ?
+                                                    config.roles.customer.account_left.map((item, index) => <Link key={index} to={item.path}>
+                                                        <MDBIcon icon={item.icon} />
+                                                        {item.title}
+                                                    </Link>) :
+                                                    config.roles.manager.account_left.map((item, index) => <Link key={index} to={item.path}>
+                                                        <MDBIcon icon={item.icon} />
+                                                        {item.title}
+                                                    </Link>)
+                                            }
                                         </section>
                                     </div>
                                     <div className='col-12 text-center mt-3'>
@@ -80,30 +84,33 @@ class Account extends Component {
                                         <TabPane tab="Tài khoản của tôi" key="1">
                                             <EditAccount />
                                         </TabPane>
-                                        <TabPane tab="Sổ địa chỉ" key="2">
-                                            <Tabs tabPosition='top' activeKey={currentTab} onChange={this.activeTab}>
-                                                <TabPane
-                                                    tab={<span><Icon type="unordered-list" />Danh sách địa chỉ</span>}
-                                                    key="1">
-                                                    {
-                                                        isEditing ?
-                                                            <EditAddress
-                                                                data={data}
-                                                                toggleEditAddress={this.toggleEditAddress}
-                                                                updateAddress={updateAddress} /> :
-                                                            <ListAddress
-                                                                address={address}
-                                                                toggleEditAddress={this.toggleEditAddress}
-                                                                deleteAddress={deleteAddress} />
-                                                    }
-                                                </TabPane>
-                                                <TabPane
-                                                    tab={<span><Icon type="plus-circle" />Thêm địa chỉ</span>}
-                                                    key="2">
-                                                    <CreateAddress createNewAddress={createNewAddress} redirect={() => this.setState({ currentTab: '1' })} />
-                                                </TabPane>
-                                            </Tabs>
-                                        </TabPane>
+                                        {
+                                            role === '1' &&
+                                            <TabPane tab="Sổ địa chỉ" key="2">
+                                                <Tabs tabPosition='top' activeKey={currentTab} onChange={this.activeTab}>
+                                                    <TabPane
+                                                        tab={<span><Icon type="unordered-list" />Danh sách địa chỉ</span>}
+                                                        key="1">
+                                                        {
+                                                            isEditing ?
+                                                                <EditAddress
+                                                                    data={data}
+                                                                    toggleEditAddress={this.toggleEditAddress}
+                                                                    updateAddress={updateAddress} /> :
+                                                                <ListAddress
+                                                                    address={address}
+                                                                    toggleEditAddress={this.toggleEditAddress}
+                                                                    deleteAddress={deleteAddress} />
+                                                        }
+                                                    </TabPane>
+                                                    <TabPane
+                                                        tab={<span><Icon type="plus-circle" />Thêm địa chỉ</span>}
+                                                        key="2">
+                                                        <CreateAddress createNewAddress={createNewAddress} redirect={() => this.setState({ currentTab: '1' })} />
+                                                    </TabPane>
+                                                </Tabs>
+                                            </TabPane>
+                                        }
                                     </Tabs>
                                 </section>
                             </div>

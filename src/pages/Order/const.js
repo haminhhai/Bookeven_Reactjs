@@ -1,43 +1,43 @@
 import React from 'react'
 export const columnsCus = [
     {
-        label: <th>Mã đơn hàng</th>
+        label: <th key='cCode'>Mã đơn hàng</th>
     },
     {
-        label: <th className='text-center'>Ngày đặt hàng</th>
+        label: <th key='cFromDate' className='text-center'>Ngày đặt hàng</th>
     },
     {
-        label: <th className='text-center'>Ngày nhận hàng</th>
+        label: <th key='cToDate' className='text-center'>Ngày nhận hàng</th>
     },
     {
-        label: <th>Tổng tiền</th>
+        label: <th key='cTotal' >Tổng tiền</th>
     },
     {
-        label: <th>Tình trạng</th>
+        label: <th key='cStatus' >Tình trạng</th>
     }
 ]
 
 export const columnsMan = [
     {
-        label: <th>Mã đơn hàng</th>
+        label: <th key='mCode' >Mã đơn hàng</th>
     },
     {
-        label: <th>Khách hàng</th>
+        label: <th key='mCustomer' >Khách hàng</th>
     },
     {
-        label: <th>Điện thoại</th>
+        label: <th key='mPhone' >Điện thoại</th>
     },
     {
-        label: <th className='text-center'>Ngày đặt hàng</th>
+        label: <th key='mFromDate' className='text-center'>Ngày đặt hàng</th>
     },
     {
-        label: <th className='text-center'>Ngày nhận hàng</th>
+        label: <th key='mToDate' className='text-center'>Ngày nhận hàng</th>
     },
     {
-        label: <th>Tổng tiền</th>
+        label: <th key='mTotal' >Tổng tiền</th>
     },
     {
-        label: <th>Tình trạng</th>
+        label: <th key='mStatus'>Tình trạng</th>
     }
 ]
 
@@ -87,15 +87,15 @@ export const STATUS = 'Tình trạng:'
 
 export const colsDetailCus = [
     {
-        label: <th>Sản phẩm</th>
+        label: <th key='product'>Sản phẩm</th>
     },
     {
-        label: <th className='text-center'>Số lượng</th>
+        label: <th key='quantity' className='text-center'>Số lượng</th>
     },
     {
-        label: <th>Đơn giá</th>
+        label: <th key='price'>Đơn giá</th>
     },
     {
-        label: <th>Tạm tính</th>
+        label: <th key='estiTotal'>Tạm tính</th>
     },
 ]

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn,  } from 'mdbreact';
+import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn, } from 'mdbreact';
 import Header from '../../layouts/Header/Header'
 import '../../styles/cart.scss'
 import MessageContainer from '../../containers/MessageContainer';
@@ -41,28 +41,28 @@ class Cart extends Component {
                             <MDBTableBody>
                                 {children[0]}
                                 {
-                                    typeof children[0] !== 'string' ?
-                                        <tr>
-                                            <td colSpan='12' className='actions'>
-                                                <div className='coupon' >
-                                                    <input
-                                                        type="text"
-                                                        className="form-control mr-2"
-                                                        placeholder="Mã giảm giá"
-                                                    />
-                                                    <MDBBtn>Áp dụng</MDBBtn>
-                                                </div>
-                                            </td>
-                                        </tr> :
-                                        <tr>
-                                            <td colSpan='12' className='actions'>
-                                                <div className='coupon' >
-                                                    <Link to='/'>
-                                                        <MDBBtn>Quay lại cửa hàng</MDBBtn>
-                                                    </Link>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                    // typeof children[0] !== 'string' ?
+                                    //     <tr>
+                                    //         <td colSpan='12' className='actions'>
+                                    //             <div className='coupon' >
+                                    //                 <input
+                                    //                     type="text"
+                                    //                     className="form-control mr-2"
+                                    //                     placeholder="Mã giảm giá"
+                                    //                 />
+                                    //                 <MDBBtn>Áp dụng</MDBBtn>
+                                    //             </div>
+                                    //         </td>
+                                    //     </tr> :
+                                    //     <tr>
+                                    //         <td colSpan='12' className='actions'>
+                                    //             <div className='coupon' >
+                                    //                 <Link to='/'>
+                                    //                     <MDBBtn>Quay lại cửa hàng</MDBBtn>
+                                    //                 </Link>
+                                    //             </div>
+                                    //         </td>
+                                    //     </tr>
                                 }
                             </MDBTableBody>
                         </MDBTable>

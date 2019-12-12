@@ -10,7 +10,7 @@ import * as cont from './const'
 import img from '../../assets/logo.png'
 import DetailOrder from './DetailOrder';
 import SearchOrder from './SearchOrder';
-class ManagerCustomer extends Component {
+class OrderManager extends Component {
 
     constructor(props) {
         super(props);
@@ -121,4 +121,4 @@ class ManagerCustomer extends Component {
     }
 }
 
-export default ManagerCustomer;
+export default OrderManager;

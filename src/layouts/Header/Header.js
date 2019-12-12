@@ -169,7 +169,7 @@ class Header extends Component {
                                     </Breadcrumb.Item>
                                     <Breadcrumb.Item>
                                         {child !== undefined ?
-                                            <Link to={`/${this.$utils.convertVietnamese(parent)}`} onClick={document.documentElement.scrollTop = 0}>
+                                            <Link to={`/${this.$utils.convertVietnamese(parent)}`} >
                                                 {parent}
                                             </Link> :
                                             parent

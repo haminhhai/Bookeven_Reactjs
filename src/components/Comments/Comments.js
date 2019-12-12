@@ -4,6 +4,7 @@ import moment from 'moment';
 import AvatarUser from '../AvatarUser/AvatarUser';
 
 import './style.scss'
+import { MDBIcon } from 'mdbreact';
 class Comments extends React.Component {
   state = {
     action: null,
@@ -15,24 +16,22 @@ class Comments extends React.Component {
 
     const actions = [
       <span key="comment-basic-like">
-        <Tooltip title="Like">
-          <Icon
-            type="like"
-            theme={action === 'liked' ? 'filled' : 'outlined'}
-            onClick={this.like}
-          />
+        <Tooltip title={action !== 'liked' ? 'Thích' : 'Bỏ thích'}>
+          <MDBIcon far={action !== 'liked'} icon="thumbs-up" onClick={this.like} style={{ marginRight: 8 }} />
         </Tooltip>
         <span style={{ paddingLeft: 8, cursor: 'auto' }}>{likes}</span>
       </span>,
-      <span key="comment-basic-reply-to">Trả lời</span>,
+      <span key="comment-basic-reply-to">
+        <MDBIcon icon="reply" style={{ marginRight: 8 }} />
+        Trả lời</span>,
     ];
 
     return (
       <Comment
-      className='comment-card'
+        className='comment-card'
         actions={actions}
         author={comment.name}
-        avatar={<AvatarUser name={comment.name}/>}
+        avatar={<AvatarUser name={comment.name} />}
         content={
           <p>
             {comment.comment}

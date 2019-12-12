@@ -65,7 +65,7 @@ class BPCard extends Component {
                 <img src={book.src} waves="true" className="imgBook" alt="" overlay="true" />
                 {
                   book.percentDiscount > 0 && 
-                  <div class="promotionPercent">
+                  <div className="promotionPercent">
                   {cont.SVG}
                   <span>{book.percentDiscount + '%'}</span>
                 </div>

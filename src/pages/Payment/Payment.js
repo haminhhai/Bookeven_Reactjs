@@ -145,8 +145,8 @@ class Payment extends Component {
                                                     <option value=''>Sổ địa chỉ</option>
                                                     {
                                                         address.length > 0 &&
-                                                        address.map(item =>
-                                                            <option value={item.id}>
+                                                        address.map((item, index) =>
+                                                            <option key={index} value={item.id}>
                                                                 Người nhận: {item.name},
                                                                 Địa chỉ: {`${item.street}, ${this.$utils.filterAddress(item.province, item.district, item.ward)}`}
                                                             </option>

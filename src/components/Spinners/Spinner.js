@@ -13,15 +13,18 @@ const list = ['point', 'radius', 'corner', 'sound', 'default']
 class Spinner extends Component {
     render() {
         const { showLoading } = this.props.ui
+        var { lazyShow } = false
+        if(this.props.showSpin)
+            lazyShow = true
         let xhtml = null
-        if (showLoading)
+        if (showLoading || lazyShow)
             xhtml = (
-                <div class="con-fl-loading" >
-                    <h4 class="title-loading">Đang xử lý...</h4>
-                    <div class={`fl-loading ${list[Math.floor(Math.random() * 4)]}`}>
-                        <div class="effect-1 effects"></div>
-                        <div class="effect-2 effects"></div>
-                        <div class="effect-3 effects"></div>
+                <div className="con-fl-loading" >
+                    {/* <h4 className="title-loading">Đang xử lý...</h4> */}
+                    <div className={`fl-loading ${list[Math.floor(Math.random() * 4)]}`}>
+                        <div className="effect-1 effects"></div>
+                        <div className="effect-2 effects"></div>
+                        <div className="effect-3 effects"></div>
                     </div>
                 </div>
             )

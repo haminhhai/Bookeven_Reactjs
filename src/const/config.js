@@ -16,29 +16,15 @@ export const roles = {
         },
         account_left: [
             {
-                path: '/bill-status',
+                path: '/tinh-hinh-don-hang',
                 icon: 'truck-loading',
                 title: 'Tình hình đơn hàng'
             },
-            {
-                path: '/database',
-                icon: 'database',
-                title: 'Cơ sở dữ liệu sách'
-            },
-        ],
-        account_right: [
-            {
-                tab_title: 'Tài khoản của tôi'
-            }
         ],
         over_img_card: [
             {
                 icon: 'truck-loading',
                 title: 'Tình hình đơn hàng'
-            },
-            {
-                icon: 'database',
-                title: 'Cơ sở dữ liệu sách'
             },
 
         ]
@@ -60,14 +46,6 @@ export const roles = {
                 path: '/lich-su-mua-hang',
                 icon: 'history',
                 title: 'Lịch sử mua hàng'
-            },
-        ],
-        account_right: [
-            {
-                tab_title: 'Tài khoản của tôi'
-            },
-            {
-                tab_title: 'Sổ địa chỉ'
             },
         ],
         over_img_card: [

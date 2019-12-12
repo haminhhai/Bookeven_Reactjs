@@ -12,12 +12,12 @@ class NotFound extends Component {
     render() {
         return (
             <div>
-                <Header carousel={false} parent='Lịch sử mua hàng' />
+                <Header carousel={false} parent='404' />
                 <div className='notfound container'>
                     <div className='row text-center'>
                         <img className='logo' src={img} />
                         <h1>404</h1>
-                        <h5>Không tồn tại liên kết</h5>
+                        <h5>Không tìm thấy!</h5>
                         <Link  to='/'>
                             <MDBBtn className='font-weight-bold' color=' light-green accent-3'>
                                 Quay lại mua sắm

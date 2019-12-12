@@ -18,15 +18,12 @@ class CartContainer extends Component {
     var res = Message.MSG_CART_EMPTY
     if (cart.length > 0)
       res = cart.map((item, index) => {
-        return (
-          <CartItem
+        return <CartItem
             key={index}
             item={item}
             onRemoveProduct={removeCart}
             onChangeMessage={changeMessage}
             onUpdateProduct={updateCart} />
-
-        )
       })
 
     return res

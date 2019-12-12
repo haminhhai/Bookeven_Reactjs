@@ -51,6 +51,7 @@ function* watchFetchFieldsbookAction() {
     while (true) {
         yield take(types.FETCH_LIST_FIELDSBOOK)
         const res = yield call(getListFieldsbook)
+        console.log(res)
         const { status, data } = res
         if (status === STATUS_CODE.SUCCESS) {
             yield put(fetchListFieldsbookSuccess(data))

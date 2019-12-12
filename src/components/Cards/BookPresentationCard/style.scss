@@ -2,6 +2,10 @@
   .card {
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
+    min-height: 540px !important;
+
+    .card-body {
+    }
 
     &:hover {
       -webkit-transform: translateY(4px);
@@ -73,7 +77,6 @@
     margin-top: -1.25rem;
     background-clip: border-box;
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
-    min-height: 320px;
     -webkit-transition: all 0.25s ease;
     transition: all 0.25s ease;
 
