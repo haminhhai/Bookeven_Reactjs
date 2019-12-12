@@ -1,12 +1,26 @@
 const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const VENDOR_LIBS = [
+    'axios',
+    'bootstrap',
+    'jquery',
+    'react',
+    'react-dom',
+    'react-redux',
+    'react-router-dom',
+    'redux',
+    'redux-thunk',
+    'redux-saga'
+];
 module.exports = {
     mode: 'development',
     entry: {
-        app: ['./src/index.js']
+        app: ['./src/index.js'],
+        vendor: VENDOR_LIBS
     },
 
     output: {
-        path: __dirname + "/dist",
+        path: __dirname + "./src/dist",
         filename: "bundle.js"
     },
     module: {
@@ -45,11 +59,17 @@ module.exports = {
             'jQuery': 'jquery',
             'window.$': 'jquery',
             'window.jQuery': 'jquery'
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            names : ['vendor', 'manifest']
+        }),
+        new HtmlWebpackPlugin({
+            template : './public/index.html'
         })
     ],
     devServer: {
         contentBase: __dirname,
-        port: 3000,
+        port: 1999,
         host: 'localhost',
     },
 

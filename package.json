@@ -2,7 +2,7 @@
   "name": "bookeven",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://haminhhai.github.io/Bookeven_Reactjs/",
+  "homepage": ".",
   "engines": {
     "node": "9.5.0",
     "npm": "5.7.1"
@@ -16,6 +16,7 @@
     "gh-pages": "^2.1.1",
     "jquery": "^3.4.1",
     "less": "^3.10.3",
+    "lodash": "^4.17.15",
     "mdbreact": "^4.20.0",
     "moment": "^2.24.0",
     "numeral": "^2.0.6",

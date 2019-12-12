@@ -64,7 +64,6 @@ class Header extends Component {
         openModal(i)
     }
     Logout() {
-
         localStorage.removeItem('authen')
         localStorage.removeItem('role')
         window.location.reload()
@@ -91,16 +90,12 @@ class Header extends Component {
                             </MDBNavbarNav>
                             {this.state.authen === null ?
                                 <MDBNavbarNav className='reglog' right>
-                                    <MDBNavItem>
-                                        <MDBNavLink className="waves-effect waves-light text-center" to="#!" onClick={() => { this.toggleModal(1) }}>
-                                            ĐĂNG NHẬP
-                                    </MDBNavLink>
-                                    </MDBNavItem>
-                                    <MDBNavItem>
-                                        <MDBNavLink className="waves-effect waves-light text-center" to="#!" onClick={() => { this.toggleModal(2) }}>
-                                            ĐĂNG KÝ
-                                    </MDBNavLink>
-                                    </MDBNavItem>
+                                    <MDBBtn onClick={() => { this.toggleModal(1) }}>
+                                        ĐĂNG NHẬP
+                                    </MDBBtn>
+                                    <MDBBtn onClick={() => { this.toggleModal(2) }}>
+                                        ĐĂNG KÝ
+                                    </MDBBtn>
                                 </MDBNavbarNav>
                                 :
                                 <MDBNavbarNav className='reglog' right>
@@ -210,25 +205,25 @@ class Header extends Component {
                             </div>
                             {
                                 role === '1' &&
-                                roles.customer.over_img_card.map((item, index) => 
-                                    <Link 
-                                        key={index} 
+                                roles.customer.over_img_card.map((item, index) =>
+                                    <Link
+                                        key={index}
                                         to={`/${this.$utils.convertVietnamese(item.title)}`}
                                         className='col d-flex justify-content-center'>
-                                            <MDBIcon icon={item.icon} className='mr-1'/>
-                                            {item.title}
+                                        <MDBIcon icon={item.icon} className='mr-1' />
+                                        {item.title}
                                     </Link>
                                 )
                             }
                             {
                                 role === '2' &&
-                                roles.manager.over_img_card.map((item, index) => 
-                                    <Link 
-                                        key={index} 
-                                        to={`/${this.$utils.convertVietnamese(item.title)}`} 
+                                roles.manager.over_img_card.map((item, index) =>
+                                    <Link
+                                        key={index}
+                                        to={`/${this.$utils.convertVietnamese(item.title)}`}
                                         className='col d-flex justify-content-center'>
-                                            <MDBIcon icon={item.icon} className='mr-1'/>
-                                            {item.title}
+                                        <MDBIcon icon={item.icon} className='mr-1' />
+                                        {item.title}
                                     </Link>
                                 )
                             }

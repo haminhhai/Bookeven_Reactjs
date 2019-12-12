@@ -4,10 +4,10 @@ import moment from 'moment';
 import AvatarUser from '../AvatarUser/AvatarUser';
 
 const { TextArea } = Input;
-const Editor = ({ onChange, onSubmit, submitting, value }) => (
+const Editor = ({ onChange, onSubmit, submitting, value, handleKeyDown }) => (
     <div>
         <Form.Item>
-            <TextArea rows={4} onChange={onChange} value={value} placeholder='Nhập bình luận'/>
+            <TextArea rows={4} onChange={onChange} value={value} placeholder='Nhập bình luận' onKeyDown={handleKeyDown}/>
         </Form.Item>
         <Form.Item>
             <Button htmlType="submit" loading={submitting} onClick={onSubmit} type="primary">
@@ -24,6 +24,9 @@ class InputComment extends Component {
             submitting: false,
             value: '',
         }
+    }
+    handleKeyDown = (e) => {
+        e.key === 'Enter' && this.handleSubmit()
     }
     handleSubmit = () => {
         const { addComment } = this.props
@@ -67,6 +70,7 @@ class InputComment extends Component {
                         onSubmit={this.handleSubmit}
                         submitting={submitting}
                         value={value}
+                        handleKeyDown={this.handleKeyDown}
                     />
                 }
             />

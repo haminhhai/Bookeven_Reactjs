@@ -24,15 +24,6 @@ import { STATUS_CODE } from '../const/config'
 import { toastSuccess } from '../utils/Utils'
 import * as msg from '../const/message'
 
-/**
- * First: fetch list book
- * Second: Call API
- * Third: check status code
- * success -> ...
- * failed -> ...
- * Fourth: turn off loading
- * Fifth: do next task
- */
 function* watchFetchListBookAction() {
     while (true) {
         yield take(types.FETCH_LIST_BOOK)
@@ -51,7 +42,6 @@ function* watchFetchFieldsbookAction() {
     while (true) {
         yield take(types.FETCH_LIST_FIELDSBOOK)
         const res = yield call(getListFieldsbook)
-        console.log(res)
         const { status, data } = res
         if (status === STATUS_CODE.SUCCESS) {
             yield put(fetchListFieldsbookSuccess(data))

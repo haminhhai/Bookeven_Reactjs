@@ -203,7 +203,10 @@ class DetailOrder extends Component {
                                 </div>
                                 <div className='col-12 text-center'>
                                     <MDBBtn size="lg" className='rounded-pill text-white' rounded color=" yellow darken-3" onClick={closeModal}>Đóng</MDBBtn>
-                                    <MDBBtn size="lg" className='rounded-pill text-white' rounded color=" yellow darken-3" onClick={this.onUpdateOrder}>Lưu</MDBBtn>
+                                    {
+                                        role === '2' &&
+                                        <MDBBtn size="lg" className='rounded-pill text-white' rounded color=" yellow darken-3" onClick={this.onUpdateOrder}>Lưu</MDBBtn>
+                                    }
                                 </div>
                             </div>
                         </div>

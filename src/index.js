@@ -1,6 +1,7 @@
 import React, { Component, lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { ConnectedRouter } from 'connected-react-router'
+import { BrowserRouter as Router, HashRouter } from 'react-router-dom'
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
@@ -14,7 +15,6 @@ import 'antd/dist/antd.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-image-lightbox/style.css';
 
-import App from './App';
 import { BackTop } from 'antd'
 import NewBookContainer from './containers/BookContainer/NewBookContainer';
 
@@ -26,7 +26,6 @@ import configureStore, { history } from './redux/configureStore'
 
 import { ToastContainer } from 'react-toastify'
 import Spinner from './components/Spinners/Spinner'
-// import Routes from './routes/Routes'
 
 import './styles/index.scss'
 
@@ -41,7 +40,7 @@ const store = configureStore()
 
 ReactDOM.render(
     <Provider store={store}>
-        <ConnectedRouter history={history}>
+        <HashRouter basename='/'>
             <BackTop visibilityHeight={100} />
             {role === '2' && <NewBookContainer />}
             <Spinner />
@@ -49,7 +48,7 @@ ReactDOM.render(
             <Suspense fallback={<Spinner showSpin={true} />}>
                 <Routes />
             </Suspense>
-        </ConnectedRouter>
+        </HashRouter>
     </Provider>,
     document.getElementById('root')
 );

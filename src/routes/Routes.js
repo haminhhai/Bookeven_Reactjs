@@ -15,6 +15,7 @@ import { convertVietnamese } from '../utils/Utils'
 import CustomerRoutes from './CustomerRoutes'
 import ManagerRoutes from './ManagerRoutes'
 import NotFound from '../pages/NotFound';
+import ManSignup from '../pages/ManSignup';
 
 var routes = [
     {
@@ -35,6 +36,13 @@ var routes = [
                 <BookCategoryContainer parent='search' />
                 <Footer />
             </React.Fragment>
+        }
+    },
+    {
+        path: '/dang-ky-cho-quan-ly',
+        exact: false,
+        main: () => {
+            return <ManSignup />
         }
     },
 ]
@@ -118,11 +126,15 @@ class Routes extends Component {
         var { listBooks, fieldsBook } = this.props.books
         if ((listBooks.length > 0 && fieldsBook.length > 0 && !done))
             this.generateRoutes()
+        const role = localStorage.getItem('role')
         return (
             <Switch>
                 {routes}
-                <CustomerRoutes />
-                <ManagerRoutes />
+                {
+                    role === '1' ?
+                        <CustomerRoutes /> :
+                        <ManagerRoutes />
+                }
                 <Route exact path="/404" component={NotFound} />
                 <Redirect to="/404" />
             </Switch>

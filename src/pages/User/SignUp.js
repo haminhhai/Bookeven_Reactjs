@@ -5,6 +5,7 @@ class SignUp extends Component {
     state = {
         email: '',
         fullname: '',
+        phone: '',
         password: '',
         confirmpassword: ''
     }
@@ -21,7 +22,7 @@ class SignUp extends Component {
 
     };
     render() {
-        var { email, fullname, password, confirmpassword } = this.state
+        var { email, fullname, password, confirmpassword, phone } = this.state
         return (
             <form className="needs-validation"
                 onSubmit={this.submitHandler}>
@@ -42,6 +43,15 @@ class SignUp extends Component {
                         name='email'
                         onChange={this.changeHandler}
                         value={email}
+                        required
+                    />
+                    <MDBInput
+                        label="Điện thoại"
+                        icon="phone"
+                        type="text"
+                        name='phone'
+                        onChange={this.changeHandler}
+                        value={phone}
                         required
                     />
                     <MDBInput

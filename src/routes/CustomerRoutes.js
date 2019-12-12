@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import CartContainer from '../containers/CartContainer';
 import AccountContainer from '../containers/Account/AccountContainer';
@@ -11,40 +11,40 @@ const routes = [
         path: '/tai-khoan',
         exact: false,
         main: (match) => {
-            return <React.Fragment>
+            return <Fragment>
                 <AccountContainer match={match} />
                 <Footer />
-            </React.Fragment>
+            </Fragment>
         },
     },
     {
         path: '/lich-su-mua-hang',
         exact: false,
         main: () => {
-            return <React.Fragment>
+            return <Fragment>
                 <OrderContainer />
                 <Footer />
-            </React.Fragment>
+            </Fragment>
         }
     },
     {
         path: '/gio-hang',
         exact: false,
         main: () => {
-            return <React.Fragment>
+            return <Fragment>
                 <CartContainer />
                 <Footer />
-            </React.Fragment>
+            </Fragment>
         }
     },
     {
         path: '/thanh-toan',
         exact: false,
         main: () => {
-            return <React.Fragment>
+            return <Fragment>
                 <PaymentContainer />
                 <Footer />
-            </React.Fragment>
+            </Fragment>
         }
     },
 ]
@@ -64,13 +64,13 @@ export default class CusomerRoute extends Component {
     render() {
         const role = localStorage.getItem('role');
         return (
-            <React.Fragment>
+            <Fragment>
                 {
                     role === '1' ?
                         this.showComponent() :
                         <Redirect to='/' />
                 }
-            </React.Fragment>
+            </Fragment>
         )
 
     }
