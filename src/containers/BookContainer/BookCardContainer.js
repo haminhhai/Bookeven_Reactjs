@@ -33,12 +33,12 @@ class BookCardContainer extends Component {
   }
 
   render() {
-    const { listBooks, index, type, book, fieldsBook, bookActions } = this.props
+    const { listBooks, index, type, book, fieldsBook, bookActions, info } = this.props
     const { updateListBook, fetchListBook } = bookActions
     return (
       type === 'bp' ?
 
-          <BPCard book={book} onAddToCart={this.onAddToCart} fieldsBook={fieldsBook} updateListBook={updateListBook} fetchListBook={fetchListBook}/>
+          <BPCard book={book} onAddToCart={this.onAddToCart} fieldsBook={fieldsBook} updateListBook={updateListBook} fetchListBook={fetchListBook} role={info.role}/>
         :
         <BRCard book={listBooks[index]} />
     );
@@ -62,8 +62,8 @@ const MapStateToProps = state => {
   return {
     listBooks: state.books.listBooks,
     cart: state.cart,
-    fieldsBook: state.books.fieldsBook
-
+    fieldsBook: state.books.fieldsBook,
+    info: state.account.info
   }
 }
 

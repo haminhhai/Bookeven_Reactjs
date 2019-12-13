@@ -1,34 +1,19 @@
 import React, { Component } from 'react';
 
 import { MDBBtn, MDBIcon, MDBInput } from 'mdbreact'
-import Spinner from '../../components/Spinners/Spinner'
 
 class SignIn extends Component {
     state = {
-        email: 'bookeven@gmail.com',
+        email: 'haihaidb@gmail.com',
         password: '123456',
-        isLoading: false
     }
 
     submitHandler = event => {
         event.preventDefault();
         event.target.className += " was-validated";
-        this.setState({ isLoading: !this.state.isLoading })
-
-        setTimeout(() => {
-            this.setState({ isLoading: !this.state.isLoading })
-            window.location.reload()
-        }, 0);
-        
-        const info = {
-            name: 'Hà Minh Hải',
-            phone: '0123435644',
-            email: 'haihaidb@gmail.com',
-            id: 3306,
-        }
-        localStorage.setItem('authen', true)
-        localStorage.setItem('role', '1')
-        localStorage.setItem('info', JSON.stringify(info))
+        const { email, password } = this.state
+        const { login } = this.props
+        login(email, password)
     };
 
     changeHandler = event => {
@@ -37,7 +22,7 @@ class SignIn extends Component {
     };
 
     render() {
-        var { email, password, isLoading } = this.state
+        var { email, password } = this.state
         return (
             <form className="needs-validation" onSubmit={this.submitHandler}>
                 <div className='row'>
@@ -73,7 +58,6 @@ class SignIn extends Component {
                         <MDBIcon icon="sign-in-alt" className='ml-2' />
                     </MDBBtn>
                 </div>
-                {isLoading && <Spinner type='sound' title='Đang đăng nhập...' />}
             </form>
         );
     }

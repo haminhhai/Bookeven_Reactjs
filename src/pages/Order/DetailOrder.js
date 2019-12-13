@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 
-import { MDBBtn, MDBTable, MDBTableHead, MDBTableBody, MDBModal, MDBModalHeader, MDBModalBody, MDBIcon, MDBBadge, } from 'mdbreact';
+import { MDBBtn, MDBTable, MDBTableHead, MDBTableBody, MDBModal, MDBModalHeader, MDBModalBody, MDBBadge, } from 'mdbreact';
 import { Select, DatePicker } from 'antd'
 
 import '../../styles/order.scss'
 import * as cont from './const'
 import moment from 'moment'
 
-const role = localStorage.getItem('role')
 const { Option } = Select
 class DetailOrder extends Component {
     constructor(props) {
@@ -67,7 +66,7 @@ class DetailOrder extends Component {
         })
     }
     render() {
-        const { data, address, modal, closeModal } = this.props
+        const { data, address, modal, closeModal, role } = this.props
         const { status, isEditTime, toDate } = this.state
         let xhtml = null
         if (address.name !== undefined)
@@ -104,7 +103,7 @@ class DetailOrder extends Component {
                                             this.$utils.formatTimeToDate(data.endTime, 'DD/MM/YYYY')
                                     }
                                     {
-                                        role === '2' &&
+                                        role === 2 &&
                                         <MDBBadge onClick={this.showEditTime} className='edit-badge ml-3' color='warning'>Sửa</MDBBadge>
                                     }
                                 </div>
@@ -127,7 +126,7 @@ class DetailOrder extends Component {
                                     {address.phone}
                                 </div>
                                 {
-                                    role === '2' &&
+                                    role === 2 &&
                                     <React.Fragment>
                                         <div className='col-3 font-weight-bold'>
                                             {cont.STATUS}
@@ -204,7 +203,7 @@ class DetailOrder extends Component {
                                 <div className='col-12 text-center'>
                                     <MDBBtn size="lg" className='rounded-pill text-white' rounded color=" yellow darken-3" onClick={closeModal}>Đóng</MDBBtn>
                                     {
-                                        role === '2' &&
+                                        role === 2 &&
                                         <MDBBtn size="lg" className='rounded-pill text-white' rounded color=" yellow darken-3" onClick={this.onUpdateOrder}>Lưu</MDBBtn>
                                     }
                                 </div>

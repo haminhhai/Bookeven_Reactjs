@@ -9,9 +9,8 @@ class EditAccount extends Component {
         super(props);
         this.state = {
             showEditPassword: false,
-            fullnameEdit: 'Hà Minh Hải',
-            emailEdit: 'bookeven@gmail.com',
-            phoneEdit: '0327487958',
+            fullnameEdit: '',
+            phoneEdit: '',
             isUpdating: false
 
         }
@@ -30,8 +29,15 @@ class EditAccount extends Component {
         event.preventDefault();
         event.target.className += " was-validated";
     };
+    componentDidMount() {
+        const { info } = this.props
+        this.setState({
+            fullnameEdit: info.fullname,
+            phoneEdit: info.phone
+        })
+    }
     render() {
-        const { showEditPassword, fullnameEdit, phoneEdit, emailEdit, isUpdating} = this.state
+        const { showEditPassword, fullnameEdit, phoneEdit, isUpdating} = this.state
         return (
             <form
                 className='needs-validation'
@@ -44,17 +50,6 @@ class EditAccount extends Component {
                             type="text"
                             name='fullnameEdit'
                             value={fullnameEdit}
-                            onChange={this.changeHandler}
-                            required
-                        />
-                    </div>
-                    <div className='col-12 container'>
-                        <MDBInput
-                            outline
-                            label="Email"
-                            type="email"
-                            name='emailEdit'
-                            value={emailEdit}
                             onChange={this.changeHandler}
                             required
                         />

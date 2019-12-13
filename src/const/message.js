@@ -40,3 +40,5 @@ export const MSG_COMEBACK = 'Chào mừng bạn quay trở lại Bookeven!'
 export const MSG_EMPTY_ADDRESS = 'Không có địa chỉ nào được lưu!'
 
 export const MSG_ADD_TO_CART_FAIL = 'Bạn đã thêm tối đa số hàng có trong kho!'
+
+export const MSG_PASSWORD_CONSISTENT = 'Hai mật khẩu không khớp. Hãy nhập lại mật khẩu.'

@@ -8,8 +8,6 @@ import * as orderActions from '../../actions/order'
 import OrderCustomer from '../../pages/Order/OrderCustomer';
 import OrderManager from '../../pages/Order/OrderManager'
 
-
-const role = localStorage.getItem('role')
 class OrderContainer extends Component {
     constructor(props) {
         super(props);
@@ -18,17 +16,18 @@ class OrderContainer extends Component {
     componentDidMount() {
         const { getListAddress } = this.props.accountActions
         const { fetchAllListOrders, fetchListOrdersById } = this.props.orderActions
-        if (role === '2')
+        const { info } = this.props
+        if (info.role === 2)
             fetchAllListOrders()
-        else fetchListOrdersById(3306)
+        else fetchListOrdersById(info.id)
         getListAddress()
     }
     render() {
-        const { orders, address, orderActions } = this.props
+        const { orders, address, orderActions, info } = this.props
         const { updateOrder } = orderActions
-        if (role === '1')
-            return <OrderCustomer orders={orders} address={address} />
-        else return <OrderManager orders={orders} address={address} updateOrder={updateOrder}/>
+        if (info.role === 1)
+            return <OrderCustomer orders={orders} address={address} role={info.role} />
+        else return <OrderManager orders={orders} address={address} updateOrder={updateOrder} role={info.role} />
     }
 }
 
@@ -48,7 +47,8 @@ OrderContainer.propTypes = {
 const mapStatetoProps = state => {
     return {
         address: state.account.address,
-        orders: state.orders
+        orders: state.orders,
+        info: state.account.info
     }
 }
 

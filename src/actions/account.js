@@ -104,3 +104,49 @@ export const deleteAddressFailed = error => {
         }
     }
 }
+
+export const getUser = id => ({
+    type: types.GET_USER,
+    payload: {
+        id
+    }
+});
+
+export const getUserSuccess = data => ({
+    type: types.GET_USER_SUCCESS,
+    payload: {
+        data
+    }
+});
+
+export const getUserFailed = error => ({
+    type: types.GET_USER_FAILED,
+    payload: {
+        error
+    }
+});
+
+export const updateUser = data => ({
+    type: types.UPDATE_USER,
+    payload: {
+        data
+    }
+});
+
+export const updateUserSuccess = data => ({
+    type: types.UPDATE_USER_SUCCESS,
+    payload: {
+        data
+    }
+});
+
+export const updateUserFailed = error => ({
+    type: types.UPDATE_USER_FAILED,
+    payload: {
+        error
+    }
+});
+
+export const deleteInfo = () => ({
+    type: types.DELETE_INFO,
+});

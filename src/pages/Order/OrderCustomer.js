@@ -53,7 +53,7 @@ class OrderCustomer extends Component {
     }
     render() {
         const { modal, data, address } = this.state
-        const { orders } = this.props
+        const { orders, role } = this.props
         return (
             <div>
                 <Header carousel={false} parent='Lịch sử mua hàng' />
@@ -99,7 +99,8 @@ class OrderCustomer extends Component {
                     <DetailOrder data={data}
                         address={address}
                         closeModal={this.closeModal}
-                        modal={modal} />
+                        modal={modal} 
+                        role={role} />
                 </div>
             </div>
         );

@@ -29,7 +29,6 @@ import Spinner from './components/Spinners/Spinner'
 
 import './styles/index.scss'
 
-const role = localStorage.getItem('role')
 const Routes = lazy(() =>
     new Promise((resolve, reject) =>
         setTimeout(() => resolve(import("./routes/Routes")), 3000)
@@ -42,7 +41,7 @@ ReactDOM.render(
     <Provider store={store}>
         <HashRouter basename='/'>
             <BackTop visibilityHeight={100} />
-            {role === '2' && <NewBookContainer />}
+            <NewBookContainer />
             <Spinner />
             <ToastContainer />
             <Suspense fallback={<Spinner showSpin={true} />}>

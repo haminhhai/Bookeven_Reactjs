@@ -42,9 +42,8 @@ class Account extends Component {
         window.scrollTo(0, 0)
     }
     render() {
-        const { address, createNewAddress, updateAddress, deleteAddress } = this.props
+        const { address, createNewAddress, updateAddress, deleteAddress, info } = this.props
         const { isEditing, data, currentTab } = this.state
-        const role = localStorage.getItem('role')
         return (
             <div >
                 <Header carousel={false} parent='Tài khoản' />
@@ -55,10 +54,10 @@ class Account extends Component {
                                 <div className='row'>
                                     <div className='col-12'>
                                         <section className='left_acc'>
-                                            <Avatar name='Hà Minh Hải' />
-                                            <p>Hà Minh Hải</p>
+                                            <Avatar name={info.fullname} />
+                                            <p>{info.fullname}</p>
                                             {
-                                                role === '1' ?
+                                                info.role === 1 ?
                                                     config.roles.customer.account_left.map((item, index) => <Link key={index} to={item.path}>
                                                         <MDBIcon icon={item.icon} />
                                                         {item.title}
@@ -82,10 +81,10 @@ class Account extends Component {
                                         type="card"
                                     >
                                         <TabPane tab="Tài khoản của tôi" key="1">
-                                            <EditAccount />
+                                            <EditAccount info={info}/>
                                         </TabPane>
                                         {
-                                            role === '1' &&
+                                            info.role === 1 &&
                                             <TabPane tab="Sổ địa chỉ" key="2">
                                                 <Tabs tabPosition='top' activeKey={currentTab} onChange={this.activeTab}>
                                                     <TabPane
@@ -96,11 +95,13 @@ class Account extends Component {
                                                                 <EditAddress
                                                                     data={data}
                                                                     toggleEditAddress={this.toggleEditAddress}
-                                                                    updateAddress={updateAddress} /> :
+                                                                    updateAddress={updateAddress} 
+                                                                    info={info} /> :
                                                                 <ListAddress
                                                                     address={address}
                                                                     toggleEditAddress={this.toggleEditAddress}
-                                                                    deleteAddress={deleteAddress} />
+                                                                    deleteAddress={deleteAddress}
+                                                                    info={info} />
                                                         }
                                                     </TabPane>
                                                     <TabPane

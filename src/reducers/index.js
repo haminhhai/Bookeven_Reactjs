@@ -4,11 +4,13 @@ import cart from './cart'
 import ui from './ui'
 import account from './account'
 import orders from './order'
+import auth from './auth'
 import { connectRouter } from 'connected-react-router';
 
 const rootReducer = history =>
     combineReducers({
         books,
+        auth,
         cart,
         ui,
         account,

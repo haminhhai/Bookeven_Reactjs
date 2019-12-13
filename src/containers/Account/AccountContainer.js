@@ -18,7 +18,8 @@ class AccountContainer extends Component {
                 address={account.address}
                 createNewAddress={createNewAddress} 
                 updateAddress={updateAddress}
-                deleteAddress={deleteAddress}/>
+                deleteAddress={deleteAddress}
+                info={account.info}/>
         );
     }
 }
@@ -37,7 +38,7 @@ AccountContainer.propTypes = {
 
 const MapStateToProps = state => {
     return {
-        account: state.account
+        account: state.account,
     }
 }
 

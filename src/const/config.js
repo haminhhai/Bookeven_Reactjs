@@ -1,4 +1,5 @@
-export const API_URL = 'http://localhost:3000'
+export const API_URL_LOCAL = 'http://localhost:3000'
+export const API_URL = 'https://bookeven-backend.herokuapp.com/apis'
 
 export const STATUS_CODE = {
     SUCCESS: 200,

@@ -11,6 +11,7 @@ import { Breadcrumb } from 'antd';
 
 import * as bookActions from '../../actions/book'
 import * as uiActions from '../../actions/ui'
+import * as authActions from '../../actions/auth'
 import { roles } from '../../const/config'
 
 import '../../styles/layout.scss'
@@ -32,9 +33,6 @@ class Header extends Component {
             numTab: 1,
 
             isCarousel: this.props.carousel,
-
-            authen: localStorage.getItem('authen'),
-
             keyWord: '',
         };
     }
@@ -63,14 +61,13 @@ class Header extends Component {
         const { openModal } = uiActions
         openModal(i)
     }
-    Logout() {
-        localStorage.removeItem('authen')
-        localStorage.removeItem('role')
-        window.location.reload()
+    Logout = () => {
+        const { authActions, info } = this.props
+        authActions.logout(info.id)
     }
     render() {
-        const { parent, child, cart, fieldsBook } = this.props //parent = this.props.parent
-        const role = localStorage.getItem('role')
+        const { parent, child, cart, fieldsBook, info, authen } = this.props 
+        const { role } = info
         var total = 0
         if (cart.length > 0)
             cart.forEach(element => {
@@ -88,7 +85,7 @@ class Header extends Component {
                             <MDBNavbarNav left>
                                 <SearchBox handleChange={this.handleFilter} handleSearch={this.handleSearch} />
                             </MDBNavbarNav>
-                            {this.state.authen === null ?
+                            {authen === false ?
                                 <MDBNavbarNav className='reglog' right>
                                     <MDBBtn onClick={() => { this.toggleModal(1) }}>
                                         ĐĂNG NHẬP
@@ -101,9 +98,9 @@ class Header extends Component {
                                 <MDBNavbarNav className='reglog' right>
                                     <MDBNavItem>
                                         <MDBDropdown>
-                                            <MDBDropdownToggle title='Chào Bookevener'>
+                                            <MDBDropdownToggle title={`Chào ${info.fullname}`}>
                                                 <MDBIcon className='mr-2' icon="book-reader" size='2x' />
-                                                Chào Bookevener!
+                                                Chào {info.fullname}!
                                             </MDBDropdownToggle>
                                             <MDBDropdownMenu >
                                                 <Link to='/tai-khoan'>
@@ -116,7 +113,7 @@ class Header extends Component {
                                 </MDBNavbarNav>
                             }
                             {
-                                role === '1' &&
+                                role === 1 &&
                                 <MDBNavLink className="cart-nav waves-effect waves-light text-center" to="/gio-hang">
                                     <MDBBtn size="sm" className="cart-nav-btn mr-auto">
                                         <MDBIcon icon="shopping-cart" className='mr3' size='2x'>
@@ -204,7 +201,7 @@ class Header extends Component {
 
                             </div>
                             {
-                                role === '1' &&
+                                role === 1 &&
                                 roles.customer.over_img_card.map((item, index) =>
                                     <Link
                                         key={index}
@@ -216,7 +213,7 @@ class Header extends Component {
                                 )
                             }
                             {
-                                role === '2' &&
+                                role === 2 &&
                                 roles.manager.over_img_card.map((item, index) =>
                                     <Link
                                         key={index}
@@ -239,15 +236,17 @@ class Header extends Component {
 const mapStateToProps = state => {
     return {
         cart: state.cart,
-        fieldsBook: state.books.fieldsBook
+        fieldsBook: state.books.fieldsBook,
+        info: state.account.info,
+        authen: state.auth.authen
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         uiActions: bindActionCreators(uiActions, dispatch),
-        bookActions: bindActionCreators(bookActions, dispatch)
-
+        bookActions: bindActionCreators(bookActions, dispatch),
+        authActions: bindActionCreators(authActions, dispatch)
     }
 }
 

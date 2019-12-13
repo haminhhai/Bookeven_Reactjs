@@ -16,9 +16,6 @@ class EditAddress extends Component {
             province: '',
             district: '',
             ward: '',
-            fullnameAddress: '',
-            emailAddress: '',
-            phoneAddress: '',
             street: '',
             selectedProvince: '',
             selectedDistrict: '',
@@ -105,45 +102,12 @@ class EditAddress extends Component {
         })
     }
     render() {
-        const { province, district, ward, fullnameAddress, phoneAddress, emailAddress, street, selectedProvince, selectedDistrict, selectedWard } = this.state
+        const { province, district, ward, street, selectedProvince, selectedDistrict, selectedWard } = this.state
         const { toggleEditAddress, } = this.props
         return (
             <form className='needs-validation'
                 onSubmit={this.submitHandler}>
                 <div className='row container'>
-                    <div className='col-12'>
-                        <MDBInput
-                            outline
-                            label="Họ tên *"
-                            type="text"
-                            name='fullnameAddress'
-                            value={fullnameAddress}
-                            onChange={this.changeHandler}
-                            required
-                        />
-                    </div>
-                    <div className='col-12'>
-                        <MDBInput
-                            outline
-                            label="Email *"
-                            type="email"
-                            name='emailAddress'
-                            value={emailAddress}
-                            onChange={this.changeHandler}
-                            required
-                        />
-                    </div>
-                    <div className='col-12'>
-                        <MDBInput
-                            outline
-                            label="Điện thoại *"
-                            type="tel"
-                            name='phoneAddress'
-                            value={phoneAddress}
-                            onChange={this.changeHandler}
-                            required
-                        />
-                    </div>
                     <div className='col-12'>
                         <MDBInput
                             outline

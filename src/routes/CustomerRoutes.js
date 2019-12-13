@@ -62,11 +62,11 @@ export default class CusomerRoute extends Component {
         return result
     }
     render() {
-        const role = localStorage.getItem('role');
+        const { role } = this.props
         return (
             <Fragment>
                 {
-                    role === '1' ?
+                    role=== 1 ?
                         this.showComponent() :
                         <Redirect to='/' />
                 }

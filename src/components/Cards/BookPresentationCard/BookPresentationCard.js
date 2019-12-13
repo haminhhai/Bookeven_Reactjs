@@ -32,8 +32,8 @@ class BPCard extends Component {
   }
 
   componentDidMount() {
-    const role = localStorage.getItem('role')
-    if (role === '2')
+    const {role} = this.props
+    if (role === 2)
       this.setState({
         data: roles.manager.couple_btn
       })
@@ -41,7 +41,7 @@ class BPCard extends Component {
   }
   render() {
     const { data, detailBook, modal } = this.state
-    const { fieldsBook, updateListBook, fetchListBook } = this.props
+    const { fieldsBook, updateListBook, fetchListBook, role } = this.props
     var book = {
       id: 1,
       src: '',
@@ -55,7 +55,6 @@ class BPCard extends Component {
     }
     if (this.props.book !== undefined)
       book = this.props.book
-    const role = localStorage.getItem('role')
     return (
       <div className='bpcard-container'>
         <MDBCard style={{ minWidth: '14rem', height: 'auto' }} className='text-center'>
@@ -101,7 +100,7 @@ class BPCard extends Component {
 
                 <span
                   className='cart_edit'
-                  onClick={role === '1' ? () => this.onAddToCart(book) : () => this.showModal(book)}>
+                  onClick={role === 1 ? () => this.onAddToCart(book) : () => this.showModal(book)}>
                   <div>
                     <MDBIcon icon={data.r_icon} />
                   </div>

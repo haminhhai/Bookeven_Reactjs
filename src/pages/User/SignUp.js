@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { MDBBtn, MDBIcon, MDBInput } from 'mdbreact'
 
+import { MSG_PASSWORD_CONSISTENT } from '../../const/message'
 class SignUp extends Component {
     state = {
         email: '',
@@ -13,8 +14,16 @@ class SignUp extends Component {
     submitHandler = event => {
         event.preventDefault();
         event.target.className += " was-validated";
-
-
+        const { email, fullname, phone, password, confirmpassword } = this.state
+        const { signup } = this.props
+        if( password !== confirmpassword )
+        {
+            this.$utils.toastError(MSG_PASSWORD_CONSISTENT)
+            this.setState({ confirmpassword: ''})
+        }
+        else {
+            signup(email, password, fullname, phone)
+        }
     };
 
     changeHandler = event => {

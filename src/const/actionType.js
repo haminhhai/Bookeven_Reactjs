@@ -149,3 +149,36 @@ export const ADD_COMMENT = 'ADD_COMMENT'
 export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS'
 
 export const ADD_COMMENT_FAILED = 'ADD_COMMENT_FAILED'
+
+//AUTHENTICAL ACTIONS
+export const SIGN_UP = 'SIGN_UP'
+
+export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS'
+
+export const SIGN_UP_FAILED = 'SIGN_UP_FAILED'
+
+export const LOGIN = 'LOGIN'
+
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+
+export const LOGIN_FAILED = 'LOGIN_FAILED'
+
+export const LOGOUT = 'LOGOUT'
+
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
+
+export const LOGOUT_FAILED = 'LOGOUT_FAILED'
+
+export const GET_USER = 'GET_USER'
+
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS'
+
+export const GET_USER_FAILED = 'GET_USER_FAILED'
+
+export const UPDATE_USER = 'UPDATE_USER'
+
+export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS'
+
+export const UPDATE_USER_FAILED = 'UPDATE_USER_FAILED'
+
+export const DELETE_INFO = 'DELETE_INFO'

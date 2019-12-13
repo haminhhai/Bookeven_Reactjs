@@ -40,9 +40,9 @@ export default class CusomerRoute extends Component {
         return result
     }
     render() {
-        const role = localStorage.getItem('role');
+        const { role } = this.props
         return (
-            role === '2' ?
+            role === 2 ?
                 this.showComponent() :
                 <Redirect to='/' />
 

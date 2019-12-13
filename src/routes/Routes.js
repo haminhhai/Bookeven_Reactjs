@@ -11,11 +11,14 @@ import Footer from '../layouts/Footer/Footer'
 
 import * as bookActions from '../actions/book'
 import * as cartActions from '../actions/cart'
+import * as accActions from '../actions/account'
 import { convertVietnamese } from '../utils/Utils'
 import CustomerRoutes from './CustomerRoutes'
 import ManagerRoutes from './ManagerRoutes'
 import NotFound from '../pages/NotFound';
 import ManSignup from '../pages/ManSignup';
+
+import axiosService from '../utils/axiosService'
 
 var routes = [
     {
@@ -56,12 +59,23 @@ class Routes extends Component {
     }
 
     componentDidMount() {
-        var { bookActions, cartActions } = this.props
+        var { bookActions, cartActions, accActions } = this.props
         const { fetchListBook, fetchListFieldsbook } = bookActions
         const { fetchCart } = cartActions
+        const { getUser } = accActions
         fetchListBook()
         fetchListFieldsbook()
         fetchCart()
+        const token = localStorage.getItem('TOKEN');
+        if (token) {
+            axiosService.setHeader('Authorization', `Bearer ${token}`);
+        }
+        this.getUser(getUser)
+    }
+
+    getUser = func => {
+        const ID = localStorage.getItem('ID')
+        ID && func(ID)
     }
 
     generateRoutes() {
@@ -123,17 +137,17 @@ class Routes extends Component {
     }
     render() {
         const { done, routes } = this.state
-        var { listBooks, fieldsBook } = this.props.books
+        const { info, books } = this.props
+        var { listBooks, fieldsBook } = books
         if ((listBooks.length > 0 && fieldsBook.length > 0 && !done))
             this.generateRoutes()
-        const role = localStorage.getItem('role')
         return (
             <Switch>
                 {routes}
                 {
-                    role === '1' ?
-                        <CustomerRoutes /> :
-                        <ManagerRoutes />
+                    info.role === 1 ?
+                        <CustomerRoutes role={info.role} /> :
+                        <ManagerRoutes role={info.role} />
                 }
                 <Route exact path="/404" component={NotFound} />
                 <Redirect to="/404" />
@@ -156,13 +170,15 @@ Routes.propTypes = {
 const mapStateToProps = state => {
     return {
         books: state.books,
+        info: state.account.info
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         bookActions: bindActionCreators(bookActions, dispatch),
-        cartActions: bindActionCreators(cartActions, dispatch)
+        cartActions: bindActionCreators(cartActions, dispatch),
+        accActions: bindActionCreators(accActions, dispatch),
     }
 }
 

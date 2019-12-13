@@ -1,29 +1,50 @@
 import axios from 'axios'
-
+import {logout} from '../actions/auth'
 class AxiosService {
     constructor() {
-        const instance = axios.create()
-        instance.interceptors.response.use(
+        const service = axios.create({
+            headers: {}
+        })
+        service.interceptors.response.use(
             this.handleSuccess,
             this.handleError
         )
-        this.instance = instance
+        this.service = service
+    }
+
+    setHeader(name, value) {
+        this.service.defaults.headers.common[name] = value;
+    }
+
+    removeHeader(name) {
+        delete this.service.defaults.headers.common[name];
     }
 
     handleSuccess(response) {
         return response
     }
 
-    handleError(error) {
-        return Promise.reject(error)
-    }
+    handleError = error => {
+        switch (error.response.status) {
+            case 401:
+                this.redirectTo(document, '/');
+                localStorage.removeItem('info')
+                break;
+            default:
+                return Promise.reject(error);
+        }
+    };
+
+    redirectTo = (document, path) => {
+        document.location = path;
+    };
 
     get(endpoint) {
-        return this.instance.get(endpoint)
+        return this.service.get(endpoint)
     }
 
     post(endpoint, payload) {
-        return this.instance.request({
+        return this.service.request({
             method: 'POST',
             url: endpoint,
             responseType: 'json',
@@ -31,7 +52,7 @@ class AxiosService {
         });
     }
     put(endpoint, payload) {
-        return this.instance.request({
+        return this.service.request({
             method: 'PUT',
             url: endpoint,
             responseType: 'json',
@@ -40,7 +61,7 @@ class AxiosService {
     }
 
     delete(endpoint, payload) {
-        return this.instance.request({
+        return this.service.request({
             method: 'DELETE',
             url: endpoint,
             responseType: 'json',

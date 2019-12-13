@@ -6,6 +6,7 @@ import { MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBBtn, MDBIcon
 
 import '../../styles/reglog.scss'
 import * as uiActions from '../../actions/ui'
+import * as authActions from '../../actions/auth'
 import SignIn from './SignIn';
 import SignUp from './SignUp'
 
@@ -24,7 +25,8 @@ class ModalAuth extends Component {
 
     }
     render() {
-        var { numTab, isOpen } = this.props.ui.toggleModal 
+        var { numTab, isOpen } = this.props.ui.toggleModal
+        const { signup, login } = this.props.authActions
         return (
             <div className='card-reg-log'>
 
@@ -45,7 +47,7 @@ class ModalAuth extends Component {
                     <MDBTabContent activeItem={numTab} >
                         <MDBTabPane tabId={1} role="tabpanel">
                             <MDBModalBody>
-                                <SignIn/>
+                                <SignIn login={login}/>
                             </MDBModalBody>
                             <MDBModalFooter>
                                 <div className='float-left text-left text-md-right'>
@@ -60,7 +62,7 @@ class ModalAuth extends Component {
                         </MDBTabPane>
                         <MDBTabPane tabId={2} role="tabpanel">
                             <MDBModalBody>
-                                <SignUp/>
+                                <SignUp signup={signup}/>
                             </MDBModalBody>
                             <MDBModalFooter>
 
@@ -92,6 +94,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         uiActions: bindActionCreators(uiActions, dispatch),
+        authActions: bindActionCreators(authActions, dispatch)
     }
 }
 

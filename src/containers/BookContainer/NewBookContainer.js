@@ -8,10 +8,11 @@ import NBBtn from '../../components/Buttons/NewBookBtn/NewBookBtn';
 class NewBookContainer extends Component {
     state = {  }
     render() { 
-        const { fieldsBook } = this.props
-        return (
-            <NBBtn fieldsBook={fieldsBook}/>
-        )
+        const { fieldsBook, info } = this.props
+        let xhtml = null
+        if (info.role === 2)
+            xhtml = <NBBtn fieldsBook={fieldsBook}/>
+        return xhtml
     }
 }
 
@@ -21,7 +22,8 @@ NewBookContainer.propTypes = {
 
 const mapStateToProps = state => {
     return {
-        fieldsBook: state.books.fieldsBook
+        fieldsBook: state.books.fieldsBook,
+        info: state.account.info
     }
 }
 

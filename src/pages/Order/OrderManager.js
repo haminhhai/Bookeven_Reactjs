@@ -56,7 +56,7 @@ class OrderManager extends Component {
     }
     render() {
         const { modal, data, address } = this.state
-        const { orders, updateOrder } = this.props
+        const { orders, updateOrder, role } = this.props
         return (
             <div>
                 <Header carousel={false} parent='Tình hình đơn hàng' />
@@ -114,7 +114,8 @@ class OrderManager extends Component {
                             address={address}
                             closeModal={this.closeModal}
                             modal={modal} 
-                            updateOrder={updateOrder}/>}
+                            updateOrder={updateOrder}
+                            role={role} />}
                 </div>
             </div>
         );
