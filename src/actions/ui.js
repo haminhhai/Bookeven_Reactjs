@@ -21,10 +21,4 @@ export const closeModal = () => {
     }
 }
 
-export const changeMessage =  message => {
-    return {
-        type: CHANGE_MESSAGE,
-        message, 
-    }
-}
 

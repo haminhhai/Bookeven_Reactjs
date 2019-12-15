@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn, } from 'mdbreact';
 import Header from '../../layouts/Header/Header'
 import '../../styles/cart.scss'
-import MessageContainer from '../../containers/MessageContainer';
 
 class Cart extends Component {
     constructor(props) {
@@ -23,7 +22,6 @@ class Cart extends Component {
 
                 <div className='cart-wrapper'>
                     <div className='container'>
-                        <MessageContainer />
                         <MDBTable className='mt-4'>
                             {
                                 typeof children[0] !== 'string' &&

@@ -364,17 +364,6 @@
   ],
   "cart": [
     {
-      "id": 6,
-      "src": "https://nxbkimdong.com.vn/sites/default/files/styles/uc_product/public/giao-duc-nhi-dong_bia-final-in-1.jpg?itok=odJolgFH",
-      "title": "Giáo dục nhi đồng 1",
-      "author": "Đạm Phương Nữ Sử",
-      "inventory": 1,
-      "realPrice": 55000,
-      "percentDiscount": 10,
-      "topic": 2,
-      "quantity": 1
-    },
-    {
       "id": 9,
       "src": "https://nxbkimdong.com.vn/sites/default/files/styles/uc_product/public/yoga-cho-tre-em_bia_tb2019-1.jpg?itok=XTTcaHQN",
       "title": "Yoga cho trẻ em",
@@ -384,7 +373,7 @@
       "topic": 2,
       "inventory": 26,
       "rate": 1,
-      "quantity": 1
+      "quantity": 2
     }
   ],
   "account": [

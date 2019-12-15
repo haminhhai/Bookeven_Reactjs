@@ -105,11 +105,8 @@ export const deleteAddressFailed = error => {
     }
 }
 
-export const getUser = id => ({
+export const getUser = () => ({
     type: types.GET_USER,
-    payload: {
-        id
-    }
 });
 
 export const getUserSuccess = data => ({

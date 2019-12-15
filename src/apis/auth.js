@@ -9,8 +9,8 @@ export const login = data => {
     return axiosService.post(`${API_URL}/login`, data)
 }
 
-export const logout = data => {
-    return axiosService.post(`${API_URL}/logout`, data)
+export const logout = () => {
+    return axiosService.get(`${API_URL}/logout`)
 }
 
 

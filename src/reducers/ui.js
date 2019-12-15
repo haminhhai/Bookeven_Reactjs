@@ -6,7 +6,6 @@ const initialState = {
         isOpen: false,
     },
     showLoading: false,
-    message: ''
 }
 
 const reducer = (state = initialState, action) => {
@@ -38,12 +37,6 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 showLoading: false
-            }
-
-        case types.CHANGE_MESSAGE:
-            return {
-                ...state,
-                message: action.message
             }
         default: return state
     }

@@ -13,16 +13,14 @@ class CartItem extends Component {
     }
 
     onDelete = product => {
-        var { onRemoveProduct, onChangeMessage } = this.props
+        var { onRemoveProduct } = this.props
         onRemoveProduct(product)
-        onChangeMessage(msg.MSG_DELETE_BOOK_IN_CART_SUCCESS)
     }
 
     onChangeQuantity = (e) => {
-        var { onUpdateProduct, onChangeMessage } = this.props
+        var { onUpdateProduct } = this.props
         var { item } = this.props
         onUpdateProduct(item, e)
-        onChangeMessage(msg.MSG_UPDATE_CART_SUCESS)
 
     }
     render() {

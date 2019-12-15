@@ -67,15 +67,14 @@ class Routes extends Component {
         fetchListFieldsbook()
         fetchCart()
         const token = localStorage.getItem('TOKEN');
-        if (token) {
-            axiosService.setHeader('Authorization', `Bearer ${token}`);
+        const email = localStorage.getItem('EMAIL');
+        const id = localStorage.getItem('ID');
+        if (token && email && id) {
+            axiosService.setHeader('authorization', `Bearer ${token}`)
+            axiosService.setHeader('email', email)
+            axiosService.setHeader('id', id)
         }
-        this.getUser(getUser)
-    }
-
-    getUser = func => {
-        const ID = localStorage.getItem('ID')
-        ID && func(ID)
+        id && getUser()
     }
 
     generateRoutes() {

@@ -95,11 +95,10 @@ function* watchDeleteAddressAction({ payload }) {
     }
 }
 
-function* watchGetUserAction({ payload }) {
-    const { id } = payload
+function* watchGetUserAction() {
     try {
         yield put(showLoading());
-        const res = yield call(getInfo, id)
+        const res = yield call(getInfo)
         console.log(res)
         const { status, data } = res
         if (status === STATUS_CODE.SUCCESS) {

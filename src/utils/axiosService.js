@@ -13,7 +13,7 @@ class AxiosService {
     }
 
     setHeader(name, value) {
-        this.service.defaults.headers.common[name] = value;
+        this.service.defaults.headers.common[name] = value
     }
 
     removeHeader(name) {
@@ -27,8 +27,8 @@ class AxiosService {
     handleError = error => {
         switch (error.response.status) {
             case 401:
-                this.redirectTo(document, '/');
-                localStorage.removeItem('info')
+                const id = localStorage.getItem('ID')
+                logout(id)
                 break;
             default:
                 return Promise.reject(error);

@@ -9,6 +9,8 @@ import {
     delay
 } from 'redux-saga/effects';
 import * as types from '../const/actionType'
+import { hideLoading, showLoading } from '../actions/ui';
+import _get from 'lodash/get';
 import {
     fetchAllListOrdersSuccess, fetchAllListOrdersFailed,
     fetchListOrdersByIdSuccess, fetchListOrdersByIdFailed,
@@ -25,24 +27,40 @@ import moment from 'moment'
 function* watchfetchAllListOrders() {
     while (true) {
         yield take(types.FETCH_ALL_LIST_ORDER)
-        const res = yield call(fetchAllListOrders)
-        const { status, data } = res
-        if (status === STATUS_CODE.SUCCESS) {
-            yield put(fetchAllListOrdersSuccess(data))
-        } else {
-            yield put(fetchAllListOrdersFailed(data))
+        try {
+            yield put(showLoading())
+            const res = yield call(fetchAllListOrders)
+            const { status, data } = res
+            if (status === STATUS_CODE.SUCCESS) {
+                yield put(fetchAllListOrdersSuccess(data))
+            } else {
+                yield put(fetchAllListOrdersFailed(data))
+            }
+        } catch (error) {
+            const message = _get(error, 'response.data.message', {});
+            yield put(fetchAllListOrdersFailed(message));
+        } finally {
+            yield put(hideLoading())
         }
     }
 }
 
 function* watchfetchListOrdersById({ payload }) {
     const { id } = payload
-    const res = yield call(fetchListOrdersById, id)
-    const { status, data } = res
-    if (status === STATUS_CODE.SUCCESS) {
-        yield put(fetchListOrdersByIdSuccess(data))
-    } else {
-        yield put(fetchListOrdersByIdFailed(data))
+    try {
+        yield put(showLoading())
+        const res = yield call(fetchListOrdersById, id)
+        const { status, data } = res
+        if (status === STATUS_CODE.SUCCESS) {
+            yield put(fetchListOrdersByIdSuccess(data))
+        } else {
+            yield put(fetchListOrdersByIdFailed(data))
+        }
+    } catch (error) {
+        const message = _get(error, 'response.data.message', {});
+        yield put(fetchListOrdersByIdFailed(message));
+    } finally {
+        yield put(hideLoading())
     }
 }
 
@@ -67,23 +85,37 @@ function* watchCreateOrder({ payload }) {
         createAt: moment(time).unix(),
         endTime: '-'
     }
-    const res = yield call(createOrder, body)
-    const { status, data } = res
-    if (status === STATUS_CODE.CREATED) {
-        yield put(createOrderSuccess(data))
-        toastSuccess(msg.MSG_CREATE_ORDER_SUCCESS)
+    try {
+        yield put(showLoading())
+        const res = yield call(createOrder, body)
+        const { status, data } = res
+        if (status === STATUS_CODE.CREATED) {
+            yield put(createOrderSuccess(data))
+        }
+        else yield put(createOrderFailed(data))
+    } catch (error) {
+        const message = _get(error, 'response.data.message', {});
+        yield put(createOrderFailed(message));
+    } finally {
+        yield put(hideLoading())
     }
-    else yield put(createOrderFailed(data))
 }
 
 function* watchUpdateOrder({ payload }) {
-    const res = yield call(updateOrder, payload.data)
-    const { status, data } = res
-    if (status === STATUS_CODE.SUCCESS) {
-        toastSuccess(msg.MSG_UPDATE_ORDER_SUCCESS)
-        yield put(updateOrderSuccess(data))
+    try {
+        const res = yield call(updateOrder, payload.data)
+        const { status, data } = res
+        if (status === STATUS_CODE.SUCCESS) {
+            toastSuccess(msg.MSG_UPDATE_ORDER_SUCCESS)
+            yield put(updateOrderSuccess(data))
+        }
+        else yield put(updateOrderFailed(data))
+    } catch (error) {
+        const message = _get(error, 'response.data.message', {});
+        yield put(updateOrderFailed(message));
+    } finally {
+        yield put(hideLoading())
     }
-    else yield put(updateOrderFailed(data))
 }
 
 function* orderSaga() {

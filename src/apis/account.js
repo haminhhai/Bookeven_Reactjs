@@ -23,10 +23,10 @@ export const deleteAddress = id => {
 // http://api_url/user
 const url_user = 'user'
 
-export const getInfo = id => {
-    return axiosService.get(`${API_URL}/${url_user}/${id}`)
+export const getInfo = () => {
+    return axiosService.get(`${API_URL}/${url_user}/info`)
 }
 
 export const updateInfo = data => {
-    return axiosService.put(`${API_URL}/${url_user}/${data.id}`, data)
+    return axiosService.put(`${API_URL}/${url_user}/update`, data)
 }

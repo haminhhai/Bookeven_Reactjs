@@ -56,11 +56,13 @@ function* processLogin({ payload }) {
             yield put(loginSuccess(data));
 
             const { token, email, id } = data;
-            axiosService.setHeader('Authorization', `Bearer ${token}`);
-            axiosService.setHeader('Email', email);
+            axiosService.setHeader('authorization', `Bearer ${token}`);
+            axiosService.setHeader('email', email);
+            axiosService.setHeader('id', parseInt(id));
             localStorage.setItem('TOKEN', token);
             localStorage.setItem('ID', id)
-            yield put(getUser(id))
+            localStorage.setItem('EMAIL', email)
+            yield put(getUser())
             yield put(closeModal())
         } else {
             yield put(loginFailed(data));
@@ -78,14 +80,15 @@ function* processLogout({ payload }) {
     yield put(showLoading());
     try {
         const resp = yield call(logout, { id });
-        console.log(resp)
         const { data, status } = resp;
         if (status === STATUS_CODE.SUCCESS) {
             yield put(logoutSuccess(data));
-            localStorage.removeItem('info')
             localStorage.removeItem('ID')
-            axiosService.removeHeader('Authorization')
-            axiosService.removeHeader('Email')
+            localStorage.removeItem('TOKEN')
+            localStorage.removeItem('EMAIL')
+            axiosService.removeHeader('authorization')
+            axiosService.removeHeader('email')
+            axiosService.removeHeader('id');
             yield put(deleteInfo())
         } else {
             yield put(logoutFailed(data));

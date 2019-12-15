@@ -25,7 +25,7 @@ class OrderContainer extends Component {
     render() {
         const { orders, address, orderActions, info } = this.props
         const { updateOrder } = orderActions
-        if (info.role === 1)
+        if (info.role === 1 )
             return <OrderCustomer orders={orders} address={address} role={info.role} />
         else return <OrderManager orders={orders} address={address} updateOrder={updateOrder} role={info.role} />
     }

@@ -8,12 +8,10 @@ import CartTotal from '../pages/Cart/CartTotal'
 
 import * as Message from '../const/message'
 import * as cartActions from '../actions/cart'
-import * as uiActions from '../actions/ui'
 class CartContainer extends Component {
 
   showCartItem = cart => {
-    var { cartActions, uiActions } = this.props
-    const { changeMessage } = uiActions
+    var { cartActions } = this.props
     const { updateCart, removeCart } = cartActions
     var res = Message.MSG_CART_EMPTY
     if (cart.length > 0)
@@ -22,7 +20,6 @@ class CartContainer extends Component {
             key={index}
             item={item}
             onRemoveProduct={removeCart}
-            onChangeMessage={changeMessage}
             onUpdateProduct={updateCart} />
       })
 
@@ -49,9 +46,6 @@ class CartContainer extends Component {
 
 CartContainer.propTypes = {
   cart: PropTypes.array,
-  uiActions: PropTypes.shape({
-    changeMessage: PropTypes.func
-  }),
   cartActions: PropTypes.shape({
     updateCart: PropTypes.func,
     removeCart: PropTypes.func,
@@ -66,7 +60,6 @@ const MapStateToProps = state => {
 
 const MapDispatchToProps = dispatch => {
   return {
-    uiActions: bindActionCreators(uiActions, dispatch),
     cartActions: bindActionCreators(cartActions, dispatch)
   }
 }
