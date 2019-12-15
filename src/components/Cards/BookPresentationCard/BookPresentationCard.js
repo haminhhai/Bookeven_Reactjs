@@ -8,6 +8,7 @@ import * as cont from './const'
 import './style.scss'
 import { roles } from '../../../const/config'
 import ModalEditBook from './ModalEditBook';
+import empty from '../../../assets/empty.jpg'
 class BPCard extends Component {
   state = {
     data: {},
@@ -15,9 +16,15 @@ class BPCard extends Component {
     detailBook: {}
   }
 
-  onAddToCart = book => {
-    this.props.onAddToCart(book)
-
+  checkAuthen = book => {
+    const { role, authen, onAddToCart, openModal } = this.props
+    if(authen) {
+      if(role === 1)
+        onAddToCart(book)
+      else this.showModal(book)
+    } else {
+      openModal(1, true)
+    }
   }
 
   showModal = data => {
@@ -41,10 +48,10 @@ class BPCard extends Component {
   }
   render() {
     const { data, detailBook, modal } = this.state
-    const { fieldsBook, updateListBook, fetchListBook, role } = this.props
+    const { fieldsBook, updateListBook, fetchListBook } = this.props
     var book = {
       id: 1,
-      src: '',
+      src: empty,
       title: '',
       author: '',
       realPrice: 0,
@@ -100,7 +107,7 @@ class BPCard extends Component {
 
                 <span
                   className='cart_edit'
-                  onClick={role === 1 ? () => this.onAddToCart(book) : () => this.showModal(book)}>
+                  onClick={() => this.checkAuthen(book)}>
                   <div>
                     <MDBIcon icon={data.r_icon} />
                   </div>

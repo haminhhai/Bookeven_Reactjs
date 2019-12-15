@@ -103,6 +103,7 @@ function* watchCreateOrder({ payload }) {
 
 function* watchUpdateOrder({ payload }) {
     try {
+        yield put(showLoading())
         const res = yield call(updateOrder, payload.data)
         const { status, data } = res
         if (status === STATUS_CODE.SUCCESS) {

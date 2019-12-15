@@ -42,8 +42,8 @@ function* watchGetAddressAction() {
 }
 
 function* watchCreateAddressAction({ payload }) {
-    yield put(showLoading());
     try {
+        yield put(showLoading());
         const res = yield call(createNewAddress, payload.data)
         const { status, data } = res
         if (status === STATUS_CODE.CREATED) {

@@ -18,8 +18,8 @@ import {  getUser, deleteInfo } from '../actions/account';
 
 function* processSignup({ payload }) {
     const { email, password, phone, fullname } = payload;
-    yield put(showLoading());
     try {
+        yield put(showLoading());
         const resp = yield call(signup, {
             email,
             password,
@@ -45,8 +45,8 @@ function* processSignup({ payload }) {
 
 function* processLogin({ payload }) {
     const { email, password } = payload;
-    yield put(showLoading());
     try {
+        yield put(showLoading());
         const resp = yield call(login, {
             email,
             password
@@ -77,8 +77,8 @@ function* processLogin({ payload }) {
 
 function* processLogout({ payload }) {
     const { id } = payload;
-    yield put(showLoading());
     try {
+        yield put(showLoading());
         const resp = yield call(logout, { id });
         const { data, status } = resp;
         if (status === STATUS_CODE.SUCCESS) {

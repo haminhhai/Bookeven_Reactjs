@@ -19,19 +19,14 @@ class BookDetailContainer extends Component {
             if (book.inventory > checkExist[0].quantity) {
                 if (checkExist[0].quantity + quantity >= book.inventory) {
                     addToCart(book, book.inventory - checkExist[0].quantity)
-                    this.$utils.addToCartSuccess()
                 }
                 else {
                     addToCart(book, quantity)
-                    this.$utils.addToCartSuccess()
                 }
             }
-            else
-                this.$utils.addToCartFail()
         }
         else {
             addToCart(book, quantity)
-            this.$utils.addToCartSuccess()
         }
     }
 
@@ -42,12 +37,16 @@ class BookDetailContainer extends Component {
 
     }
     render() {
-        const { parent, detailBook } = this.props //parent = this.props.parent
+        const { parent, detailBook, role, bookActions, fieldsBook } = this.props //parent = this.props.parent
+        const { updateListBook } = bookActions
         return (
             <BookDetail
                 parent={parent}
                 detailBook={detailBook}
-                onAddToCart={this.onAddToCart} />
+                onAddToCart={this.onAddToCart}
+                updateListBook={updateListBook}
+                role={role} 
+                fieldsBook={fieldsBook} />
         );
     }
 }
@@ -68,14 +67,16 @@ BookDetailContainer.propTypes = {
 const MapStateToProps = state => {
     return {
         detailBook: state.books.detailBook,
-        cart: state.cart
+        cart: state.cart,
+        role: state.account.info.role,
+        fieldsBook: state.books.fieldsBook,
     }
 }
 
 const MapDispatchToProps = dispatch => {
     return {
         cartActions: bindActionCreators(cartActions, dispatch),
-        bookActions: bindActionCreators(bookActions, dispatch)
+        bookActions: bindActionCreators(bookActions, dispatch),
     }
 }
 

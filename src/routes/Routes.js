@@ -59,13 +59,12 @@ class Routes extends Component {
     }
 
     componentDidMount() {
-        var { bookActions, cartActions, accActions } = this.props
+        var { bookActions, cartActions, accActions, authen } = this.props
         const { fetchListBook, fetchListFieldsbook } = bookActions
         const { fetchCart } = cartActions
         const { getUser } = accActions
         fetchListBook()
         fetchListFieldsbook()
-        fetchCart()
         const token = localStorage.getItem('TOKEN');
         const email = localStorage.getItem('EMAIL');
         const id = localStorage.getItem('ID');
@@ -75,6 +74,8 @@ class Routes extends Component {
             axiosService.setHeader('id', id)
         }
         id && getUser()
+        if (authen)
+            fetchCart()
     }
 
     generateRoutes() {
@@ -169,7 +170,8 @@ Routes.propTypes = {
 const mapStateToProps = state => {
     return {
         books: state.books,
-        info: state.account.info
+        info: state.account.info,
+        authen: state.auth.authen
     }
 }
 

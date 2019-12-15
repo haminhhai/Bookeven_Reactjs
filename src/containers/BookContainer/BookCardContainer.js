@@ -8,6 +8,7 @@ import BRCard from '../../components/Cards/BookRateCard/BookRateCard'
 
 import * as cartActions from '../../actions/cart'
 import * as bookActions from '../../actions/book'
+import * as uiActions from '../../actions/ui'
 class BookCardContainer extends Component {
 
   onAddToCart = book => {
@@ -22,23 +23,26 @@ class BookCardContainer extends Component {
       if (book.inventory > check[0].quantity) {
         addToCart(book, 1)
       }
-      else
-        this.$utils.addToCartFail()
     }
     else {
-
       addToCart(book, 1)
-      this.$utils.addToCartSuccess()
     }
   }
 
   render() {
-    const { listBooks, index, type, book, fieldsBook, bookActions, info } = this.props
+    const { listBooks, index, type, book, fieldsBook, bookActions, info, authen, uiActions } = this.props
     const { updateListBook, fetchListBook } = bookActions
     return (
       type === 'bp' ?
-
-          <BPCard book={book} onAddToCart={this.onAddToCart} fieldsBook={fieldsBook} updateListBook={updateListBook} fetchListBook={fetchListBook} role={info.role}/>
+        <BPCard
+          book={book}
+          onAddToCart={this.onAddToCart}
+          fieldsBook={fieldsBook}
+          updateListBook={updateListBook}
+          fetchListBook={fetchListBook}
+          role={info.role}
+          authen={authen} 
+          openModal={uiActions.openModal} />
         :
         <BRCard book={listBooks[index]} />
     );
@@ -63,14 +67,16 @@ const MapStateToProps = state => {
     listBooks: state.books.listBooks,
     cart: state.cart,
     fieldsBook: state.books.fieldsBook,
-    info: state.account.info
+    info: state.account.info,
+    authen: state.auth.authen
   }
 }
 
 const MapDispatchToProps = dispatch => {
   return {
     cartActions: bindActionCreators(cartActions, dispatch),
-    bookActions: bindActionCreators(bookActions, dispatch)
+    bookActions: bindActionCreators(bookActions, dispatch),
+    uiActions: bindActionCreators(uiActions, dispatch),
   }
 }
 

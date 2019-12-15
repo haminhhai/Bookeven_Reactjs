@@ -1,0 +1,21 @@
+.rate-form {
+  border: 1px solid #a59c9c;
+  border-radius: 15px;
+  padding: 10px;
+  & > #rate-card {
+    border-right: 1px solid #a59c9c;
+
+  }
+  & > div {
+    text-align: center;
+
+    h1 {
+      font-weight: bold;
+      color: #fadb14;
+    }
+  }
+
+  .user-rate {
+    margin-top: 5%;
+  }
+}

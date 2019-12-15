@@ -27,7 +27,6 @@ import { STATUS_CODE } from '../const/config'
 function* watchGetCartAction() {
     while (true) {
         try {
-            yield put(showLoading())
             yield take(types.FETCH_CART)
             const res = yield call(getCart)
             const { status, data } = res
@@ -39,9 +38,7 @@ function* watchGetCartAction() {
         } catch (error) {
             const message = _get(error, 'response.data.message', {});
             yield put(fetchCartFailed(message));
-        } finally {
-            yield put(hideLoading())
-        }
+        } 
     }
 }
 

@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { Rate } from "antd";
 import { Link } from 'react-router-dom'
 import './style.scss'
+import empty from '../../../assets/empty.jpg'
 class BRCard extends Component {
     state = {}
 
     render() {
         var book = {
             id: 1,
-            src: '',
+            src: empty,
             title: '',
             author: '',
             realPrice: 0,

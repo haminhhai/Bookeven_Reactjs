@@ -84,8 +84,8 @@ class OrderCustomer extends Component {
                                                 orders.map((item, index) =>
                                                     <tr key={index} onClick={() => this.showModal(item)} style={{ cursor: 'pointer' }}>
                                                         <td>{item.id}</td>
-                                                        <td className='text-center'>{this.$utils.formatTimeToDate(item.createAt, 'DD/MM/YYYY')}</td>
-                                                        <td className='text-center'>{this.$utils.formatTimeToDate(item.endTime, 'DD/MM/YYYY')}</td>
+                                                        <td className='text-center'>{this.$utils.converTSToDate(item.createAt, 'DD/MM/YYYY')}</td>
+                                                        <td className='text-center'>{this.$utils.converTSToDate(item.endTime, 'DD/MM/YYYY')}</td>
                                                         <td>{this.$utils.calculateTotalCart(item.listBooks, 'vnd')}</td>
                                                         <td>{this.formatStatus(item.status)}</td>
                                                     </tr>

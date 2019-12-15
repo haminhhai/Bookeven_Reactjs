@@ -11,38 +11,6 @@ export const formatVND = value => {
   return numeral(value).format('0,0') + ' đ'
 }
 
-export const addToCartSuccess = () => {
-  const key = 'updatable';
-  notification.success({
-    key: key,
-    message: msg.TITLE_SUCCESS,
-    description: msg.MSG_ADD_TO_CART_SUCCESS,
-  });
-  setTimeout(() => {
-    notification.success({
-      key: key,
-      message: msg.TITLE_SUCCESS,
-      description: msg.MSG_ADD_TO_CART_SUCCESS,
-    });
-  }, 1000);
-}
-
-export const addToCartFail = () => {
-  const key = 'updatable';
-  notification.error({
-    key: key,
-    message: msg.TITLE_FAIL,
-    description: msg.MSG_ADD_TO_CART_FAIL,
-  });
-  setTimeout(() => {
-    notification.error({
-      key: key,
-      essage: msg.TITLE_FAIL,
-      description: msg.MSG_ADD_TO_CART_FAIL,
-    });
-  }, 1000);
-}
-
 export const idGenerator = function () {
   return '_' + Math.random().toString(36).substr(2, 9);
 };
@@ -117,9 +85,13 @@ export const calTotalPrice = (realPrice, percent, quantity) => {
 }
 
 
-export const formatTimeToDate = (timestamp, format) => {
+export const converTSToDate = (timestamp, format) => {
   if (typeof timestamp !== 'number')
     return timestamp
   else
   return moment.unix(timestamp).format(format)
+}
+
+export const convertDateToTS = date => {
+  return moment(date).unix()
 }

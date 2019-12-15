@@ -38,8 +38,8 @@ class Comments extends React.Component {
           </p>
         }
         datetime={
-          <Tooltip title={this.$utils.formatTimeToDate(comment.time, 'HH:mm:ss DD-MM-YYYY')}>
-            <span>{moment(this.$utils.formatTimeToDate(comment.time, 'YYYY-MM-DD HH:mm:ss')).fromNow()}</span>
+          <Tooltip title={this.$utils.converTSToDate(comment.time, 'HH:mm:ss DD-MM-YYYY')}>
+            <span>{moment(this.$utils.converTSToDate(comment.time, 'YYYY-MM-DD HH:mm:ss')).fromNow()}</span>
           </Tooltip>
         }
       />

@@ -1,22 +1,17 @@
 import React, { Component } from 'react';
 
-import {  Checkbox } from 'antd'
 import { MDBBtn, MDBInput } from "mdbreact";
 
 import '../../../styles/account.scss'
-class EditAccount extends Component {
+class EditInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showEditPassword: false,
             fullnameEdit: '',
             phoneEdit: '',
             isUpdating: false
 
         }
-    }
-    toggleShowEditPW = () => {
-        this.setState({ showEditPassword: !this.state.showEditPassword })
     }
 
     changeHandler = event => {
@@ -37,7 +32,7 @@ class EditAccount extends Component {
         })
     }
     render() {
-        const { showEditPassword, fullnameEdit, phoneEdit, isUpdating} = this.state
+        const { fullnameEdit, phoneEdit, isUpdating} = this.state
         return (
             <form
                 className='needs-validation'
@@ -65,39 +60,6 @@ class EditAccount extends Component {
                             required
                         />
                     </div>
-                    <div className='col-12 container'>
-                        <Checkbox onChange={this.toggleShowEditPW}>Thay đổi mật khẩu</Checkbox>
-                    </div>
-                    {showEditPassword &&
-                        <div className='row container'>
-                            <div className='col-12'>
-                                <MDBInput
-                                    outline
-                                    label="Mật khẩu cũ"
-                                    type="password"
-                                    name='oldpass'
-                                    required
-                                />
-                            </div>
-                            <div className='col-12 '>
-                                <MDBInput
-                                    outline
-                                    label="Mật khẩu mới"
-                                    type="password"
-                                    name='newpass'
-                                    required
-                                />
-                            </div>
-                            <div className='col-12 '>
-                                <MDBInput
-                                    outline
-                                    label="Nhập lại"
-                                    type="password"
-                                    name='renewpass'
-                                    required
-                                />
-                            </div>
-                        </div>}
                     <div className='col-6 container'>
                         <MDBBtn disabled={!isUpdating} gradient='sunny-morning' type='submit'>Cập nhật</MDBBtn>
                     </div>
@@ -108,4 +70,4 @@ class EditAccount extends Component {
 }
 
 
-export default EditAccount;
+export default EditInfo;

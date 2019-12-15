@@ -52,7 +52,7 @@ class DetailOrder extends Component {
         const { toDate, status } = this.state
         const { data, updateOrder, closeModal } = this.props
         var body = data
-        body.endTime = moment(toDate).unix()
+        body.endTime = this.$utils.convertDateToTS(toDate)
         body.status = status
         updateOrder(body)
         closeModal()
@@ -86,7 +86,7 @@ class DetailOrder extends Component {
                                     {cont.CREATE_AT}
                                 </div>
                                 <div className='col-9 mb-3'>
-                                    {this.$utils.formatTimeToDate(data.createAt, 'DD/MM/YYYY')}
+                                    {this.$utils.converTSToDate(data.createAt, 'DD/MM/YYYY')}
                                 </div>
                                 <div className='col-3 font-weight-bold'>
                                     {cont.END_TIME}
@@ -100,7 +100,7 @@ class DetailOrder extends Component {
                                                 value={toDate}
                                                 placeholder='Chọn ngày nhận'
                                                 style={{ width: '40%' }} /> :
-                                            this.$utils.formatTimeToDate(data.endTime, 'DD/MM/YYYY')
+                                            this.$utils.converTSToDate(data.endTime, 'DD/MM/YYYY')
                                     }
                                     {
                                         role === 2 &&

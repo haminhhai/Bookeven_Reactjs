@@ -72,6 +72,9 @@
           padding-top: 20px;
         }
       }
+      & > .last-child {
+        border-bottom: none;
+      }
     }
   }
 }

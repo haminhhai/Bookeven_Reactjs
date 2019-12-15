@@ -10,7 +10,7 @@ import InputComment from '../components/Comments/InputComment';
 class CommentContainer extends Component {
 
   render() {
-    const { comments, bookActions } = this.props
+    const { comments, bookActions, authen, info } = this.props
     const { addComment } = bookActions
     return (
       <React.Fragment>
@@ -20,7 +20,7 @@ class CommentContainer extends Component {
             <Comments comment={item} key={index} />
           )
         }
-        <InputComment addComment={addComment}/>
+        <InputComment addComment={addComment} authen={authen} info={info}/>
       </React.Fragment>
     );
   }
@@ -35,7 +35,9 @@ CommentContainer.propTypes = {
 
 const MapStateToProps = state => {
   return {
-    comments: state.books.comments
+    comments: state.books.comments,
+    authen: state.auth.authen,
+    info: state.account.info
   }
 }
 

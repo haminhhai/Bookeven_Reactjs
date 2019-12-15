@@ -57,3 +57,26 @@ export const roles = {
         ]
     }
 }
+
+export const rateStatus = [
+    {
+        content: 'Rất không hài lòng!',
+        icon: 'angry'
+    },
+    {
+        content: 'Không hài lòng!',
+        icon: 'frown-open'
+    },
+    {
+        content: 'Bình thường!',
+        icon: 'meh'
+    },
+    {
+        content: 'Hài lòng!',
+        icon: 'grin-beam'
+    },
+    {
+        content: 'Rất hài lòng!',
+        icon: 'grin-stars'
+    },
+]

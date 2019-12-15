@@ -16,7 +16,11 @@ class Homepage extends Component {
   loopCard(min, max) {
     var items = []
     for (var i = min; i < max; i++)
-      items.push(<BookCardContainer key={i} index={i} type='bp' className='col-lg-3 col-md-6'/>)
+      items.push(
+        <div key={i} className='col-lg-3 col-md-6'>
+          <BookCardContainer key={i} index={i} type='bp' />
+        </div>
+      )
     return items
   }
   componentDidMount() {
@@ -38,7 +42,7 @@ class Homepage extends Component {
               </Link>
             </h3>
             <div className="row mt-5">
-              {this.loopCard(0, 4) }
+              {this.loopCard(0, 4)}
             </div>
           </div>
         </div>
@@ -51,7 +55,7 @@ class Homepage extends Component {
               </Link>
             </h3>
             <div className="row mt-5 ">
-              {this.loopCard(4, 8) }
+              {this.loopCard(4, 8)}
             </div>
           </div>
         </div>

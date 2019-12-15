@@ -11,9 +11,10 @@ import * as config from '../../const/config'
 
 import '../../styles/account.scss'
 import CreateAddress from './CreateAddress';
-import EditAccount from './Edit/EditAccount';
+import EditInfo from './Edit/EditInfo';
 import ListAddress from './ListAddress';
 import EditAddress from './Edit/EditAddress';
+import EditPassword from './Edit/EditPassword';
 
 const { TabPane } = Tabs;
 class Account extends Component {
@@ -81,7 +82,7 @@ class Account extends Component {
                                         type="card"
                                     >
                                         <TabPane tab="Tài khoản của tôi" key="1">
-                                            <EditAccount info={info}/>
+                                            <EditInfo info={info}/>
                                         </TabPane>
                                         {
                                             info.role === 1 &&
@@ -112,6 +113,9 @@ class Account extends Component {
                                                 </Tabs>
                                             </TabPane>
                                         }
+                                        <TabPane tab="Đổi mật khẩu" key="3">
+                                            <EditPassword />
+                                        </TabPane>
                                     </Tabs>
                                 </section>
                             </div>

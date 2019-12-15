@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReadMoreReact from 'read-more-react';
 import * as $ from 'jquery'
 
 import { MDBBtn, MDBTable, MDBTableBody, MDBBadge } from 'mdbreact';
@@ -7,27 +6,30 @@ import { Rate, InputNumber } from 'antd'
 
 import Header from '../../layouts/Header/Header'
 import CommentContainer from '../../containers/CommentContainer'
+import ModalEditBook from '../../components/Cards/BookPresentationCard/ModalEditBook'
 
 import '../../components/Exzoom/jquery.exzoom.js'
 import * as index from './index.js'
 
 import '../../styles/bookdetail.scss'
 import '../../components/Exzoom/jquery.exzoom.scss'
-
-
+import RateContainer from '../../containers/RateContainer';
 
 class BookDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            quantity: 1
+            quantity: 1,
+            modal: false
         }
     }
 
     changeQuantity = e => {
         this.setState({ quantity: e })
     }
-
+    toggleModal = () => {
+        this.setState({ modal: !this.state.modal })
+    }
     componentDidMount() {
         $(function () {
 
@@ -52,13 +54,19 @@ class BookDetail extends Component {
         this.props.onAddToCart(book, this.state.quantity)
     }
     render() {
-        const { parent, detailBook } = this.props //parent = this.props.parent
-        const { quantity } = this.state
+        const { parent, detailBook, updateListBook, fieldsBook, role } = this.props //parent = this.props.parent
+        const { quantity, modal } = this.state
+        console.log(role)
         let xhtml = null
         if (detailBook.hasOwnProperty('id'))
             xhtml = <div >
                 <Header carousel={false} parent={parent} child={detailBook.title} />
-
+                <ModalEditBook
+                    updateListBook={updateListBook}
+                    data={detailBook}
+                    closeModal={this.toggleModal}
+                    fieldsBook={fieldsBook}
+                    modal={modal} />
                 <div className='book-detail'>
                     <div className='container'>
                         <div className='book-general row'>
@@ -78,20 +86,25 @@ class BookDetail extends Component {
                                     <Rate disabled allowHalf defaultValue={4.5} />
                                     <p>(2 người đã đánh giá)</p>
                                 </div>
-                                <ReadMoreReact text={index.desc} readMoreText='Xem thêm' />
 
                                 <h4 className='mt-3'>
                                     <del className='mr-3'>{this.$utils.formatVND(detailBook.realPrice)}</del>
                                     <b>{this.$utils.calDiscountPrice(detailBook.realPrice, detailBook.percentDiscount)}</b>
                                 </h4>
                                 {
-                                    detailBook.inventory > 0 &&
-                                    <InputNumber className='mt-3' value={quantity} min={1} max={detailBook.inventory} onChange={this.changeQuantity} />
+                                    (detailBook.inventory > 0 && role === 1) &&
+                                    <React.Fragment>
+                                        <InputNumber className='mt-3' value={quantity} min={1} max={detailBook.inventory} onChange={this.changeQuantity} />
+                                        <MDBBtn className='add-cart-btn ml-3' onClick={() => this.addToCart(detailBook)}>Thêm vào giỏ</MDBBtn>
+                                    </React.Fragment>
                                 }
                                 {
-                                    detailBook.inventory > 0 ?
-                                        <MDBBtn className='add-cart-btn ml-3' onClick={() => this.addToCart(detailBook)}>Thêm vào giỏ</MDBBtn> :
-                                        <MDBBtn className='add-cart-btn' disabled>Hết hàng!</MDBBtn>
+                                    (detailBook.inventory === 0 && role === 1) &&
+                                    <MDBBtn className='add-cart-btn' disabled>Hết hàng!</MDBBtn>
+                                }
+                                {
+                                    role === 2 &&
+                                    <MDBBtn className='add-cart-btn' onClick={() => this.toggleModal()}>Chỉnh sửa</MDBBtn>
                                 }
                             </div>
                         </div>
@@ -119,6 +132,10 @@ class BookDetail extends Component {
                                 <div className='comment-system'>
                                     <CommentContainer />
                                 </div>
+                            </div>
+                            <div className='col-12 col-md-12 last-child'>
+                                <h3>Đánh giá</h3>
+                                <RateContainer />
                             </div>
                         </div>
                     </div>

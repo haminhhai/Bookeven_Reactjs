@@ -96,8 +96,8 @@ class OrderManager extends Component {
                                                             <td className='align-middle'>
                                                                 {this.filterAddress('phone', item.idAddress)}
                                                             </td>
-                                                            <td className='text-center align-middle'>{this.$utils.formatTimeToDate(item.createAt, 'DD/MM/YYYY')}</td>
-                                                            <td className='text-center'>{this.$utils.formatTimeToDate(item.endTime, 'DD/MM/YYYY')}</td>
+                                                            <td className='text-center align-middle'>{this.$utils.converTSToDate(item.createAt, 'DD/MM/YYYY')}</td>
+                                                            <td className='text-center'>{this.$utils.converTSToDate(item.endTime, 'DD/MM/YYYY')}</td>
                                                             <td className='align-middle'>{this.$utils.calculateTotalCart(item.listBooks, 'vnd')}</td>
                                                             <td className='align-middle'>{this.formatStatus(item.status)}</td>
                                                         </tr>

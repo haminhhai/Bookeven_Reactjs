@@ -3,9 +3,7 @@
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
     min-height: 540px !important;
-
-    .card-body {
-    }
+    max-height: 540px !important;
 
     &:hover {
       -webkit-transform: translateY(4px);

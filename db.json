@@ -374,6 +374,30 @@
       "inventory": 26,
       "rate": 1,
       "quantity": 2
+    },
+    {
+      "id": 1,
+      "src": "https://nxbkimdong.com.vn/sites/default/files/styles/uc_product/public/kim-dong_bia_195mmx260mm.jpg?itok=Wp5OCpwL",
+      "title": "Kim Đồng",
+      "author": "Nhiều tác giả",
+      "realPrice": 98000,
+      "percentDiscount": 10,
+      "topic": 1,
+      "inventory": 0,
+      "rate": 0,
+      "quantity": 1
+    },
+    {
+      "id": 3,
+      "src": "https://nxbkimdong.com.vn/sites/default/files/styles/uc_product/public/bac-ho-viet-di-chuc.jpg?itok=fuHz3kX0",
+      "title": "Bác Hồ viết di chúc và di chúc của Bác Hồ",
+      "author": "Nhiều tác giả",
+      "realPrice": 40000,
+      "percentDiscount": 15,
+      "topic": 1,
+      "inventory": 15,
+      "rate": 0,
+      "quantity": 1
     }
   ],
   "account": [
