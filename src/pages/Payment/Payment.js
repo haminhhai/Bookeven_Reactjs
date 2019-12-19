@@ -229,7 +229,7 @@ class Payment extends Component {
                                                 <MDBTableHead color='cloudy-knoxville-gradient'>
                                                     <tr>
                                                         <th>{cont.CART_BOOKNAME}</th>
-                                                        <th>{cont.CART_QUANTITY}</th>
+                                                        <th>{cont.CART_AMOUNT}</th>
                                                         <th>{cont.CART_TOTAL}</th>
                                                     </tr>
                                                 </MDBTableHead>
@@ -239,8 +239,8 @@ class Payment extends Component {
                                                         cart.map((item, i) =>
                                                             <tr key={i}>
                                                                 <td>{item.title}</td>
-                                                                <td>{item.quantity}</td>
-                                                                <td>{this.$utils.calTotalPrice(item.realPrice, item.percentDiscount, item.quantity)}</td>
+                                                                <td>{item.amount}</td>
+                                                                <td>{this.$utils.calTotalPrice(item.price, item.discount, item.amount)}</td>
                                                             </tr>
                                                         )
                                                     }

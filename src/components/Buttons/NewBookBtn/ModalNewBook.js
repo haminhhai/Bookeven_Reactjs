@@ -72,15 +72,15 @@ class ModalNewBook extends Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                const { name, author, topic, percentDiscount, realPrice, inventory, pages, size, publishDate, weight } = values
+                const { name, author, topic, discount, price, inventory, pages, size, publishDate, weight } = values
                 const body = {
                     id: data.id,
-                    src: imageUrl,
+                    image: imageUrl,
                     title: name,
                     author: author,
                     inventory: inventory,
-                    realPrice: realPrice,
-                    percentDiscount: percentDiscount,
+                    price: price,
+                    discount: discount,
                     topic: topic
                 }
                 updateListBook(body)
@@ -228,12 +228,12 @@ class ModalNewBook extends Component {
                                         </Form.Item>
                                     </div>
                                     <div className='col-6'>
-                                        <Form.Item label='Mã ISBN'>
-                                            {getFieldDecorator('isbn', {
+                                        <Form.Item label='Mã sách'>
+                                            {getFieldDecorator('id', {
                                                 rules: [
                                                     {
                                                         required: true,
-                                                        message: cont.REQUIRE_ISBN,
+                                                        message: cont.REQUIRE_ID,
                                                     },
                                                 ],
                                             })(
@@ -243,7 +243,7 @@ class ModalNewBook extends Component {
                                     </div>
                                     <div className='col-6'>
                                         <Form.Item label='Đơn giá'>
-                                            {getFieldDecorator('realPrice', {
+                                            {getFieldDecorator('price', {
                                                 rules: [
                                                     {
                                                         required: true,
@@ -283,7 +283,7 @@ class ModalNewBook extends Component {
                                     </div>
                                     <div className='col-4'>
                                         <Form.Item label='Giảm giá (%)'>
-                                            {getFieldDecorator('percentDiscount', {
+                                            {getFieldDecorator('discount', {
                                                 rules: [
                                                     {
                                                         required: true,

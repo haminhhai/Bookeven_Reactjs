@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import BookCategory from '../../pages/BookCategory/BookCategory'
+import BookField from '../../pages/BookField/BookField'
 import * as bookActions from '../../actions/book'
-class BookCategoryContainer extends Component {
+class BookFieldContainer extends Component {
     componentDidMount() {
         const { bookActions, id } = this.props
         const { filterBooksSingle } = bookActions
@@ -13,14 +13,20 @@ class BookCategoryContainer extends Component {
             filterBooksSingle(id)
     }
     render() {
-        const { parent, filtedBook } = this.props
-        return <BookCategory
-            parent={parent !== 'search' ? parent : `Kết quả tìm kiếm "${filtedBook.keyword}"`}
-            listBook={filtedBook.list} />
+        const { parent, filtedBook, path, bookActions, fieldsBook, history } = this.props
+        const { filterBooksMulti, getBooksByBFID } = bookActions
+        return <BookField
+            parent={parent}
+            filtedBook={filtedBook} 
+            path={path} 
+            filterBooksMulti={filterBooksMulti} 
+            fieldsBook={fieldsBook}
+            getBooksByBFID={getBooksByBFID}
+            history={history} />
     }
 }
 
-BookCategoryContainer.propTypes = {
+BookFieldContainer.propTypes = {
     filtedBook: PropTypes.shape({
         keyword: PropTypes.string
     }),
@@ -33,6 +39,8 @@ BookCategoryContainer.propTypes = {
 const mapStateToProps = state => {
     return {
         filtedBook: state.books.filtedBook,
+        path: state.router.location.pathname,
+        fieldsBook: state.books.fieldsBook
     }
 }
 
@@ -42,4 +50,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BookCategoryContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(BookFieldContainer);

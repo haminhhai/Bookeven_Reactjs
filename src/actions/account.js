@@ -78,20 +78,20 @@ export const updateAddressFailed = error => {
     }
 }
 
-export const deleteAddress = id => {
+export const deleteAddress = data => {
     return {
         type: types.DELETE_ADDRESS,
         payload: {
-            id
+            data
         }
     }
 }
 
-export const deleteAddressSuccess = id => {
+export const deleteAddressSuccess = data => {
     return {
         type: types.DELETE_ADDRESS_SUCCESS,
         payload: {
-            id
+            data
         }
     }
 }
@@ -139,6 +139,27 @@ export const updateUserSuccess = data => ({
 
 export const updateUserFailed = error => ({
     type: types.UPDATE_USER_FAILED,
+    payload: {
+        error
+    }
+});
+
+export const changePassword = data => ({
+    type: types.CHANGE_PASSWORD,
+    payload: {
+        data
+    }
+});
+
+export const changePasswordSuccess = data => ({
+    type: types.CHANGE_PASSWORD_SUCCESS,
+    payload: {
+        data
+    }
+});
+
+export const changePasswordFailed = error => ({
+    type: types.CHANGE_PASSWORD_FAILED,
     payload: {
         error
     }

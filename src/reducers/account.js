@@ -30,13 +30,8 @@ var account = (state = initialState, action) => {
         }
         case types.CREATE_NEW_ADDRESS_SUCCESS: {
             toastSuccess(msg.MSG_CREATED_ADDRESS_SUCCESS)
-            const { data } = action.payload
             return {
-                ...state,
-                address: [
-                    ...state.address,
-                    data
-                ]
+                ...state
             }
         }
         case types.CREATE_NEW_ADDRESS_FAILED: {
@@ -49,7 +44,7 @@ var account = (state = initialState, action) => {
         case types.UPDATE_ADDRESS_SUCCESS: {
             toastSuccess(msg.MSG_UPDATE_ADDRESS_SUCCESS)
             const { data } = action.payload
-            const index = state.address.findIndex(item => item.id === data.id)
+            const index = state.address.findIndex(item => item.id === data.address_id)
             const newList = [...state.address.slice(0, index), data, ...state.address.slice(index + 1)];
             return {
                 ...state,
@@ -65,8 +60,8 @@ var account = (state = initialState, action) => {
         }
         case types.DELETE_ADDRESS_SUCCESS: {
             toastSuccess(msg.MSG_DELETE_ADDRESS_SUCCESS)
-            const { id } = action.payload
-            const newList = state.address.filter(item => item.id !== id)
+            const { data } = action.payload
+            const newList = state.address.filter(item => item.id !== data.address_id)
             return {
                 ...state,
                 address: [...newList]
@@ -87,6 +82,38 @@ var account = (state = initialState, action) => {
             }
         }
         case types.GET_USER_FAILED: {
+            const { error } = action.payload
+            toastError(error)
+            return {
+                ...state,
+            }
+        }
+        case types.UPDATE_USER_SUCCESS: {
+            const { data } = action.payload
+            toastSuccess(msg.MSG_UPDATE_USER_SUCCESS)
+            return {
+                ...state,
+                info: {
+                    ...state.info,
+                    fullname: data.fullname,
+                    phone: data.phone
+                }
+            }
+        }
+        case types.UPDATE_USER_FAILED: {
+            const { error } = action.payload
+            toastError(error)
+            return {
+                ...state,
+            }
+        }
+        case types.CHANGE_PASSWORD_SUCCESS: {
+            toastSuccess(msg.MSG_CHANGE_PASSWORD_SUCCESS)
+            return {
+                ...state
+            }
+        }
+        case types.CHANGE_PASSWORD_FAILED: {
             const { error } = action.payload
             toastError(error)
             return {

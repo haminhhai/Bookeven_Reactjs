@@ -9,44 +9,49 @@ import * as bookActions from '../../actions/book'
 import * as cartActions from '../../actions/cart'
 class BookDetailContainer extends Component {
 
-    onAddToCart = (book, quantity) => {
+    onAddToCart = (book, amount) => {
         const { cart, cartActions } = this.props
         const { addToCart } = cartActions
         var checkExist = cart.filter(item => {
             return item.id === book.id
         })
         if (checkExist.length > 0) {
-            if (book.inventory > checkExist[0].quantity) {
-                if (checkExist[0].quantity + quantity >= book.inventory) {
-                    addToCart(book, book.inventory - checkExist[0].quantity)
+            if (book.inventory > checkExist[0].amount) {
+                if (checkExist[0].amount + amount >= book.inventory) {
+                    addToCart(book, book.inventory - checkExist[0].amount)
                 }
                 else {
-                    addToCart(book, quantity)
+                    addToCart(book, amount)
                 }
             }
         }
         else {
-            addToCart(book, quantity)
+            addToCart(book, amount)
         }
     }
 
     componentDidMount() {
-        const { bookActions, id } = this.props
-        bookActions.getDetailBook(id)
+        const { bookActions, path } = this.props
+        var id = this.$utils.getNumberFromString(path)
+        if (typeof id === 'number')
+            bookActions.getDetailBook({ id: id })
+        
         bookActions.getListComments(id)
 
     }
     render() {
-        const { parent, detailBook, role, bookActions, fieldsBook } = this.props //parent = this.props.parent
-        const { updateListBook } = bookActions
+        const { detailBook, role, bookActions, fieldsBook, filtedBook, history } = this.props //parent = this.props.parent
+        const { updateListBook, getDetailBook } = bookActions
         return (
             <BookDetail
-                parent={parent}
+                filtedBook={filtedBook}
                 detailBook={detailBook}
                 onAddToCart={this.onAddToCart}
                 updateListBook={updateListBook}
-                role={role} 
-                fieldsBook={fieldsBook} />
+                role={role}
+                fieldsBook={fieldsBook}
+                getDetailBook={getDetailBook}
+                history={history} />
         );
     }
 }
@@ -67,9 +72,11 @@ BookDetailContainer.propTypes = {
 const MapStateToProps = state => {
     return {
         detailBook: state.books.detailBook,
+        filtedBook: state.books.filtedBook,
         cart: state.cart,
         role: state.account.info.role,
         fieldsBook: state.books.fieldsBook,
+        path: state.router.location.pathname,
     }
 }
 

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { MDBTable, MDBTableBody, MDBBtn, MDBIcon, MDBModal, MDBModalBody, MDBModalHeader } from 'mdbreact'
 import { Tooltip } from 'antd'
-import province from '../../utils/data/province.json'
-import district from '../../utils/data/district.json'
-import ward from '../../utils/data/ward.json'
 import * as msg from '../../const/message'
 class ListAddress extends Component {
     constructor(props) {
@@ -25,7 +22,7 @@ class ListAddress extends Component {
         this.setState({ modal: !this.state.modal })
     }
     render() {
-        const { address, toggleEditAddress, deleteAddress } = this.props
+        const { address, toggleEditAddress, deleteAddress, info } = this.props
         const { modal, id } = this.state
         let xhtml = <h6 className='text-center font-weight-bold'>{msg.MSG_EMPTY_ADDRESS}</h6>
         if (address.length > 0)
@@ -44,40 +41,44 @@ class ListAddress extends Component {
                             </div>
                         </div>
                     </div>
-                    <MDBTable striped bordered>
-                        <MDBTableBody>
-                            <tr>
-                                <td>Người nhận: </td>
-                                <td>{item.name}</td>
-                            </tr>
-                            <tr>
-                                <td>Địa chỉ: </td>
-                                <td>{`${item.street}, ${this.$utils.filterAddress(item.province, item.district, item.ward)}`}</td>
-                            </tr>
-                            <tr>
-                                <td>Email: </td>
-                                <td>{item.email}</td>
-                            </tr>
-                            <tr>
-                                <td>Số điện thoại: </td>
-                                <td>{item.phone}</td>
-                            </tr>
-                        </MDBTableBody>
-                    </MDBTable>
+                    <div className='col-12'>
+                        <MDBTable striped bordered>
+                            <MDBTableBody>
+                                <tr>
+                                    <td>Người nhận: </td>
+                                    <td>{info.fullname}</td>
+                                </tr>
+                                <tr>
+                                    <td>Địa chỉ: </td>
+                                    <td>{`${item.street}, ${this.$utils.filterAddress(item.province, item.district, item.ward)}`}</td>
+                                </tr>
+                                <tr>
+                                    <td>Email: </td>
+                                    <td>{info.email}</td>
+                                </tr>
+                                <tr>
+                                    <td>Số điện thoại: </td>
+                                    <td>{info.phone}</td>
+                                </tr>
+                            </MDBTableBody>
+                        </MDBTable>
+                    </div>
 
                     <MDBModal cascading isOpen={modal} toggle={this.toggleModal}>
                         <MDBModalHeader
                             tag="h5"
                             className=" red text-white"
                             toggle={this.toggleModal}>
-                                <MDBIcon className='mr-2' icon="trash-alt" />
+                            <MDBIcon className='mr-2' icon="trash-alt" />
                             {msg.MSG_SURE_TO_DELETE_ADDRESS}
                         </MDBModalHeader>
                         <MDBModalBody className='text-right'>
                             <MDBBtn className='rounded-pill' outline color="danger" onClick={this.toggleModal}>Không</MDBBtn>
                             <MDBBtn className='rounded-pill' color="danger"
                                 onClick={() => {
-                                    deleteAddress(id)
+                                    deleteAddress({
+                                        address_id: id
+                                    })
                                     this.setState({ modal: false })
                                 }}>Có</MDBBtn>
                         </MDBModalBody>

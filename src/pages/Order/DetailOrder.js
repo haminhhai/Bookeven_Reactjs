@@ -161,18 +161,18 @@ class DetailOrder extends Component {
                                                 data.listBooks.map((item, index) =>
                                                     <tr key={index}>
                                                         <td className='imgBook '>
-                                                            <img src={item.src} alt={item.title} />
+                                                            <img src={item.image} alt={item.title} />
                                                             <p className='align-middle ml-2'>{item.title}</p>
                                                         </td>
                                                         <td className='text-center align-middle'>
-                                                            {item.quantity}
+                                                            {item.amount}
                                                         </td>
                                                         <td className=' align-middle'>
-                                                            <del className='mr-1'>{this.$utils.formatVND(item.realPrice)}</del>
-                                                            {this.$utils.calDiscountPrice(item.realPrice, item.percentDiscount)}
+                                                            <del className='mr-1'>{this.$utils.formatVND(item.price)}</del>
+                                                            {this.$utils.calDiscountPrice(item.price, item.discount)}
                                                         </td>
                                                         <td className='align-middle font-weight-bold'>
-                                                            {this.$utils.calTotalPrice(item.realPrice, item.percentDiscount, item.quantity)}
+                                                            {this.$utils.calTotalPrice(item.price, item.discount, item.amount)}
                                                         </td>
                                                     </tr>
                                                 )

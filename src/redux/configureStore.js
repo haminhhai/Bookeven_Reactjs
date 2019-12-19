@@ -17,7 +17,9 @@ const composeEnhancers =
     : compose;
 
 const sagaMiddleware = createSagaMiddleware()
-export const history = createBrowserHistory();
+export const history = createBrowserHistory({
+  basename: '#/'
+});
 
 const configureStore = () => {
     const middleWares = [thunk, sagaMiddleware, routerMiddleware(history)]

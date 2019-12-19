@@ -28,11 +28,12 @@ class Homepage extends Component {
   }
   render() {
     const { redir, path } = this.state
+    const { history } = this.props
     if (redir)
       return <Redirect to={`/${path}`} />
     return (
       <div className='home-container'>
-        <Header />
+        <Header history={history}/>
         <div className='wrapper'>
           <div className='container'>
             <h3 className='title font-weight-bold'>

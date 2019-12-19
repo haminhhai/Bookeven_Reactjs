@@ -26,6 +26,6 @@ export const REQUIRE_WEIGHT = 'Hãy nhập trọng lượng sách!'
 
 export const REQUIRE_DATE = 'Hãy chọn ngày phát hành!'
 
-export const REQUIRE_ISBN = 'Hãy nhập mã ISBN!'
+export const REQUIRE_ID = 'Hãy nhập mã sách!'
 
 export const REQUIRE_IMAGE = 'Hãy tải lên ảnh bìa sách!'

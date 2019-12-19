@@ -7,11 +7,13 @@ import {
     loginSuccess,
     signupFailed,
     signupSuccess,
+    signupManagerFailed,
+    signupManagerSuccess,
     logoutSuccess,
     logoutFailed,
 } from '../actions/auth';
 import {closeModal} from '../actions/ui'
-import { login, signup, logout } from '../apis/auth';
+import { login, signup, logout, signup_manager } from '../apis/auth';
 import * as authTypes from '../const/actionType';
 import axiosService from '../utils/axiosService';
 import {  getUser, deleteInfo } from '../actions/account';
@@ -26,18 +28,41 @@ function* processSignup({ payload }) {
             fullname,
             phone
         });
-        console.log(resp)
         const { data, status } = resp;
         if (status === STATUS_CODE.CREATED) {
             yield put(signupSuccess(data));
             yield put(closeModal())
         } else {
-            yield put(signupFailed(data));
+            yield put(signupFailed(data.message));
         }
     } catch (error) {
         const message = _get(error, 'response.data.message', {});
-        console.log(message)
         yield put(signupFailed(message));
+    } finally {
+        yield put(hideLoading());
+    }
+}
+
+function* processSignupManager({ payload }) {
+    const { email, password, phone, fullname } = payload;
+    try {
+        yield put(showLoading());
+        const resp = yield call(signup_manager, {
+            email,
+            password,
+            fullname,
+            phone
+        });
+        const { data, status } = resp;
+        if (status === STATUS_CODE.CREATED) {
+            yield put(signupManagerSuccess(data));
+        } else {
+            yield put(signupManagerFailed(data.message));
+        }
+    } catch (error) {
+        const message = _get(error, 'response.data', {});
+        console.log(message)
+        yield put(signupManagerFailed(message));
     } finally {
         yield put(hideLoading());
     }
@@ -65,7 +90,7 @@ function* processLogin({ payload }) {
             yield put(getUser())
             yield put(closeModal())
         } else {
-            yield put(loginFailed(data));
+            yield put(loginFailed(data.message));
         }
     } catch (error) {
         const err = _get(error, 'response.data.message', {})
@@ -91,7 +116,7 @@ function* processLogout({ payload }) {
             axiosService.removeHeader('id');
             yield put(deleteInfo())
         } else {
-            yield put(logoutFailed(data));
+            yield put(logoutFailed(data.message));
         }
     } catch (error) {
         const err = _get(error, 'response.data.message', {});
@@ -103,6 +128,7 @@ function* processLogout({ payload }) {
 
 function* authSaga() {
     yield takeLatest(authTypes.SIGN_UP, processSignup);
+    yield takeLatest(authTypes.SIGN_UP_MANAGER, processSignupManager);
     yield takeLatest(authTypes.LOGIN, processLogin);
     yield takeLatest(authTypes.LOGOUT, processLogout);
 }

@@ -29,10 +29,8 @@ class InputComment extends Component {
 
         setTimeout(() => {
             const body = {
-                accountId: 3306,
-                ISBN: 1,
-                name: 'Hà Minh Hải',
-                time: this.$utils.convertDateToTS(new Date()),
+                book_id: 1,
+                date: this.$utils.convertDateToTS(new Date()),
                 comment: this.state.value
             }
             this.setState({

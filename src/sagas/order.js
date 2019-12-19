@@ -34,7 +34,7 @@ function* watchfetchAllListOrders() {
             if (status === STATUS_CODE.SUCCESS) {
                 yield put(fetchAllListOrdersSuccess(data))
             } else {
-                yield put(fetchAllListOrdersFailed(data))
+                yield put(fetchAllListOrdersFailed(data.message))
             }
         } catch (error) {
             const message = _get(error, 'response.data.message', {});
@@ -54,7 +54,7 @@ function* watchfetchListOrdersById({ payload }) {
         if (status === STATUS_CODE.SUCCESS) {
             yield put(fetchListOrdersByIdSuccess(data))
         } else {
-            yield put(fetchListOrdersByIdFailed(data))
+            yield put(fetchListOrdersByIdFailed(data.message))
         }
     } catch (error) {
         const message = _get(error, 'response.data.message', {});
@@ -92,7 +92,7 @@ function* watchCreateOrder({ payload }) {
         if (status === STATUS_CODE.CREATED) {
             yield put(createOrderSuccess(data))
         }
-        else yield put(createOrderFailed(data))
+        else yield put(createOrderFailed(data.message))
     } catch (error) {
         const message = _get(error, 'response.data.message', {});
         yield put(createOrderFailed(message));
@@ -110,7 +110,7 @@ function* watchUpdateOrder({ payload }) {
             toastSuccess(msg.MSG_UPDATE_ORDER_SUCCESS)
             yield put(updateOrderSuccess(data))
         }
-        else yield put(updateOrderFailed(data))
+        else yield put(updateOrderFailed(data.message))
     } catch (error) {
         const message = _get(error, 'response.data.message', {});
         yield put(updateOrderFailed(message));

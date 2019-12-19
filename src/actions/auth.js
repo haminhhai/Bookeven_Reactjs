@@ -24,6 +24,30 @@ export const signupFailed = error => ({
     }
 });
 
+export const signupManager = (email, password, fullname, phone) => ({
+    type: types.SIGN_UP_MANAGER,
+    payload: {
+        email,
+        password,
+        fullname,
+        phone
+    }
+});
+
+export const signupManagerSuccess = data => ({
+    type: types.SIGN_UP_MANAGER_SUCCESS,
+    payload: {
+        data
+    }
+});
+
+export const signupManagerFailed = error => ({
+    type: types.SIGN_UP_MANAGER_FAILED,
+    payload: {
+        error
+    }
+});
+
 export const login = (email, password) => ({
     type: types.LOGIN,
     payload: {

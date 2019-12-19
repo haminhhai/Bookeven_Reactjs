@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types';
+import { Skeleton } from 'antd';
 
 import * as bookActions from '../actions/book'
 import Comments from '../components/Comments/Comments';
@@ -17,10 +18,12 @@ class CommentContainer extends Component {
         {
           comments.length > 0 &&
           comments.map((item, index) =>
-            <Comments comment={item} key={index} />
+            <Skeleton avatar loading={true} active key={index}>
+              <Comments comment={item} />
+            </Skeleton>
           )
         }
-        <InputComment addComment={addComment} authen={authen} info={info}/>
+        <InputComment addComment={addComment} authen={authen} info={info} />
       </React.Fragment>
     );
   }

@@ -5,19 +5,19 @@ import { API_URL_LOCAL, API_URL } from '../const/config'
 const url_address = 'address'
 
 export const getListAddress = () => {
-    return axiosService.get(`${API_URL_LOCAL}/${url_address}`)
+    return axiosService.get(`${API_URL}/${url_address}/list`)
 }
 
 export const createNewAddress = data => {
-    return axiosService.post(`${API_URL_LOCAL}/${url_address}`, data)
+    return axiosService.post(`${API_URL}/${url_address}/new`, data)
 }
 
 export const updateAddress = data => {
-    return axiosService.put(`${API_URL_LOCAL}/${url_address}/${data.id}`, data)
+    return axiosService.put(`${API_URL}/${url_address}/update`, data)
 }
 
-export const deleteAddress = id => {
-    return axiosService.delete(`${API_URL_LOCAL}/${url_address}/${id}`)
+export const deleteAddress = data => {
+    return axiosService.delete(`${API_URL}/${url_address}/delete`, data)
 }
 
 // http://api_url/user
@@ -29,4 +29,8 @@ export const getInfo = () => {
 
 export const updateInfo = data => {
     return axiosService.put(`${API_URL}/${url_user}/update`, data)
+}
+
+export const changePassword = data => {
+    return axiosService.post(`${API_URL}/${url_user}/password`, data)
 }

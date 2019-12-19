@@ -33,7 +33,7 @@ function* watchGetCartAction() {
             if (status === STATUS_CODE.SUCCESS) {
                 yield put(fetchCartSuccess(data))
             } else {
-                yield put(fetchCartFailed(data))
+                yield put(fetchCartFailed(data.message))
             }
         } catch (error) {
             const message = _get(error, 'response.data.message', {});
@@ -43,7 +43,7 @@ function* watchGetCartAction() {
 }
 
 function* watchAddToCartAction({ payload }) {
-    const { product, quantity } = payload
+    const { product, amount } = payload
     try {
         yield put(showLoading())
         var cart = yield select(state => state.cart) //get cart from store
@@ -51,22 +51,22 @@ function* watchAddToCartAction({ payload }) {
         if (cart.length > 0)
             checkExist = cart.filter(book => book.id === product.id) // check if product exists in cart?
         if (checkExist.length > 0) {
-            checkExist[0].quantity += quantity
+            checkExist[0].amount += amount
             const res = yield call(updateCart, checkExist[0])
             const { status, data } = res
             if (status === STATUS_CODE.SUCCESS) {
                 yield put(updateCartSuccess(data))
             } else {
-                yield put(updateCartFailed(data))
+                yield put(updateCartFailed(data.message))
             }
         } else {
-            product.quantity = quantity
+            product.amount = amount
             const res = yield call(addToCart, product)
             const { status, data } = res
             if (status === STATUS_CODE.CREATED) {
                 yield put(addToCartSuccess(data))
             } else {
-                yield put(addToCartFailed(data))
+                yield put(addToCartFailed(data.message))
             }
         }
     } catch (error) {
@@ -78,19 +78,19 @@ function* watchAddToCartAction({ payload }) {
 }
 
 function* watchUpdateCartAction({ payload }) {
-    const { product, quantity } = payload
+    const { product, amount } = payload
     try {
         yield put(showLoading())
         const cart = yield select(state => state.cart) //get cart from store
         const filterBook = cart.filter(book => book.id === product.id) //filter product needs to update
         if (filterBook.length > 0) {
-            filterBook[0].quantity = quantity
+            filterBook[0].amount = amount
             const res = yield call(updateCart, filterBook[0])
             const { status, data } = res
             if (status === STATUS_CODE.SUCCESS) {
                 yield put(updateCartSuccess(data))
             } else {
-                yield put(updateCartFailed(data))
+                yield put(updateCartFailed(data.message))
             }
         }
     } catch (error) {
@@ -105,12 +105,12 @@ function* watchRemoveItemAction({ payload }) {
     const { product } = payload
     try {
         yield put(showLoading())
-        const res = yield call(removeBook, product.id)
+        const res = yield call(removeBook, product)
         const { status, data } = res
         if (status === STATUS_CODE.SUCCESS) {
             yield put(removeCartSuccess(product))
         } else {
-            yield put(removeCartFailed(data))
+            yield put(removeCartFailed(data.message))
         }
     } catch (error) {
         const message = _get(error, 'response.data.message', {});

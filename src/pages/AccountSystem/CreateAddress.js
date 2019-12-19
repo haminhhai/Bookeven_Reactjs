@@ -16,9 +16,6 @@ class CreateAddress extends Component {
             province: '',
             district: '',
             ward: '',
-            fullnameAddress: '',
-            emailAddress: '',
-            phoneAddress: '',
             street: '',
             selectedProvince: '',
             selectedDistrict: '',
@@ -61,10 +58,6 @@ class CreateAddress extends Component {
         const { street, selectedProvince, selectedDistrict, selectedWard } = this.state
         const { createNewAddress, redirect } = this.props
         const body = {
-            id: this.$utils.idGenerator(),
-            name: 'Hà Minh Hải',
-            email: 'haihaidb@gmail.com',
-            phone: '0327487958',
             street: street,
             province: selectedProvince,
             district: selectedDistrict,
@@ -82,7 +75,6 @@ class CreateAddress extends Component {
         province.map((item, index) =>
             tempProvince.push(<option key={index} value={parseInt(item.provinceid)}>{item.name}</option>)
         )
-
         this.setState({ province: tempProvince })
     }
     render() {

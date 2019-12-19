@@ -15,8 +15,8 @@ class ModalEditBook extends Component {
             title: '',
             author: '',
             inventory: 0,
-            percentDiscount: 0,
-            realPrice: 0,
+            discount: 0,
+            price: 0,
             topic: 0,
             changeToSave: true
         }
@@ -78,15 +78,15 @@ class ModalEditBook extends Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                const { name, author, topic, percentDiscount, realPrice, inventory, pages, size, publishDate, weight } = values
+                const { name, author, topic, discount, price, inventory, pages, size, publishDate, weight } = values
                 const body = {
                     id: data.id,
-                    src: imageUrl,
+                    image: imageUrl,
                     title: name,
                     author: author,
                     inventory: inventory,
-                    realPrice: realPrice,
-                    percentDiscount: percentDiscount,
+                    price: price,
+                    discount: discount,
                     topic: topic
                 }
                 updateListBook(body)
@@ -98,26 +98,25 @@ class ModalEditBook extends Component {
     componentDidMount() {
         const { data } = this.props
         this.setState({
-            imageUrl: data.src,
+            imageUrl: data.image,
             name: data.title,
             author: data.author,
             inventory: data.inventory,
-            percentDiscount: data.percentDiscount,
-            realPrice: data.realPrice,
+            discount: data.discount,
+            price: data.price,
             topic: data.topic
         })
     }
     render() {
         const { modal, closeModal, fieldsBook, form } = this.props
-        const { imageUrl, previewVisible, loading, name, author, inventory, percentDiscount, realPrice, topic, changeToSave } = this.state
+        const { imageUrl, previewVisible, loading, name, author, inventory, discount, price, topic, changeToSave } = this.state
         const { getFieldDecorator } = form;
         const uploadButton = (
             <div>
                 <Icon type={loading ? 'loading' : 'plus'} />
                 <div className="ant-upload-text">Đổi ảnh</div>
             </div>
-        );
-        console.log(imageUrl)
+        )
         return (
             <MDBModal className='modal-edit' cascading isOpen={modal} size='lg'>
                 <MDBModalHeader
@@ -245,12 +244,12 @@ class ModalEditBook extends Component {
                                         </Form.Item>
                                     </div>
                                     <div className='col-6'>
-                                        <Form.Item label='Mã ISBN'>
-                                            {getFieldDecorator('isbn', {
+                                        <Form.Item label='Mã sách'>
+                                            {getFieldDecorator('id', {
                                                 rules: [
                                                     {
                                                         required: true,
-                                                        message: cont.REQUIRE_ISBN,
+                                                        message: cont.REQUIRE_ID,
                                                     },
                                                 ],
                                             })(
@@ -260,8 +259,8 @@ class ModalEditBook extends Component {
                                     </div>
                                     <div className='col-6'>
                                         <Form.Item label='Đơn giá'>
-                                            {getFieldDecorator('realPrice', {
-                                                initialValue: realPrice,
+                                            {getFieldDecorator('price', {
+                                                initialValue: price,
                                                 rules: [
                                                     {
                                                         required: true,
@@ -301,8 +300,8 @@ class ModalEditBook extends Component {
                                     </div>
                                     <div className='col-4'>
                                         <Form.Item label='Giảm giá (%)'>
-                                            {getFieldDecorator('percentDiscount', {
-                                                initialValue: percentDiscount,
+                                            {getFieldDecorator('discount', {
+                                                initialValue: discount,
                                                 rules: [
                                                     {
                                                         required: true,

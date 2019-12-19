@@ -51,6 +51,141 @@ export const fetchListBookFailed = error => {
     }
 }
 
+export const getBooksByBFID = data => {
+    return {
+        type: types.GET_LIST_BY_BF_ID,
+        payload: {
+            data
+        }
+    }
+}
+
+export const getBooksByBFIDSuccess = data => {
+    return {
+        type: types.GET_LIST_BY_BF_ID_SUCCESS,
+        payload: {
+            data
+        }
+    }
+}
+
+export const getBooksByBFIDFailed = error => {
+    return {
+        type: types.GET_LIST_BY_BF_ID_FAILED,
+        payload: {
+            error
+        }
+    }
+}
+
+export const getListBestSeller = data => {
+    return {
+        type: types.GET_LIST_BEST_SELLER,
+        payload: {
+            data
+        }
+    }
+}
+
+export const getListBestSellerSuccess = data => {
+    return {
+        type: types.GET_LIST_BEST_SELLER_SUCCESS,
+        payload: {
+            data
+        }
+    }
+}
+
+export const getListBestSellerFailed = error => {
+    return {
+        type: types.GET_LIST_BEST_SELLER_FAILED,
+        payload: {
+            error
+        }
+    }
+}
+
+export const getListBestSales = data => {
+    return {
+        type: types.GET_LIST_BEST_SALES,
+        payload: {
+            data
+        }
+    }
+}
+
+export const getListBestSalesSuccess = data => {
+    return {
+        type: types.GET_LIST_BEST_SALES_SUCCESS,
+        payload: {
+            data
+        }
+    }
+}
+
+export const getListBestSalesFailed = error => {
+    return {
+        type: types.GET_LIST_BEST_SALES_FAILED,
+        payload: {
+            error
+        }
+    }
+}
+
+export const getListBestNewest = data => {
+    return {
+        type: types.GET_LIST_NEWEST,
+        payload: {
+            data
+        }
+    }
+}
+
+export const getListBestNewestSuccess = data => {
+    return {
+        type: types.GET_LIST_NEWEST_SUCCESS,
+        payload: {
+            data
+        }
+    }
+}
+
+export const getListBestNewestFailed = error => {
+    return {
+        type: types.GET_LIST_NEWEST_FAILED,
+        payload: {
+            error
+        }
+    }
+}
+
+export const getListBestRate = data => {
+    return {
+        type: types.GET_LIST_BEST_RATE,
+        payload: {
+            data
+        }
+    }
+}
+
+export const getListBestRateSuccess = data => {
+    return {
+        type: types.GET_LIST_BEST_RATE_SUCCESS,
+        payload: {
+            data
+        }
+    }
+}
+
+export const getListBestRateFailed = error => {
+    return {
+        type: types.GET_LIST_BEST_RATE_FAILED,
+        payload: {
+            error
+        }
+    }
+}
+
 export const filterBooksSingle = data => {
     return {
         type: types.FILTER_BOOKS_SINGLE,
@@ -69,6 +204,15 @@ export const filterBooksSingleSuccess = data => {
     }
 }
 
+export const filterBooksSingleFailed = error => {
+    return {
+        type: types.FITLER_BOOKS_SINGLE_FAILED,
+        payload: {
+            error
+        }
+    }
+}
+
 export const filterBooksMulti = data => {
     return {
         type: types.FILTER_BOOKS_MULTI,
@@ -83,6 +227,15 @@ export const filterBooksMultiSuccess = data => {
         type: types.FITLER_BOOKS_MULTI_SUCCESS,
         payload: {
             data
+        }
+    }
+}
+
+export const filterBooksMultiFailed = error => {
+    return {
+        type: types.FITLER_BOOKS_MULTI_FAILED,
+        payload: {
+            error
         }
     }
 }
@@ -147,11 +300,11 @@ export const updateListBookFailed = error => {
     }
 }
 
-export const getListComments = ISBN => {
+export const getListComments = id => {
     return {
         type: types.GET_LIST_COMMENTS,
         payload: {
-            ISBN
+            id
         }
     }
 }

@@ -43,7 +43,7 @@ class Account extends Component {
         window.scrollTo(0, 0)
     }
     render() {
-        const { address, createNewAddress, updateAddress, deleteAddress, info } = this.props
+        const { address, createNewAddress, updateAddress, deleteAddress, info, updateUser, changePassword } = this.props
         const { isEditing, data, currentTab } = this.state
         return (
             <div >
@@ -82,7 +82,7 @@ class Account extends Component {
                                         type="card"
                                     >
                                         <TabPane tab="Tài khoản của tôi" key="1">
-                                            <EditInfo info={info}/>
+                                            <EditInfo updateUser={updateUser} info={info}/>
                                         </TabPane>
                                         {
                                             info.role === 1 &&
@@ -114,7 +114,7 @@ class Account extends Component {
                                             </TabPane>
                                         }
                                         <TabPane tab="Đổi mật khẩu" key="3">
-                                            <EditPassword />
+                                            <EditPassword changePassword={changePassword}/>
                                         </TabPane>
                                     </Tabs>
                                 </section>

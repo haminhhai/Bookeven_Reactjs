@@ -10,7 +10,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case types.SIGN_UP_SUCCESS: {
-            toastSuccess('Đăng ký thành công');
+            toastSuccess('Đăng ký thành công!');
             return {
                 ...state
             };
@@ -22,8 +22,21 @@ const reducer = (state = initialState, action) => {
                 ...state
             };
         }
+        case types.SIGN_UP_MANAGER_SUCCESS: {
+            toastSuccess('Đăng ký tài khoản quản lý thành công!');
+            return {
+                ...state
+            };
+        }
+        case types.SIGN_UP_MANAGER_FAILED: {
+            const { error } = action.payload;
+            toastError(error);
+            return {
+                ...state
+            };
+        }
         case types.LOGIN_SUCCESS: {
-            toastSuccess('Đăng nhập thành công');
+            toastSuccess('Chào mừng bạn quay lại với Bookeven!');
             return {
                 authen: true
             };

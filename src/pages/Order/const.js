@@ -90,7 +90,7 @@ export const colsDetailCus = [
         label: <th key='product'>Sản phẩm</th>
     },
     {
-        label: <th key='quantity' className='text-center'>Số lượng</th>
+        label: <th key='amount' className='text-center'>Số lượng</th>
     },
     {
         label: <th key='price'>Đơn giá</th>

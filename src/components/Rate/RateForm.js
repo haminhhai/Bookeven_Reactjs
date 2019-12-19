@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Rate, Progress, Tooltip } from 'antd'
+import { Rate, Progress, Tooltip, List, Skeleton } from 'antd'
 import './style.scss'
 import { MDBIcon } from 'mdbreact'
 
+import AvatarUser from '../AvatarUser/AvatarUser'
 import { rateStatus } from '../../const/config'
 const rateArr = [
     {
@@ -30,8 +31,26 @@ class RateForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            content: 'Đánh giá!',
-            icon: ''
+            status: {
+                content: 'Đánh giá!',
+                icon: '',
+                color: '',
+            },
+            loading: false,
+            data: [
+                {
+                    title: 'Ant Design Title 1',
+                },
+                {
+                    title: 'Ant Design Title 2',
+                },
+                {
+                    title: 'Ant Design Title 3',
+                },
+                {
+                    title: 'Ant Design Title 4',
+                },
+            ]
         }
     }
 
@@ -55,17 +74,24 @@ class RateForm extends Component {
     onChange = e => {
         if (e === undefined)
             this.setState({
-                content: 'Đánh giá!',
-                icon: '',
+                status: {
+                    content: 'Đánh giá!',
+                    icon: '',
+                    color: '',
+                }
             })
         else
             this.setState({
-                content: rateStatus[e - 1].content,
-                icon: rateStatus[e - 1].icon,
+                status: rateStatus[e - 1]
             })
     }
+    onRate = e => {
+        console.log(e)
+    }
     render() {
-        const { content, icon } = this.state
+        const { status, data, loading } = this.state
+        const { disabled } = this.props
+        const { content, icon, color } = status
         return (
             <div className='rate-form row'>
                 <div id='rate-card' className='col-4'>
@@ -81,12 +107,36 @@ class RateForm extends Component {
                 </div>
                 <div className='col-4 user-rate'>
                     Đánh giá của bạn về sản phẩm này
-                    <Tooltip title={<div>{content} <MDBIcon icon={icon} /></div>}>
+                    <Tooltip title={<div>{content} <MDBIcon style={{ color: `${color}` }} icon={icon} /></div>}>
                         <div>
-                            <Rate onHoverChange={this.onChange} />
+                            <Rate disabled onHoverChange={this.onChange} onChange={this.onRate} />
                         </div>
                     </Tooltip>
-                    {/* <b>{status.content}</b><MDBIcon icon={status.icon}/> */}
+                </div>
+                <div className='col-12 list-rate'>
+                    <List itemLayout='horizontal' dataSource={data} renderItem={item => (
+                        <List.Item actions={[<Rate disabled defaultValue={5} />]} >
+                            <Skeleton
+                                avatar
+                                title={false}
+                                loading={true}
+                                active>
+                                <List.Item.Meta
+                                    avatar={<AvatarUser name='Lò Đào Tạo' />}
+                                    title='Lò Đào Tạo'
+                                    description={
+                                        <div>
+                                            {rateStatus[4].content}
+                                            <MDBIcon
+                                                className='ml-2'
+                                                style={{ color: `${color}` }}
+                                                icon={rateStatus[4].icon}
+                                                size='2x' />
+                                        </div>}
+                                />
+                            </Skeleton>
+                        </List.Item>
+                    )} />
                 </div>
             </div>
         );

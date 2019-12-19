@@ -55,13 +55,10 @@ class EditAddress extends Component {
     submitHandler = event => {
         event.preventDefault();
         event.target.className += " was-validated";
-        const { fullnameAddress, emailAddress, phoneAddress, street, selectedProvince, selectedDistrict, selectedWard } = this.state
+        const { street, selectedProvince, selectedDistrict, selectedWard } = this.state
         const { updateAddress , data, toggleEditAddress} = this.props
         const body = {
-            id: data.id,
-            name: fullnameAddress,
-            email: emailAddress,
-            phone: phoneAddress,
+            address_id: data.id,
             street: street,
             province: selectedProvince,
             district: selectedDistrict,
@@ -92,9 +89,6 @@ class EditAddress extends Component {
         })
         this.setState({ province: tempProvince })
         this.setState({
-            fullnameAddress: data.name,
-            emailAddress: data.email,
-            phoneAddress: data.phone,
             street: data.street,
             selectedProvince: data.province,
             selectedDistrict: data.district,

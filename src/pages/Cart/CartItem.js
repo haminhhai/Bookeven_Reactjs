@@ -3,7 +3,6 @@ import { MDBIcon, MDBBtn } from 'mdbreact';
 import { InputNumber } from 'antd'
 
 import '../../styles/cart.scss'
-import * as msg from '../../const/message'
 
 class CartItem extends Component {
     constructor(props) {
@@ -14,10 +13,12 @@ class CartItem extends Component {
 
     onDelete = product => {
         var { onRemoveProduct } = this.props
-        onRemoveProduct(product)
+        onRemoveProduct({
+            book_id: product.id
+        })
     }
 
-    onChangeQuantity = (e) => {
+    onChangeAmount = (e) => {
         var { onUpdateProduct } = this.props
         var { item } = this.props
         onUpdateProduct(item, e)
@@ -33,18 +34,19 @@ class CartItem extends Component {
                     </MDBBtn>
                 </td>
                 <td className='imgBook align-middle'>
-                    <img src={item.src} alt={item.title} />
+                    <img src={item.image} alt={item.name} />
                 </td>
-                <td className='name align-middle'>{item.title}</td>
-                <td className='quantity align-middle'>
-                    <InputNumber min={1} max={item.inventory} defaultValue={item.quantity} onChange={this.onChangeQuantity} />
+                <td className='name align-middle'>{item.name}</td>
+                <td className='amount align-middle'>
+                    <InputNumber min={1} max={item.inventory} defaultValue={item.amount} onChange={this.onChangeAmount} />
                 </td>
                 <td className='price align-middle'>
-                    <del className='mr-1'>{this.$utils.formatVND(item.realPrice)}</del>
-                    {this.$utils.calDiscountPrice(item.realPrice, item.percentDiscount)}
+                    {this.$utils.formatVND(item.price) !== this.$utils.calDiscountPrice(item.price, item.discount) && 
+                    <del className='mr-1'>{this.$utils.formatVND(item.price)}</del>}
+                    {this.$utils.calDiscountPrice(item.price, item.discount)}
                 </td>
                 <td className='total align-middle font-weight-bold'>
-                    {this.$utils.calTotalPrice(item.realPrice, item.percentDiscount, item.quantity)}
+                    {this.$utils.calTotalPrice(item.price, item.discount, item.amount)}
                 </td>
             </tr>
         )

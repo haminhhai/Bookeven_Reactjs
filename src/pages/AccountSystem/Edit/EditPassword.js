@@ -25,11 +25,18 @@ class EditPassword extends Component {
         event.preventDefault();
         event.target.className += " was-validated";
         const { oldPass, newPass, confirmPass } = this.state
+        const { changePassword } = this.props
         if( newPass !== confirmPass ) 
         {
             this.$utils.toastError(msg.MSG_PASSWORD_CONSISTENT)
             this.setState({ confirmPass: '' })
         }
+        else if( newPass.length < 6 )
+            this.$utils.toastError(msg.MSG_PASSWORD_SHORT)
+        else changePassword({
+            old_pass: oldPass,
+            new_pass: newPass
+        })
         
     }
     render() {

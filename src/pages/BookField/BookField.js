@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
-import { Slider, Rate, Select } from 'antd'
-import { MDBPagination, MDBPageNav, MDBPageItem, MDBBtn } from 'mdbreact'
+import { Slider, Rate, Select, Pagination } from 'antd'
+import { MDBBtn } from 'mdbreact'
 
 import Header from '../../layouts/Header/Header'
 import BookCardContainer from '../../containers/BookContainer/BookCardContainer'
-import * as bookActions from '../../actions/book'
 import '../../styles/bookcg.scss'
 
 const { Option } = Select
-class BookCategory extends Component {
+class BookField extends Component {
     state = {
         minval: 0,
         maxval: 100000,
         rate: 0,
-        topic: ''
+        topic: '',
     };
 
     setPriceRange = value => {
@@ -36,7 +33,7 @@ class BookCategory extends Component {
     }
 
     handleFilter = () => {
-        const { filterBooksMulti } = this.props.bookActions
+        const { filterBooksMulti } = this.props
         const { minval, maxval, rate, topic } = this.state
         const data = {
             price: {
@@ -44,7 +41,7 @@ class BookCategory extends Component {
                 max: maxval
             },
             rate: rate,
-            topic: topic
+            topic: topic,
         }
         filterBooksMulti(data)
     }
@@ -59,61 +56,72 @@ class BookCategory extends Component {
         }
         return items
     }
+    onShowSizeChange = (current, pageSize) => {
+        const { path, getBooksByBFID } = this.props
+        var id = this.$utils.getNumberFromString(path)
+        if (typeof id === 'number')
+            getBooksByBFID({
+                bookField_id: id,
+                amount: pageSize,
+                page: current
+            })
+    }
+    changePage = page => {
+        const { path, getBooksByBFID, filtedBook } = this.props
+        var id = this.$utils.getNumberFromString(path)
+        if (typeof id === 'number')
+            getBooksByBFID({
+                bookField_id: id,
+                amount: filtedBook.pageSize,
+                page: page
+            })
+    };
     componentDidMount() {
         window.scrollTo(0, 0)
+        const { getBooksByBFID, path } = this.props
+        var id = this.$utils.getNumberFromString(path)
+        if (typeof id === 'number') 
+            getBooksByBFID({
+                bookField_id: id,
+                amount: 10,
+                page: 1
+            })
+    }
+    filterType = parent => {
+        const { filtedBook } = this.props
+        switch (parent) {
+            case 'search':
+                return `Kết quả tìm kiếm "${filtedBook.keyword}"`
+            default:
+                return filtedBook.bookfield
+        }
     }
     render() {
-        const { parent, listBook, fieldsBook } = this.props //parent = this.props.parent
+        const { parent, filtedBook, fieldsBook, history } = this.props //parent = this.props.parent
         const { topic, rate, maxval, minval } = this.state
         return (
             <div>
-                <Header carousel={false} parent={parent} />
+                <Header carousel={false} parent={this.filterType(parent)} history={history} />
                 <div className='bookcg-wrapper'>
                     <div className='container'>
                         <div className="row">
                             <div className="col-12 col-md-9">
                                 <div className='row'>
-                                    {listBook.length > 0 &&
-                                        listBook.map((item, index) =>
+                                    {filtedBook.list.length > 0 &&
+                                        filtedBook.list.map((item, index) =>
                                             <div key={index} className='col-lg-3 col-md-6 mb-4 ml-5'>
                                                 <BookCardContainer book={item} type='bp' />
                                             </div>)
                                     }
                                 </div>
                                 <div className='pagi-store row'>
-                                    <MDBPagination circle>
-                                        <MDBPageItem disabled>
-                                            <MDBPageNav className="page-link">
-                                                <span>Đầu</span>
-                                            </MDBPageNav>
-                                        </MDBPageItem>
-                                        <MDBPageItem disabled>
-                                            <MDBPageNav className="page-link" aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                                <span className="sr-only">Previous</span>
-                                            </MDBPageNav>
-                                        </MDBPageItem>
-                                        <MDBPageItem active>
-                                            <MDBPageNav className="page-link">
-                                                1 <span className="sr-only">(current)</span>
-                                            </MDBPageNav>
-                                        </MDBPageItem>
-                                        <MDBPageItem>
-                                            <MDBPageNav className="page-link">
-                                                2
-                                </MDBPageNav>
-                                        </MDBPageItem>
-                                        <MDBPageItem>
-                                            <MDBPageNav className="page-link">
-                                                &raquo;
-                                </MDBPageNav>
-                                        </MDBPageItem>
-                                        <MDBPageItem>
-                                            <MDBPageNav className="page-link">
-                                                Cuối
-                                </MDBPageNav>
-                                        </MDBPageItem>
-                                    </MDBPagination>
+                                    <Pagination
+                                        showSizeChanger
+                                        defaultCurrent={1}
+                                        onChange={this.changePage}
+                                        onShowSizeChange={this.onShowSizeChange}
+                                        total={filtedBook.total}
+                                    />
                                 </div>
                             </div>
                             <div className="col-12 col-md-3">
@@ -179,17 +187,4 @@ class BookCategory extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        fieldsBook: state.books.fieldsBook
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        bookActions: bindActionCreators(bookActions, dispatch)
-    }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(BookCategory);
+export default BookField

@@ -18,8 +18,8 @@ class BPCard extends Component {
 
   checkAuthen = book => {
     const { role, authen, onAddToCart, openModal } = this.props
-    if(authen) {
-      if(role === 1)
+    if (authen) {
+      if (role === 1)
         onAddToCart(book)
       else this.showModal(book)
     } else {
@@ -39,7 +39,7 @@ class BPCard extends Component {
   }
 
   componentDidMount() {
-    const {role} = this.props
+    const { role } = this.props
     if (role === 2)
       this.setState({
         data: roles.manager.couple_btn
@@ -50,12 +50,12 @@ class BPCard extends Component {
     const { data, detailBook, modal } = this.state
     const { fieldsBook, updateListBook, fetchListBook } = this.props
     var book = {
-      id: 1,
-      src: empty,
-      title: '',
-      author: '',
-      realPrice: 0,
-      percentDiscount: 0,
+      id: 0,
+      image: empty,
+      title: 'Sách trống',
+      author: 'Null',
+      price: 0,
+      discount: 0,
       topic: 0,
       inventory: 0,
       rate: 0
@@ -65,23 +65,24 @@ class BPCard extends Component {
     return (
       <div className='bpcard-container'>
         <MDBCard style={{ minWidth: '14rem', height: 'auto' }} className='text-center'>
-          <Link to={`/${this.$utils.convertVietnamese(book.title)}`}>
+          <Link to={book.author !== 'Null' ? `/chi-tiet-sach/${book.id}` : '/#'}>
             <MDBView className='book-wrapper' hover>
               <LazyLoad height='200' offset={100} once>
-                <img src={book.src} waves="true" className="imgBook" alt="" overlay="true" />
+                <img src={book.image} waves="true" className="imgBook" alt="" overlay="true" />
                 {
-                  book.percentDiscount > 0 && 
+                  book.discount > 0 &&
                   <div className="promotionPercent">
-                  {cont.SVG}
-                  <span>{book.percentDiscount + '%'}</span>
-                </div>
+                    {cont.SVG}
+                    <span>{book.discount + '%'}</span>
+                  </div>
                 }
               </LazyLoad>
               <MDBMask className="flex-center" overlay="white-light" />
-            </MDBView></Link>
+            </MDBView>
+          </Link>
           <MDBCardBody>
             <MDBCardTitle className="h5" title={book.title}>
-              <Link className='text-dark' to={`/${this.$utils.convertVietnamese(book.title)}`}>
+              <Link className='text-dark' to={book.author !== 'Null' ? `/chi-tiet-sach/${book.id}` : '/#'}>
                 {book.title}
               </Link>
             </MDBCardTitle>
@@ -89,15 +90,15 @@ class BPCard extends Component {
               {book.author}
             </MDBCardText>
             <div className='price'>
-              {book.percentDiscount !== 0 &&
-                <del>{this.$utils.formatVND(book.realPrice)}</del>}
-              <p className='h3'>{this.$utils.calDiscountPrice(book.realPrice, book.percentDiscount)}</p>
+              {book.discount !== 0 &&
+                <del>{this.$utils.formatVND(book.price)}</del>}
+              <p className='h3'>{this.$utils.calDiscountPrice(book.price, book.discount)}</p>
             </div>
             <div className='coubtn-wrapper'>
               <div className='coubtn-border'>
 
                 <span className='detail'>
-                  <Link style={{ color: '#3c3d41' }} to={`/${this.$utils.convertVietnamese(book.title)}`}>
+                  <Link style={{ color: '#3c3d41' }} to={book.author !== 'Null' ? `/chi-tiet-sach/${book.id}` : '/#'}>
                     <div>
                       <MDBIcon icon={data.l_icon} />
                     </div>
@@ -107,7 +108,7 @@ class BPCard extends Component {
 
                 <span
                   className='cart_edit'
-                  onClick={() => this.checkAuthen(book)}>
+                  onClick={book.author !== 'Null' ? () => this.checkAuthen(book) : null}>
                   <div>
                     <MDBIcon icon={data.r_icon} />
                   </div>
@@ -118,13 +119,13 @@ class BPCard extends Component {
           </MDBCardBody>
         </MDBCard>
         {
-          modal && <ModalEditBook 
-          data={detailBook} 
-          modal={modal} 
-          closeModal={this.closeModal} 
-          fieldsBook={fieldsBook} 
-          updateListBook={updateListBook} 
-          fetchListBook={fetchListBook}/>
+          modal && <ModalEditBook
+            data={detailBook}
+            modal={modal}
+            closeModal={this.closeModal}
+            fieldsBook={fieldsBook}
+            updateListBook={updateListBook}
+            fetchListBook={fetchListBook} />
         }
       </div >
     )

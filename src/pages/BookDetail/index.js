@@ -12,7 +12,7 @@ export const data = [
         content: '120 gram'
     },
     {
-        title: 'Mã ISBN',
+        title: 'Mã sách',
         content: '120 gram'
     },
     {

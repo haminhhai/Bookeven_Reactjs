@@ -6,10 +6,8 @@ import { Badge } from 'antd'
 
 import Header from '../../layouts/Header/Header'
 import '../../styles/order.scss'
-import * as msg from '../../const/message'
 import * as cont from './const'
 import img from '../../assets/logo.png'
-import moment from 'moment'
 import DetailOrder from './DetailOrder';
 class OrderCustomer extends Component {
 
@@ -21,10 +19,6 @@ class OrderCustomer extends Component {
             address: {},
         }
 
-    }
-
-    handleData = (e) => {
-        console.log(e.target.parentNode.childNodes)
     }
     componentDidMount() {
         window.scrollTo(0, 0)

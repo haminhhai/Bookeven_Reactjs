@@ -65,13 +65,21 @@ class Header extends Component {
         const { authActions, info } = this.props
         authActions.logout(info.id)
     }
+    getListByBookField = id => {
+        const { bookActions } = this.props
+        bookActions.getBooksByBFID({
+            bookField_id: id,
+            amount: 10,
+            page: 1
+        })
+    }
     render() {
-        const { parent, child, cart, fieldsBook, info, authen } = this.props 
+        const { parent, child, cart, fieldsBook, info, authen, detailBook, history } = this.props
         const { role } = info
         var total = 0
         if (cart.length > 0)
             cart.forEach(element => {
-                total += element.quantity
+                total += element.amount
             });
         return (
             <div>
@@ -161,7 +169,8 @@ class Header extends Component {
                                     </Breadcrumb.Item>
                                     <Breadcrumb.Item>
                                         {child !== undefined ?
-                                            <Link to={`/${this.$utils.convertVietnamese(parent)}`} >
+                                            <Link to={'/sach-theo-danh-muc/' + detailBook.bookfield_id} 
+                                            onClick={() => this.getListByBookField(detailBook.bookfield_id)}>
                                                 {parent}
                                             </Link> :
                                             parent
@@ -188,10 +197,9 @@ class Header extends Component {
                                     </MDBDropdownToggle>
                                     <MDBDropdownMenu >
                                         {fieldsBook.map((item, index) =>
-                                            index < 7 &&
                                             <MDBDropdownItem key={index}>
-                                                <Link to={'/' + item.path}>
-                                                    {item.name}
+                                                <Link to={'/sach-theo-danh-muc/' + item.id} onClick={() => this.getListByBookField(item.id)}>
+                                                    <b>{item.name}</b>
                                                 </Link>
                                             </MDBDropdownItem>
 
@@ -238,7 +246,8 @@ const mapStateToProps = state => {
         cart: state.cart,
         fieldsBook: state.books.fieldsBook,
         info: state.account.info,
-        authen: state.auth.authen
+        authen: state.auth.authen,
+        detailBook: state.books.detailBook
     }
 }
 

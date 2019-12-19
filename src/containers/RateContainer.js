@@ -9,7 +9,8 @@ import RateForm from '../components/Rate/RateForm';
 class RateContainer extends Component {
 
   render() {
-    return <RateForm />
+    const { disabled } = this.props
+    return <RateForm disabled/>
   }
 }
 

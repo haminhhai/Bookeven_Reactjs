@@ -41,7 +41,7 @@ var cart = (state = initialState, action) => {
         case types.REMOVE_ITEM_FROM_CART_SUCCESS: {
             toastSuccess(msg.MSG_DELETE_BOOK_IN_CART_SUCCESS)
             const { data } = action.payload
-            const newList = state.filter(item => item.id !== data.id)
+            const newList = state.filter(item => item.id !== data)
             return [...newList]
         }
         case types.REMOVE_ITEM_FROM_CART_FAILED: {

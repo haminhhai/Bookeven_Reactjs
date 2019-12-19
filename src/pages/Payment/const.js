@@ -18,7 +18,7 @@ export const CART_TITLE = 'Nội dung giỏ hàng'
 
 export const CART_BOOKNAME = 'Tên sách'
 
-export const CART_QUANTITY = 'Số lượng'
+export const CART_AMOUNT= 'Số lượng'
 
 export const CART_TOTAL = 'Thành tiền:'
 

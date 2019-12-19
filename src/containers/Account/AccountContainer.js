@@ -12,13 +12,15 @@ class AccountContainer extends Component {
     }
     render() {
         var { account, accountActions } = this.props
-        const { createNewAddress, updateAddress, deleteAddress } = accountActions
+        const { createNewAddress, updateAddress, deleteAddress, updateUser, changePassword } = accountActions
         return (
             <Account
                 address={account.address}
                 createNewAddress={createNewAddress} 
                 updateAddress={updateAddress}
                 deleteAddress={deleteAddress}
+                updateUser={updateUser}
+                changePassword={changePassword}
                 info={account.info}/>
         );
     }
@@ -47,6 +49,5 @@ const MapDispatchToProps = dispatch => {
         accountActions: bindActionCreators(accountActions, dispatch)
     }
 }
-
 
 export default connect(MapStateToProps, MapDispatchToProps)(AccountContainer);

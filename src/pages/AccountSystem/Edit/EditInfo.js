@@ -23,6 +23,12 @@ class EditInfo extends Component {
     submitHandler = event => {
         event.preventDefault();
         event.target.className += " was-validated";
+        const { fullnameEdit, phoneEdit } = this.state
+        const { updateUser } = this.props
+        updateUser({
+            fullname: fullnameEdit,
+            phone: phoneEdit
+        })
     };
     componentDidMount() {
         const { info } = this.props

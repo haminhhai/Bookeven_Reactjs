@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { MDBBtn, MDBIcon, MDBInput } from 'mdbreact'
 
-import { MSG_PASSWORD_CONSISTENT } from '../../const/message'
+import { MSG_PASSWORD_CONSISTENT, MSG_PASSWORD_SHORT } from '../../const/message'
 class SignUp extends Component {
     state = {
         email: '',
@@ -21,6 +21,8 @@ class SignUp extends Component {
             this.$utils.toastError(MSG_PASSWORD_CONSISTENT)
             this.setState({ confirmpassword: ''})
         }
+        else if( password.length < 6 )
+            this.$utils.toastError(MSG_PASSWORD_SHORT)
         else {
             signup(email, password, fullname, phone)
         }

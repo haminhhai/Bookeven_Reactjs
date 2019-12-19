@@ -9,11 +9,11 @@ class BRCard extends Component {
     render() {
         var book = {
             id: 1,
-            src: empty,
+            image: empty,
             title: '',
             author: '',
-            realPrice: 0,
-            percentDiscount: 0,
+            price: 0,
+            discount: 0,
             topic: 0,
             inventory: 0,
             rate: 0
@@ -22,11 +22,11 @@ class BRCard extends Component {
             book = this.props.book
         return (
             <div className='top-rate row'>
-                <Link to={`/${this.$utils.convertVietnamese(book.title)}`}>
-                    <img src={book.src} alt='' />
+                <Link to={`/chi-tiet-sach/${book.id}`}>
+                    <img src={book.image} alt='' />
                 </Link>
                 <span className='text-left' title={book.title}>
-                    <Link className='text-dark' to={`/${this.$utils.convertVietnamese(book.title)}`}>
+                    <Link className='text-dark' to={`/chi-tiet-sach/${book.id}`}>
                         {book.title}
                     </Link>
                 </span>
@@ -34,9 +34,9 @@ class BRCard extends Component {
                     <Rate allowHalf defaultValue={book.rate} disabled />
                 </div>
                 <p>
-                    {book.percentDiscount > 0 &&
-                        <del className='mr-1'>{this.$utils.formatVND(book.realPrice)}</del>}
-                    {this.$utils.calDiscountPrice(book.realPrice, book.percentDiscount)}
+                    {book.discount > 0 &&
+                        <del className='mr-1'>{this.$utils.formatVND(book.price)}</del>}
+                    {this.$utils.calDiscountPrice(book.price, book.discount)}
                 </p>
             </div>
         );

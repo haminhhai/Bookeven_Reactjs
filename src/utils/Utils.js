@@ -54,7 +54,7 @@ export const calculateTotalCart = (cart, type) => {
   var result = 0
   if (cart.length > 0)
     cart.map(item =>
-      result += (parseInt(item.quantity) * parseInt(item.realPrice - (item.realPrice * item.percentDiscount / 100))))
+      result += (parseInt(item.amount) * parseInt(item.price - (item.price * item.discount / 100))))
   if (type === 'vnd')
     result = formatVND(result)
   return result
@@ -65,8 +65,11 @@ export const filterAddress = (provinceId, districtId, wardId) => {
   const wardName = ward.filter(item => item.wardid === wardId)[0]
   const districtName = district.filter(item => item.districtid === districtId)[0]
   const provinceName = province.filter(item => item.provinceid === provinceId)[0]
-  address = `${wardName.name}, ${districtName.name}, ${provinceName.name}`
-  return address
+  if (wardName !== undefined && districtName !== undefined && provinceName !== undefined) {
+    address = `${wardName.name}, ${districtName.name}, ${provinceName.name}`
+    return address
+  }
+  else return 'Unknown'
 }
 
 
@@ -76,22 +79,28 @@ export const getBase64 = (img, callback) => {
   reader.readAsDataURL(img);
 }
 
-export const calDiscountPrice = (realPrice, percent) => {
-  return formatVND(realPrice - (realPrice * percent / 100))
+export const calDiscountPrice = (price, percent) => {
+  return formatVND(price - (price * percent / 100))
 }
 
-export const calTotalPrice = (realPrice, percent, quantity) => {
-  return formatVND((realPrice - (realPrice * percent / 100)) * quantity)
+export const calTotalPrice = (price, percent, amount) => {
+  return formatVND((price - (price * percent / 100)) * amount)
 }
-
 
 export const converTSToDate = (timestamp, format) => {
   if (typeof timestamp !== 'number')
     return timestamp
   else
-  return moment.unix(timestamp).format(format)
+    return moment.unix(timestamp).format(format)
 }
 
 export const convertDateToTS = date => {
   return moment(date).unix()
+}
+
+export const getNumberFromString = text => {
+  var res = text
+  if(text.match(/\d/g) !== null)
+    res = parseInt(text.match(/\d/g).join(""))
+  return res
 }
