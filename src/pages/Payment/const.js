@@ -28,4 +28,6 @@ export const TOTAL_INVOICE = 'Tổng giá trị đơn hàng:'
 
 export const ORDER_SUCCESS = 'Đặt hàng thành công!'
 
+export const NOTE_ADDRESS = 'Nếu bạn chưa có địa chỉ hãy tới Tài khoản > Sổ địa chỉ > Thêm mới địa chỉ.'
+
 export const THANK_ORDER = 'Cảm ơn bạn đã đặt hàng tại Bookeven. Chúng tôi sẽ giao hàng cho bạn sớm nhất có thể.'

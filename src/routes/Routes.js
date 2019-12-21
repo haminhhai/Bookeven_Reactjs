@@ -71,10 +71,9 @@ class Routes extends Component {
 
     componentDidMount() {
         var { bookActions, cartActions, accActions, authen } = this.props
-        const { fetchListBook, fetchListFieldsbook } = bookActions
+        const {  fetchListFieldsbook } = bookActions
         const { fetchCart } = cartActions
         const { getUser } = accActions
-        fetchListBook()
         fetchListFieldsbook()
         const token = localStorage.getItem('TOKEN');
         const email = localStorage.getItem('EMAIL');

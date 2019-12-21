@@ -6,18 +6,20 @@ import './style.scss'
 class AvatarUser extends Component {
     state = {}
     handleName = (name) => {
-        var check = / /g
-        var firstWord = ''
-        var secondWord = ''
-        var numOfBlank = name.match(check)
-        if (numOfBlank !== null) {
-            firstWord = name.slice(0, 1)
-            var i = name.lastIndexOf(' ')
-            secondWord = name.slice(i + 1, i + 2)
+        if (name !== undefined) {
+            var check = / /g
+            var firstWord = ''
+            var secondWord = ''
+            var numOfBlank = name.match(check)
+            if (numOfBlank !== null) {
+                firstWord = name.slice(0, 1)
+                var i = name.lastIndexOf(' ')
+                secondWord = name.slice(i + 1, i + 2)
+            }
+            else
+                firstWord = name.slice(0, 1)
+            return (firstWord + secondWord).toUpperCase()
         }
-        else
-            firstWord = name.slice(0, 1)
-        return (firstWord + secondWord).toUpperCase()
     }
     render() {
         const { size, name } = this.props

@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { MDBTable, MDBTableBody, MDBTableHead, MDBBtn, } from 'mdbreact';
+import { MDBTable, MDBTableBody, MDBTableHead, } from 'mdbreact';
 import Header from '../../layouts/Header/Header'
 import '../../styles/cart.scss'
 
@@ -72,15 +70,5 @@ class Cart extends Component {
     }
 }
 
-const MapStateToProps = state => {
-    return {
-    }
-}
 
-const MapDispatchToProps = (dispatch, props) => {
-    return {
-
-    }
-}
-
-export default connect(MapStateToProps, MapDispatchToProps)(Cart);
+export default Cart

@@ -14,7 +14,7 @@ export const getDetailBook = data => {
 }
 
 export const updateListBooks = data => {
-    return axiosService.put(`${API_URL_LOCAL}/${url_books}/${data.id}`, data)
+    return axiosService.put(`${API_URL}/${url_book}/update`, data)
 }
 
 export const getBooksByBFID = data => {
@@ -49,9 +49,17 @@ export const getListFieldsbook = () => {
 const url_cmt = 'comment'
 
 export const getListComments = data => {
-    return axiosService.get(`${API_URL}/${url_cmt}/list`, data)
+    return axiosService.post(`${API_URL}/${url_cmt}/list`, data)
 }
 
 export const addComment = data => {
     return axiosService.post(`${API_URL}/${url_cmt}/new`, data)
+}
+
+export const updateComment = data => {
+    return axiosService.put(`${API_URL}/${url_cmt}/update`, data)
+}
+
+export const deleteComment = data => {
+    return axiosService.delete(`${API_URL}/${url_cmt}/delete`, data)
 }

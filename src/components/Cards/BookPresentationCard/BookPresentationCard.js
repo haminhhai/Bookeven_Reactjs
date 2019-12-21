@@ -13,23 +13,29 @@ class BPCard extends Component {
   state = {
     data: {},
     modal: false,
-    detailBook: {}
+    id: 0,
   }
 
   checkAuthen = book => {
-    const { role, authen, onAddToCart, openModal } = this.props
+    const { role, authen, onAddToCart, openModal, getDetailBook } = this.props
     if (authen) {
       if (role === 1)
-        onAddToCart(book)
-      else this.showModal(book)
+        onAddToCart({
+          book_id: book.id,
+          amount: 1
+        })
+      else {
+        getDetailBook({ id: book.id })
+        this.showModal(book.id)
+      }
     } else {
       openModal(1, true)
     }
   }
 
-  showModal = data => {
+  showModal = id => {
     this.setState({
-      detailBook: data,
+      id: id,
       modal: !this.state.modal
     })
   }
@@ -38,17 +44,19 @@ class BPCard extends Component {
     this.setState({ modal: !this.state.modal })
   }
 
-  componentDidMount() {
-    const { role } = this.props
-    if (role === 2)
-      this.setState({
-        data: roles.manager.couple_btn
-      })
-    else this.setState({ data: roles.customer.couple_btn })
+  componentWillReceiveProps(preProps) {
+    if (preProps.role !== 0) {
+      const { role } = this.props
+      if (role === 2)
+        this.setState({
+          data: roles.manager.couple_btn
+        })
+      else this.setState({ data: roles.customer.couple_btn })
+    }
   }
   render() {
-    const { data, detailBook, modal } = this.state
-    const { fieldsBook, updateListBook, fetchListBook } = this.props
+    const { data, id, modal } = this.state
+    const { fieldsBook, updateListBook, fetchListBook, detailBook } = this.props
     var book = {
       id: 0,
       image: empty,
@@ -120,12 +128,13 @@ class BPCard extends Component {
         </MDBCard>
         {
           modal && <ModalEditBook
-            data={detailBook}
+            id={id}
             modal={modal}
             closeModal={this.closeModal}
             fieldsBook={fieldsBook}
             updateListBook={updateListBook}
-            fetchListBook={fetchListBook} />
+            fetchListBook={fetchListBook}
+            detailBook={detailBook} />
         }
       </div >
     )

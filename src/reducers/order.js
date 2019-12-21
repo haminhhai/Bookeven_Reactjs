@@ -31,8 +31,6 @@ var orders = (state = initialState, action) => {
             return [...state]
         }
         case types.CREATE_ORDER_SUCCESS: {
-            const { data } = action.payload
-            state.push(data)
             toastSuccess(msg.MSG_CREATE_ORDER_SUCCESS)
             return [...state]
         }

@@ -12,12 +12,13 @@ import {
     logoutSuccess,
     logoutFailed,
 } from '../actions/auth';
-import {closeModal} from '../actions/ui'
+import { closeModal } from '../actions/ui'
 import { login, signup, logout, signup_manager } from '../apis/auth';
 import * as authTypes from '../const/actionType';
 import axiosService from '../utils/axiosService';
-import {  getUser, deleteInfo } from '../actions/account';
+import { getUser, deleteInfo } from '../actions/account';
 
+import { MSG_ERROR_OCCUR } from '../const/message'
 function* processSignup({ payload }) {
     const { email, password, phone, fullname } = payload;
     try {
@@ -36,7 +37,9 @@ function* processSignup({ payload }) {
             yield put(signupFailed(data.message));
         }
     } catch (error) {
-        const message = _get(error, 'response.data.message', {});
+        var message = _get(error, 'response.data.message', {});
+        if (typeof message === 'object')
+            message = MSG_ERROR_OCCUR
         yield put(signupFailed(message));
     } finally {
         yield put(hideLoading());
@@ -60,7 +63,9 @@ function* processSignupManager({ payload }) {
             yield put(signupManagerFailed(data.message));
         }
     } catch (error) {
-        const message = _get(error, 'response.data', {});
+        var message = _get(error, 'response.data', {});
+        if (typeof message === 'object')
+            message = MSG_ERROR_OCCUR
         console.log(message)
         yield put(signupManagerFailed(message));
     } finally {
@@ -93,7 +98,9 @@ function* processLogin({ payload }) {
             yield put(loginFailed(data.message));
         }
     } catch (error) {
-        const err = _get(error, 'response.data.message', {})
+        var err = _get(error, 'response.data.message', {})
+        if (typeof message === 'object')
+            err = MSG_ERROR_OCCUR
         yield put(loginFailed(err));
     } finally {
         yield put(hideLoading());
@@ -119,7 +126,9 @@ function* processLogout({ payload }) {
             yield put(logoutFailed(data.message));
         }
     } catch (error) {
-        const err = _get(error, 'response.data.message', {});
+        var err = _get(error, 'response.data.message', {});
+        if (typeof message === 'object')
+            err = MSG_ERROR_OCCUR
         yield put(loginFailed(err));
     } finally {
         yield put(hideLoading());

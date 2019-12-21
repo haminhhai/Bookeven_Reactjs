@@ -300,11 +300,11 @@ export const updateListBookFailed = error => {
     }
 }
 
-export const getListComments = id => {
+export const getListComments = data => {
     return {
         type: types.GET_LIST_COMMENTS,
         payload: {
-            id
+            data
         }
     }
 }
@@ -348,6 +348,60 @@ export const addCommentSuccess = data => {
 export const addCommentFailed = error => {
     return {
         type: types.ADD_COMMENT_FAILED,
+        payload: {
+            error
+        }
+    }
+}
+
+export const updateComment = data => {
+    return {
+        type: types.UPDATE_COMMENT,
+        payload: {
+            data
+        }
+    }
+}
+
+export const updateCommentSuccess = data => {
+    return {
+        type: types.UPDATE_COMMENT_SUCCESS,
+        payload: {
+            data
+        }
+    }
+}
+
+export const updateCommentFailed = error => {
+    return {
+        type: types.UPDATE_COMMENT_FAILED,
+        payload: {
+            error
+        }
+    }
+}
+
+export const deleteComment = data => {
+    return {
+        type: types.DELETE_COMMENT,
+        payload: {
+            data
+        }
+    }
+}
+
+export const deleteCommentSuccess = data => {
+    return {
+        type: types.DELETE_COMMENT_SUCCESS,
+        payload: {
+            data
+        }
+    }
+}
+
+export const deleteCommentFailed = error => {
+    return {
+        type: types.DELETE_COMMENT_FAILED,
         payload: {
             error
         }

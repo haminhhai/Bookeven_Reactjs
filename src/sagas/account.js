@@ -22,6 +22,7 @@ import {
 import { getListAddress, createNewAddress, updateAddress, deleteAddress, getInfo, updateInfo, changePassword } from '../apis/account'
 import { STATUS_CODE } from '../const/config'
 
+import {MSG_ERROR_OCCUR} from '../const/message'
 function* watchGetAddressAction() {
     while (true) {
         yield take(types.GET_LIST_ADDRESS)
@@ -35,7 +36,9 @@ function* watchGetAddressAction() {
                 yield put(getListAddressFailed(data.message))
             }
         } catch (error) {
-            const message = _get(error, 'response.data.message', {});
+            var message = _get(error, 'response.data.message', {});
+        if(typeof message === 'object')
+            message = MSG_ERROR_OCCUR
             yield put(getListAddressFailed(message));
         } finally {
             yield put(hideLoading());
@@ -54,7 +57,9 @@ function* watchCreateAddressAction({ payload }) {
         }
         else yield put(createNewAddressFailed(data.message))
     } catch (error) {
-        const message = _get(error, 'response.data.message', {});
+        var message = _get(error, 'response.data.message', {});
+        if(typeof message === 'object')
+            message = MSG_ERROR_OCCUR
         yield put(createNewAddressFailed(message));
     } finally {
         yield put(hideLoading());
@@ -72,7 +77,9 @@ function* watchUpdateAddressAction({ payload }) {
         }
         else yield put(updateAddressFailed(data.message))
     } catch (error) {
-        const message = _get(error, 'response.data.message', {});
+        var message = _get(error, 'response.data.message', {});
+        if(typeof message === 'object')
+            message = MSG_ERROR_OCCUR
         yield put(updateAddressFailed(message));
     } finally {
         yield put(hideLoading());
@@ -91,7 +98,9 @@ function* watchDeleteAddressAction({ payload }) {
             yield put(deleteAddressFailed(data.message))
         }
     } catch (error) {
-        const message = _get(error, 'response.data.message', {});
+        var message = _get(error, 'response.data.message', {});
+        if(typeof message === 'object')
+            message = MSG_ERROR_OCCUR
         yield put(deleteAddressFailed(message));
     } finally {
         yield put(hideLoading());
@@ -109,7 +118,9 @@ function* watchGetUserAction() {
             yield put(getUserFailed(data.message))
         }
     } catch (error) {
-        const message = _get(error, 'response.data.message', {});
+        var message = _get(error, 'response.data.message', {});
+        if(typeof message === 'object')
+            message = MSG_ERROR_OCCUR
         yield put(getUserFailed(message));
     } finally {
         yield put(hideLoading());
@@ -127,7 +138,9 @@ function* watchUpdateUserAction({ payload }) {
             yield put(updateUserFailed(data.message))
         }
     } catch (error) {
-        const message = _get(error, 'response.data.message', {});
+        var message = _get(error, 'response.data.message', {});
+        if(typeof message === 'object')
+            message = MSG_ERROR_OCCUR
         yield put(updateUserFailed(message));
     } finally {
         yield put(hideLoading());
@@ -145,7 +158,9 @@ function* watchChangePasswordAction({ payload }) {
             yield put(changePasswordFailed(data.message))
         }
     } catch (error) {
-        const message = _get(error, 'response.data.message', {});
+        var message = _get(error, 'response.data.message', {});
+        if(typeof message === 'object')
+            message = MSG_ERROR_OCCUR
         yield put(changePasswordFailed(message));
     } finally {
         yield put(hideLoading());

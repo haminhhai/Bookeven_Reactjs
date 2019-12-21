@@ -9,44 +9,23 @@ import * as bookActions from '../../actions/book'
 import * as cartActions from '../../actions/cart'
 class BookDetailContainer extends Component {
 
-    onAddToCart = (book, amount) => {
-        const { cart, cartActions } = this.props
-        const { addToCart } = cartActions
-        var checkExist = cart.filter(item => {
-            return item.id === book.id
-        })
-        if (checkExist.length > 0) {
-            if (book.inventory > checkExist[0].amount) {
-                if (checkExist[0].amount + amount >= book.inventory) {
-                    addToCart(book, book.inventory - checkExist[0].amount)
-                }
-                else {
-                    addToCart(book, amount)
-                }
-            }
-        }
-        else {
-            addToCart(book, amount)
-        }
-    }
-
     componentDidMount() {
         const { bookActions, path } = this.props
         var id = this.$utils.getNumberFromString(path)
         if (typeof id === 'number')
             bookActions.getDetailBook({ id: id })
         
-        bookActions.getListComments(id)
+        bookActions.getListComments({ id: id })
 
     }
     render() {
-        const { detailBook, role, bookActions, fieldsBook, filtedBook, history } = this.props //parent = this.props.parent
+        const { detailBook, role, bookActions, fieldsBook, filtedBook, history, cartActions } = this.props //parent = this.props.parent
         const { updateListBook, getDetailBook } = bookActions
         return (
             <BookDetail
                 filtedBook={filtedBook}
                 detailBook={detailBook}
-                onAddToCart={this.onAddToCart}
+                onAddToCart={cartActions.addToCart}
                 updateListBook={updateListBook}
                 role={role}
                 fieldsBook={fieldsBook}

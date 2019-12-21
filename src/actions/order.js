@@ -78,11 +78,10 @@ export const updateOrderFailed = error => {
     }
 }
 
-export const createOrder = (id, data) => {
+export const createOrder =  data => {
     return {
         type: types.CREATE_ORDER,
         payload: {
-            id,
             data
         }
     }

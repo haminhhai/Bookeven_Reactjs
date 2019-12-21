@@ -13,8 +13,9 @@ class BookFieldContainer extends Component {
             filterBooksSingle(id)
     }
     render() {
-        const { parent, filtedBook, path, bookActions, fieldsBook, history } = this.props
-        const { filterBooksMulti, getBooksByBFID } = bookActions
+        const { parent, books, path, bookActions, fieldsBook, history } = this.props
+        const { filtedBook, rateBook } = books
+        const { filterBooksMulti, getBooksByBFID, getListBestNewest, getListBestSeller, getListBestSales } = bookActions
         return <BookField
             parent={parent}
             filtedBook={filtedBook} 
@@ -22,7 +23,11 @@ class BookFieldContainer extends Component {
             filterBooksMulti={filterBooksMulti} 
             fieldsBook={fieldsBook}
             getBooksByBFID={getBooksByBFID}
-            history={history} />
+            history={history}
+            rateBook={rateBook}
+            getListBestNewest={getListBestNewest}
+            getListBestSeller={getListBestSeller}
+            getListBestSales={getListBestSales} />
     }
 }
 
@@ -38,7 +43,7 @@ BookFieldContainer.propTypes = {
 
 const mapStateToProps = state => {
     return {
-        filtedBook: state.books.filtedBook,
+        books: state.books,
         path: state.router.location.pathname,
         fieldsBook: state.books.fieldsBook
     }

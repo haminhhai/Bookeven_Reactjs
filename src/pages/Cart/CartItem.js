@@ -21,7 +21,10 @@ class CartItem extends Component {
     onChangeAmount = (e) => {
         var { onUpdateProduct } = this.props
         var { item } = this.props
-        onUpdateProduct(item, e)
+        onUpdateProduct({
+            book_id: item.id,
+            amount: e
+        })
 
     }
     render() {

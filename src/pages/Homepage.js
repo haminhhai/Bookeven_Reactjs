@@ -5,7 +5,6 @@ import { Redirect, Link } from 'react-router-dom'
 import Header from '../layouts/Header/Header'
 import '../styles/home.scss'
 import BookCardContainer from '../containers/BookContainer/BookCardContainer'
-
 class Homepage extends Component {
   state = {
     redir: false,
@@ -37,7 +36,7 @@ class Homepage extends Component {
         <div className='wrapper'>
           <div className='container'>
             <h3 className='title font-weight-bold'>
-              <Link to='/ban-chay-nhat'>
+              <Link to='/sach-ban-chay'>
                 <MDBIcon icon="chart-line" className='mr-2' />
                 Sách bán chạy nhất
               </Link>
@@ -78,5 +77,4 @@ class Homepage extends Component {
   }
 }
 
-
-export default Homepage;
+export default Homepage

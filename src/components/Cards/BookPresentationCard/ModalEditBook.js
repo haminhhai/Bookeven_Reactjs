@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { MDBModal, MDBModalBody, MDBModalHeader, MDBBtn, MDBIcon, MDBView, MDBMask } from 'mdbreact'
 import { Upload, Icon, InputNumber, Select, Form, Input, Button, DatePicker } from 'antd'
 import Lightbox from 'react-image-lightbox';
-
+import moment from 'moment'
 import * as cont from './const'
 import './style.scss'
 class ModalEditBook extends Component {
@@ -17,8 +17,11 @@ class ModalEditBook extends Component {
             inventory: 0,
             discount: 0,
             price: 0,
-            topic: 0,
-            changeToSave: true
+            bookfield: 0,
+            pages: 0,
+            size: '',
+            publishDate: null,
+            weight: '',
         }
     }
     beforeUpload = file => {
@@ -40,31 +43,20 @@ class ModalEditBook extends Component {
         }
         if (info.file.status === 'done') {
             // Get this url from response in real world.
-            this.$utils.getBase64(info.file.originFileObj, imageUrl =>
+            this.$utils.getBase64(info.file.originFileObj, imageUrl => {
+                const contentType = 'image/png';
+                const blob = this.b64toBlob(imageUrl.slice(22), contentType);
+                const blobUrl = URL.createObjectURL(blob);
                 this.setState({
-                    imageUrl,
+                    imageUrl: blobUrl,
                     loading: false,
                     changeToSave: false
                 })
+            }
             );
             this.$utils.toastSuccess(cont.UPLOAD_SUCCESS)
         }
-    };
-
-    handleSelectTopic = id => {
-        this.setState({
-            topic: id,
-            changeToSave: false
-        })
     }
-
-    changeHandler = event => {
-        this.setState({
-            [event.target.name]: event.target.value,
-            changeToSave: false
-        });
-    };
-
     normFile = e => {
         if (Array.isArray(e)) {
             return e;
@@ -73,21 +65,26 @@ class ModalEditBook extends Component {
     };
 
     handleSubmit = e => {
-        const { updateListBook, data, closeModal, fetchListBook } = this.props
+        const { updateListBook, detailBook, closeModal } = this.props
         const { imageUrl } = this.state
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                const { name, author, topic, discount, price, inventory, pages, size, publishDate, weight } = values
+                const { name, author, bookfield, discount, price, inventory, pages, size, publishDate, weight } = values
                 const body = {
-                    id: data.id,
-                    image: imageUrl,
+                    id: detailBook.id,
                     title: name,
                     author: author,
-                    inventory: inventory,
+                    size: size,
+                    numPage: pages,
+                    weight: weight + ' gram',
+                    publishDate: publishDate.format('YYYY-MM-DD'),
                     price: price,
+                    bookField: bookfield,
+                    description: detailBook.description,
+                    image: imageUrl,
+                    inventory: inventory,
                     discount: discount,
-                    topic: topic
                 }
                 updateListBook(body)
                 closeModal()
@@ -95,21 +92,46 @@ class ModalEditBook extends Component {
         });
     };
 
-    componentDidMount() {
-        const { data } = this.props
-        this.setState({
-            imageUrl: data.image,
-            name: data.title,
-            author: data.author,
-            inventory: data.inventory,
-            discount: data.discount,
-            price: data.price,
-            topic: data.topic
-        })
+    b64toBlob = (b64Data, contentType = '', sliceSize = 512) => {
+        const byteCharacters = atob(b64Data);
+        const byteArrays = [];
+
+        for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+            const byteNumbers = new Array(slice.length);
+            for (let i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            const byteArray = new Uint8Array(byteNumbers);
+            byteArrays.push(byteArray);
+        }
+
+        const blob = new Blob(byteArrays, { type: contentType });
+        return blob;
+    }
+    componentWillReceiveProps(preProps) {
+        if (preProps.detailBook.id !== undefined && preProps.id === preProps.detailBook.id) {
+            const { detailBook } = preProps
+            this.setState({
+                imageUrl: detailBook.image,
+                name: detailBook.name,
+                author: detailBook.author,
+                inventory: detailBook.inventory,
+                discount: detailBook.discount,
+                price: detailBook.price,
+                bookfield: detailBook.bookfield_id,
+                pages: detailBook.page,
+                size: detailBook.size,
+                weight: detailBook.weight,
+                publishDate: detailBook.published_date
+            })
+        }
     }
     render() {
-        const { modal, closeModal, fieldsBook, form } = this.props
-        const { imageUrl, previewVisible, loading, name, author, inventory, discount, price, topic, changeToSave } = this.state
+        const {  modal, closeModal, fieldsBook, form } = this.props
+        const { imageUrl, previewVisible, loading, name, author, inventory, discount, price, bookfield, pages, size, weight, publishDate } = this.state
         const { getFieldDecorator } = form;
         const uploadButton = (
             <div>
@@ -146,11 +168,6 @@ class ModalEditBook extends Component {
                                             {getFieldDecorator('fileList', {
                                                 valuePropName: 'fileList',
                                                 getValueFromEvent: this.normFile,
-                                                rules: [
-                                                    {
-                                                        required: true,
-                                                    },
-                                                ],
                                             })(
                                                 <Upload
                                                     accept="image/png, image/jpeg"
@@ -204,8 +221,8 @@ class ModalEditBook extends Component {
                                     </div>
                                     <div className='col-6'>
                                         <Form.Item label='Danh mục'>
-                                            {getFieldDecorator('topic', {
-                                                initialValue: topic,
+                                            {getFieldDecorator('bookfield', {
+                                                initialValue: bookfield,
                                                 rules: [
                                                     {
                                                         required: true,
@@ -232,24 +249,11 @@ class ModalEditBook extends Component {
                                     <div className='col-6'>
                                         <Form.Item label='Khuôn khổ'>
                                             {getFieldDecorator('size', {
+                                                initialValue: size,
                                                 rules: [
                                                     {
                                                         required: true,
                                                         message: cont.REQUIRE_SIZE,
-                                                    },
-                                                ],
-                                            })(
-                                                <Input size='large' />
-                                            )}
-                                        </Form.Item>
-                                    </div>
-                                    <div className='col-6'>
-                                        <Form.Item label='Mã sách'>
-                                            {getFieldDecorator('id', {
-                                                rules: [
-                                                    {
-                                                        required: true,
-                                                        message: cont.REQUIRE_ID,
                                                     },
                                                 ],
                                             })(
@@ -279,7 +283,7 @@ class ModalEditBook extends Component {
                                             )}
                                         </Form.Item>
                                     </div>
-                                    <div className='col-4'>
+                                    <div className='col-6'>
                                         <Form.Item label='Tồn kho'>
                                             {getFieldDecorator('inventory', {
                                                 initialValue: inventory,
@@ -298,7 +302,7 @@ class ModalEditBook extends Component {
                                             )}
                                         </Form.Item>
                                     </div>
-                                    <div className='col-4'>
+                                    <div className='col-6'>
                                         <Form.Item label='Giảm giá (%)'>
                                             {getFieldDecorator('discount', {
                                                 initialValue: discount,
@@ -322,6 +326,7 @@ class ModalEditBook extends Component {
                                     <div className='col-4'>
                                         <Form.Item label='Số trang'>
                                             {getFieldDecorator('pages', {
+                                                initialValue: pages,
                                                 rules: [
                                                     {
                                                         required: true,
@@ -342,6 +347,7 @@ class ModalEditBook extends Component {
                                     <div className='col-6'>
                                         <Form.Item label='Trọng lượng(gram)'>
                                             {getFieldDecorator('weight', {
+                                                initialValue: this.$utils.getNumberFromString(weight),
                                                 rules: [
                                                     {
                                                         required: true,
@@ -362,6 +368,7 @@ class ModalEditBook extends Component {
                                     <div className='col-6'>
                                         <Form.Item label='Ngày phát hành'>
                                             {getFieldDecorator('publishDate', {
+                                                initialValue: moment(publishDate),
                                                 rules: [
                                                     {
                                                         type: 'object',
@@ -371,7 +378,7 @@ class ModalEditBook extends Component {
                                                 ],
                                             })(
                                                 <DatePicker
-                                                    style={{ width: '100%' }} 
+                                                    style={{ width: '100%' }}
                                                     size='large'
                                                     placeholder='Chọn ngày'
                                                     format='DD-MM-YYYY' />

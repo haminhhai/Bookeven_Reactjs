@@ -28,6 +28,10 @@ export const MSG_UPDATE_BOOK_SUCCESS = 'Cập nhật sản phẩm thành công!'
 
 export const MSG_ADD_COMMENT_SUCCESS = 'Thêm bình luận thành công!'
 
+export const MSG_UPDATE_COMMENT_SUCCESS = 'Cập nhật bình luận thành công!'
+
+export const MSG_DELETE_COMMENT_SUCCESS = 'Xóa bình luận thành công!'
+
 export const MSG_UPDATE_USER_SUCCESS = 'Cập nhật tài khoản thành công!'
 
 export const MSG_CHANGE_PASSWORD_SUCCESS = 'Đổi mật khẩu thành công!'

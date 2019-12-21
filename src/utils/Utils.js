@@ -94,6 +94,10 @@ export const converTSToDate = (timestamp, format) => {
     return moment.unix(timestamp).format(format)
 }
 
+export const convertTSToMoment = timestamp => {
+  return moment.unix(timestamp)
+}
+
 export const convertDateToTS = date => {
   return moment(date).unix()
 }

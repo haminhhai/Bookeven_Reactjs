@@ -57,35 +57,95 @@ class BookField extends Component {
         return items
     }
     onShowSizeChange = (current, pageSize) => {
-        const { path, getBooksByBFID } = this.props
-        var id = this.$utils.getNumberFromString(path)
-        if (typeof id === 'number')
-            getBooksByBFID({
-                bookField_id: id,
+        const { path, getBooksByBFID, getListBestNewest, getListBestSeller, getListBestSales } = this.props
+        if (path.includes('sach-theo-danh-muc')) {
+            var id = this.$utils.getNumberFromString(path)
+            if (typeof id === 'number')
+                getBooksByBFID({
+                    bookField_id: id,
+                    amount: pageSize,
+                    page: current
+                })
+        }
+        else if (path.includes('sach-moi')) {
+            getListBestNewest({
                 amount: pageSize,
                 page: current
             })
+        }
+        else if (path.includes('sach-ban-chay')) {
+            getListBestSeller({
+                amount: pageSize,
+                page: current
+            })
+        }
+        else if (path.includes('sach-giam-gia')) {
+            getListBestSales({
+                amount: pageSize,
+                page: current
+            })
+        }
     }
     changePage = page => {
-        const { path, getBooksByBFID, filtedBook } = this.props
-        var id = this.$utils.getNumberFromString(path)
-        if (typeof id === 'number')
-            getBooksByBFID({
-                bookField_id: id,
+        const { path, getBooksByBFID, filtedBook, getListBestNewest, getListBestSeller, getListBestSales } = this.props
+        if (path.includes('sach-theo-danh-muc')) {
+            var id = this.$utils.getNumberFromString(path)
+            if (typeof id === 'number')
+                getBooksByBFID({
+                    bookField_id: id,
+                    amount: filtedBook.pageSize,
+                    page: page
+                })
+        }
+        else if (path.includes('sach-moi')) {
+            getListBestNewest({
                 amount: filtedBook.pageSize,
                 page: page
             })
+        }
+        else if (path.includes('sach-ban-chay')) {
+            getListBestSeller({
+                amount: filtedBook.pageSize,
+                page: page
+            })
+        }
+        else if (path.includes('sach-giam-gia')) {
+            getListBestSales({
+                amount: filtedBook.pageSize,
+                page: page
+            })
+        }
     };
     componentDidMount() {
         window.scrollTo(0, 0)
-        const { getBooksByBFID, path } = this.props
-        var id = this.$utils.getNumberFromString(path)
-        if (typeof id === 'number') 
-            getBooksByBFID({
-                bookField_id: id,
+        const { getBooksByBFID, getListBestNewest, getListBestSeller, getListBestSales, path } = this.props
+        if (path.includes('sach-theo-danh-muc')) {
+            var id = this.$utils.getNumberFromString(path)
+            if (typeof id === 'number')
+                getBooksByBFID({
+                    bookField_id: id,
+                    amount: 10,
+                    page: 1
+                })
+        }
+        else if (path.includes('sach-moi')) {
+            getListBestNewest({
                 amount: 10,
                 page: 1
             })
+        }
+        else if (path.includes('sach-ban-chay')) {
+            getListBestSeller({
+                amount: 10,
+                page: 1
+            })
+        }
+        else if (path.includes('sach-giam-gia')) {
+            getListBestSales({
+                amount: 10,
+                page: 1
+            })
+        }
     }
     filterType = parent => {
         const { filtedBook } = this.props
@@ -97,7 +157,7 @@ class BookField extends Component {
         }
     }
     render() {
-        const { parent, filtedBook, fieldsBook, history } = this.props //parent = this.props.parent
+        const { parent, filtedBook, fieldsBook, history, rateBook } = this.props //parent = this.props.parent
         const { topic, rate, maxval, minval } = this.state
         return (
             <div>
@@ -173,7 +233,11 @@ class BookField extends Component {
                                     </div>
                                     <div className='card-rcol col-md-12'>
                                         <strong>Sách bình chọn nhiều nhất</strong>
-                                        {this.loopCard(0, 5, 'br')}
+                                        {
+                                            rateBook.length > 0 &&
+                                            rateBook.map((item, i) =>
+                                                <BookCardContainer key={i} book={item} type='br' />)
+                                        }
                                     </div>
                                 </div>
                             </div>

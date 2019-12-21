@@ -10,41 +10,24 @@ import * as cartActions from '../../actions/cart'
 import * as bookActions from '../../actions/book'
 import * as uiActions from '../../actions/ui'
 class BookCardContainer extends Component {
-
-  onAddToCart = book => {
-    const { cart, cartActions } = this.props
-    const { addToCart } = cartActions
-    var check = []
-    if (cart.length > 0)
-      check = cart.filter(item => {
-        return item.id === book.id
-      })
-    if (check.length > 0) {
-      if (book.inventory > check[0].amount) {
-        addToCart(book, 1)
-      }
-    }
-    else {
-      addToCart(book, 1)
-    }
-  }
-
   render() {
-    const { listBooks, index, type, book, fieldsBook, bookActions, info, authen, uiActions } = this.props
-    const { updateListBook, fetchListBook } = bookActions
+    const {   type, book, books, bookActions, info, authen, uiActions, cartActions } = this.props
+    const {fieldsBook, detailBook } = books
+    const { updateListBook, getDetailBook } = bookActions
     return (
       type === 'bp' ?
         <BPCard
           book={book}
-          onAddToCart={this.onAddToCart}
+          onAddToCart={cartActions.addToCart}
           fieldsBook={fieldsBook}
           updateListBook={updateListBook}
-          fetchListBook={fetchListBook}
           role={info.role}
           authen={authen} 
-          openModal={uiActions.openModal} />
+          openModal={uiActions.openModal}
+          getDetailBook={getDetailBook}
+          detailBook={detailBook} />
         :
-        <BRCard book={listBooks[index]} />
+        <BRCard book={book} />
     );
   }
 }
@@ -64,9 +47,8 @@ BookCardContainer.propTypes = {
 
 const MapStateToProps = state => {
   return {
-    listBooks: state.books.listBooks,
+    books: state.books,
     cart: state.cart,
-    fieldsBook: state.books.fieldsBook,
     info: state.account.info,
     authen: state.auth.authen
   }

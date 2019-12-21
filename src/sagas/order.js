@@ -22,8 +22,8 @@ import { fetchAllListOrders, fetchListOrdersById, createOrder, filterOrder, upda
 import { toastSuccess } from '../utils/Utils'
 import * as msg from '../const/message'
 import { STATUS_CODE } from '../const/config'
-import moment from 'moment'
 
+import { MSG_ERROR_OCCUR } from '../const/message'
 function* watchfetchAllListOrders() {
     while (true) {
         yield take(types.FETCH_ALL_LIST_ORDER)
@@ -37,7 +37,9 @@ function* watchfetchAllListOrders() {
                 yield put(fetchAllListOrdersFailed(data.message))
             }
         } catch (error) {
-            const message = _get(error, 'response.data.message', {});
+            var message = _get(error, 'response.data.message', {});
+            if (typeof message === 'object')
+                message = MSG_ERROR_OCCUR
             yield put(fetchAllListOrdersFailed(message));
         } finally {
             yield put(hideLoading())
@@ -57,7 +59,9 @@ function* watchfetchListOrdersById({ payload }) {
             yield put(fetchListOrdersByIdFailed(data.message))
         }
     } catch (error) {
-        const message = _get(error, 'response.data.message', {});
+        var message = _get(error, 'response.data.message', {});
+        if (typeof message === 'object')
+            message = MSG_ERROR_OCCUR
         yield put(fetchListOrdersByIdFailed(message));
     } finally {
         yield put(hideLoading())
@@ -77,24 +81,18 @@ function* watchFilterOrder({ payload }) {
 }
 
 function* watchCreateOrder({ payload }) {
-    var time = new Date()
-    const body = {
-        idAddress: payload.id,
-        listBooks: payload.data,
-        status: 1,
-        createAt: moment(time).unix(),
-        endTime: '-'
-    }
     try {
         yield put(showLoading())
-        const res = yield call(createOrder, body)
+        const res = yield call(createOrder, payload.data)
         const { status, data } = res
         if (status === STATUS_CODE.CREATED) {
             yield put(createOrderSuccess(data))
         }
         else yield put(createOrderFailed(data.message))
     } catch (error) {
-        const message = _get(error, 'response.data.message', {});
+        var message = _get(error, 'response.data.message', {});
+        if (typeof message === 'object')
+            message = MSG_ERROR_OCCUR
         yield put(createOrderFailed(message));
     } finally {
         yield put(hideLoading())
@@ -112,7 +110,9 @@ function* watchUpdateOrder({ payload }) {
         }
         else yield put(updateOrderFailed(data.message))
     } catch (error) {
-        const message = _get(error, 'response.data.message', {});
+        var message = _get(error, 'response.data.message', {});
+        if (typeof message === 'object')
+            message = MSG_ERROR_OCCUR
         yield put(updateOrderFailed(message));
     } finally {
         yield put(hideLoading())

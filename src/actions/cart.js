@@ -24,12 +24,11 @@ export const fetchCartFailed = error => {
     }
 }
 
-export const addToCart = (product, amount) => {
+export const addToCart = data => {
     return {
         type: types.ADD_TO_CART,
         payload: {
-            product,
-            amount
+            data
         }
     }
 }
@@ -52,12 +51,11 @@ export const addToCartFailed = error => {
     }
 }
 
-export const updateCart = (product, amount) => {
+export const updateCart = data => {
     return {
         type: types.UPDATE_CART,
         payload: {
-            product,
-            amount
+            data
         }
     }
 }
@@ -80,11 +78,11 @@ export const updateCartFailed = error => {
     }
 }
 
-export const removeCart = product => {
+export const removeCart = data => {
     return {
         type: types.REMOVE_ITEM_FROM_CART,
         payload: {
-            product
+            data
         }
     }
 }

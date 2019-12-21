@@ -11,19 +11,24 @@ import InputComment from '../components/Comments/InputComment';
 class CommentContainer extends Component {
 
   render() {
-    const { comments, bookActions, authen, info } = this.props
-    const { addComment } = bookActions
+    const { books, bookActions, authen, info } = this.props
+    const { comments, detailBook } = books
+    const { addComment, updateComment, deleteComment } = bookActions
     return (
       <React.Fragment>
         {
           comments.length > 0 &&
           comments.map((item, index) =>
-            <Skeleton avatar loading={true} active key={index}>
-              <Comments comment={item} />
+            <Skeleton avatar loading={false} active key={index}>
+              <Comments 
+                comment={item}
+                updateComment={updateComment}
+                deleteComment={deleteComment}
+                info={info} />
             </Skeleton>
           )
         }
-        <InputComment addComment={addComment} authen={authen} info={info} />
+        <InputComment addComment={addComment} authen={authen} info={info} detailBook={detailBook}/>
       </React.Fragment>
     );
   }
@@ -38,9 +43,9 @@ CommentContainer.propTypes = {
 
 const MapStateToProps = state => {
   return {
-    comments: state.books.comments,
+    books: state.books,
     authen: state.auth.authen,
-    info: state.account.info
+    info: state.account.info,
   }
 }
 

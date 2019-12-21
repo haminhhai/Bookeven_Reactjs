@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
 import { Comment, Form, Button, Input } from 'antd';
-import moment from 'moment';
 import AvatarUser from '../AvatarUser/AvatarUser';
 
 const { TextArea } = Input;
 
 
+const Editor = ({ onChange, onSubmit, submitting, value, handleKeyDown, authen }) => (
+    <div>
+        <Form.Item>
+            <TextArea rows={4} onChange={onChange} value={value} placeholder='Nhập bình luận' onKeyDown={handleKeyDown} />
+        </Form.Item>
+        <Form.Item>
+            <Button disabled={!authen} htmlType="submit" loading={submitting} onClick={onSubmit} type="primary">
+                Bình luận
+            </Button>
+        </Form.Item>
+    </div>
+);
 class InputComment extends Component {
     constructor(props) {
         super(props);
@@ -18,7 +29,7 @@ class InputComment extends Component {
         e.key === 'Enter' && this.handleSubmit()
     }
     handleSubmit = () => {
-        const { addComment } = this.props
+        const { addComment, detailBook } = this.props
         if (!this.state.value) {
             return;
         }
@@ -29,8 +40,8 @@ class InputComment extends Component {
 
         setTimeout(() => {
             const body = {
-                book_id: 1,
-                date: this.$utils.convertDateToTS(new Date()),
+                book_id: detailBook.id,
+                date: this.$utils.convertDateToTS(new Date()).toString(),
                 comment: this.state.value
             }
             this.setState({
@@ -46,18 +57,6 @@ class InputComment extends Component {
     render() {
         const { submitting, value } = this.state;
         const { authen, info }  =this.props
-        const Editor = ({ onChange, onSubmit, submitting, value, handleKeyDown }) => (
-            <div>
-                <Form.Item>
-                    <TextArea disabled={!authen} rows={4} onChange={onChange} value={value} placeholder='Nhập bình luận' onKeyDown={handleKeyDown} />
-                </Form.Item>
-                <Form.Item>
-                    <Button disabled={!authen} htmlType="submit" loading={submitting} onClick={onSubmit} type="primary">
-                        Bình luận
-                    </Button>
-                </Form.Item>
-            </div>
-        );
         return (
             <Comment
                 avatar={
@@ -70,6 +69,7 @@ class InputComment extends Component {
                         submitting={submitting}
                         value={value}
                         handleKeyDown={this.handleKeyDown}
+                        authen={authen}
                     />
                 }
             />

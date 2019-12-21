@@ -17,15 +17,13 @@ class PaymentContainer extends Component {
         getListAddress()
     }
     render() {
-        const { accountActions, orderActions, cart, address } = this.props
-        const { createNewAddress } = accountActions
+        const { orderActions, cart, address } = this.props
         const { createOrder } = orderActions
         return (
             <Payment
                 createOrder={createOrder}
                 cart={cart}
-                address={address}
-                createNewAddress={createNewAddress} />
+                address={address} />
         );
     }
 }

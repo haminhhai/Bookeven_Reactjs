@@ -31,7 +31,10 @@ class BookDetail extends Component {
         this.setState({ modal: !this.state.modal })
     }
     addToCart = (book) => {
-        this.props.onAddToCart(book, this.state.amount)
+        this.props.onAddToCart({
+            book_id: book.id,
+            amount: this.state.amount
+        })
     }
     componentWillReceiveProps(preProps) {
         if (preProps.detailBook.id !== undefined && !this.state.zoomed) {
@@ -58,10 +61,11 @@ class BookDetail extends Component {
         const { amount, modal } = this.state
         let xhtml = null
         xhtml = <div >
-            <Header carousel={false} parent={filtedBook.bookfield} child={detailBook.name} parentPath={`/sach-theo-danh-muc/${detailBook.bookfield_id}`} history={history}/>
+            <Header carousel={false} parent={filtedBook.bookfield} child={detailBook.name} parentPath={`/sach-theo-danh-muc/${detailBook.bookfield_id}`} history={history} />
             <ModalEditBook
+                id={detailBook.id}
                 updateListBook={updateListBook}
-                data={detailBook}
+                detailBook={detailBook}
                 closeModal={this.toggleModal}
                 fieldsBook={fieldsBook}
                 modal={modal} />
@@ -86,7 +90,10 @@ class BookDetail extends Component {
                             </div>
 
                             <h4 className='mt-3'>
-                                <del className='mr-3'>{this.$utils.formatVND(detailBook.price)}</del>
+                                {
+                                    this.$utils.calDiscountPrice(detailBook.price, detailBook.discount) !== this.$utils.formatVND(detailBook.price) &&
+                                    <del className='mr-3'>{this.$utils.formatVND(detailBook.price)}</del>
+                                }
                                 <b>{this.$utils.calDiscountPrice(detailBook.price, detailBook.discount)}</b>
                             </h4>
                             {
@@ -142,7 +149,7 @@ class BookDetail extends Component {
                         </div>
                         <div className='col-12 col-md-12 last-child'>
                             <h3>Đánh giá</h3>
-                            <RateContainer disabled={!detailBook.bought}/>
+                            <RateContainer disabled={!detailBook.bought} />
                         </div>
                     </div>
                 </div>

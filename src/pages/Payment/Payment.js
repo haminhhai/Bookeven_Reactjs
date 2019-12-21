@@ -2,65 +2,22 @@ import React, { Component } from 'react';
 
 import { MDBModal, MDBModalHeader, MDBIcon, MDBBtn, MDBTable, MDBTableBody, MDBTableHead, MDBInput, MDBModalBody } from 'mdbreact'
 import { Radio } from 'antd'
-
-import province from '../../utils/data/province.json'
-import district from '../../utils/data/district.json'
-import ward from '../../utils/data/ward.json'
 import Header from '../../layouts/Header/Header'
 import * as msg from '../../const/message'
 import * as cont from './const'
 import '../../styles/payment.scss'
 import PaymentSuccess from './PaymentSuccess.js';
-
+import moment from 'moment'
 class Payment extends Component {
     constructor(props) {
         super(props);
         this.state = {
             modal: false,
-            fullnameAddress: '',
-            emailAddress: '',
-            phoneAddress: '',
-            street: '',
-            selectedProvince: '',
-            selectedDistrict: '',
-            selectedWard: '',
             selectedAddress: '',
             addressNote: 1,
             isSuccess: false
         }
     }
-    changeTypeAddressNote = (e) => {
-        this.setState({ addressNote: e.target.value })
-    }
-
-    changeProvince = e => {
-        var id = parseInt(e.target.value)
-        this.setState({ selectedProvince: id })
-        var districts = []
-        districts = district.filter(item => {
-            return item.provinceid === id
-        })
-        var tempDistrict = []
-        districts.map((item, index) =>
-            tempDistrict.push(<option key={index} value={parseInt(item.districtid)}>{item.name}</option>)
-        )
-        this.setState({ district: tempDistrict })
-    }
-
-    changeDistrict = e => {
-        var id = parseInt(e.target.value)
-        this.setState({ selectedDistrict: id })
-        var wards = []
-        wards = ward.filter(item => {
-            return item.districtid === id
-        })
-        var tempWard = []
-        wards.map((item, index) =>
-            tempWard.push(<option key={index} value={parseInt(item.wardid)}>{item.name}</option>)
-        )
-        this.setState({ ward: tempWard })
-    }
-
     changeHandler = event => {
         this.setState({ [event.target.name]: event.target.value });
     };
@@ -70,48 +27,28 @@ class Payment extends Component {
         event.target.className += " was-validated";
         this.toggleModal()
     };
-
-    submitcreateOrder = () => {
-        const { createNewAddress, createOrder, cart } = this.props
-        const { addressNote, street, selectedProvince, selectedDistrict, selectedWard, selectedAddress } = this.state
-        const body = {
-            id: this.$utils.idGenerator(),
-            name: 'Hà Minh Hải',
-            email: 'haihaidb@gmail.com',
-            phone: '0327487958',
-            street: street,
-            province: selectedProvince,
-            district: selectedDistrict,
-            ward: parseInt(selectedWard)
-        }
-        var id = ''
-        if (addressNote === 2) {
-            id = body.id
-            createNewAddress(body)
-        }
-        else id = selectedAddress
-        createOrder(id, cart)
+    onCreateOrder = () => {
+        var time = new Date()
+        const { selectedAddress } = this.state
+        const { createOrder } = this.props
+        createOrder({
+            address_id: selectedAddress,
+            orderDate: moment(time).unix().toString(),
+            status: 1
+        })
+        this.setState({isSuccess: true})
         this.toggleModal()
-        this.setState({ isSuccess: true })
     }
-
     toggleModal = () => {
         this.setState({ modal: !this.state.modal })
     }
 
     componentDidMount() {
         window.scrollTo(0, 0)
-        var tempProvince = []
-        province.map((item, index) =>
-            tempProvince.push(<option key={index} value={parseInt(item.provinceid)}>{item.name}</option>)
-        )
-
-        this.setState({ province: tempProvince })
     }
     render() {
         const { cart, address } = this.props
-        const { province, district, ward, modal, isSuccess,
-            street, selectedProvince, selectedDistrict, selectedWard, addressNote, selectedAddress } = this.state
+        const { modal, isSuccess, selectedAddress } = this.state
         return (
             <form className='needs-validation'
                 onSubmit={this.submitHandler}>
@@ -127,15 +64,8 @@ class Payment extends Component {
                                         {cont.INFO_INVOICE_TITLE}
                                     </h4>
                                     <div className='row'>
-                                        <div className='col-12 mb-2'>
-                                            <Radio.Group onChange={this.changeTypeAddressNote} value={addressNote}>
-                                                <Radio value={1}>{cont.CHOOSE_YOUR_ADDRESS}</Radio>
-                                                <Radio value={2}>{cont.CHOOSE_NEW_ADDRESS}</Radio>
-                                            </Radio.Group>
-                                        </div>
-                                        {
-                                            addressNote === 1 &&
-                                            <div className='col-12 mb-4'>
+                                        <div className='col-12'>
+                                            <div className='method-pay'>
                                                 <select
                                                     name='selectedAddress'
                                                     onChange={this.changeHandler}
@@ -154,41 +84,8 @@ class Payment extends Component {
                                                     }
                                                 </select>
                                             </div>
-                                        }
-                                        {
-                                            addressNote === 2 &&
-                                            <div className='row'>
-                                                <div className='col-12'>
-                                                    <MDBInput
-                                                        outline
-                                                        label="Địa chỉ *"
-                                                        type="text"
-                                                        name='street'
-                                                        value={street}
-                                                        onChange={this.changeHandler}
-                                                        required
-                                                    />
-                                                </div>
-                                                <div className='col-12 mt-4'>
-                                                    <select onChange={this.changeProvince} value={selectedProvince} className="browser-default custom-select" required>
-                                                        <option value=''>Tỉnh/Thành phố *</option>
-                                                        {province}
-                                                    </select>
-                                                </div>
-                                                <div className='col-12 mt-5'>
-                                                    <select onChange={this.changeDistrict} value={selectedDistrict} className="browser-default custom-select" required>
-                                                        <option value=''>Quận/Huyện/TX *</option>
-                                                        {district}
-                                                    </select>
-                                                </div>
-                                                <div className='col-12 mt-5 mb-4'>
-                                                    <select name='selectedWard' onChange={this.changeHandler} value={selectedWard} className="browser-default custom-select" required>
-                                                        <option value=''>Xã/Phường *</option>
-                                                        {ward}
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        }
+                                            <p>{cont.NOTE_ADDRESS}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -238,13 +135,13 @@ class Payment extends Component {
                                                         cart.length > 0 &&
                                                         cart.map((item, i) =>
                                                             <tr key={i}>
-                                                                <td>{item.title}</td>
+                                                                <td>{item.name}</td>
                                                                 <td>{item.amount}</td>
                                                                 <td>{this.$utils.calTotalPrice(item.price, item.discount, item.amount)}</td>
                                                             </tr>
                                                         )
                                                     }
-                                                    <tr>
+                                                    {/* <tr>
                                                         <td colSpan='12' className='actions'>
                                                             <div className='coupon' >
                                                                 <input
@@ -255,7 +152,7 @@ class Payment extends Component {
                                                                 <MDBBtn color='danger'>Áp dụng</MDBBtn>
                                                             </div>
                                                         </td>
-                                                    </tr>
+                                                    </tr> */}
                                                 </MDBTableBody>
                                             </MDBTable>
                                             <div className='collateral'>
@@ -300,7 +197,7 @@ class Payment extends Component {
                                     </MDBModalHeader>
                                     <MDBModalBody className='text-right'>
                                         <MDBBtn className='rounded-pill' outline color="success" onClick={this.toggleModal}>Không</MDBBtn>
-                                        <MDBBtn className='text-white rounded-pill' color=" green accent-3" onClick={this.submitcreateOrder}>Có</MDBBtn>
+                                        <MDBBtn className='text-white rounded-pill' color=" green accent-3" onClick={this.onCreateOrder}>Có</MDBBtn>
                                     </MDBModalBody>
                                 </MDBModal>
                             </div>

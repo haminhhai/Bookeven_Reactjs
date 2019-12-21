@@ -64,6 +64,21 @@ export const DEFAULT_ROUTES = [
         component: BookFieldContainer
     },
     {
+        path: '/sach-giam-gia',
+        exact: false,
+        component: BookFieldContainer
+    },
+    {
+        path: '/sach-moi',
+        exact: false,
+        component: BookFieldContainer
+    },
+    {
+        path: '/sach-ban-chay',
+        exact: false,
+        component: BookFieldContainer
+    },
+    {
         path: '/chi-tiet-sach/:id',
         exact: false,
         component: BookDetailContainer
