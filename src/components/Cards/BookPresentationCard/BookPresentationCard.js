@@ -54,6 +54,7 @@ class BPCard extends Component {
         })
       else this.setState({ data: roles.customer.couple_btn })
     }
+    else this.setState({ data: roles.customer.couple_btn })
   }
   render() {
     const { data, id, modal } = this.state
@@ -91,7 +92,7 @@ class BPCard extends Component {
           </Link>
           <MDBCardBody>
             <MDBCardTitle className="h5" title={book.title}>
-              <Link className='text-dark' to={book.author !== 'Null' ? `/chi-tiet-sach/${book.id}` : '/#'}>
+              <Link className='text-dark author' to={book.author !== 'Null' ? `/chi-tiet-sach/${book.id}` : '/#'}>
                 {book.title}
               </Link>
             </MDBCardTitle>

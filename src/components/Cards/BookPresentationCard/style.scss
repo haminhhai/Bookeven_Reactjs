@@ -5,6 +5,11 @@
     min-height: 540px !important;
     max-height: 540px !important;
 
+    .card-body .card-text {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
     &:hover {
       -webkit-transform: translateY(4px);
       transform: translateY(4px);

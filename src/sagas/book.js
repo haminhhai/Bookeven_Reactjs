@@ -34,7 +34,10 @@ import {
     rateBookSuccess, rateBookFailed,
     updateRateSuccess, updateRateFailed,
     getListRate as fetchListRate,
-    getDetailBook as fetchDetailBook
+    getDetailBook as fetchDetailBook,
+    fourBestDiscountSuccess, fourBestDiscountFailed,
+    fourNewestFailed, fourNewestSuccess,
+    foutBestSellerFailed, foutBestSellerSuccess
 } from '../actions/book'
 import {
     getListFieldsbook, updateListBooks, getListComments, addComment, addRate, updateRate,
@@ -285,6 +288,51 @@ function* watchGetListComments({ payload }) {
     }
 }
 
+function* watch4NewestComments({ payload }) {
+    try {
+        const res = yield call(getListNewest, payload.data)
+        const { status, data } = res
+        if (status === STATUS_CODE.SUCCESS)
+            yield put(fourNewestSuccess(data))
+        else yield put(fourNewestFailed(data.message))
+    } catch (error) {
+        var message = _get(error, 'response.data.message', {});
+        if (typeof message === 'object')
+            message = MSG_ERROR_OCCUR
+        yield put(fourNewestFailed(message));
+    }
+}
+
+function* watch4SellerComments({ payload }) {
+    try {
+        const res = yield call(getListBestSeller, payload.data)
+        const { status, data } = res
+        if (status === STATUS_CODE.SUCCESS)
+            yield put(foutBestSellerSuccess(data))
+        else yield put(foutBestSellerFailed(data.message))
+    } catch (error) {
+        var message = _get(error, 'response.data.message', {});
+        if (typeof message === 'object')
+            message = MSG_ERROR_OCCUR
+        yield put(foutBestSellerFailed(message));
+    }
+}
+
+function* watch4DiscountComments({ payload }) {
+    try {
+        const res = yield call(getListBestSales, payload.data)
+        const { status, data } = res
+        if (status === STATUS_CODE.SUCCESS)
+            yield put(fourBestDiscountSuccess(data))
+        else yield put(fourBestDiscountFailed(data.message))
+    } catch (error) {
+        var message = _get(error, 'response.data.message', {});
+        if (typeof message === 'object')
+            message = MSG_ERROR_OCCUR
+        yield put(fourBestDiscountFailed(message));
+    }
+}
+
 function* filterBooksAction({ payload }) {
     try {
         yield put(showLoading())
@@ -475,6 +523,9 @@ function* bookSaga() {
     yield takeEvery(types.GET_DETAIL_BOOK, watchGetBookDetailAction)
     yield takeLatest(types.FILTER_BOOKS, filterBooksAction)
     yield takeLatest(types.GET_LIST_COMMENTS, watchGetListComments)
+    yield takeLatest(types.FOUR_NEWEST, watch4NewestComments)
+    yield takeLatest(types.FOUR_BEST_DISCOUNT, watch4DiscountComments)
+    yield takeLatest(types.FOUR_BEST_SELLER, watch4SellerComments)
     yield takeLatest(types.GET_LIST_BY_BF_ID, watchGetListByBFIdTypeAction)
     yield takeLatest(types.GET_LIST_BEST_SELLER, watchGetBestSellerAction)
     yield takeLatest(types.GET_LIST_BEST_SALES, watchGetBestSalesAction)

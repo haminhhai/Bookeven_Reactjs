@@ -492,3 +492,84 @@ export const deleteCommentFailed = error => {
         }
     }
 }
+
+export const fourNewest = data => {
+    return {
+        type: types.FOUR_NEWEST,
+        payload: {
+            data
+        }
+    }
+}
+
+export const fourNewestSuccess = data => {
+    return {
+        type: types.FOUR_NEWEST_SUCCESS,
+        payload: {
+            data
+        }
+    }
+}
+
+export const fourNewestFailed = error => {
+    return {
+        type: types.FOUR_NEWEST_FAILED,
+        payload: {
+            error
+        }
+    }
+}
+
+export const foutBestSeller = data => {
+    return {
+        type: types.FOUR_BEST_SELLER,
+        payload: {
+            data
+        }
+    }
+}
+
+export const foutBestSellerSuccess = data => {
+    return {
+        type: types.FOUR_BEST_SELLER_SUCCESS,
+        payload: {
+            data
+        }
+    }
+}
+
+export const foutBestSellerFailed = error => {
+    return {
+        type: types.FOUR_BEST_SELLER_FAILED,
+        payload: {
+            error
+        }
+    }
+}
+
+export const fourBestDiscount = data => {
+    return {
+        type: types.FOUR_BEST_DISCOUNT,
+        payload: {
+            data
+        }
+    }
+}
+
+export const fourBestDiscountSuccess = data => {
+    return {
+        type: types.FOUR_BEST_DISCOUNT_SUCCESS,
+        payload: {
+            data
+        }
+    }
+}
+
+export const fourBestDiscountFailed = error => {
+    return {
+        type: types.FOUR_BEST_DISCOUNT_FAILED,
+        payload: {
+            error
+        }
+    }
+}

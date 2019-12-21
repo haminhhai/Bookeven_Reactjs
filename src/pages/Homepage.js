@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { MDBIcon } from 'mdbreact'
 import { Redirect, Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import Header from '../layouts/Header/Header'
 import '../styles/home.scss'
 import BookCardContainer from '../containers/BookContainer/BookCardContainer'
+import * as bookActions from '../actions/book'
 class Homepage extends Component {
   state = {
     redir: false,
@@ -12,22 +15,33 @@ class Homepage extends Component {
     title: ''
   }
 
-  loopCard(min, max) {
+  loopCard(book) {
     var items = []
-    for (var i = min; i < max; i++)
+    for (var i = 0; i < 4; i++)
       items.push(
         <div key={i} className='col-lg-3 col-md-6'>
-          <BookCardContainer key={i} index={i} type='bp' />
+          <BookCardContainer key={i} book={book[i]} type='bp' />
         </div>
       )
     return items
   }
   componentDidMount() {
     window.scrollTo(0, 0)
+    const { bookActions } = this.props
+    const { fourNewest, foutBestSeller, fourBestDiscount } = bookActions
+    const body = {
+      amount: 4,
+      page: 1
+    }
+    fourNewest(body)
+    foutBestSeller(body)
+    fourBestDiscount(body)
   }
   render() {
     const { redir, path } = this.state
-    const { history } = this.props
+    const { history, books } = this.props
+    const {newBook, bestSeller, bestDiscount}  = books
+    console.log(newBook)
     if (redir)
       return <Redirect to={`/${path}`} />
     return (
@@ -42,7 +56,7 @@ class Homepage extends Component {
               </Link>
             </h3>
             <div className="row mt-5">
-              {this.loopCard(0, 4)}
+              {this.loopCard(newBook)}
             </div>
           </div>
         </div>
@@ -55,7 +69,7 @@ class Homepage extends Component {
               </Link>
             </h3>
             <div className="row mt-5 ">
-              {this.loopCard(4, 8)}
+              {this.loopCard(bestSeller)}
             </div>
           </div>
         </div>
@@ -68,7 +82,7 @@ class Homepage extends Component {
               </Link>
             </h3>
             <div className="row mt-5 ">
-              {this.loopCard(8, 12)}
+              {this.loopCard(bestDiscount)}
             </div>
           </div>
         </div>
@@ -76,5 +90,17 @@ class Homepage extends Component {
     );
   }
 }
+const MapStateToProps = state => {
+  return {
+    books: state.books
+  }
+}
 
-export default Homepage
+const MapDispatchToProps = dispatch => {
+  return {
+    bookActions: bindActionCreators(bookActions, dispatch)
+  }
+}
+
+
+export default connect(MapStateToProps, MapDispatchToProps)(Homepage);

@@ -5,6 +5,9 @@ import { getListComments } from '../actions/book'
 
 var intialState = {
     rateBook: [],
+    newBook: [],
+    bestSeller: [],
+    bestDiscount: [],
     detailBook: {},
     fieldsBook: [],
     filtedBook: {
@@ -343,6 +346,49 @@ var books = (state = intialState, action) => {
             }
         }
         case types.UPDATE_RATE_FAILED: {
+            const { error } = action.payload
+            toastError(error)
+            return {
+                ...state,
+            }
+        }
+        case types.FOUR_NEWEST_SUCCESS: {
+            const { data } = action.payload
+
+            return {
+                ...state,
+                newBook: [...data.books]
+            }
+        }
+        case types.FOUR_NEWEST_FAILED: {
+            const { error } = action.payload
+            toastError(error)
+            return {
+                ...state,
+            }
+        }
+        case types.FOUR_BEST_SELLER_SUCCESS: {
+            const { data } = action.payload
+            return {
+                ...state,
+                bestSeller: [...data.books]
+            }
+        }
+        case types.FOUR_BEST_SELLER_FAILED: {
+            const { error } = action.payload
+            toastError(error)
+            return {
+                ...state,
+            }
+        }
+        case types.FOUR_BEST_DISCOUNT_SUCCESS: {
+            const { data } = action.payload
+            return {
+                ...state,
+                bestDiscount: [...data.books]
+            }
+        }
+        case types.FOUR_BEST_DISCOUNT_FAILED: {
             const { error } = action.payload
             toastError(error)
             return {
