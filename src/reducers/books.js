@@ -1,7 +1,7 @@
 import * as types from '../const/actionType'
 import * as msg from '../const/message'
 import { toastSuccess, toastError } from '../utils/Utils'
-import {getListComments} from '../actions/book'
+import { getListComments } from '../actions/book'
 
 var intialState = {
     rateBook: [],
@@ -10,12 +10,21 @@ var intialState = {
     filtedBook: {
         list: [],
         currentPage: 1,
-        pageSize: 1,
+        pageSize: 10,
         total: 1,
         bookfield: '',
-        keyword: ''
+        keyword: "",
+        minRate: 1,
+        maxRate: 5,
+        minPrice: 0,
+        maxPrice: 1000000,
+        bookfieldId: 1
     },
-    comments: []
+    comments: [],
+    rate: {
+        list: [],
+        totalRate: 0,
+    }
 }
 
 var books = (state = intialState, action) => {
@@ -151,31 +160,33 @@ var books = (state = intialState, action) => {
                 ...state,
             }
         }
-        case types.FITLER_BOOKS_MULTI_SUCCESS: {
-            const { data } = action.payload
-            return {
-                ...state,
-                filtedBook: {
-                    list: data,
-                    keyword: ''
-                }
-            }
-        }
-        case types.FITLER_BOOKS_MULTI_FAILED: {
-            const { error } = action.payload
-            toastError(error)
-            return {
-                ...state
-            }
-        }
-        case types.GET_KEYWORD: {
-            const { keyword } = action.payload
+        case types.FITLER_BOOKS_SUCCESS: {
+            const { data, req } = action.payload
+            const { books, total, bookfield, page, amount } = data
+            console.log(req)
             return {
                 ...state,
                 filtedBook: {
                     ...state.filtedBook,
-                    keyword: keyword
+                    list: books,
+                    total: total,
+                    bookfield: bookfield,
+                    currentPage: page,
+                    pageSize: amount,
+                    keyword: req.title,
+                    minRate: req.minRate,
+                    maxRate: req.maxRate,
+                    minPrice: req.minPrice,
+                    maxPrice: req.maxPrice,
+                    bookfieldId: req.bookField
                 }
+            }
+        }
+        case types.FITLER_BOOKS_FAILED: {
+            const { error } = action.payload
+            toastError(error)
+            return {
+                ...state
             }
         }
         case types.FETCH_LIST_FIELDSBOOK_SUCCESS: {
@@ -186,6 +197,31 @@ var books = (state = intialState, action) => {
             }
         }
         case types.FETCH_LIST_FIELDSBOOK_FAILED: {
+            const { error } = action.payload
+            toastError(error)
+            return {
+                ...state,
+            }
+        }
+        case types.ADD_NEW_BOOK_SUCCESS: {
+            const { data } = action.payload
+            return {
+                ...state,
+            }
+        }
+        case types.ADD_NEW_BOOK_FAILED: {
+            const { error } = action.payload
+            toastError(error)
+            return {
+                ...state,
+            }
+        }
+        case types.UPLOAD_IMAGE_SUCCESS: {
+            return {
+                ...state,
+            }
+        }
+        case types.UPLOAD_IMAGE_FAILED: {
             const { error } = action.payload
             toastError(error)
             return {
@@ -220,12 +256,12 @@ var books = (state = intialState, action) => {
         case types.GET_LIST_COMMENTS_FAILED: {
             const { error } = action.payload
             toastError(error)
-            return { 
+            return {
                 ...state,
-             }
+            }
         }
         case types.ADD_COMMENT_SUCCESS: {
-            getListComments({ id: state.detailBook.id})
+            getListComments({ id: state.detailBook.id })
             toastSuccess(msg.MSG_ADD_COMMENT_SUCCESS)
             return {
                 ...state
@@ -234,9 +270,9 @@ var books = (state = intialState, action) => {
         case types.ADD_COMMENT_FAILED: {
             const { error } = action.payload
             toastError(error)
-            return { 
+            return {
                 ...state,
-             }
+            }
         }
         case types.UPDATE_COMMENT_SUCCESS: {
             toastSuccess(msg.MSG_UPDATE_COMMENT_SUCCESS)
@@ -253,9 +289,9 @@ var books = (state = intialState, action) => {
         case types.UPDATE_COMMENT_FAILED: {
             const { error } = action.payload
             toastError(error)
-            return { 
+            return {
                 ...state,
-             }
+            }
         }
         case types.DELETE_COMMENT_SUCCESS: {
             const { data } = action.payload
@@ -269,9 +305,49 @@ var books = (state = intialState, action) => {
         case types.DELETE_COMMENT_FAILED: {
             const { error } = action.payload
             toastError(error)
-            return { 
+            return {
                 ...state,
-             }
+            }
+        }
+        case types.GET_LIST_RATE_SUCCESS: {
+            const { data } = action.payload
+            return {
+                ...state,
+                rate: {
+                    totalRate: data.totalRate[0].rate,
+                    list: [...data.rates]
+                }
+            }
+        }
+        case types.GET_LIST_RATE_FAILED: {
+            const { error } = action.payload
+            toastError(error)
+            return {
+                ...state,
+            }
+        }
+        case types.RATE_BOOK_SUCCESS: {
+            return {
+                ...state,
+            }
+        }
+        case types.RATE_BOOK_FAILED: {
+            const { error } = action.payload
+            toastError(error)
+            return {
+                ...state,
+            }
+        }case types.UPDATE_RATE_SUCCESS: {
+            return {
+                ...state,
+            }
+        }
+        case types.UPDATE_RATE_FAILED: {
+            const { error } = action.payload
+            toastError(error)
+            return {
+                ...state,
+            }
         }
         default: return { ...state }
     }

@@ -3,6 +3,7 @@ import LazyLoad from 'react-lazyload';
 import { Link } from 'react-router-dom'
 
 import { MDBCard, MDBIcon, MDBCardBody, MDBCardTitle, MDBCardText, MDBMask, MDBView } from 'mdbreact'
+import {Rate } from 'antd'
 import * as cont from './const'
 
 import './style.scss'
@@ -102,6 +103,7 @@ class BPCard extends Component {
                 <del>{this.$utils.formatVND(book.price)}</del>}
               <p className='h3'>{this.$utils.calDiscountPrice(book.price, book.discount)}</p>
             </div>
+            <Rate disabled defaultValue={book.rate !== null ? book.rate : 0} />
             <div className='coubtn-wrapper'>
               <div className='coubtn-border'>
 

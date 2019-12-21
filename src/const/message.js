@@ -24,6 +24,8 @@ export const MSG_CREATE_ORDER_SUCCESS = 'Đặt mua hàng thành công!'
 
 export const MSG_UPDATE_ORDER_SUCCESS = 'Cập nhật đơn hàng thành công!'
 
+export const MSG_FILTER_ORDER_SUCCESS = 'Tra cứu hoàn tất!'
+
 export const MSG_UPDATE_BOOK_SUCCESS = 'Cập nhật sản phẩm thành công!'
 
 export const MSG_ADD_COMMENT_SUCCESS = 'Thêm bình luận thành công!'

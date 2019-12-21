@@ -15,19 +15,19 @@ class BookFieldContainer extends Component {
     render() {
         const { parent, books, path, bookActions, fieldsBook, history } = this.props
         const { filtedBook, rateBook } = books
-        const { filterBooksMulti, getBooksByBFID, getListBestNewest, getListBestSeller, getListBestSales } = bookActions
+        const {  getBooksByBFID, getListBestNewest, getListBestSeller, getListBestSales, filterBooks } = bookActions
         return <BookField
             parent={parent}
             filtedBook={filtedBook} 
             path={path} 
-            filterBooksMulti={filterBooksMulti} 
             fieldsBook={fieldsBook}
             getBooksByBFID={getBooksByBFID}
             history={history}
             rateBook={rateBook}
             getListBestNewest={getListBestNewest}
             getListBestSeller={getListBestSeller}
-            getListBestSales={getListBestSales} />
+            getListBestSales={getListBestSales}
+            filterBooks={filterBooks} />
     }
 }
 

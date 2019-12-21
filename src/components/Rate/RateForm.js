@@ -37,20 +37,7 @@ class RateForm extends Component {
                 color: '',
             },
             loading: false,
-            data: [
-                {
-                    title: 'Ant Design Title 1',
-                },
-                {
-                    title: 'Ant Design Title 2',
-                },
-                {
-                    title: 'Ant Design Title 3',
-                },
-                {
-                    title: 'Ant Design Title 4',
-                },
-            ]
+            acceptRate: false
         }
     }
 
@@ -86,51 +73,70 @@ class RateForm extends Component {
             })
     }
     onRate = e => {
-        console.log(e)
+        const { rateBook,detailBook } = this.props
+        rateBook({
+            book_id: detailBook.id,
+            rate: parseInt(e)
+        })
+    }
+    componentDidMount( ) {
+        const { disabled, info, rate} = this.props
+        var check = rate.list.findIndex(item => item.fullname === info.fullname)
+        if(disabled === false && check === -1)
+            this.setState({
+                acceptRate: true
+            })
+        else this.setState({
+            acceptRate: false
+        })
     }
     render() {
-        const { status, data, loading } = this.state
-        const { disabled } = this.props
+        const { status, acceptRate } = this.state
+        const {  rate, role, info } = this.props
         const { content, icon, color } = status
+        console.log(acceptRate)
         return (
             <div className='rate-form row'>
-                <div id='rate-card' className='col-4'>
+                <div id='rate-card' className={`col-${role === 2 ? '6' : '4'}`}>
                     <h5>Đánh giá trung bình</h5>
-                    <h1>4/5</h1>
-                    <Rate disabled defaultValue={4} />
-                    <p>( 2 người đã đánh giá )</p>
+                    <h1>{rate.totalRate}/5</h1>
+                    <Rate disabled allowHalf defaultValue={rate.totalRate} />
+                    <p>( {rate.list.length} người đã đánh giá )</p>
                 </div>
-                <div id='rate-card' className='col-4'>
+                <div id='rate-card' className={`col-${role === 2 ? '6' : '4'}`}>
                     {
                         rateArr.map((item, index) => this.showProgressRate(item.num, item.rate, index))
                     }
                 </div>
-                <div className='col-4 user-rate'>
-                    Đánh giá của bạn về sản phẩm này
+                {
+                    role === 1 &&
+                    <div className={`col-4 user-rate`}>
+                        Đánh giá của bạn về sản phẩm này
                     <Tooltip title={<div>{content} <MDBIcon style={{ color: `${color}` }} icon={icon} /></div>}>
-                        <div>
-                            <Rate disabled onHoverChange={this.onChange} onChange={this.onRate} />
-                        </div>
-                    </Tooltip>
-                </div>
+                            <div>
+                                <Rate disabled={!acceptRate} onHoverChange={this.onChange} onChange={this.onRate} />
+                            </div>
+                        </Tooltip>
+                    </div>
+                }
                 <div className='col-12 list-rate'>
-                    <List itemLayout='horizontal' dataSource={data} renderItem={item => (
-                        <List.Item actions={[<Rate disabled defaultValue={5} />]} >
+                    <List itemLayout='horizontal' dataSource={rate.list} renderItem={item => (
+                        <List.Item actions={[<Rate disabled defaultValue={parseInt(item.rate)} />]} >
                             <Skeleton
                                 avatar
                                 title={false}
-                                loading={true}
+                                loading={false}
                                 active>
                                 <List.Item.Meta
-                                    avatar={<AvatarUser name='Lò Đào Tạo' />}
-                                    title='Lò Đào Tạo'
+                                    avatar={<AvatarUser name={item.fullname} />}
+                                    title={item.fullname}
                                     description={
                                         <div>
-                                            {rateStatus[4].content}
+                                            {rateStatus[parseInt(item.rate) - 1].content}
                                             <MDBIcon
                                                 className='ml-2'
-                                                style={{ color: `${color}` }}
-                                                icon={rateStatus[4].icon}
+                                                style={{ color: rateStatus[parseInt(item.rate) - 1].color }}
+                                                icon={rateStatus[parseInt(item.rate) - 1].icon}
                                                 size='2x' />
                                         </div>}
                                 />

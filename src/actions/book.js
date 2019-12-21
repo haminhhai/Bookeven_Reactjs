@@ -27,30 +27,6 @@ export const getDetailBookFailed = error => {
     }
 }
 
-export const fetchListBook = () => {
-    return {
-        type: types.FETCH_LIST_BOOK
-    }
-}
-
-export const fetchListBookSuccess = data => {
-    return {
-        type: types.FETCH_LIST_BOOK_SUCCESS,
-        payload: {
-            data
-        }
-    }
-}
-
-export const fetchListBookFailed = error => {
-    return {
-        type: types.FETCH_LIST_BOOK_FAILED,
-        payload: {
-            error
-        }
-    }
-}
-
 export const getBooksByBFID = data => {
     return {
         type: types.GET_LIST_BY_BF_ID,
@@ -186,54 +162,55 @@ export const getListBestRateFailed = error => {
     }
 }
 
-export const filterBooksSingle = data => {
+export const filterBooks = data => {
     return {
-        type: types.FILTER_BOOKS_SINGLE,
+        type: types.FILTER_BOOKS,
         payload: {
             data
         }
     }
 }
 
-export const filterBooksSingleSuccess = data => {
+export const filterBooksSuccess = (data, req) => {
     return {
-        type: types.FITLER_BOOKS_SINGLE_SUCCESS,
+        type: types.FITLER_BOOKS_SUCCESS,
         payload: {
-            data
+            data,
+            req
         }
     }
 }
 
-export const filterBooksSingleFailed = error => {
+export const filterBooksFailed = error => {
     return {
-        type: types.FITLER_BOOKS_SINGLE_FAILED,
+        type: types.FITLER_BOOKS_FAILED,
         payload: {
             error
         }
     }
 }
 
-export const filterBooksMulti = data => {
+export const addNewBook = data => {
     return {
-        type: types.FILTER_BOOKS_MULTI,
+        type: types.ADD_NEW_BOOK,
         payload: {
             data
         }
     }
 }
 
-export const filterBooksMultiSuccess = data => {
+export const addNewBookSuccess = data => {
     return {
-        type: types.FITLER_BOOKS_MULTI_SUCCESS,
+        type: types.ADD_NEW_BOOK_SUCCESS,
         payload: {
             data
         }
     }
 }
 
-export const filterBooksMultiFailed = error => {
+export const addNewBookFailed = error => {
     return {
-        type: types.FITLER_BOOKS_MULTI_FAILED,
+        type: types.ADD_NEW_BOOK_FAILED,
         payload: {
             error
         }
@@ -245,6 +222,87 @@ export const getKeyword = keyword => {
         type: types.GET_KEYWORD,
         payload: {
             keyword
+        }
+    }
+}
+
+export const getListRate = data => {
+    return {
+        type: types.GET_LIST_RATE,
+        payload: {
+            data
+        }
+    }
+}
+
+export const getListRateSuccess = data => {
+    return {
+        type: types.GET_LIST_RATE_SUCCESS,
+        payload: {
+            data
+        }
+    }
+}
+
+export const getListRateFailed = error => {
+    return {
+        type: types.GET_LIST_RATE_FAILED,
+        payload: {
+            error
+        }
+    }
+}
+
+export const rateBook = data => {
+    return {
+        type: types.RATE_BOOK,
+        payload: {
+            data
+        }
+    }
+}
+
+export const rateBookSuccess = data => {
+    return {
+        type: types.RATE_BOOK_SUCCESS,
+        payload: {
+            data
+        }
+    }
+}
+
+export const rateBookFailed = error => {
+    return {
+        type: types.RATE_BOOK_FAILED,
+        payload: {
+            error
+        }
+    }
+}
+
+export const updateRate = data => {
+    return {
+        type: types.UPDATE_RATE,
+        payload: {
+            data
+        }
+    }
+}
+
+export const updateRateSuccess = data => {
+    return {
+        type: types.UPDATE_RATE_SUCCESS,
+        payload: {
+            data
+        }
+    }
+}
+
+export const updateRateFailed = error => {
+    return {
+        type: types.UPDATE_RATE_FAILED,
+        payload: {
+            error
         }
     }
 }
@@ -294,6 +352,33 @@ export const updateListBookSuccess = data => {
 export const updateListBookFailed = error => {
     return {
         type: types.UPDATE_BOOK_FAILED,
+        payload: {
+            error
+        }
+    }
+}
+
+export const uploadImage = data => {
+    return {
+        type: types.UPLOAD_IMAGE,
+        payload: {
+            data
+        }
+    }
+}
+
+export const uploadImageSuccess = data => {
+    return {
+        type: types.UPLOAD_IMAGE_SUCCESS,
+        payload: {
+            data
+        }
+    }
+}
+
+export const uploadImageFailed = error => {
+    return {
+        type: types.UPLOAD_IMAGE_FAILED,
         payload: {
             error
         }

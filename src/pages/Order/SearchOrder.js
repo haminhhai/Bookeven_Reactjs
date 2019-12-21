@@ -11,12 +11,12 @@ class SearchOrder extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            code: '',
+            code: 0,
             name: '',
             phone: '',
             fromDate: null,
             toDate: null,
-            status: '',
+            status: 1,
         }
     }
 
@@ -49,7 +49,18 @@ class SearchOrder extends Component {
     }
 
     handleSubmit = () => {
-        
+        const { code, name, phone, fromDate, toDate, status }  =this.state
+        const { filterOrder } = this.props
+        const body = {
+            id: code === 0 || code === "" ? "" : parseInt(code),
+            fullName: name,
+            phone: phone,
+            createDate: fromDate !== null ? fromDate.unix().toString() : "",
+            shipDate: toDate !== null ? toDate.unix().toString() : "",
+            status: status
+        }
+        console.log(body)
+        filterOrder(body)
     }
     render() {
         const { code, name, phone, fromDate, toDate, status } = this.state

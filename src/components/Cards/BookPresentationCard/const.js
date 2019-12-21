@@ -30,6 +30,8 @@ export const REQUIRE_DATE = 'Hãy chọn ngày phát hành!'
 
 export const REQUIRE_ID = 'Hãy nhập mã sách!'
 
+export const REQUIRE_DES = 'Hãy nhập mô tả sách'
+
 export const SVG = <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 32 17" xmlSpace="preserve" className="percentTag_3y-j">
         <path d="M0,0h32v17H10.29c0,0-3.15,0.23-5.01-4.57L0,0z"/>
     </svg>

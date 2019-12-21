@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
-import { Slider, Rate, Select, Pagination } from 'antd'
-import { MDBBtn } from 'mdbreact'
+import { Slider, Select, Pagination } from 'antd'
+import { MDBBtn, MDBIcon } from 'mdbreact'
 
 import Header from '../../layouts/Header/Header'
 import BookCardContainer from '../../containers/BookContainer/BookCardContainer'
@@ -12,8 +12,9 @@ const { Option } = Select
 class BookField extends Component {
     state = {
         minval: 0,
-        maxval: 100000,
-        rate: 0,
+        maxval: 1000000,
+        minrate: 1,
+        maxrate: 5,
         topic: '',
     };
 
@@ -24,26 +25,31 @@ class BookField extends Component {
         });
     };
 
-    changeStar = value => {
-        this.setState({ rate: value })
-    }
+    setRateRange = value => {
+        this.setState({
+            minrate: value[0],
+            maxrate: value[1]
+        });
+    };
 
     handleSelectTopic = id => {
         this.setState({ topic: id })
     }
 
     handleFilter = () => {
-        const { filterBooksMulti } = this.props
-        const { minval, maxval, rate, topic } = this.state
+        const { filterBooks } = this.props
+        const { minval, maxval, minrate, maxrate, topic } = this.state
         const data = {
-            price: {
-                min: minval,
-                max: maxval
-            },
-            rate: rate,
-            topic: topic,
+            minPrice: minval,
+            title: "",
+            maxPrice: maxval,
+            minRate: minrate,
+            maxRate: maxrate,
+            bookField: topic,
+            amount: 10,
+            page: 1,
         }
-        filterBooksMulti(data)
+        filterBooks(data)
     }
 
     loopCard(min, max, type) {
@@ -57,7 +63,7 @@ class BookField extends Component {
         return items
     }
     onShowSizeChange = (current, pageSize) => {
-        const { path, getBooksByBFID, getListBestNewest, getListBestSeller, getListBestSales } = this.props
+        const { filtedBook, path, getBooksByBFID, getListBestNewest, getListBestSeller, getListBestSales, filterBooks } = this.props
         if (path.includes('sach-theo-danh-muc')) {
             var id = this.$utils.getNumberFromString(path)
             if (typeof id === 'number')
@@ -85,9 +91,23 @@ class BookField extends Component {
                 page: current
             })
         }
+        else if (path.includes('search')) {
+            const body = {
+                title: filtedBook.keyword,
+                bookField: filtedBook.bookfield_id,
+                minRate: filtedBook.minRate,
+                maxRate: filtedBook.maxRate,
+                minPrice: filtedBook.minPrice,
+                maxPrice: filtedBook.maxPrice,
+                amount: pageSize,
+                page: current
+            }
+            filterBooks(body)
+        }
+        
     }
     changePage = page => {
-        const { path, getBooksByBFID, filtedBook, getListBestNewest, getListBestSeller, getListBestSales } = this.props
+        const { path, getBooksByBFID, filtedBook, getListBestNewest, getListBestSeller, getListBestSales, filterBooks } = this.props
         if (path.includes('sach-theo-danh-muc')) {
             var id = this.$utils.getNumberFromString(path)
             if (typeof id === 'number')
@@ -114,6 +134,20 @@ class BookField extends Component {
                 amount: filtedBook.pageSize,
                 page: page
             })
+        }
+        else if (path.includes('search')) {
+            const body = {
+                title: filtedBook.keyword,
+                bookField: filtedBook.bookfieldId,
+                minRate: filtedBook.minRate,
+                maxRate: filtedBook.maxRate,
+                minPrice: filtedBook.minPrice,
+                maxPrice: filtedBook.maxPrice,
+                amount: filtedBook.pageSize,
+                page: page
+            }
+            console.log(body)
+            filterBooks(body)
         }
     };
     componentDidMount() {
@@ -146,19 +180,34 @@ class BookField extends Component {
                 page: 1
             })
         }
+        else if (path.includes('search')) {
+            const { filterBooks } = this.props
+            const body = {
+                title: "",
+                bookField: "",
+                minRate: "",
+                maxRate: "",
+                minPrice: "",
+                maxPrice: "",
+                amount: 10,
+                page: 1
+            }
+            filterBooks(body)
+        }
     }
     filterType = parent => {
         const { filtedBook } = this.props
         switch (parent) {
             case 'search':
-                return `Kết quả tìm kiếm "${filtedBook.keyword}"`
+                return `Kết quả cho tìm kiếm của bạn`
             default:
                 return filtedBook.bookfield
         }
     }
+
     render() {
         const { parent, filtedBook, fieldsBook, history, rateBook } = this.props //parent = this.props.parent
-        const { topic, rate, maxval, minval } = this.state
+        const { topic, maxval, minval, minrate, maxrate } = this.state
         return (
             <div>
                 <Header carousel={false} parent={this.filterType(parent)} history={history} />
@@ -202,10 +251,17 @@ class BookField extends Component {
                                         </div>
                                         <div className='filter' >
                                             <strong>Lọc theo rating</strong>
-                                            <div className='row'>
-                                                <Rate className='ml-2' value={rate} onChange={this.changeStar} />
-                                                <p className='mt-2 ml-2'>( ít nhất {rate} sao )</p>
-                                            </div>
+                                            <Slider
+                                                range
+                                                step={1}
+                                                min={1}
+                                                max={5}
+                                                defaultValue={[1, 5]}
+                                                onChange={this.setRateRange} />
+                                            <p className='text-center mt-2'>
+                                                {minrate}<MDBIcon icon="star" />
+                                                — {maxrate}<MDBIcon icon="star" />
+                                            </p>
                                         </div>
                                         <div className='filter' >
                                             <strong>Lọc theo danh mục sách</strong>

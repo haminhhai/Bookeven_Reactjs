@@ -8,18 +8,18 @@ export const fetchAllListOrders = () => {
     return axiosService.get(`${API_URL}/${url_order}/list`)
 } 
 
-export const fetchListOrdersById = id => {
-    return axiosService.get(`${API_URL}/${url_order}?customerId=${id}`)
+export const fetchDetailOrder = data => {
+    return axiosService.post(`${API_URL}/${url_order}/detail`, data)
 } 
 
-export const filterOrder = (code, name, phone, createAt, endTime, status) => {
-    return axiosService.get(`${API_URL}/${url_order}?code=${code}&name=${name}&phone=${phone}&createAt=${createAt}&endTime=${endTime}&status=${status}`)
+export const filterOrder = data => {
+    return axiosService.post(`${API_URL}/${url_order}/filter`, data)
 } 
 
 export const updateOrder = data => {
-    return axiosService.put(`${API_URL}/${url_order}/${data.id}`, data)
+    return axiosService.put(`${API_URL}/${url_order}/update`, data)
 }
 
 export const createOrder = data => {
-    return axiosService.post(`${API_URL}/${url_order}`, data)
+    return axiosService.post(`${API_URL}/${url_order}/new`, data)
 }

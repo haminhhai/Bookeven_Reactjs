@@ -15,8 +15,6 @@ class OrderCustomer extends Component {
         super(props);
         this.state = {
             modal: false,
-            data: {},
-            address: {},
         }
 
     }
@@ -34,20 +32,21 @@ class OrderCustomer extends Component {
         }
     }
     showModal = data => {
-        const { address } = this.props
-        var filtedAddress = address.filter(item => item.id === data.idAddress)[0]
-        this.setState({
-            data: data,
-            modal: !this.state.modal,
-            address: filtedAddress
-        })
+        const { fetchDetailOrder } = this.props
+        console.log(data)
+       fetchDetailOrder({
+           id: data.order_id
+       })
+       this.setState({
+           modal: true
+       })
     }
     closeModal = () => {
         this.setState({ modal: !this.state.modal })
     }
     render() {
-        const { modal, data, address } = this.state
-        const { orders, role } = this.props
+        const { modal } = this.state
+        const { orders, role, detail } = this.props
         return (
             <div>
                 <Header carousel={false} parent='Lịch sử mua hàng' />
@@ -77,10 +76,10 @@ class OrderCustomer extends Component {
                                             {
                                                 orders.map((item, index) =>
                                                     <tr key={index} onClick={() => this.showModal(item)} style={{ cursor: 'pointer' }}>
-                                                        <td>{item.id}</td>
-                                                        <td className='text-center'>{this.$utils.converTSToDate(item.createAt, 'DD/MM/YYYY')}</td>
-                                                        <td className='text-center'>{this.$utils.converTSToDate(item.endTime, 'DD/MM/YYYY')}</td>
-                                                        <td>{this.$utils.calculateTotalCart(item.listBooks, 'vnd')}</td>
+                                                        <td>{item.order_id}</td>
+                                                        <td className='text-center'>{this.$utils.converTSToDate(parseInt(item.orderDate), 'DD/MM/YYYY')}</td>
+                                                        <td className='text-center'>{item.shipDate !== null ? this.$utils.converTSToDate(parseInt(item.shipDate), 'DD/MM/YYYY') : '--/--/----'}</td>
+                                                        <td>{this.$utils.formatVND(item.total, 'vnd')}</td>
                                                         <td>{this.formatStatus(item.status)}</td>
                                                     </tr>
                                                 )
@@ -90,8 +89,7 @@ class OrderCustomer extends Component {
                                 </div>
                             </div>
                     }
-                    <DetailOrder data={data}
-                        address={address}
+                    <DetailOrder data={detail}
                         closeModal={this.closeModal}
                         modal={modal} 
                         role={role} />

@@ -9,8 +9,9 @@ import RateForm from '../components/Rate/RateForm';
 class RateContainer extends Component {
 
   render() {
-    const { disabled } = this.props
-    return <RateForm disabled/>
+    const { disabled, rate, role, bookActions, detailBook, info } = this.props
+    console.log(rate)
+    return <RateForm disabled={disabled} rate={rate} role={role} rateBook={bookActions.rateBook} detailBook={detailBook} info={info}/>
   }
 }
 
@@ -24,6 +25,8 @@ RateContainer.propTypes = {
 const MapStateToProps = state => {
   return {
     authen: state.auth.authen,
+    detailBook: state.books.detailBook,
+    info: state.account.info
   }
 }
 

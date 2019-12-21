@@ -19,8 +19,9 @@ class BookDetailContainer extends Component {
 
     }
     render() {
-        const { detailBook, role, bookActions, fieldsBook, filtedBook, history, cartActions } = this.props //parent = this.props.parent
-        const { updateListBook, getDetailBook } = bookActions
+        const { books, role, bookActions, history, cartActions } = this.props //parent = this.props.parent
+        const { fieldsBook, filtedBook, detailBook, rate } = books
+        const { updateListBook, getDetailBook, getListRate } = bookActions
         return (
             <BookDetail
                 filtedBook={filtedBook}
@@ -30,7 +31,9 @@ class BookDetailContainer extends Component {
                 role={role}
                 fieldsBook={fieldsBook}
                 getDetailBook={getDetailBook}
-                history={history} />
+                history={history}
+                getListRate={getListRate}
+                rate={rate} />
         );
     }
 }
@@ -50,11 +53,9 @@ BookDetailContainer.propTypes = {
 
 const MapStateToProps = state => {
     return {
-        detailBook: state.books.detailBook,
-        filtedBook: state.books.filtedBook,
+        books: state.books,
         cart: state.cart,
         role: state.account.info.role,
-        fieldsBook: state.books.fieldsBook,
         path: state.router.location.pathname,
     }
 }

@@ -24,27 +24,27 @@ export const fetchAllListOrdersFailed = error => {
     }
 }
 
-export const fetchListOrdersById = id => {
+export const fetchDetailOrder = data => {
     return {
-        type: types.FETCH_LIST_ORDER_BY_ID,
-        payload: {
-            id
-        }
-    }
-}
-
-export const fetchListOrdersByIdSuccess = data => {
-    return {
-        type: types.FETCH_LIST_ORDER_BY_ID_SUCCESS,
+        type: types.FETCH_DETAIL_ORDER,
         payload: {
             data
         }
     }
 }
 
-export const fetchListOrdersByIdFailed = error => {
+export const fetchDetailOrderSuccess = data => {
     return {
-        type: types.FETCH_LIST_ORDER_BY_ID_FAILED,
+        type: types.FETCH_DETAIL_ORDER_SUCCESS,
+        payload: {
+            data
+        }
+    }
+}
+
+export const fetchDetailOrderFailed = error => {
+    return {
+        type: types.FETCH_DETAIL_ORDER_FAILED,
         payload: {
             error
         }
@@ -102,5 +102,38 @@ export const createOrderFailed = error => {
         payload: {
             error
         }
+    }
+}
+
+export const filterOrder =  data => {
+    return {
+        type: types.FILTER_ORDER,
+        payload: {
+            data
+        }
+    }
+}
+
+export const filterOrderSuccess = data => {
+    return {
+        type: types.FILTER_ORDER_SUCCESS,
+        payload: {
+            data
+        }
+    }
+}
+
+export const filterOrderFailed = error => {
+    return {
+        type: types.FILTER_ORDER_FAILED,
+        payload: {
+            error
+        }
+    }
+}
+
+export const deleteListOrder = () => {
+    return {
+        type: types.DELETE_ORDER,
     }
 }

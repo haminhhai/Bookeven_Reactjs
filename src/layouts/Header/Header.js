@@ -45,9 +45,18 @@ class Header extends Component {
     handleSearch = () => {
         const { keyWord } = this.state
         const { bookActions } = this.props
-        const { getKeyword, filterBooksSingle } = bookActions
-        getKeyword(keyWord)
-        filterBooksSingle(keyWord)
+        const { filterBooks } = bookActions
+        const body = {
+            title: keyWord,
+            bookField: "",
+            minRate: "",
+            maxRate: "",
+            minPrice: "",
+            maxPrice: "",
+            amount: 10,
+            page: 1
+        }
+        filterBooks(body)
     }
 
     toggleNavBar = () => {

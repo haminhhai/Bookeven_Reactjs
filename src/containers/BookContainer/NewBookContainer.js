@@ -8,10 +8,10 @@ import NBBtn from '../../components/Buttons/NewBookBtn/NewBookBtn';
 class NewBookContainer extends Component {
     state = {  }
     render() { 
-        const { fieldsBook, info } = this.props
+        const { fieldsBook, info, bookActions } = this.props
         let xhtml = null
         if (info.role === 2)
-            xhtml = <NBBtn fieldsBook={fieldsBook}/>
+            xhtml = <NBBtn fieldsBook={fieldsBook} addNewBook={bookActions.addNewBook} uploadImage={bookActions.uploadImage} />
         return xhtml
     }
 }

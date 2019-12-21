@@ -14,7 +14,7 @@ class NBBtn extends Component {
     }
     render() {
         const { modal } = this.state
-        const { fieldsBook } = this.props
+        const { fieldsBook, addNewBook, uploadImage } = this.props
         return (
             <div>
                 <div className='nbbtn-container' onClick={this.toggleModal}>
@@ -25,7 +25,7 @@ class NBBtn extends Component {
                 </div >
                 {
                     modal &&
-                    <ModalNewBook modal={modal} toggleModal={this.toggleModal} fieldsBook={fieldsBook} />
+                    <ModalNewBook addNewBook={addNewBook} modal={modal} toggleModal={this.toggleModal} fieldsBook={fieldsBook} uploadImage={uploadImage}/>
                 }
             </div>
         )

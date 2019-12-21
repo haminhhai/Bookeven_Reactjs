@@ -54,10 +54,14 @@ class BookDetail extends Component {
                 });
             });
             this.setState({ zoomed: true })
+            this.props.getListRate({
+                book_id: preProps.detailBook.id
+            })
         }
     }
     render() {
-        const { detailBook, updateListBook, fieldsBook, role, filtedBook, history } = this.props //parent = this.props.parent
+        const { detailBook, updateListBook, fieldsBook, role, filtedBook, history, rate } = this.props //parent = this.props.parent
+        console.log(rate)
         const { amount, modal } = this.state
         let xhtml = null
         xhtml = <div >
@@ -85,8 +89,8 @@ class BookDetail extends Component {
                             <h1 >{detailBook.name}</h1>
                             <h5 className=''>Tác giả: {detailBook.author}</h5>
                             <div className='rate-detail'>
-                                <Rate disabled allowHalf defaultValue={4.5} />
-                                <p>(2 người đã đánh giá)</p>
+                                <Rate disabled defaultValue={rate.list.length} />
+                                <p>({rate.list.length} người đã đánh giá)</p>
                             </div>
 
                             <h4 className='mt-3'>
@@ -149,7 +153,7 @@ class BookDetail extends Component {
                         </div>
                         <div className='col-12 col-md-12 last-child'>
                             <h3>Đánh giá</h3>
-                            <RateContainer disabled={!detailBook.bought} />
+                            <RateContainer role={role} disabled={!detailBook.bought} rate={rate}/>
                         </div>
                     </div>
                 </div>

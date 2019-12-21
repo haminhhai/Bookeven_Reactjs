@@ -14,39 +14,35 @@ class OrderContainer extends Component {
         this.state = {}
     }
     componentDidMount() {
-        const { getListAddress } = this.props.accountActions
-        const { fetchAllListOrders, fetchListOrdersById } = this.props.orderActions
+        const { fetchAllListOrders, deleteListOrder } = this.props.orderActions
         const { info } = this.props
-        if (info.role === 2)
+        if (info.role === 1)
             fetchAllListOrders()
-        else fetchListOrdersById(info.id)
-        getListAddress()
+        else {
+            deleteListOrder()
+        }
     }
     render() {
-        const { orders, address, orderActions, info } = this.props
-        const { updateOrder } = orderActions
+        const { orders, orderActions, info } = this.props
+        const { updateOrder, fetchDetailOrder, filterOrder } = orderActions
         if (info.role === 1 )
-            return <OrderCustomer orders={orders} address={address} role={info.role} />
-        else return <OrderManager orders={orders} address={address} updateOrder={updateOrder} role={info.role} />
+            return <OrderCustomer fetchDetailOrder={fetchDetailOrder} orders={orders.list} detail={orders.detail} role={info.role} />
+        else return <OrderManager fetchDetailOrder={fetchDetailOrder} 
+        orders={orders.list} detail={orders.detail} updateOrder={updateOrder} role={info.role}
+        filterOrder={filterOrder} />
     }
 }
 
 OrderContainer.propTypes = {
-    orders: PropTypes.array,
-    address: PropTypes.array,
-    accountActions: PropTypes.shape({
-        getListAddress: PropTypes.func
-    }),
+    orders: PropTypes.object,
     orderActions: PropTypes.shape({
         fetchAllListOrders: PropTypes.func,
-        fetchListOrdersById: PropTypes.func,
         updateOrder: PropTypes.func
     })
 }
 
 const mapStatetoProps = state => {
     return {
-        address: state.account.address,
         orders: state.orders,
         info: state.account.info
     }

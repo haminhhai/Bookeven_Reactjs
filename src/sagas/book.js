@@ -9,12 +9,12 @@ import {
     delay
 } from 'redux-saga/effects';
 import { hideLoading, showLoading } from '../actions/ui';
+import imgurService from '../utils/imgurService';
+import * as config from '../const/config'
 import _get from 'lodash/get';
 import * as types from '../const/actionType'
 import {
-    fetchListBookSuccess, fetchListBookFailed,
-    filterBooksSingleSuccess, filterBooksSingleFailed,
-    filterBooksMultiSuccess, filterBooksMultiFailed,
+    filterBooksSuccess, filterBooksFailed,
     fetchListFieldsbookSuccess, fetchListFieldsbookFailed,
     getDetailBookSuccess, getDetailBookFailed,
     updateListBookSuccess, updateListBookFailed,
@@ -27,39 +27,23 @@ import {
     getListBestNewestSuccess, getListBestNewestFailed,
     updateCommentSuccess, updateCommentFailed,
     deleteCommentSuccess, deleteCommentFailed,
-    getListBestRate as getListBestRate2
+    getListBestRate as getListBestRate2, uploadImageFailed,
+    addNewBookSuccess, addNewBookFailed,
+    addNewBook as onAddNewBook,
+    getListRateSuccess, getListRateFailed,
+    rateBookSuccess, rateBookFailed,
+    updateRateSuccess, updateRateFailed,
+    getListRate as fetchListRate,
+    getDetailBook as fetchDetailBook
 } from '../actions/book'
 import {
-    getListBooks, getListFieldsbook, updateListBooks, getListComments, addComment,
+    getListFieldsbook, updateListBooks, getListComments, addComment, addRate, updateRate,
     getListBestSeller, getBooksByBFID, getListNewest, getListBestRate, getListBestSales, getDetailBook,
-    updateComment, deleteComment
+    updateComment, deleteComment, filterBook, uploadImage, addNewBook, getListRate
 } from '../apis/book'
 
 import { STATUS_CODE } from '../const/config'
 import { MSG_ERROR_OCCUR } from '../const/message'
-function* watchFetchListBookAction() {
-    while (true) {
-        yield take(types.FETCH_LIST_BOOK)
-        try {
-            yield put(showLoading())
-            const res = yield call(getListBooks)
-            const { status, data } = res
-            if (status === STATUS_CODE.SUCCESS) {
-                yield put(fetchListBookSuccess(data))
-
-            } else {
-                yield put(fetchListBookFailed(data.message))
-            }
-        } catch (error) {
-            var message = _get(error, 'response.data.message', {});
-            if (typeof message === 'object')
-                message = MSG_ERROR_OCCUR
-            yield put(fetchListBookFailed(message));
-        } finally {
-            yield put(hideLoading())
-        }
-    }
-}
 
 function* watchGetListByBFIdTypeAction({ payload }) {
     try {
@@ -87,6 +71,51 @@ function* watchGetListByBFIdTypeAction({ payload }) {
         yield put(getBooksByBFIDFailed(message));
     } finally {
         yield delay(500)
+        yield put(hideLoading())
+    }
+}
+
+function* watchGetListRateAction({ payload }) {
+    try {
+        yield put(showLoading())
+        const res = yield call(getListRate, payload.data)
+        const { status, data } = res
+        if (status === STATUS_CODE.SUCCESS) {
+            yield put(getListRateSuccess(data))
+        } else {
+            yield put(getListRateFailed(data.message))
+        }
+    } catch (error) {
+        var message = _get(error, 'response.data.message', {});
+        if (typeof message === 'object')
+            message = MSG_ERROR_OCCUR
+        yield put(getListRateFailed(message));
+    } finally {
+        yield put(hideLoading())
+    }
+}
+
+function* watchRateBookAction({ payload }) {
+    try {
+        yield put(showLoading())
+        const res = yield call(addRate, payload.data)
+        const { status, data } = res
+        console.log(res)
+        if (status === STATUS_CODE.CREATED) {
+            yield put(getListRate({
+                book_id: payload.data.book_id
+            }))
+            yield put(rateBookSuccess(data))
+        } else {
+            yield put(rateBookFailed(data.message))
+        }
+    } catch (error) {
+        console.log(error)
+        var message = _get(error, 'response.data.message', {});
+        if (typeof message === 'object')
+            message = MSG_ERROR_OCCUR
+        yield put(rateBookFailed(message));
+    } finally {
         yield put(hideLoading())
     }
 }
@@ -208,7 +237,7 @@ function* watchFetchFieldsbookAction() {
             var message = _get(error, 'response.data.message', {});
             if (typeof message === 'object')
                 message = MSG_ERROR_OCCUR
-            yield put(fetchListBookFailed(message));
+            yield put(fetchListFieldsbookFailed(message));
         }
     }
 }
@@ -256,70 +285,85 @@ function* watchGetListComments({ payload }) {
     }
 }
 
-function* filterBookBySingleTypeAction({ payload }) {
-    const { data } = payload
+function* filterBooksAction({ payload }) {
     try {
         yield put(showLoading())
-        const list = yield select(state => state.books.listBooks)
-        var filterBooks = null
-        if (typeof data === 'string') //filter by title
-            filterBooks = list.filter(book =>
-                book.title
-                    .trim()
-                    .toLowerCase()
-                    .includes(data.trim().toLowerCase()))
-        else  //filter by topic
-            filterBooks = list.filter(book => book.topic === data)
-        yield put(filterBooksSingleSuccess(filterBooks))
+        const res = yield call(filterBook, payload.data)
+        console.log(payload.data)
+        const { status, data } = res
+        console.log(res)
+        if (status === STATUS_CODE.SUCCESS) {
+            var body = {
+                ...data,
+                bookfield: 'Kết quả cho tìm kiếm của bạn',
+                page: payload.data.page,
+                amount: payload.data.amount,
+            }
+            yield put(filterBooksSuccess(body, payload.data))
+        }
+        else yield put(filterBooksFailed(data.message))
     } catch (error) {
         var message = _get(error, 'response.data.message', {});
         if (typeof message === 'object')
             message = MSG_ERROR_OCCUR
-        yield put(filterBooksSingleFailed(message));
-    } finally {
-        yield put(hideLoading())
-    }
-}
-
-function* filterBookByMultiTypeAction({ payload }) {
-    const { data } = payload
-    const { min, max } = data.price
-    try {
-        yield put(showLoading())
-        const list = yield select(state => state.books.listBooks)
-        var filterBooks = list.filter(item =>
-            item.price >= min
-            && item.price <= max
-            && item.rate === data.rate
-            && (data.topic !== '' ? item.topic === data.topic : item.topic > 0)
-        )
-        yield put(filterBooksMultiSuccess(filterBooks))
-    } catch (error) {
-        var message = _get(error, 'response.data.message', {});
-        if (typeof message === 'object')
-            message = MSG_ERROR_OCCUR
-        yield put(filterBooksMultiFailed(message))
+        yield put(filterBooksFailed(message))
     } finally {
         yield put(hideLoading())
     }
 }
 
 function* updateBookAction({ payload }) {
-    try {
-        yield put(showLoading())
-        const res = yield call(updateListBooks, payload.data)
-        const { status, data } = res
-        if (status === STATUS_CODE.SUCCESS) {
-            yield put(updateListBookSuccess(data))
+    if (payload.data.image.length > 100) {
+        try {
+            imgurService.setHeader('Authorization', `Client-Id ${config.imgur_client_id}`)
+            const res = yield call(uploadImage, payload.data)
+            if (res.status === STATUS_CODE.SUCCESS) {
+                try {
+                    var body = {
+                        ...payload.data,
+                        image: res.data.data.link
+                    }
+                    console.log(body)
+                    const resp = yield call(updateListBooks, body)
+                    const { status, data } = resp
+                    console.log(resp)
+                    if (status === STATUS_CODE.SUCCESS) {
+                        yield put(updateListBookSuccess(body))
+                    }
+                    else yield put(updateListBookFailed(data.message))
+                } catch (error) {
+                    var message = _get(error, 'response.data.message', {});
+                    if (typeof message === 'object')
+                        message = MSG_ERROR_OCCUR
+                    yield put(updateListBookFailed(message))
+                }
+            }
+            else yield put(uploadImageFailed(res.data.message))
+        } catch (error) {
+            var err = _get(error, 'response.data.message', {});
+            if (typeof err === 'object')
+                err = MSG_ERROR_OCCUR
+            yield put(uploadImageFailed(err))
         }
-        else yield put(updateListBookFailed(data.message))
-    } catch (error) {
-        var message = _get(error, 'response.data.message', {});
-        if (typeof message === 'object')
-            message = MSG_ERROR_OCCUR
-        yield put(updateListBookFailed(message))
-    } finally {
-        yield put(hideLoading())
+    }
+    else {
+        try {
+            yield put(showLoading())
+            const res = yield call(updateListBooks, payload.data)
+            const { status, data } = res
+            if (status === STATUS_CODE.SUCCESS) {
+
+                yield put(updateListBookSuccess(data))
+            }
+            else yield put(updateListBookFailed(data.message))
+        } catch (error) {
+            var message = _get(error, 'response.data.message', {});
+            if (typeof message === 'object')
+                message = MSG_ERROR_OCCUR
+            yield put(updateListBookFailed(message))
+        } finally {
+            yield put(hideLoading())
+        }
     }
 }
 
@@ -355,6 +399,58 @@ function* updateCommentAction({ payload }) {
     }
 }
 
+function* watchUploadImage({ payload }) {
+    try {
+        imgurService.setHeader('Authorization', `Client-Id ${config.imgur_client_id}`)
+        const res = yield call(uploadImage, payload.data)
+        const { status, data } = res
+        if (status === STATUS_CODE.SUCCESS) {
+            yield put(onAddNewBook(data.data.link))
+        }
+        else yield put(uploadImageFailed(data.message))
+    } catch (error) {
+        var message = _get(error, 'response.data.message', {});
+        if (typeof message === 'object')
+            message = MSG_ERROR_OCCUR
+        yield put(uploadImageFailed(message))
+    }
+}
+
+function* watchAddNewBook({ payload }) {
+    try {
+        imgurService.setHeader('Authorization', `Client-Id ${config.imgur_client_id}`)
+        const res = yield call(uploadImage, payload.data)
+        if (res.status === STATUS_CODE.SUCCESS) {
+            try {
+                var body = {
+                    ...payload.data,
+                    image: res.data.data.link
+                }
+                console.log(body)
+                const resp = yield call(addNewBook, body)
+                const { status, data } = resp
+                console.log(resp)
+                if (status === STATUS_CODE.SUCCESS) {
+                    yield put(addNewBookSuccess(body))
+                }
+                else yield put(addNewBookFailed(data.message))
+            } catch (error) {
+                var message = _get(error, 'response.data.message', {});
+                if (typeof message === 'object')
+                    message = MSG_ERROR_OCCUR
+                yield put(addNewBookFailed(message))
+            }
+        }
+        else yield put(uploadImageFailed(res.data.message))
+    } catch (error) {
+        var err = _get(error, 'response.data.message', {});
+        if (typeof err === 'object')
+            err = MSG_ERROR_OCCUR
+        yield put(uploadImageFailed(err))
+    }
+
+}
+
 function* deleteCommentAction({ payload }) {
     try {
         const res = yield call(deleteComment, payload.data)
@@ -373,17 +469,19 @@ function* deleteCommentAction({ payload }) {
 
 
 function* bookSaga() {
-    yield fork(watchFetchListBookAction)
     yield fork(watchFetchFieldsbookAction)
+    yield takeLatest(types.GET_LIST_RATE, watchGetListRateAction)
+    yield takeLatest(types.RATE_BOOK, watchRateBookAction)
     yield takeEvery(types.GET_DETAIL_BOOK, watchGetBookDetailAction)
-    yield takeLatest(types.FILTER_BOOKS_SINGLE, filterBookBySingleTypeAction)
-    yield takeLatest(types.FILTER_BOOKS_MULTI, filterBookByMultiTypeAction)
+    yield takeLatest(types.FILTER_BOOKS, filterBooksAction)
     yield takeLatest(types.GET_LIST_COMMENTS, watchGetListComments)
     yield takeLatest(types.GET_LIST_BY_BF_ID, watchGetListByBFIdTypeAction)
     yield takeLatest(types.GET_LIST_BEST_SELLER, watchGetBestSellerAction)
     yield takeLatest(types.GET_LIST_BEST_SALES, watchGetBestSalesAction)
     yield takeLatest(types.GET_LIST_BEST_RATE, watchGetBestRateAction)
     yield takeLatest(types.GET_LIST_NEWEST, watchGetListNewest)
+    yield takeLatest(types.ADD_NEW_BOOK, watchAddNewBook)
+    yield takeLatest(types.UPLOAD_IMAGE, watchUploadImage)
     yield takeEvery(types.ADD_COMMENT, addCommentAction)
     yield takeEvery(types.UPDATE_COMMENT, updateCommentAction)
     yield takeEvery(types.DELETE_COMMENT, deleteCommentAction)

@@ -9,6 +9,11 @@ import ManSignup from "../pages/ManSignup";
 
 export const API_URL_LOCAL = 'http://localhost:3000'
 export const API_URL = 'https://bookeven-backend.herokuapp.com/apis'
+export const API_UPLOAD = 'https://api.imgur.com/3/image'
+
+export const  imgur_username = 'bookeven9'
+export const  imgur_password = 'Nguyenvu9'
+export const  imgur_client_id = 'b6c9f3d9f91ac09'
 
 export const STATUS_CODE = {
     SUCCESS: 200,

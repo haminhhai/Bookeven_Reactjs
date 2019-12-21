@@ -16,6 +16,7 @@ class DetailOrder extends Component {
             fromDate: null,
             toDate: moment(new Date()),
             isEditTime: false,
+            modal: false
         }
     }
     formatStatus = value => {
@@ -50,26 +51,29 @@ class DetailOrder extends Component {
 
     onUpdateOrder = () => {
         const { toDate, status } = this.state
-        const { data, updateOrder, closeModal } = this.props
-        var body = data
-        body.endTime = this.$utils.convertDateToTS(toDate)
-        body.status = status
+        const { data, updateOrder } = this.props
+        var body = {
+            id: data.id,
+            shipDate: this.$utils.convertDateToTS(toDate).toString(),
+            status: status
+        }
+        console.log(body)
         updateOrder(body)
-        closeModal()
     }
     componentDidMount() {
         const { data } = this.props
         this.setState({
             status: data.status,
-            fromDate: moment.unix(data.createAt),
-            toDate: typeof data.endTime !== 'string' ? moment.unix(data.endTime) : this.state.toDate
+            fromDate: moment.unix(parseInt(data.orderDate)),
+            toDate: data.shipDate !== null ? moment.unix(parseInt(data.shipDate)) : this.state.toDate
         })
     }
     render() {
-        const { data, address, modal, closeModal, role } = this.props
+        const { data, modal, closeModal, role } = this.props
         const { status, isEditTime, toDate } = this.state
+        console.log(data, toDate)
         let xhtml = null
-        if (address.name !== undefined)
+        if (data.id !== undefined)
             xhtml =
                 <MDBModal cascading isOpen={modal} size="lg">
                     <MDBModalHeader
@@ -86,7 +90,7 @@ class DetailOrder extends Component {
                                     {cont.CREATE_AT}
                                 </div>
                                 <div className='col-9 mb-3'>
-                                    {this.$utils.converTSToDate(data.createAt, 'DD/MM/YYYY')}
+                                    {this.$utils.converTSToDate(parseInt(data.orderDate), 'DD/MM/YYYY')}
                                 </div>
                                 <div className='col-3 font-weight-bold'>
                                     {cont.END_TIME}
@@ -100,7 +104,9 @@ class DetailOrder extends Component {
                                                 value={toDate}
                                                 placeholder='Chọn ngày nhận'
                                                 style={{ width: '40%' }} /> :
-                                            this.$utils.converTSToDate(data.endTime, 'DD/MM/YYYY')
+                                            data.shipDate !== null ?
+                                                this.$utils.converTSToDate(parseInt(data.shipDate), 'DD/MM/YYYY') :
+                                                '--/--/----'
                                     }
                                     {
                                         role === 2 &&
@@ -111,19 +117,20 @@ class DetailOrder extends Component {
                                     {cont.NAME}
                                 </div>
                                 <div className='col-9 mb-3'>
-                                    {address.name}
+                                    {data.user.name}
                                 </div>
                                 <div className='col-3 font-weight-bold'>
                                     {cont.ADDRESS}
                                 </div>
                                 <div className='col-9 mb-3'>
-                                    {`${address.street}, ${this.$utils.filterAddress(address.province, address.district, address.ward)}`}
+                                    {`${data.address.useraddress}, 
+                                    ${this.$utils.filterAddress(data.address.province, data.address.district, data.address.ward)}`}
                                 </div>
                                 <div className='col-3 font-weight-bold'>
                                     {cont.PHONE}
                                 </div>
                                 <div className='col-9 mb-3'>
-                                    {address.phone}
+                                    {data.user.phone}
                                 </div>
                                 {
                                     role === 2 &&
@@ -158,17 +165,19 @@ class DetailOrder extends Component {
                                         </MDBTableHead>
                                         <MDBTableBody>
                                             {
-                                                data.listBooks.map((item, index) =>
+                                                data.books.map((item, index) =>
                                                     <tr key={index}>
-                                                        <td className='imgBook '>
-                                                            <img src={item.image} alt={item.title} />
-                                                            <p className='align-middle ml-2'>{item.title}</p>
+                                                        <td className='imgBook align-middle'>
+                                                            <img src={item.image} alt={item.name} />
+                                                            <p className='align-middle ml-2'>{item.name}</p>
                                                         </td>
                                                         <td className='text-center align-middle'>
                                                             {item.amount}
                                                         </td>
                                                         <td className=' align-middle'>
+                                                            {this.$utils.calDiscountPrice(item.price, item.discount) !== this.$utils.formatVND(item.price) &&
                                                             <del className='mr-1'>{this.$utils.formatVND(item.price)}</del>
+                                                            }
                                                             {this.$utils.calDiscountPrice(item.price, item.discount)}
                                                         </td>
                                                         <td className='align-middle font-weight-bold'>
@@ -185,7 +194,7 @@ class DetailOrder extends Component {
                                                 <MDBTableBody>
                                                     <tr>
                                                         <td>Thành tiền</td>
-                                                        <td>{this.$utils.calculateTotalCart(data.listBooks, 'vnd')}</td>
+                                                        <td>{this.$utils.calculateTotalCart(data.books, 'vnd')}</td>
                                                     </tr>
                                                     <tr >
                                                         <td>Phí vận chuyển</td>
@@ -193,7 +202,7 @@ class DetailOrder extends Component {
                                                     </tr>
                                                     <tr >
                                                         <td className='font-weight-bold'>Tổng tiền</td>
-                                                        <td className='font-weight-bold'>{this.$utils.calculateTotalCart(data.listBooks, 'vnd')}</td>
+                                                        <td className='font-weight-bold'>{this.$utils.calculateTotalCart(data.books, 'vnd')}</td>
                                                     </tr>
                                                 </MDBTableBody>
                                             </MDBTable>

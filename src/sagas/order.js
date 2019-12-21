@@ -13,12 +13,14 @@ import { hideLoading, showLoading } from '../actions/ui';
 import _get from 'lodash/get';
 import {
     fetchAllListOrdersSuccess, fetchAllListOrdersFailed,
-    fetchListOrdersByIdSuccess, fetchListOrdersByIdFailed,
+    fetchDetailOrderSuccess, fetchDetailOrderFailed,
     filterOrderSuccess, filterOrderFailed,
     updateOrderSuccess, updateOrderFailed,
-    createOrderSuccess, createOrderFailed
+    createOrderSuccess, createOrderFailed,
+    
 } from '../actions/order'
-import { fetchAllListOrders, fetchListOrdersById, createOrder, filterOrder, updateOrder } from '../apis/order'
+import { fetchCart } from '../actions/cart'
+import { fetchAllListOrders, fetchDetailOrder, createOrder, filterOrder, updateOrder } from '../apis/order'
 import { toastSuccess } from '../utils/Utils'
 import * as msg from '../const/message'
 import { STATUS_CODE } from '../const/config'
@@ -31,6 +33,7 @@ function* watchfetchAllListOrders() {
             yield put(showLoading())
             const res = yield call(fetchAllListOrders)
             const { status, data } = res
+            console.log(res)
             if (status === STATUS_CODE.SUCCESS) {
                 yield put(fetchAllListOrdersSuccess(data))
             } else {
@@ -47,37 +50,46 @@ function* watchfetchAllListOrders() {
     }
 }
 
-function* watchfetchListOrdersById({ payload }) {
-    const { id } = payload
+function* watchfetchDetailOrder({ payload }) {
     try {
+        console.log(payload.data)
         yield put(showLoading())
-        const res = yield call(fetchListOrdersById, id)
+        const res = yield call(fetchDetailOrder, payload.data)
         const { status, data } = res
+        console.log(res)
         if (status === STATUS_CODE.SUCCESS) {
-            yield put(fetchListOrdersByIdSuccess(data))
+            yield put(fetchDetailOrderSuccess(data))
         } else {
-            yield put(fetchListOrdersByIdFailed(data.message))
+            yield put(fetchDetailOrderFailed(data.message))
         }
     } catch (error) {
         var message = _get(error, 'response.data.message', {});
         if (typeof message === 'object')
             message = MSG_ERROR_OCCUR
-        yield put(fetchListOrdersByIdFailed(message));
+        yield put(fetchDetailOrderFailed(message));
     } finally {
         yield put(hideLoading())
     }
 }
 
 function* watchFilterOrder({ payload }) {
-    // const { id } = payload
-    // const res = yield call(fetchListOrdersById, id)
-    // console.log(res)
-    // const { status, data } = res
-    // if (status === STATUS_CODE.SUCCESS) {
-    //     yield put(fetchListOrdersByIdSuccess(data))
-    // } else {
-    //     yield put(fetchListOrdersByIdFailed(data))
-    // }
+    try {
+        yield put(showLoading())
+        const res = yield call(filterOrder, payload.data)
+        const { status, data } = res
+        console.log(res)
+        if (status === STATUS_CODE.SUCCESS) {
+            yield put(filterOrderSuccess(data))
+        }
+        else yield put(filterOrderFailed(data.message))
+    } catch (error) {
+        var message = _get(error, 'response.data.message', {});
+        if (typeof message === 'object')
+            message = MSG_ERROR_OCCUR
+        yield put(filterOrderFailed(message));
+    } finally {
+        yield put(hideLoading())
+    }
 }
 
 function* watchCreateOrder({ payload }) {
@@ -85,7 +97,8 @@ function* watchCreateOrder({ payload }) {
         yield put(showLoading())
         const res = yield call(createOrder, payload.data)
         const { status, data } = res
-        if (status === STATUS_CODE.CREATED) {
+        console.log(res)
+        if (status === STATUS_CODE.SUCCESS) {
             yield put(createOrderSuccess(data))
         }
         else yield put(createOrderFailed(data.message))
@@ -120,7 +133,7 @@ function* watchUpdateOrder({ payload }) {
 }
 
 function* orderSaga() {
-    yield takeEvery(types.FETCH_LIST_ORDER_BY_ID, watchfetchListOrdersById)
+    yield takeEvery(types.FETCH_DETAIL_ORDER, watchfetchDetailOrder)
     yield fork(watchfetchAllListOrders)
     yield takeEvery(types.CREATE_ORDER, watchCreateOrder)
     yield takeLatest(types.FILTER_ORDER, watchFilterOrder)

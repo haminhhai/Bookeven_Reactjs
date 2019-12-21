@@ -1,16 +1,19 @@
 import axiosService from '../utils/axiosService'
-import { API_URL_LOCAL, API_URL } from '../const/config'
+import imgurService from '../utils/imgurService'
+import { API_UPLOAD, API_URL } from '../const/config'
 
+export const uploadImage = data => {
+    return imgurService.post(`${API_UPLOAD}`, data)
+}   
 // http://localhost:3000/books
-const url_books = 'books'
 const url_book = 'book'
-
-export const getListBooks = () => {
-    return axiosService.get(`${API_URL_LOCAL}/${url_books}`)
-}
 
 export const getDetailBook = data => {
     return axiosService.post(`${API_URL}/${url_book}/detail`, data)
+}
+
+export const addNewBook = data => {
+    return axiosService.post(`${API_URL}/${url_book}/new`, data)
 }
 
 export const filterBook = data => {
@@ -67,3 +70,18 @@ export const updateComment = data => {
 export const deleteComment = data => {
     return axiosService.delete(`${API_URL}/${url_cmt}/delete`, data)
 }
+
+const url_rate = 'rate'
+
+export const getListRate = data => {
+    return axiosService.post(`${API_URL}/${url_rate}/list`, data)
+}   
+
+export const addRate = data => {
+    return axiosService.post(`${API_URL}/${url_rate}/new`, data)
+}
+
+export const updateRate = data => {
+    return axiosService.put(`${API_URL}/${url_rate}/update`, data)
+}
+

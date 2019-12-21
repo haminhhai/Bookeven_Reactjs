@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
-import { MDBBtn, MDBTable, MDBTableBody, MDBTableHead, MDBModal, MDBModalHeader, MDBModalBody, MDBIcon } from 'mdbreact';
-import { Badge, Form, Input, DatePicker } from 'antd'
+import { MDBBtn, MDBTable, MDBTableBody, MDBTableHead, MDBIcon } from 'mdbreact';
+import { Badge } from 'antd'
 
 import Header from '../../layouts/Header/Header'
 import '../../styles/order.scss'
@@ -17,7 +17,6 @@ class OrderManager extends Component {
         this.state = {
             modal: false,
             data: {},
-            address: {},
         }
 
     }
@@ -35,43 +34,26 @@ class OrderManager extends Component {
         }
     }
     showModal = data => {
-        const { address } = this.props
-        var filtedAddress = address.filter(item => item.id === data.idAddress)[0]
-        this.setState({
-            data: data,
-            modal: !this.state.modal,
-            address: filtedAddress
+        const { fetchDetailOrder } = this.props
+        fetchDetailOrder({
+            id: data.id
         })
-    }
-    filterAddress = (field, id) => {
-        const { address } = this.props
-        var filtedAddress = ''
-        if (address.length > 0)
-            filtedAddress = address.filter(item => item.id === id)[0][field]
-
-        return filtedAddress
+        this.setState({
+            modal: true
+        })
     }
     closeModal = () => {
         this.setState({ modal: !this.state.modal })
     }
     render() {
-        const { modal, data, address } = this.state
-        const { orders, updateOrder, role } = this.props
+        const { modal } = this.state
+        const { orders, updateOrder, role, detail, filterOrder } = this.props
         return (
             <div>
                 <Header carousel={false} parent='Tình hình đơn hàng' />
                 <div className='order-contain container'>
-                    {
-                        orders.length === 0 ?
-                            <div className='empty-order text-center'>
-                                <img className='logo' src={img} alt='' />
-                                <h4>{cont.EMPTY_ORDER}</h4>
-                                <Link to='/'>
-                                    <MDBBtn color=' light-green accent-3'>{cont.BACK_HOME}</MDBBtn>
-                                </Link>
-                            </div> :
                             <React.Fragment>
-                                <SearchOrder />
+                                <SearchOrder filterOrder={filterOrder}/>
                                 <div className='order row'>
                                     <h4 className='container'><MDBIcon className='mr-2' icon="file-invoice-dollar" />Đơn hàng</h4>
                                     <div className='container mt-4'>
@@ -91,14 +73,14 @@ class OrderManager extends Component {
                                                         <tr key={index} onClick={() => this.showModal(item)} style={{ cursor: 'pointer' }}>
                                                             <td className='align-middle'>{item.id}</td>
                                                             <td className='align-middle'>
-                                                                {this.filterAddress('name', item.idAddress)}
+                                                                {item.fullName}
                                                             </td>
                                                             <td className='align-middle'>
-                                                                {this.filterAddress('phone', item.idAddress)}
+                                                                {item.phone}
                                                             </td>
-                                                            <td className='text-center align-middle'>{this.$utils.converTSToDate(item.createAt, 'DD/MM/YYYY')}</td>
-                                                            <td className='text-center'>{this.$utils.converTSToDate(item.endTime, 'DD/MM/YYYY')}</td>
-                                                            <td className='align-middle'>{this.$utils.calculateTotalCart(item.listBooks, 'vnd')}</td>
+                                                            <td className='text-center align-middle'>{this.$utils.converTSToDate(parseInt(item.createDate), 'DD/MM/YYYY')}</td>
+                                                            <td className='text-center'>{item.shipDate !== null ? this.$utils.converTSToDate(parseInt(item.shipDate), 'DD/MM/YYYY') : '--/--/----'}</td>
+                                                            <td className='align-middle'>{this.$utils.formatVND(item.total)}</td>
                                                             <td className='align-middle'>{this.formatStatus(item.status)}</td>
                                                         </tr>
                                                     )
@@ -108,10 +90,8 @@ class OrderManager extends Component {
                                     </div>
                                 </div>
                             </React.Fragment>
-                    }
                     {modal &&
-                        <DetailOrder data={data}
-                            address={address}
+                        <DetailOrder data={detail}
                             closeModal={this.closeModal}
                             modal={modal} 
                             updateOrder={updateOrder}
