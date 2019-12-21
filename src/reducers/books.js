@@ -151,23 +151,6 @@ var books = (state = intialState, action) => {
                 ...state,
             }
         }
-        case types.FITLER_BOOKS_SINGLE_SUCCESS: {
-            const { data } = action.payload
-            return {
-                ...state,
-                filtedBook: {
-                    ...state.filtedBook,
-                    list: data
-                }
-            }
-        }
-        case types.FITLER_BOOKS_SINGLE_FAILED: {
-            const { error } = action.payload
-            toastError(error)
-            return {
-                ...state,
-            }
-        }
         case types.FITLER_BOOKS_MULTI_SUCCESS: {
             const { data } = action.payload
             return {

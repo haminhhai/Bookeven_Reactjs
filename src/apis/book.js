@@ -13,6 +13,10 @@ export const getDetailBook = data => {
     return axiosService.post(`${API_URL}/${url_book}/detail`, data)
 }
 
+export const filterBook = data => {
+    return axiosService.post(`${API_URL}/${url_book}/filter`, data)
+}
+
 export const updateListBooks = data => {
     return axiosService.put(`${API_URL}/${url_book}/update`, data)
 }
