@@ -59,7 +59,6 @@ class SearchOrder extends Component {
             shipDate: toDate !== null ? toDate.unix().toString() : "",
             status: status
         }
-        console.log(body)
         filterOrder(body)
     }
     render() {

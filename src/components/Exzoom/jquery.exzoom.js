@@ -30,8 +30,10 @@ window["jQuery"] = $;
         exzoom_preview_img = null,
         autoPlayInterval = null,
         startX = 0,
+        // eslint-disable-next-line no-unused-vars
         startY = 0,
         endX = 0,
+        // eslint-disable-next-line no-unused-vars
         endY = 0,
         g = {},
         defaults = {
@@ -135,7 +137,6 @@ window["jQuery"] = $;
         
         for (let i = 0; i < imgNum; i++) {
             imgArr[i] = copute_image_prop(images.eq(i));
-            // console.log(imgArr[i]);
             let li = exzoom_img_ul.find("li").eq(i);
             li.css("width", boxWidth);
             li.find("img").css({
@@ -285,8 +286,6 @@ window["jQuery"] = $;
 
         
         exzoom_img_ul.on("touchend", function (event) {
-            
-            console.log(endX < startX);
             if (endX < startX) {
                 
                 moveRight();

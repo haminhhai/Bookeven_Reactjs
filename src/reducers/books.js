@@ -1,6 +1,6 @@
 import * as types from '../const/actionType'
 import * as msg from '../const/message'
-import { toastSuccess, toastError } from '../utils/Utils'
+import { toastSuccess } from '../utils/Utils'
 import { getListComments } from '../actions/book'
 
 var intialState = {
@@ -17,16 +17,17 @@ var intialState = {
         total: 1,
         bookfield: '',
         keyword: "",
-        minRate: 1,
-        maxRate: 5,
-        minPrice: 0,
-        maxPrice: 1000000,
+        minRate: "",
+        maxRate: "",
+        minPrice: "",
+        maxPrice: "",
         bookfieldId: 1
     },
     comments: [],
     rate: {
         list: [],
         totalRate: 0,
+        ratePercents: {}
     }
 }
 
@@ -44,8 +45,6 @@ var books = (state = intialState, action) => {
             }
         }
         case types.GET_DETAIL_BOOK_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state
             }
@@ -65,8 +64,6 @@ var books = (state = intialState, action) => {
             }
         }
         case types.GET_LIST_BY_BF_ID_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state
             }
@@ -86,8 +83,6 @@ var books = (state = intialState, action) => {
             }
         }
         case types.GET_LIST_NEWEST_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state
             }
@@ -107,8 +102,6 @@ var books = (state = intialState, action) => {
             }
         }
         case types.GET_LIST_BEST_SELLER_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state
             }
@@ -128,22 +121,18 @@ var books = (state = intialState, action) => {
             }
         }
         case types.GET_LIST_BEST_SALES_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state
             }
         }
         case types.GET_LIST_BEST_RATE_SUCCESS: {
-            const { books } = action.payload.data
+            const { data } = action.payload
             return {
                 ...state,
-                rateBook: [...books]
+                rateBook: [...data]
             }
         }
         case types.GET_LIST_BEST_RATE_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state
             }
@@ -157,8 +146,6 @@ var books = (state = intialState, action) => {
 
         }
         case types.FETCH_LIST_BOOK_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state,
             }
@@ -166,7 +153,6 @@ var books = (state = intialState, action) => {
         case types.FITLER_BOOKS_SUCCESS: {
             const { data, req } = action.payload
             const { books, total, bookfield, page, amount } = data
-            console.log(req)
             return {
                 ...state,
                 filtedBook: {
@@ -186,8 +172,6 @@ var books = (state = intialState, action) => {
             }
         }
         case types.FITLER_BOOKS_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state
             }
@@ -200,33 +184,27 @@ var books = (state = intialState, action) => {
             }
         }
         case types.FETCH_LIST_FIELDSBOOK_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state,
             }
         }
         case types.ADD_NEW_BOOK_SUCCESS: {
-            const { data } = action.payload
             return {
                 ...state,
             }
         }
         case types.ADD_NEW_BOOK_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state,
             }
         }
         case types.UPLOAD_IMAGE_SUCCESS: {
+            toastSuccess('Tạo ảnh thành công')
             return {
                 ...state,
             }
         }
         case types.UPLOAD_IMAGE_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state,
             }
@@ -243,8 +221,6 @@ var books = (state = intialState, action) => {
                 }
             }
         case types.UPDATE_BOOK_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state
             }
@@ -257,8 +233,6 @@ var books = (state = intialState, action) => {
             }
         }
         case types.GET_LIST_COMMENTS_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state,
             }
@@ -271,8 +245,6 @@ var books = (state = intialState, action) => {
             }
         }
         case types.ADD_COMMENT_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state,
             }
@@ -290,8 +262,6 @@ var books = (state = intialState, action) => {
             }
         }
         case types.UPDATE_COMMENT_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state,
             }
@@ -306,8 +276,6 @@ var books = (state = intialState, action) => {
             }
         }
         case types.DELETE_COMMENT_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state,
             }
@@ -317,14 +285,13 @@ var books = (state = intialState, action) => {
             return {
                 ...state,
                 rate: {
-                    totalRate: data.totalRate[0].rate,
-                    list: [...data.rates]
+                    totalRate: data.totalRate,
+                    list: [...data.rateList],
+                    ratePercents: {...data.ratesPercent}
                 }
             }
         }
         case types.GET_LIST_RATE_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state,
             }
@@ -335,8 +302,6 @@ var books = (state = intialState, action) => {
             }
         }
         case types.RATE_BOOK_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state,
             }
@@ -346,8 +311,6 @@ var books = (state = intialState, action) => {
             }
         }
         case types.UPDATE_RATE_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state,
             }
@@ -361,8 +324,6 @@ var books = (state = intialState, action) => {
             }
         }
         case types.FOUR_NEWEST_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state,
             }
@@ -375,8 +336,6 @@ var books = (state = intialState, action) => {
             }
         }
         case types.FOUR_BEST_SELLER_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state,
             }
@@ -389,8 +348,6 @@ var books = (state = intialState, action) => {
             }
         }
         case types.FOUR_BEST_DISCOUNT_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state,
             }

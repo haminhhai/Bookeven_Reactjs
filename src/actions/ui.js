@@ -1,4 +1,4 @@
-import { SHOW_LOADING, HIDE_LOADING, OPEN_MODAL, CLOSE_MODAL, CHANGE_MESSAGE } from '../const/actionType'
+import { SHOW_LOADING, HIDE_LOADING, OPEN_MODAL, CLOSE_MODAL } from '../const/actionType'
 
 export const showLoading = () => ({
     type: SHOW_LOADING

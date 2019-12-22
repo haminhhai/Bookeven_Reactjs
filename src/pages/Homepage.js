@@ -41,7 +41,6 @@ class Homepage extends Component {
     const { redir, path } = this.state
     const { history, books } = this.props
     const {newBook, bestSeller, bestDiscount}  = books
-    console.log(newBook)
     if (redir)
       return <Redirect to={`/${path}`} />
     return (
@@ -56,7 +55,7 @@ class Homepage extends Component {
               </Link>
             </h3>
             <div className="row mt-5">
-              {this.loopCard(newBook)}
+              {this.loopCard(bestSeller)}
             </div>
           </div>
         </div>
@@ -69,7 +68,7 @@ class Homepage extends Component {
               </Link>
             </h3>
             <div className="row mt-5 ">
-              {this.loopCard(bestSeller)}
+              {this.loopCard(newBook)}
             </div>
           </div>
         </div>

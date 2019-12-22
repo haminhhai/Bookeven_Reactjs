@@ -80,7 +80,7 @@ class ModalEditBook extends Component {
                     price: price,
                     bookField: bookfield,
                     description: description,
-                    image: imageUrl !== '' ? imageUrl.slice(22) : detailBook.image,
+                    image: imageUrl.length > 200 ? imageUrl.slice(22) : detailBook.image,
                     inventory: inventory,
                     discount: discount,
                 }
@@ -254,12 +254,10 @@ class ModalEditBook extends Component {
                                                     ],
                                                 })(
                                                     <InputNumber
-                                                        min={0}
+                                                        min={1000}
                                                         style={{ width: '100%' }}
                                                         step={1000}
                                                         size='large'
-                                                        formatter={value => this.$utils.formatVND(value)}
-                                                        parser={value => this.$utils.formatVND(value)}
                                                     />
                                                 )}
                                             </Form.Item>

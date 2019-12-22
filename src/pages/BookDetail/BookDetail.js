@@ -37,7 +37,7 @@ class BookDetail extends Component {
         })
     }
     componentWillReceiveProps(preProps) {
-        if (preProps.detailBook.id !== undefined && !this.state.zoomed) {
+        if (preProps.detailBook.id !== this.props.detailBook.id  && !this.state.zoomed) {
             $(function () {
                 $("#exzoom").exzoom({
                     // thumbnail nav options
@@ -61,7 +61,6 @@ class BookDetail extends Component {
     }
     render() {
         const { detailBook, updateListBook, fieldsBook, role, filtedBook, history, rate } = this.props //parent = this.props.parent
-        console.log(rate)
         const { amount, modal } = this.state
         let xhtml = null
         xhtml = <div >
@@ -89,7 +88,7 @@ class BookDetail extends Component {
                             <h1 >{detailBook.name}</h1>
                             <h5 className=''>Tác giả: {detailBook.author}</h5>
                             <div className='rate-detail'>
-                                <Rate disabled defaultValue={rate.list.length} />
+                                <Rate disabled value={rate.totalRate} />
                                 <p>({rate.list.length} người đã đánh giá)</p>
                             </div>
 
@@ -153,7 +152,7 @@ class BookDetail extends Component {
                         </div>
                         <div className='col-12 col-md-12 last-child'>
                             <h3>Đánh giá</h3>
-                            <RateContainer role={role} disabled={!detailBook.bought} rate={rate}/>
+                            <RateContainer />
                         </div>
                     </div>
                 </div>

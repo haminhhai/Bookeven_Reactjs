@@ -1,5 +1,5 @@
 import axiosService from '../utils/axiosService'
-import { API_URL_LOCAL, API_URL } from '../const/config'
+import {  API_URL } from '../const/config'
 
 // http://localhost:3000/address
 const url_address = 'address'

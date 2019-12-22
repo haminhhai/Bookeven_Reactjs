@@ -51,17 +51,19 @@ class DetailOrder extends Component {
 
     onUpdateOrder = () => {
         const { toDate, status } = this.state
-        const { data, updateOrder } = this.props
+        const { data, updateOrder, closeModal } = this.props
         var body = {
             id: data.id,
             shipDate: this.$utils.convertDateToTS(toDate).toString(),
             status: status
         }
-        console.log(body)
         updateOrder(body)
+        setTimeout(() => {
+            closeModal()
+        }, 1000);
     }
-    componentDidMount() {
-        const { data } = this.props
+    componentWillReceiveProps(perProps) {
+        const { data } = perProps
         this.setState({
             status: data.status,
             fromDate: moment.unix(parseInt(data.orderDate)),
@@ -71,7 +73,6 @@ class DetailOrder extends Component {
     render() {
         const { data, modal, closeModal, role } = this.props
         const { status, isEditTime, toDate } = this.state
-        console.log(data, toDate)
         let xhtml = null
         if (data.id !== undefined)
             xhtml =

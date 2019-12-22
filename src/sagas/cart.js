@@ -4,8 +4,7 @@ import {
     put,
     take,
     takeLatest,
-    takeEvery,
-    select
+    takeEvery
 } from 'redux-saga/effects';
 import _get from 'lodash/get';
 import * as types from '../const/actionType'

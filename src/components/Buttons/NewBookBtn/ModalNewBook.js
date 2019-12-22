@@ -67,7 +67,7 @@ class ModalNewBook extends Component {
     };
 
     handleSubmit = e => {
-        const { toggleModal, addNewBook } = this.props
+        const {  addNewBook } = this.props
         const { imageUrl } = this.state
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
@@ -242,12 +242,10 @@ class ModalNewBook extends Component {
                                                     ],
                                                 })(
                                                     <InputNumber
-                                                        min={0}
+                                                        min={1000}
                                                         style={{ width: '100%' }}
                                                         step={1000}
                                                         size='large'
-                                                        formatter={value => this.$utils.formatVND(value)}
-                                                        parser={value => this.$utils.formatVND(value)}
                                                     />
                                                 )}
                                             </Form.Item>

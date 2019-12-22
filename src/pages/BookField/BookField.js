@@ -37,11 +37,11 @@ class BookField extends Component {
     }
 
     handleFilter = () => {
-        const { filterBooks } = this.props
+        const { filterBooks, filtedBook } = this.props
         const { minval, maxval, minrate, maxrate, topic } = this.state
         const data = {
             minPrice: minval,
-            title: "",
+            title: filtedBook.keyword,
             maxPrice: maxval,
             minRate: minrate,
             maxRate: maxrate,
@@ -94,7 +94,7 @@ class BookField extends Component {
         else if (path.includes('search')) {
             const body = {
                 title: filtedBook.keyword,
-                bookField: filtedBook.bookfield_id,
+                bookField: filtedBook.bookfieldId,
                 minRate: filtedBook.minRate,
                 maxRate: filtedBook.maxRate,
                 minPrice: filtedBook.minPrice,
@@ -146,7 +146,6 @@ class BookField extends Component {
                 amount: filtedBook.pageSize,
                 page: page
             }
-            console.log(body)
             filterBooks(body)
         }
     };
@@ -242,8 +241,8 @@ class BookField extends Component {
                                                 range
                                                 step={1000}
                                                 min={0}
-                                                max={100000}
-                                                defaultValue={[0, 100000]}
+                                                max={1000000}
+                                                defaultValue={[0, 1000000]}
                                                 onChange={this.setPriceRange} />
                                             <p className='text-center mt-2'>
                                                 Giá {this.$utils.formatVND(minval)} — {this.$utils.formatVND(maxval)}

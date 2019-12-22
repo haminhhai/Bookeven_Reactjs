@@ -5,8 +5,6 @@ import {
     take,
     takeLatest,
     takeEvery,
-    select,
-    delay
 } from 'redux-saga/effects';
 import * as types from '../const/actionType'
 import { hideLoading, showLoading } from '../actions/ui';
@@ -17,9 +15,9 @@ import {
     filterOrderSuccess, filterOrderFailed,
     updateOrderSuccess, updateOrderFailed,
     createOrderSuccess, createOrderFailed,
-    
+    filterOrder as onFilterOrder
+
 } from '../actions/order'
-import { fetchCart } from '../actions/cart'
 import { fetchAllListOrders, fetchDetailOrder, createOrder, filterOrder, updateOrder } from '../apis/order'
 import { toastSuccess } from '../utils/Utils'
 import * as msg from '../const/message'
@@ -33,7 +31,6 @@ function* watchfetchAllListOrders() {
             yield put(showLoading())
             const res = yield call(fetchAllListOrders)
             const { status, data } = res
-            console.log(res)
             if (status === STATUS_CODE.SUCCESS) {
                 yield put(fetchAllListOrdersSuccess(data))
             } else {
@@ -52,11 +49,9 @@ function* watchfetchAllListOrders() {
 
 function* watchfetchDetailOrder({ payload }) {
     try {
-        console.log(payload.data)
         yield put(showLoading())
         const res = yield call(fetchDetailOrder, payload.data)
         const { status, data } = res
-        console.log(res)
         if (status === STATUS_CODE.SUCCESS) {
             yield put(fetchDetailOrderSuccess(data))
         } else {
@@ -77,7 +72,6 @@ function* watchFilterOrder({ payload }) {
         yield put(showLoading())
         const res = yield call(filterOrder, payload.data)
         const { status, data } = res
-        console.log(res)
         if (status === STATUS_CODE.SUCCESS) {
             yield put(filterOrderSuccess(data))
         }
@@ -97,8 +91,7 @@ function* watchCreateOrder({ payload }) {
         yield put(showLoading())
         const res = yield call(createOrder, payload.data)
         const { status, data } = res
-        console.log(res)
-        if (status === STATUS_CODE.SUCCESS) {
+        if (status === STATUS_CODE.CREATED) {
             yield put(createOrderSuccess(data))
         }
         else yield put(createOrderFailed(data.message))
@@ -118,7 +111,14 @@ function* watchUpdateOrder({ payload }) {
         const res = yield call(updateOrder, payload.data)
         const { status, data } = res
         if (status === STATUS_CODE.SUCCESS) {
-            toastSuccess(msg.MSG_UPDATE_ORDER_SUCCESS)
+            yield put(onFilterOrder({
+                id: "",
+                fullName: "",
+                phone: "",
+                createDate: "",
+                shipDate: "",
+                status: payload.data.status
+            }))
             yield put(updateOrderSuccess(data))
         }
         else yield put(updateOrderFailed(data.message))

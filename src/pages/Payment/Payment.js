@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { MDBModal, MDBModalHeader, MDBIcon, MDBBtn, MDBTable, MDBTableBody, MDBTableHead, MDBInput, MDBModalBody } from 'mdbreact'
+import { MDBModal, MDBModalHeader, MDBIcon, MDBBtn, MDBTable, MDBTableBody, MDBTableHead, MDBModalBody } from 'mdbreact'
 import { Radio } from 'antd'
 import Header from '../../layouts/Header/Header'
 import * as msg from '../../const/message'

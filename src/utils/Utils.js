@@ -1,5 +1,3 @@
-import { notification } from 'antd'
-import * as msg from '../const/message'
 import { toast } from 'react-toastify'
 import province from './data/province.json'
 import district from './data/district.json'

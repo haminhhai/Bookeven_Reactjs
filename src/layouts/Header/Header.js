@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import {
@@ -44,18 +44,20 @@ class Header extends Component {
 
     handleSearch = () => {
         const { keyWord } = this.state
-        const { bookActions } = this.props
+        const { bookActions, books } = this.props
+        const { filtedBook } = books
         const { filterBooks } = bookActions
         const body = {
             title: keyWord,
-            bookField: "",
-            minRate: "",
-            maxRate: "",
-            minPrice: "",
-            maxPrice: "",
+            bookField: filtedBook.bookfieldId,
+            minRate: filtedBook.minRate,
+            maxRate: filtedBook.maxRate,
+            minPrice: filtedBook.minPrice,
+            maxPrice: filtedBook.maxPrice,
             amount: 10,
             page: 1
         }
+        console.log(body)
         filterBooks(body)
     }
 
@@ -83,7 +85,8 @@ class Header extends Component {
         })
     }
     render() {
-        const { parent, child, cart, fieldsBook, info, authen, detailBook, history } = this.props
+        const { parent, child, cart, books, info, authen } = this.props
+        const { fieldsBook, detailBook } = books
         const { role } = info
         var total = 0
         if (cart.length > 0)
@@ -178,8 +181,8 @@ class Header extends Component {
                                     </Breadcrumb.Item>
                                     <Breadcrumb.Item>
                                         {child !== undefined ?
-                                            <Link to={'/sach-theo-danh-muc/' + detailBook.bookfield_id} 
-                                            onClick={() => this.getListByBookField(detailBook.bookfield_id)}>
+                                            <Link to={'/sach-theo-danh-muc/' + detailBook.bookfield_id}
+                                                onClick={() => this.getListByBookField(detailBook.bookfield_id)}>
                                                 {parent}
                                             </Link> :
                                             parent
@@ -253,10 +256,9 @@ class Header extends Component {
 const mapStateToProps = state => {
     return {
         cart: state.cart,
-        fieldsBook: state.books.fieldsBook,
+        books: state.books,
         info: state.account.info,
         authen: state.auth.authen,
-        detailBook: state.books.detailBook
     }
 }
 

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import { MDBBtn, MDBInput} from "mdbreact";
 
-import * as msg from '../../../const/message'
 import province from '../../../utils/data/province.json'
 import district from '../../../utils/data/district.json'
 import ward from '../../../utils/data/ward.json'

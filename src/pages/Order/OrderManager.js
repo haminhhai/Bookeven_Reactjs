@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
 
-import { MDBBtn, MDBTable, MDBTableBody, MDBTableHead, MDBIcon } from 'mdbreact';
+import {  MDBTable, MDBTableBody, MDBTableHead, MDBIcon } from 'mdbreact';
 import { Badge } from 'antd'
 
 import Header from '../../layouts/Header/Header'
 import '../../styles/order.scss'
 import * as cont from './const'
-import img from '../../assets/logo.png'
 import DetailOrder from './DetailOrder';
 import SearchOrder from './SearchOrder';
 class OrderManager extends Component {

@@ -31,7 +31,7 @@ class BRCard extends Component {
                     </Link>
                 </span>
                 <div className='col-12'>
-                    <Rate allowHalf defaultValue={book.rate} disabled />
+                    <Rate allowHalf value={book.rate} disabled />
                 </div>
                 <p>
                     {book.discount > 0 &&

@@ -4,8 +4,8 @@ import { MDBBtn, MDBIcon, MDBInput } from 'mdbreact'
 
 class SignIn extends Component {
     state = {
-        email: 'haihaidb@gmail.com',
-        password: '123456',
+        email: '',
+        password: '',
     }
 
     submitHandler = event => {

@@ -66,7 +66,6 @@ function* processSignupManager({ payload }) {
         var message = _get(error, 'response.data', {});
         if (typeof message === 'object')
             message = MSG_ERROR_OCCUR
-        console.log(message)
         yield put(signupManagerFailed(message));
     } finally {
         yield put(hideLoading());

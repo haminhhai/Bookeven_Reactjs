@@ -15,7 +15,7 @@ class NotFound extends Component {
                 <Header carousel={false} parent='404' />
                 <div className='notfound container'>
                     <div className='row text-center'>
-                        <img className='logo' src={img} />
+                        <img className='logo' src={img} alt=''/>
                         <h1>404</h1>
                         <h5>Không tìm thấy!</h5>
                         <Link  to='/'>

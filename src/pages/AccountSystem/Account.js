@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { Tabs, Icon } from 'antd'
 import { MDBBtn, MDBIcon } from "mdbreact";
 
@@ -45,6 +45,9 @@ class Account extends Component {
     render() {
         const { address, createNewAddress, updateAddress, deleteAddress, info, updateUser, changePassword } = this.props
         const { isEditing, data, currentTab } = this.state
+        const token = localStorage.getItem('TOKEN')
+        if(!token)
+            return <Redirect to='/' />
         return (
             <div >
                 <Header carousel={false} parent='Tài khoản' />

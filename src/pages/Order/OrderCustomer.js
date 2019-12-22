@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
-import { MDBBtn, MDBTable, MDBTableBody, MDBTableHead, MDBModal, MDBModalHeader, MDBModalBody, MDBIcon } from 'mdbreact';
+import { MDBBtn, MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import { Badge } from 'antd'
 
 import Header from '../../layouts/Header/Header'
@@ -33,7 +33,6 @@ class OrderCustomer extends Component {
     }
     showModal = data => {
         const { fetchDetailOrder } = this.props
-        console.log(data)
        fetchDetailOrder({
            id: data.order_id
        })

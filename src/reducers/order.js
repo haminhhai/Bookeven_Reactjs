@@ -1,5 +1,5 @@
 import * as types from '../const/actionType'
-import { toastError, toastSuccess} from '../utils/Utils'
+import {  toastSuccess} from '../utils/Utils'
 import * as msg from '../const/message'
 var initialState = {
     list: [],
@@ -15,8 +15,6 @@ var orders = (state = initialState, action) => {
             }
         }
         case types.FETCH_ALL_LIST_ORDER_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {...state}
         }
         case types.FETCH_DETAIL_ORDER_SUCCESS: {
@@ -27,8 +25,6 @@ var orders = (state = initialState, action) => {
             }
         }
         case types.FETCH_DETAIL_ORDER_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {...state}
         }
         case types.DELETE_ORDER: {
@@ -46,8 +42,6 @@ var orders = (state = initialState, action) => {
             }
         }
         case types.FILTER_ORDER_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {...state}
         }
         case types.CREATE_ORDER_SUCCESS: {
@@ -55,8 +49,6 @@ var orders = (state = initialState, action) => {
             return {...state}
         }
         case types.CREATE_ORDER_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {...state}
         }
         case types.UPDATE_ORDER_SUCCESS: {
@@ -73,8 +65,6 @@ var orders = (state = initialState, action) => {
             }
         }
         case types.UPDATE_ORDER_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {...state}
         }
         default: return {...state}

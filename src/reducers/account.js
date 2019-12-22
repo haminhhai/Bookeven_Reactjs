@@ -1,6 +1,6 @@
 import * as types from '../const/actionType'
 import * as msg from '../const/message'
-import { toastSuccess, toastError } from '../utils/Utils'
+import { toastSuccess } from '../utils/Utils'
 const defaultInfo = {
     id: 0,
     email: '',
@@ -22,8 +22,6 @@ var account = (state = initialState, action) => {
             }
         }
         case types.GET_LIST_ADDRESS_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state,
             }
@@ -35,8 +33,6 @@ var account = (state = initialState, action) => {
             }
         }
         case types.CREATE_NEW_ADDRESS_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state,
             }
@@ -52,8 +48,6 @@ var account = (state = initialState, action) => {
             }
         }
         case types.UPDATE_ADDRESS_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state,
             }
@@ -68,8 +62,6 @@ var account = (state = initialState, action) => {
             }
         }
         case types.DELETE_ADDRESS_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state,
             }
@@ -82,8 +74,6 @@ var account = (state = initialState, action) => {
             }
         }
         case types.GET_USER_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state,
             }
@@ -101,8 +91,6 @@ var account = (state = initialState, action) => {
             }
         }
         case types.UPDATE_USER_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state,
             }
@@ -114,8 +102,6 @@ var account = (state = initialState, action) => {
             }
         }
         case types.CHANGE_PASSWORD_FAILED: {
-            const { error } = action.payload
-            toastError(error)
             return {
                 ...state,
             }

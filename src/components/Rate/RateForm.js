@@ -7,15 +7,7 @@ import AvatarUser from '../AvatarUser/AvatarUser'
 import { rateStatus } from '../../const/config'
 const rateArr = [
     {
-        num: 5,
-        rate: 50,
-    },
-    {
-        num: 4,
-        rate: 80,
-    },
-    {
-        num: 3,
+        num: 1,
         rate: 0,
     },
     {
@@ -23,7 +15,15 @@ const rateArr = [
         rate: 0,
     },
     {
-        num: 1,
+        num: 3,
+        rate: 0,
+    },
+    {
+        num: 4,
+        rate: 0,
+    },
+    {
+        num: 5,
         rate: 0,
     },
 ]
@@ -36,6 +36,7 @@ class RateForm extends Component {
                 icon: '',
                 color: '',
             },
+            value: 0,
             loading: false,
             acceptRate: false
         }
@@ -79,49 +80,57 @@ class RateForm extends Component {
             rate: parseInt(e)
         })
     }
-    componentDidMount( ) {
-        const { disabled, info, rate} = this.props
+    componentWillReceiveProps( preProps) {
+        const { detailBook, info, rate} = preProps
         var check = rate.list.findIndex(item => item.fullname === info.fullname)
-        if(disabled === false && check === -1)
+        if(detailBook.bought && check === -1)
             this.setState({
                 acceptRate: true
             })
+        else if (detailBook.bought && check !== -1){
+            this.setState({
+                acceptRate: false,
+                value: rate.list[check].rate
+            })
+        }
         else this.setState({
             acceptRate: false
         })
     }
     render() {
-        const { status, acceptRate } = this.state
-        const {  rate, role, info } = this.props
+        const { status, acceptRate, value } = this.state
+        const {  rate, info } = this.props
         const { content, icon, color } = status
-        console.log(acceptRate)
         return (
             <div className='rate-form row'>
-                <div id='rate-card' className={`col-${role === 2 ? '6' : '4'}`}>
+                <div id='rate-card' className={`col-${info.role === 2 ? '6' : '4'}`}>
                     <h5>Đánh giá trung bình</h5>
                     <h1>{rate.totalRate}/5</h1>
-                    <Rate disabled allowHalf defaultValue={rate.totalRate} />
+                    <Rate disabled allowHalf value={rate.totalRate}  />
                     <p>( {rate.list.length} người đã đánh giá )</p>
                 </div>
-                <div id='rate-card' className={`col-${role === 2 ? '6' : '4'}`}>
+                <div id='rate-card' className={`col-${info.role === 2 ? '6' : '4'}`}>
                     {
-                        rateArr.map((item, index) => this.showProgressRate(item.num, item.rate, index))
+                        rate.ratePercents.r1 === null ?
+                        rateArr.map((item, index) => this.showProgressRate(item.num, item.rate, index)):
+                        rateArr.map((item, index) => this.showProgressRate(item.num, rate.ratePercents[`r${index+1}`], index))
+
                     }
                 </div>
                 {
-                    role === 1 &&
+                    info.role === 1 &&
                     <div className={`col-4 user-rate`}>
                         Đánh giá của bạn về sản phẩm này
                     <Tooltip title={<div>{content} <MDBIcon style={{ color: `${color}` }} icon={icon} /></div>}>
                             <div>
-                                <Rate disabled={!acceptRate} onHoverChange={this.onChange} onChange={this.onRate} />
+                                <Rate disabled={!acceptRate} onHoverChange={this.onChange} onChange={this.onRate} value={value} />
                             </div>
                         </Tooltip>
                     </div>
                 }
                 <div className='col-12 list-rate'>
                     <List itemLayout='horizontal' dataSource={rate.list} renderItem={item => (
-                        <List.Item actions={[<Rate disabled defaultValue={parseInt(item.rate)} />]} >
+                        <List.Item actions={[<Rate disabled value={parseInt(item.rate)} />]} >
                             <Skeleton
                                 avatar
                                 title={false}
