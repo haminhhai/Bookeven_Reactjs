@@ -188,7 +188,7 @@ function* watchGetListNewest({ payload }) {
         if (status === STATUS_CODE.SUCCESS) {
             const body = {
                 ...data,
-                bookfield: 'Sách bán chạy',
+                bookfield: 'Sách mới',
                 page: payload.data.page,
                 amount: payload.data.amount
             }
@@ -347,6 +347,7 @@ function* filterBooksAction({ payload }) {
                 bookfield: 'Kết quả cho tìm kiếm của bạn',
                 page: payload.data.page,
                 amount: payload.data.amount,
+
             }
             yield put(filterBooksSuccess(body, payload.data))
         }

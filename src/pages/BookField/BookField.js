@@ -113,7 +113,9 @@ class BookField extends Component {
         }
         else if (path.includes('search')) {
             var params = filtedBook
-            var { checkBookfield, checkPrice, checkRate, bookfieldId, minRate, maxRate, minPrice, maxPrice, keyword } = params
+            var checks = this.state
+            var { checkBookfield, checkPrice, checkRate } = checks
+            var { bookfieldId, minRate, maxRate, minPrice, maxPrice, keyword } = params
             if (!checkBookfield)
                 bookfieldId = ""
             if (!checkPrice) {
@@ -134,6 +136,7 @@ class BookField extends Component {
                 amount: pageSize,
                 page: current
             }
+            console.log(body)
             filterBooks(body)
         }
 
@@ -169,7 +172,9 @@ class BookField extends Component {
         }
         else if (path.includes('search')) {
             var params = filtedBook
-            var { checkBookfield, checkPrice, checkRate, bookfieldId, minRate, maxRate, minPrice, maxPrice, keyword } = params
+            var checks = this.state
+            var { checkBookfield, checkPrice, checkRate } = checks
+            var { bookfieldId, minRate, maxRate, minPrice, maxPrice, keyword } = params
             if (!checkBookfield)
                 bookfieldId = ""
             if (!checkPrice) {
@@ -195,7 +200,7 @@ class BookField extends Component {
     };
     componentDidMount() {
         window.scrollTo(0, 0)
-        const { getBooksByBFID, getListBestNewest, getListBestSeller, getListBestSales, path } = this.props
+        const { getBooksByBFID, getListBestNewest, getListBestSeller, getListBestSales, path, filtedBook } = this.props
         if (path.includes('sach-theo-danh-muc')) {
             var id = this.$utils.getNumberFromString(path)
             if (typeof id === 'number')
@@ -224,20 +229,19 @@ class BookField extends Component {
             })
         }
         else if (path.includes('search')) {
-            const { filterBooks } = this.props
-            const body = {
-                title: "",
-                bookField: "",
-                minRate: "",
-                maxRate: "",
-                minPrice: "",
-                maxPrice: "",
-                amount: 12,
-                page: 1
+            var params = filtedBook
+            var { bookfieldId, minRate, maxRate, minPrice, maxPrice } = params
+            if (bookfieldId !== "")
+                this.setState({ checkBookfield: true })
+            if (minPrice !== "" || maxPrice !== "") {
+                this.setState({ checkPrice: true})
             }
-            filterBooks(body)
+            if (minRate !== "" || maxRate !== "") {
+                this.setState({ checkRate: true })
+            }
         }
     }
+
     filterType = parent => {
         const { filtedBook } = this.props
         switch (parent) {

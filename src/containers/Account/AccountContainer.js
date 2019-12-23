@@ -6,10 +6,6 @@ import PropTypes from 'prop-types';
 import Account from '../../pages/AccountSystem/Account'
 import * as accountActions from '../../actions/account'
 class AccountContainer extends Component {
-    componentDidMount() {
-        const { getListAddress } = this.props.accountActions
-        getListAddress()
-    }
     render() {
         var { account, accountActions } = this.props
         const { createNewAddress, updateAddress, deleteAddress, updateUser, changePassword } = accountActions

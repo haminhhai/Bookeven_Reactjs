@@ -173,7 +173,7 @@ export const filterBooks = data => {
 
 export const filterBooksSuccess = (data, req) => {
     return {
-        type: types.FITLER_BOOKS_SUCCESS,
+        type: types.FILTER_BOOKS_SUCCESS,
         payload: {
             data,
             req
@@ -183,7 +183,7 @@ export const filterBooksSuccess = (data, req) => {
 
 export const filterBooksFailed = error => {
     return {
-        type: types.FITLER_BOOKS_FAILED,
+        type: types.FILTER_BOOKS_FAILED,
         payload: {
             error
         }

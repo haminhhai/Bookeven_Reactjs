@@ -34,7 +34,7 @@ class OrderCustomer extends Component {
     showModal = data => {
         const { fetchDetailOrder } = this.props
        fetchDetailOrder({
-           id: data.order_id
+           id: data.id
        })
        this.setState({
            modal: true
@@ -75,8 +75,8 @@ class OrderCustomer extends Component {
                                             {
                                                 orders.map((item, index) =>
                                                     <tr key={index} onClick={() => this.showModal(item)} style={{ cursor: 'pointer' }}>
-                                                        <td>{item.order_id}</td>
-                                                        <td className='text-center'>{this.$utils.converTSToDate(parseInt(item.orderDate), 'DD/MM/YYYY')}</td>
+                                                        <td>{item.id}</td>
+                                                        <td className='text-center'>{this.$utils.converTSToDate(parseInt(item.createDate), 'DD/MM/YYYY')}</td>
                                                         <td className='text-center'>{item.shipDate !== null ? this.$utils.converTSToDate(parseInt(item.shipDate), 'DD/MM/YYYY') : '--/--/----'}</td>
                                                         <td>{this.$utils.formatVND(item.total, 'vnd')}</td>
                                                         <td>{this.formatStatus(item.status)}</td>

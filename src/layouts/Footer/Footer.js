@@ -25,7 +25,7 @@ class Footer extends Component {
                                 <i className="fa fa-home mr-3" /> 144 Xuân Thủy, Cầu Giấy, Hà Nội
                             </p>
                             <p>
-                                <i className="fa fa-envelope mr-3" /> bookeven@gmail.com
+                                <i className="fa fa-envelope mr-3" /> bookeven9@gmail.com
                             </p>
                             <p>
                                 <i className="fa fa-phone mr-3" /> + 01 234 567 88
@@ -36,7 +36,8 @@ class Footer extends Component {
                 <div className="footer-copyright text-center py-3">
                     <MDBContainer fluid>
                         &copy; {new Date().getFullYear()} Copyright:{" "}
-                        <a href="/"> Bookeven.com </a>
+                        <a href="/"> fe-bookeven.herokuapp.com </a>
+                        <i className='float-right'>v.1.0.7</i>
                     </MDBContainer>
                 </div>
             </MDBFooter>

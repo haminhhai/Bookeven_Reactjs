@@ -114,6 +114,7 @@ function* watchGetUserAction() {
         const { status, data } = res
         if (status === STATUS_CODE.SUCCESS) {
             yield put(getUserSuccess(data))
+            yield put(getListAddress2())
         } else {
             yield put(getUserFailed(data.message))
         }

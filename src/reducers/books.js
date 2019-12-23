@@ -21,7 +21,7 @@ var intialState = {
         maxRate: "",
         minPrice: "",
         maxPrice: "",
-        bookfieldId: 1
+        bookfieldId: ""
     },
     comments: [],
     rate: {
@@ -150,7 +150,7 @@ var books = (state = intialState, action) => {
                 ...state,
             }
         }
-        case types.FITLER_BOOKS_SUCCESS: {
+        case types.FILTER_BOOKS_SUCCESS: {
             const { data, req } = action.payload
             const { books, total, bookfield, page, amount } = data
             return {
@@ -171,7 +171,7 @@ var books = (state = intialState, action) => {
                 }
             }
         }
-        case types.FITLER_BOOKS_FAILED: {
+        case types.FILTER_BOOKS_FAILED: {
             return {
                 ...state
             }

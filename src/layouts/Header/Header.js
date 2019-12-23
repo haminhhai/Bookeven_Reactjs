@@ -44,15 +44,16 @@ class Header extends Component {
 
     handleSearch = () => {
         const { keyWord } = this.state
-        const { bookActions } = this.props
+        const { bookActions, books } = this.props
         const { filterBooks } = bookActions
+        var { bookfieldId, minRate, maxRate, minPrice, maxPrice } = books.filtedBook
         const body = {
             title: keyWord,
-            bookField: "",
-            minRate: "",
-            maxRate: "",
-            minPrice: "",
-            maxPrice: "",
+            bookField: bookfieldId,
+            minRate,
+            maxRate,
+            minPrice,
+            maxPrice,
             amount: 12,
             page: 1
         }
@@ -83,8 +84,8 @@ class Header extends Component {
         })
     }
     render() {
-        const { parent, child, cart, books, info, authen } = this.props
-        const { fieldsBook, detailBook } = books
+        const { parent, child, cart, books, info, authen, } = this.props
+        const { fieldsBook, detailBook, filtedBook } = books
         const { role } = info
         var total = 0
         if (cart.length > 0)
@@ -101,7 +102,7 @@ class Header extends Component {
                         <MDBNavbarToggler onClick={this.toggleNavBar} />
                         <MDBCollapse id="navbarCollapse3" isOpen={this.state.openingTopNav} navbar>
                             <MDBNavbarNav left>
-                                <SearchBox handleChange={this.handleFilter} handleSearch={this.handleSearch} />
+                                <SearchBox keyword={filtedBook.keyword} handleChange={this.handleFilter} handleSearch={this.handleSearch} />
                             </MDBNavbarNav>
                             {authen === false ?
                                 <MDBNavbarNav className='reglog' right>
@@ -207,11 +208,11 @@ class Header extends Component {
                                     </MDBDropdownToggle>
                                     <MDBDropdownMenu >
                                         {fieldsBook.map((item, index) =>
-                                            <MDBDropdownItem key={index}>
-                                                <Link to={'/sach-theo-danh-muc/' + item.id} onClick={() => this.getListByBookField(item.id)}>
+                                            <Link key={index} to={'/sach-theo-danh-muc/' + item.id} onClick={() => this.getListByBookField(item.id)}>
+                                                <MDBDropdownItem>
                                                     <b>{item.name}</b>
-                                                </Link>
-                                            </MDBDropdownItem>
+                                                </MDBDropdownItem>
+                                            </Link>
 
                                         )}
                                     </MDBDropdownMenu>
@@ -224,7 +225,7 @@ class Header extends Component {
                                     <Link
                                         key={index}
                                         to={`/${this.$utils.convertVietnamese(item.title)}`}
-                                        className='col d-flex justify-content-center'>
+                                        className='col d-flex font-weight-bold justify-content-center'>
                                         <MDBIcon icon={item.icon} className='mr-1' />
                                         {item.title}
                                     </Link>
