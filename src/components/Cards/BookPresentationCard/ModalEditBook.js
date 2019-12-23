@@ -52,7 +52,6 @@ class ModalEditBook extends Component {
                 })
 
             );
-            this.$utils.toastSuccess(cont.UPLOAD_SUCCESS)
         }
     }
     normFile = e => {
@@ -89,9 +88,9 @@ class ModalEditBook extends Component {
             }
         });
     }
-    componentWillReceiveProps(preProps) {
-        if (preProps.detailBook.id !== undefined && preProps.id === preProps.detailBook.id) {
-            const { detailBook } = preProps
+    UNSAFE_UNSAFE_componentWillReceiveProps(nextProps) {
+        if (nextProps.detailBook.id !== undefined && nextProps.id === nextProps.detailBook.id) {
+            const { detailBook } = nextProps
             this.setState({
                 imageUrl: detailBook.image,
                 name: detailBook.name,
@@ -103,7 +102,7 @@ class ModalEditBook extends Component {
                 pages: detailBook.page,
                 size: detailBook.size,
                 weight: detailBook.weight,
-                publishDate: detailBook.published_date,
+                publishDate: detailBook.published_date !== undefined ? detailBook.published_date : null,
                 description: detailBook.description
             })
         }
@@ -135,7 +134,7 @@ class ModalEditBook extends Component {
                             <div className='row'>
                                 <div className='col-3'>
                                     <div className='row'>
-                                        <div className='col-12'>
+                                        <div className='col-12 text-left'>
                                             <label>Xem trước</label>
                                             <MDBView hover onClick={() => this.setState({ previewVisible: true })}>
                                                 <img className='img-lightbox mb-2 img-fluid'
@@ -169,7 +168,7 @@ class ModalEditBook extends Component {
                                 </div>
                                 <div className='col-9'>
                                     <div className='row'>
-                                        <div className='col-6'>
+                                        <div className='col-6 text-left'>
                                             <Form.Item label='Tên sách'>
                                                 {getFieldDecorator('name', {
                                                     initialValue: name,
@@ -185,7 +184,7 @@ class ModalEditBook extends Component {
                                                 )}
                                             </Form.Item>
                                         </div>
-                                        <div className='col-6'>
+                                        <div className='col-6 text-left'>
                                             <Form.Item label='Tác giả'>
                                                 {getFieldDecorator('author', {
                                                     initialValue: author,
@@ -200,7 +199,7 @@ class ModalEditBook extends Component {
                                                 )}
                                             </Form.Item>
                                         </div>
-                                        <div className='col-6'>
+                                        <div className='col-6 text-left'>
                                             <Form.Item label='Danh mục'>
                                                 {getFieldDecorator('bookfield', {
                                                     initialValue: bookfield,
@@ -227,7 +226,7 @@ class ModalEditBook extends Component {
                                                 )}
                                             </Form.Item>
                                         </div>
-                                        <div className='col-6'>
+                                        <div className='col-6 text-left'>
                                             <Form.Item label='Khuôn khổ'>
                                                 {getFieldDecorator('size', {
                                                     initialValue: size,
@@ -242,7 +241,7 @@ class ModalEditBook extends Component {
                                                 )}
                                             </Form.Item>
                                         </div>
-                                        <div className='col-6'>
+                                        <div className='col-6 text-left'>
                                             <Form.Item label='Đơn giá'>
                                                 {getFieldDecorator('price', {
                                                     initialValue: price,
@@ -262,7 +261,7 @@ class ModalEditBook extends Component {
                                                 )}
                                             </Form.Item>
                                         </div>
-                                        <div className='col-6'>
+                                        <div className='col-6 text-left'>
                                             <Form.Item label='Tồn kho'>
                                                 {getFieldDecorator('inventory', {
                                                     initialValue: inventory,
@@ -281,7 +280,7 @@ class ModalEditBook extends Component {
                                                 )}
                                             </Form.Item>
                                         </div>
-                                        <div className='col-6'>
+                                        <div className='col-6 text-left'>
                                             <Form.Item label='Giảm giá (%)'>
                                                 {getFieldDecorator('discount', {
                                                     initialValue: discount,
@@ -297,12 +296,13 @@ class ModalEditBook extends Component {
                                                         style={{ width: '100%' }}
                                                         size='large'
                                                         step={0.1}
+                                                        max={100}
                                                     />
                                                 )}
                                             </Form.Item>
                                         </div>
 
-                                        <div className='col-4'>
+                                        <div className='col-6 text-left'>
                                             <Form.Item label='Số trang'>
                                                 {getFieldDecorator('pages', {
                                                     initialValue: pages,
@@ -323,7 +323,7 @@ class ModalEditBook extends Component {
                                             </Form.Item>
                                         </div>
 
-                                        <div className='col-6'>
+                                        <div className='col-6 text-left'>
                                             <Form.Item label='Trọng lượng(gram)'>
                                                 {getFieldDecorator('weight', {
                                                     initialValue: this.$utils.getNumberFromString(weight),
@@ -344,10 +344,10 @@ class ModalEditBook extends Component {
                                             </Form.Item>
                                         </div>
 
-                                        <div className='col-6'>
+                                        <div className='col-6 text-left'>
                                             <Form.Item label='Ngày phát hành'>
                                                 {getFieldDecorator('publishDate', {
-                                                    initialValue: moment(publishDate),
+                                                    initialValue: publishDate !== null ? moment(publishDate) : null,
                                                     rules: [
                                                         {
                                                             type: 'object',
@@ -363,7 +363,7 @@ class ModalEditBook extends Component {
                                                         format='DD-MM-YYYY' />
                                                 )}
                                             </Form.Item>
-                                        </div><div className='col-12'>
+                                        </div><div className='col-12 text-left'>
                                             <Form.Item label='Mô tả'>
                                                 {getFieldDecorator('description', {
                                                     initialValue: description,

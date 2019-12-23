@@ -9,6 +9,7 @@ import {
     delay
 } from 'redux-saga/effects';
 import { hideLoading, showLoading } from '../actions/ui';
+import { push } from 'connected-react-router';
 import imgurService from '../utils/imgurService';
 import * as config from '../const/config'
 import _get from 'lodash/get';
@@ -363,6 +364,7 @@ function* filterBooksAction({ payload }) {
 function* updateBookAction({ payload }) {
     if (payload.data.image.length > 100) {
         try {
+            yield put(showLoading())
             imgurService.setHeader('Authorization', `Client-Id ${config.imgur_client_id}`)
             const res = yield call(uploadImage, payload.data)
             if (res.status === STATUS_CODE.SUCCESS) {
@@ -392,6 +394,8 @@ function* updateBookAction({ payload }) {
             if (typeof err === 'object')
                 err = MSG_ERROR_OCCUR
             yield put(uploadImageFailed(err))
+        } finally {
+            yield put(hideLoading)
         }
     }
     else {
@@ -467,9 +471,11 @@ function* watchUploadImage({ payload }) {
 
 function* watchAddNewBook({ payload }) {
     try {
+        yield put(showLoading())
         imgurService.setHeader('Authorization', `Client-Id ${config.imgur_client_id}`)
         const res = yield call(uploadImage, payload.data)
         if (res.status === STATUS_CODE.SUCCESS) {
+            yield put(uploadImageSuccess( payload.data))
             try {
                 var body = {
                     ...payload.data,
@@ -477,8 +483,9 @@ function* watchAddNewBook({ payload }) {
                 }
                 const resp = yield call(addNewBook, body)
                 const { status, data } = resp
-                if (status === STATUS_CODE.SUCCESS) {
+                if (status === STATUS_CODE.CREATED) {
                     yield put(addNewBookSuccess(body))
+                    yield put(push(`/chi-tiet-sach/${data.id.id}`))
                 }
                 else yield put(addNewBookFailed(data.message))
             } catch (error) {
@@ -494,6 +501,8 @@ function* watchAddNewBook({ payload }) {
         if (typeof err === 'object')
             err = MSG_ERROR_OCCUR
         yield put(uploadImageFailed(err))
+    } finally {
+        yield put(hideLoading())
     }
 
 }

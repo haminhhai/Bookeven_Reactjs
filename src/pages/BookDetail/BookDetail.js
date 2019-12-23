@@ -36,8 +36,9 @@ class BookDetail extends Component {
             amount: this.state.amount
         })
     }
-    componentWillReceiveProps(preProps) {
-        if (preProps.detailBook.id !== this.props.detailBook.id  && !this.state.zoomed) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        if (nextProps.detailBook.id !== undefined  && nextProps.detailBook.id !== this.props.detailBook.id  && !this.state.zoomed) {
+            window.scrollTo(0, 0)
             $(function () {
                 $("#exzoom").exzoom({
                     // thumbnail nav options
@@ -55,7 +56,7 @@ class BookDetail extends Component {
             });
             this.setState({ zoomed: true })
             this.props.getListRate({
-                book_id: preProps.detailBook.id
+                book_id: nextProps.detailBook.id
             })
         }
     }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
-import { Slider, Select, Pagination } from 'antd'
+import { Slider, Select, Pagination, Checkbox } from 'antd'
 import { MDBBtn, MDBIcon } from 'mdbreact'
 
 import Header from '../../layouts/Header/Header'
@@ -16,7 +16,16 @@ class BookField extends Component {
         minrate: 1,
         maxrate: 5,
         topic: '',
-    };
+        checkPrice: false,
+        checkRate: false,
+        checkBookfield: false
+    }
+
+    toggleCheck = type => {
+        this.setState({
+            [type]: !this.state[type]
+        })
+    }
 
     setPriceRange = value => {
         this.setState({
@@ -38,7 +47,18 @@ class BookField extends Component {
 
     handleFilter = () => {
         const { filterBooks, filtedBook } = this.props
-        const { minval, maxval, minrate, maxrate, topic } = this.state
+        var params = this.state
+        var { minval, maxval, minrate, maxrate, topic, checkBookfield, checkPrice, checkRate } = params
+        if (!checkBookfield)
+            topic = ""
+        if (!checkPrice) {
+            minval = ""
+            maxval = ""
+        }
+        if (!checkRate) {
+            minrate = ""
+            maxrate = ""
+        }
         const data = {
             minPrice: minval,
             title: filtedBook.keyword,
@@ -46,7 +66,7 @@ class BookField extends Component {
             minRate: minrate,
             maxRate: maxrate,
             bookField: topic,
-            amount: 10,
+            amount: 12,
             page: 1,
         }
         filterBooks(data)
@@ -92,19 +112,31 @@ class BookField extends Component {
             })
         }
         else if (path.includes('search')) {
+            var params = filtedBook
+            var { checkBookfield, checkPrice, checkRate, bookfieldId, minRate, maxRate, minPrice, maxPrice, keyword } = params
+            if (!checkBookfield)
+                bookfieldId = ""
+            if (!checkPrice) {
+                minPrice = ""
+                maxPrice = ""
+            }
+            if (!checkRate) {
+                minRate = ""
+                maxRate = ""
+            }
             const body = {
-                title: filtedBook.keyword,
-                bookField: filtedBook.bookfieldId,
-                minRate: filtedBook.minRate,
-                maxRate: filtedBook.maxRate,
-                minPrice: filtedBook.minPrice,
-                maxPrice: filtedBook.maxPrice,
+                title: keyword,
+                bookField: bookfieldId,
+                minRate: minRate,
+                maxRate: maxRate,
+                minPrice: minPrice,
+                maxPrice: maxPrice,
                 amount: pageSize,
                 page: current
             }
             filterBooks(body)
         }
-        
+
     }
     changePage = page => {
         const { path, getBooksByBFID, filtedBook, getListBestNewest, getListBestSeller, getListBestSales, filterBooks } = this.props
@@ -136,13 +168,25 @@ class BookField extends Component {
             })
         }
         else if (path.includes('search')) {
+            var params = filtedBook
+            var { checkBookfield, checkPrice, checkRate, bookfieldId, minRate, maxRate, minPrice, maxPrice, keyword } = params
+            if (!checkBookfield)
+                bookfieldId = ""
+            if (!checkPrice) {
+                minPrice = ""
+                maxPrice = ""
+            }
+            if (!checkRate) {
+                minRate = ""
+                maxRate = ""
+            }
             const body = {
-                title: filtedBook.keyword,
-                bookField: filtedBook.bookfieldId,
-                minRate: filtedBook.minRate,
-                maxRate: filtedBook.maxRate,
-                minPrice: filtedBook.minPrice,
-                maxPrice: filtedBook.maxPrice,
+                title: keyword,
+                bookField: bookfieldId,
+                minRate: minRate,
+                maxRate: maxRate,
+                minPrice: minPrice,
+                maxPrice: maxPrice,
                 amount: filtedBook.pageSize,
                 page: page
             }
@@ -157,25 +201,25 @@ class BookField extends Component {
             if (typeof id === 'number')
                 getBooksByBFID({
                     bookField_id: id,
-                    amount: 10,
+                    amount: 12,
                     page: 1
                 })
         }
         else if (path.includes('sach-moi')) {
             getListBestNewest({
-                amount: 10,
+                amount: 12,
                 page: 1
             })
         }
         else if (path.includes('sach-ban-chay')) {
             getListBestSeller({
-                amount: 10,
+                amount: 12,
                 page: 1
             })
         }
         else if (path.includes('sach-giam-gia')) {
             getListBestSales({
-                amount: 10,
+                amount: 12,
                 page: 1
             })
         }
@@ -188,7 +232,7 @@ class BookField extends Component {
                 maxRate: "",
                 minPrice: "",
                 maxPrice: "",
-                amount: 10,
+                amount: 12,
                 page: 1
             }
             filterBooks(body)
@@ -206,7 +250,7 @@ class BookField extends Component {
 
     render() {
         const { parent, filtedBook, fieldsBook, history, rateBook } = this.props //parent = this.props.parent
-        const { topic, maxval, minval, minrate, maxrate } = this.state
+        const { topic, maxval, minval, minrate, maxrate, checkRate, checkBookfield, checkPrice } = this.state
         return (
             <div>
                 <Header carousel={false} parent={this.filterType(parent)} history={history} />
@@ -229,6 +273,8 @@ class BookField extends Component {
                                         onChange={this.changePage}
                                         onShowSizeChange={this.onShowSizeChange}
                                         total={filtedBook.total}
+                                        defaultPageSize={12}
+                                        pageSizeOptions={['12', '24', '36', '48']}
                                     />
                                 </div>
                             </div>
@@ -236,8 +282,9 @@ class BookField extends Component {
                                 <div className='row'>
                                     <div className='card-rcol col-md-12'>
                                         <div className='filter'>
-                                            <strong>Lọc theo giá</strong>
+                                            <Checkbox checked={checkPrice} onChange={() => this.toggleCheck('checkPrice')}><strong>Lọc theo giá</strong></Checkbox>
                                             <Slider
+                                                disabled={!checkPrice}
                                                 range
                                                 step={1000}
                                                 min={0}
@@ -249,8 +296,9 @@ class BookField extends Component {
                                             </p>
                                         </div>
                                         <div className='filter' >
-                                            <strong>Lọc theo rating</strong>
+                                            <Checkbox checked={checkRate} onChange={() => this.toggleCheck('checkRate')}><strong>Lọc theo rating</strong></Checkbox>
                                             <Slider
+                                                disabled={!checkRate}
                                                 range
                                                 step={1}
                                                 min={1}
@@ -263,8 +311,9 @@ class BookField extends Component {
                                             </p>
                                         </div>
                                         <div className='filter' >
-                                            <strong>Lọc theo danh mục sách</strong>
+                                            <Checkbox checked={checkBookfield} onChange={() => this.toggleCheck('checkBookfield')}><strong>Lọc theo danh mục sách</strong></Checkbox>
                                             <Select
+                                                disabled={!checkBookfield}
                                                 value={topic}
                                                 className='mt-2 mb-3'
                                                 style={{ width: '100%' }}
@@ -282,7 +331,12 @@ class BookField extends Component {
                                         </div>
                                         <div className='row justify-content-center'>
                                             <Link to='/search'>
-                                                <MDBBtn onClick={this.handleFilter} className="rounded-pill">Lọc</MDBBtn>
+                                                <MDBBtn
+                                                    disabled={checkBookfield || checkPrice || checkRate ? false : true}
+                                                    onClick={this.handleFilter}
+                                                    className="rounded-pill">
+                                                    Lọc
+                                                    </MDBBtn>
                                             </Link>
                                         </div>
                                     </div>

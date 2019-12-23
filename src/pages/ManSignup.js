@@ -7,7 +7,7 @@ import { MDBInput, MDBBtn } from 'mdbreact';
 import '../styles/mansignup.scss'
 import logo from '../assets/logo.png'
 import * as authActions from '../actions/auth'
-import { MSG_PASSWORD_CONSISTENT, MSG_PASSWORD_SHORT } from '../const/message'
+import { MSG_PASSWORD_CONSISTENT, MSG_PASSWORD_SHORT, MSG_PHONE_INVALID } from '../const/message'
 class ManSignup extends Component {
     constructor(props) {
         super(props);
@@ -29,10 +29,13 @@ class ManSignup extends Component {
             this.$utils.toastError(MSG_PASSWORD_CONSISTENT)
             this.setState({ confirmpassword: '' })
         }
-        else if( password.length < 6 )
+        else if (password.length < 6)
             this.$utils.toastError(MSG_PASSWORD_SHORT)
         else {
-            signupManager(email, password, fullname, phone)
+            if (this.$utils.validatePhone(phone))
+                signupManager(email, password, fullname, phone)
+            else
+                this.$utils.toastError(MSG_PHONE_INVALID)
         }
     };
 
@@ -45,7 +48,7 @@ class ManSignup extends Component {
             <div className='man-su-wrapper'>
                 <div className='fixed-background' />
                 <Link to='/'>
-                    <img src={logo} alt=''/>
+                    <img src={logo} alt='' />
                 </Link>
                 <div className='signup-container'>
                     <h1>BOOKEVEN</h1>

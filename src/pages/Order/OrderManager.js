@@ -67,6 +67,7 @@ class OrderManager extends Component {
                                             </MDBTableHead>
                                             <MDBTableBody >
                                                 {
+                                                    orders.length > 0 &&
                                                     orders.map((item, index) =>
                                                         <tr key={index} onClick={() => this.showModal(item)} style={{ cursor: 'pointer' }}>
                                                             <td className='align-middle'>{item.id}</td>

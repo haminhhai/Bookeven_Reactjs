@@ -48,6 +48,13 @@ export function convertVietnamese(str) {
   return str;
 }
 
+export const validatePhone = number => {
+  var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+  if(!vnf_regex.test(number))
+    return false
+  else return true
+}
+
 export const calculateTotalCart = (cart, type) => {
   var result = 0
   if (cart.length > 0)

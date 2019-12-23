@@ -1,5 +1,5 @@
 import _get from 'lodash/get';
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest, delay } from 'redux-saga/effects';
 import { hideLoading, showLoading } from '../actions/ui';
 import { STATUS_CODE } from '../const/config';
 import {
@@ -11,7 +11,9 @@ import {
     signupManagerSuccess,
     logoutSuccess,
     logoutFailed,
+    login as onLogin
 } from '../actions/auth';
+import {fetchCart} from '../actions/cart'
 import { closeModal } from '../actions/ui'
 import { login, signup, logout, signup_manager } from '../apis/auth';
 import * as authTypes from '../const/actionType';
@@ -31,7 +33,9 @@ function* processSignup({ payload }) {
         });
         const { data, status } = resp;
         if (status === STATUS_CODE.CREATED) {
-            yield put(signupSuccess(data));
+            yield put(signupSuccess(data))
+            yield delay(1000)
+            yield put(onLogin(email, password))
             yield put(closeModal())
         } else {
             yield put(signupFailed(data.message));
@@ -83,8 +87,7 @@ function* processLogin({ payload }) {
         const { data, status } = resp;
         if (status === STATUS_CODE.SUCCESS) {
             yield put(loginSuccess(data));
-
-            const { token, email, id } = data;
+            const { token, email, id, role } = data;
             axiosService.setHeader('authorization', `Bearer ${token}`);
             axiosService.setHeader('email', email);
             axiosService.setHeader('id', parseInt(id));
@@ -92,6 +95,8 @@ function* processLogin({ payload }) {
             localStorage.setItem('ID', id)
             localStorage.setItem('EMAIL', email)
             yield put(getUser())
+            if(role === 1)
+                yield put(fetchCart())
             yield put(closeModal())
         } else {
             yield put(loginFailed(data.message));

@@ -4,7 +4,8 @@ import {
     put,
     take,
     takeLatest,
-    takeEvery
+    takeEvery,
+    select
 } from 'redux-saga/effects';
 import _get from 'lodash/get';
 import * as types from '../const/actionType'
@@ -49,14 +50,20 @@ function* watchAddToCartAction({ payload }) {
         yield put(showLoading())
         const res = yield call(addToCart, payload.data)
         const { status, data } = res
-        var body = {
-            ...data,
-            amount: payload.data.amount
-        }
+        const cart = yield select(state => state.cart)
+        const filtedBook = cart.filter(item => item.id === payload.data.book_id)[0]
         if (status === STATUS_CODE.CREATED) {
-            yield put(addToCartSuccess(body))
+            var body_new = {
+                ...data,
+                amount: payload.data.amount
+            }
+            yield put(addToCartSuccess(body_new))
         } else if (status === STATUS_CODE.SUCCESS) {
-            yield put(updateCartSuccess(payload.data))
+            var body_update = {
+                book_id: payload.data.book_id,
+                amount: filtedBook.amount + payload.data.amount
+            }
+            yield put(updateCartSuccess(body_update))
         } else {
             yield put(addToCartFailed(data.message))
         }

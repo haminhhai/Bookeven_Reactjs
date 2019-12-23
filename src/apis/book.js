@@ -5,7 +5,6 @@ import { API_UPLOAD, API_URL } from '../const/config'
 export const uploadImage = data => {
     return imgurService.post(`${API_UPLOAD}`, data)
 }   
-// http://localhost:3000/books
 const url_book = 'book'
 
 export const getDetailBook = data => {
@@ -44,15 +43,12 @@ export const getListBestRate = data => {
     return axiosService.post(`${API_URL}/${url_book}/bestRate`, data)
 }
 
-
-// http://localhost:3000/fieldsBook
 const url_field = 'bookField'
 
 export const getListFieldsbook = () => {
     return axiosService.get(`${API_URL}/${url_field}/list`)
 }
 
-// http://localhost:3000/comment
 const url_cmt = 'comment'
 
 export const getListComments = data => {

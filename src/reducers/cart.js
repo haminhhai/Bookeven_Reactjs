@@ -1,5 +1,5 @@
 import * as types from '../const/actionType'
-import { toastSuccess } from '../utils/Utils'
+import { toastSuccess, toastError } from '../utils/Utils'
 import * as msg from '../const/message'
 
 var initialState = []
@@ -20,18 +20,20 @@ var cart = (state = initialState, action) => {
             return [...state]
         }
         case types.ADD_TO_CART_FAILED: {
+            toastError(action.payload.error)
             return [...state]
         }
         case types.UPDATE_CART_SUCCESS: {
-            toastSuccess(msg.MSG_UPDATE_CART_SUCESS)
             const { data } = action.payload
             const index = state.findIndex(item => item.id === data.book_id)
             var newCart = state[index]
-            newCart.amount += data.amount
+            newCart.amount = data.amount
             const newList = [...state.slice(0, index), newCart, ...state.slice(index + 1)];
+            toastSuccess(msg.MSG_UPDATE_CART_SUCESS)
             return [...newList]
         }
         case types.UPDATE_CART_FAILED: {
+            toastError(action.payload.error)
             return [...state]
         }
         case types.REMOVE_ITEM_FROM_CART_SUCCESS: {

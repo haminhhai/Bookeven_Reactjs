@@ -80,8 +80,8 @@ class RateForm extends Component {
             rate: parseInt(e)
         })
     }
-    componentWillReceiveProps( preProps) {
-        const { detailBook, info, rate} = preProps
+    UNSAFE_componentWillReceiveProps( nextProps) {
+        const { detailBook, info, rate} = nextProps
         var check = rate.list.findIndex(item => item.fullname === info.fullname)
         if(detailBook.bought && check === -1)
             this.setState({

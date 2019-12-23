@@ -38,6 +38,8 @@ export const MSG_UPDATE_USER_SUCCESS = 'Cập nhật tài khoản thành công!'
 
 export const MSG_CHANGE_PASSWORD_SUCCESS = 'Đổi mật khẩu thành công!'
 
+export const MSG_NEW_BOOK_SUCCESS = 'Tạo sách mới thành công!'
+
 //FAILED
 export const MSG_ERROR_OCCUR = 'Đã có lỗi xảy ra!'
 
@@ -53,6 +55,8 @@ export const MSG_COMEBACK = 'Chào mừng bạn quay trở lại Bookeven!'
 export const MSG_EMPTY_ADDRESS = 'Không có địa chỉ nào được lưu!'
 
 export const MSG_ADD_TO_CART_FAIL = 'Bạn đã thêm tối đa số hàng có trong kho!'
+
+export const MSG_PHONE_INVALID = 'Số điện thoại không hợp lệ!'
 
 export const MSG_PASSWORD_CONSISTENT = 'Hai mật khẩu không khớp. Hãy nhập lại mật khẩu.'
 

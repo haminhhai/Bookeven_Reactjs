@@ -40,9 +40,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "serve": "webpack-dev-server",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "serve": "webpack-dev-server"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -14,13 +14,12 @@ class OrderContainer extends Component {
         this.state = {}
     }
     componentDidMount() {
-        const { fetchAllListOrders, deleteListOrder } = this.props.orderActions
+        const { fetchAllListOrders } = this.props.orderActions
         const { info } = this.props
-        if (info.role === 1)
-            fetchAllListOrders()
-        else {
-            deleteListOrder()
-        }
+        fetchAllListOrders({
+            role: info.role
+        })
+        
     }
     render() {
         const { orders, orderActions, info } = this.props

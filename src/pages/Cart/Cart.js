@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { MDBTable, MDBTableBody, MDBTableHead, } from 'mdbreact';
 import Header from '../../layouts/Header/Header'
 import '../../styles/cart.scss'
-
+import {MSG_CART_EMPTY} from '../../const/message'
 class Cart extends Component {
     constructor(props) {
         super(props);
@@ -20,9 +20,10 @@ class Cart extends Component {
 
                 <div className='cart-wrapper'>
                     <div className='container'>
+                        { children[0] === null && MSG_CART_EMPTY}
                         <MDBTable className='mt-4'>
                             {
-                                typeof children[0] !== 'string' &&
+                                children[0] !== null &&
                                 <MDBTableHead color="aqua-gradient" textWhite>
                                     <tr>
                                         <th>&nbsp;</th>

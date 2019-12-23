@@ -44,20 +44,18 @@ class Header extends Component {
 
     handleSearch = () => {
         const { keyWord } = this.state
-        const { bookActions, books } = this.props
-        const { filtedBook } = books
+        const { bookActions } = this.props
         const { filterBooks } = bookActions
         const body = {
             title: keyWord,
-            bookField: filtedBook.bookfieldId,
-            minRate: filtedBook.minRate,
-            maxRate: filtedBook.maxRate,
-            minPrice: filtedBook.minPrice,
-            maxPrice: filtedBook.maxPrice,
-            amount: 10,
+            bookField: "",
+            minRate: "",
+            maxRate: "",
+            minPrice: "",
+            maxPrice: "",
+            amount: 12,
             page: 1
         }
-        console.log(body)
         filterBooks(body)
     }
 
@@ -80,7 +78,7 @@ class Header extends Component {
         const { bookActions } = this.props
         bookActions.getBooksByBFID({
             bookField_id: id,
-            amount: 10,
+            amount: 12,
             page: 1
         })
     }

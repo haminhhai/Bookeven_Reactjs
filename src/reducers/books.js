@@ -13,7 +13,7 @@ var intialState = {
     filtedBook: {
         list: [],
         currentPage: 1,
-        pageSize: 10,
+        pageSize: 12,
         total: 1,
         bookfield: '',
         keyword: "",
@@ -189,6 +189,7 @@ var books = (state = intialState, action) => {
             }
         }
         case types.ADD_NEW_BOOK_SUCCESS: {
+            toastSuccess(msg.MSG_NEW_BOOK_SUCCESS)
             return {
                 ...state,
             }

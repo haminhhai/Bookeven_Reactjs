@@ -45,8 +45,8 @@ class BPCard extends Component {
     this.setState({ modal: !this.state.modal })
   }
 
-  componentWillReceiveProps(preProps) {
-    if (preProps.role !== 0) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.role !== 0) {
       const { role } = this.props
       if (role === 2)
         this.setState({

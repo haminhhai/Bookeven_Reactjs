@@ -1,8 +1,6 @@
 import {
     call,
-    fork,
     put,
-    take,
     takeLatest,
     takeEvery,
 } from 'redux-saga/effects';
@@ -18,32 +16,29 @@ import {
     filterOrder as onFilterOrder
 
 } from '../actions/order'
+import { fetchCart } from '../actions/cart'
 import { fetchAllListOrders, fetchDetailOrder, createOrder, filterOrder, updateOrder } from '../apis/order'
-import { toastSuccess } from '../utils/Utils'
-import * as msg from '../const/message'
 import { STATUS_CODE } from '../const/config'
 
 import { MSG_ERROR_OCCUR } from '../const/message'
-function* watchfetchAllListOrders() {
-    while (true) {
-        yield take(types.FETCH_ALL_LIST_ORDER)
-        try {
-            yield put(showLoading())
-            const res = yield call(fetchAllListOrders)
-            const { status, data } = res
-            if (status === STATUS_CODE.SUCCESS) {
-                yield put(fetchAllListOrdersSuccess(data))
-            } else {
-                yield put(fetchAllListOrdersFailed(data.message))
-            }
-        } catch (error) {
-            var message = _get(error, 'response.data.message', {});
-            if (typeof message === 'object')
-                message = MSG_ERROR_OCCUR
-            yield put(fetchAllListOrdersFailed(message));
-        } finally {
-            yield put(hideLoading())
+
+function* watchfetchAllListOrders({ payload }) {
+    try {
+        yield put(showLoading())
+        const res = yield call(fetchAllListOrders, payload.data)
+        const { status, data } = res
+        if (status === STATUS_CODE.SUCCESS) {
+            yield put(fetchAllListOrdersSuccess(data))
+        } else {
+            yield put(fetchAllListOrdersFailed(data.message))
         }
+    } catch (error) {
+        var message = _get(error, 'response.data.message', {});
+        if (typeof message === 'object')
+            message = MSG_ERROR_OCCUR
+        yield put(fetchAllListOrdersFailed(message));
+    } finally {
+        yield put(hideLoading())
     }
 }
 
@@ -92,6 +87,7 @@ function* watchCreateOrder({ payload }) {
         const res = yield call(createOrder, payload.data)
         const { status, data } = res
         if (status === STATUS_CODE.CREATED) {
+            yield put(fetchCart())
             yield put(createOrderSuccess(data))
         }
         else yield put(createOrderFailed(data.message))
@@ -134,7 +130,7 @@ function* watchUpdateOrder({ payload }) {
 
 function* orderSaga() {
     yield takeEvery(types.FETCH_DETAIL_ORDER, watchfetchDetailOrder)
-    yield fork(watchfetchAllListOrders)
+    yield takeEvery(types.FETCH_ALL_LIST_ORDER, watchfetchAllListOrders)
     yield takeEvery(types.CREATE_ORDER, watchCreateOrder)
     yield takeLatest(types.FILTER_ORDER, watchFilterOrder)
     yield takeLatest(types.UPDATE_ORDER, watchUpdateOrder)

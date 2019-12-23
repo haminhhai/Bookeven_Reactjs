@@ -40,8 +40,7 @@ class ModalNewBook extends Component {
                     changeToSave: false
                 })
             }
-            );
-            this.$utils.toastSuccess(cont.UPLOAD_SUCCESS)
+            )
         }
     }
 
@@ -67,7 +66,7 @@ class ModalNewBook extends Component {
     };
 
     handleSubmit = e => {
-        const {  addNewBook } = this.props
+        const {  addNewBook, toggleModal } = this.props
         const { imageUrl } = this.state
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
@@ -88,6 +87,9 @@ class ModalNewBook extends Component {
                     discount: discount,
                 }
                 addNewBook(body)
+                setTimeout(() => {
+                    toggleModal()
+                }, 5000);
             }
         });
     };
@@ -284,6 +286,7 @@ class ModalNewBook extends Component {
                                                         style={{ width: '100%' }}
                                                         size='large'
                                                         step={0.1}
+                                                        max={100}
                                                     />
                                                 )}
                                             </Form.Item>

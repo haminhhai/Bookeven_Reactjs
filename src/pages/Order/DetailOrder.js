@@ -62,8 +62,8 @@ class DetailOrder extends Component {
             closeModal()
         }, 1000);
     }
-    componentWillReceiveProps(perProps) {
-        const { data } = perProps
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        const { data } = nextProps
         this.setState({
             status: data.status,
             fromDate: moment.unix(parseInt(data.orderDate)),
@@ -170,6 +170,8 @@ class DetailOrder extends Component {
                                                     <tr key={index}>
                                                         <td className='imgBook align-middle'>
                                                             <img src={item.image} alt={item.name} />
+                                                        </td>
+                                                        <td className='align-middle'>
                                                             <p className='align-middle ml-2'>{item.name}</p>
                                                         </td>
                                                         <td className='text-center align-middle'>

@@ -4,8 +4,8 @@ import { API_URL } from '../const/config'
 // http://localhost:3000/order
 const url_order = 'order'
 
-export const fetchAllListOrders = () => {
-    return axiosService.get(`${API_URL}/${url_order}/list`)
+export const fetchAllListOrders = data => {
+    return axiosService.post(`${API_URL}/${url_order}/list`, data)
 } 
 
 export const fetchDetailOrder = data => {

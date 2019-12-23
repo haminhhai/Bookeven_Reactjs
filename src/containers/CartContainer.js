@@ -6,14 +6,13 @@ import Cart from '../pages/Cart/Cart'
 import CartItem from '../pages/Cart/CartItem'
 import CartTotal from '../pages/Cart/CartTotal'
 
-import * as Message from '../const/message'
 import * as cartActions from '../actions/cart'
 class CartContainer extends Component {
 
   showCartItem = cart => {
     var { cartActions } = this.props
     const { updateCart, removeCart } = cartActions
-    var res = Message.MSG_CART_EMPTY
+    var res = null
     if (cart.length > 0)
       res = cart.map((item, index) => {
         return <CartItem

@@ -1,8 +1,11 @@
 import * as types from '../const/actionType'
 
-export const fetchAllListOrders = () => {
+export const fetchAllListOrders = data => {
     return {
         type: types.FETCH_ALL_LIST_ORDER,
+        payload: {
+            data
+        }
     }
 }
 
